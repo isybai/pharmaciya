@@ -1,0 +1,16 @@
+<header class="marketing-banner">
+	<h2>
+	      Номенклатура
+	</h2>
+</header>
+<div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
+	<div class="list-group">
+	    <a routerLink="app-drug-list" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-list"></i> Список лек. средств</a>
+	    <a routerLink="app-prices" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-usd"></i> Прайсы</a>
+	    <a routerLink="app-remains" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-refresh"></i> Остатки в аптеках и точках</a>
+	    <a routerLink="app-pjvls" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-globe"></i> ПЖВЛС</a>
+	</div>
+</div>
+<div class="col-6 col-md-9 content">
+	<router-outlet></router-outlet>
+</div>

@@ -1,0 +1,31 @@
+.nav>li>a.logo:focus, .nav>li>a.logo:hover {
+    background-color: white;
+    box-shadow: none;
+}
+.marketing-banner {
+	padding: 20px 40px;
+	background: #378fe7;
+	color: white;
+}
+h2 {
+    margin: 0;
+}
+div#sidebar {
+    margin-top: 20px;
+}
+.col-6.col-md-9.content {
+    margin-top: 20px;
+}
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    color: #fff !important;
+ }
+ div#sidebar a.list-group-item {
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-indent: 10px;
+}
+div#sidebar a.list-group-item i {
+    left: -10px;
+}
