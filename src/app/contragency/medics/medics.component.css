@@ -1,0 +1,23 @@
+li h4 {
+    margin: 0;
+    padding: 0px;
+    line-height: 3;
+    width: 120px;
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+.navbar-light .row {
+    border-bottom: 1px dashed #5bc0de;
+}
+.navbar-light .row:first-child {
+    border-top: 1px dashed #5bc0de;
+}
+.navbar-nav>li>a {
+    border-right: 1px solid whitesmoke;
+    margin-right: 3px;
+}
+.navbar-nav>li>a:first-child {
+    border-left: 1px solid whitesmoke;
+}
