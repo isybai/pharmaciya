@@ -1,10 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// Material
+import { MdGridListModule } from '@angular/material';
+import { MdListModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import { MdInputModule } from '@angular/material';
 import { MdSelectModule } from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -69,11 +74,16 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
   imports: [
     RoutingModule,
     SharedModule,
+
+    // Material
     BrowserAnimationsModule,
     MdButtonModule,
     MdIconModule,
     MdInputModule,
-    MdSelectModule
+    MdSelectModule,
+    MdSidenavModule,
+    MdListModule,
+    MdGridListModule
   ],
   providers: [
     AuthService,

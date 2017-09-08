@@ -1,12 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-body {
-  margin-top: 15px;
-  margin-bottom: 10px;
+html {
+  background: url(assets/bg.jpg) no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
 }
-
+a {
+  color: white;
+}
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: white;
+} 
+a:focus, a:hover {
+    color: #003a6d;
+    text-decoration: none;
+}
+nav.navbar.navbar-dark.bg-primary {
+    background-color: #1b3446 !important;
+}
+a.nav-item.nav-link.logo {
+    color: #1b3446;
+}
 .input-group {
-  margin-bottom: 15px;
+  	margin-bottom: 15px;
 }
 .mat-input-prefix {
     margin-right: 10px;
@@ -15,9 +33,49 @@ body {
     width: 100%;
 }
 .material-icons {
-	color: #63b7ff;
+	color: white;
 }
-body {
-    margin-top: 0;
-    margin-bottom: 0;
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-weight: 200;
+}
+h4.page-title {
+    text-align: center;
+}
+md-sidenav.example-sidenav.mat-drawer {
+	overflow-y: visible;
+	top: 36px;
+}
+.example-container {
+  	height: 100%;
+}
+md-sidenav-container.mat-drawer-container{
+	overflow: visible;
+}
+div.mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+    cursor: pointer;
+}
+.mat-list .mat-list-item div.mat-list-item-content {
+    height: auto;
+    padding: 0;
+} 
+.mat-drawer-container {
+    background-color: transparent;
+}
+.list-group a.list-group-item {
+    background-color: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.6);
+}
+.list-group a:hover {
+    font-weight: 600;
+    background-color: rgba(2, 117, 216, 0.42);
+    color: white;
+}
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(2, 117, 216, 0.42);
+    border-color: #ffffff;
 }

@@ -2,8 +2,8 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Account settings</h4>
+<div *ngIf="!isLoading">
+  <h4 class="page-title">Настройки аккаунта</h4>
   <div class="card-block">
     <form #accountForm="ngForm" (ngSubmit)="save(user)">
       <md-form-field>

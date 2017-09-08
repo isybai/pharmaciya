@@ -1,23 +1,28 @@
 li h4 {
-    margin: 0;
-    padding: 0px;
-    line-height: 3;
-    width: 120px;
-    display: inline-block;
-    margin-top: 4px;
-    font-size: 14px;
+    width: 140px;
     margin-right: 10px;
+    display: block;
+    padding: .5em 1em;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1rem;
+    background: rgb(53, 132, 203);
+    border-radius: 0;
 }
-.navbar-light .row {
+ul.nav.nav-pills.nav-fill {
     border-bottom: 1px dashed #5bc0de;
 }
-.navbar-light .row:first-child {
+ul.nav.nav-pills.nav-fill:first-child {
     border-top: 1px dashed #5bc0de;
 }
-.navbar-nav>li>a {
-    border-right: 1px solid whitesmoke;
-    margin-right: 3px;
+ul.nav.nav-pills.nav-fill a:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.29);
 }
-.navbar-nav>li>a:first-child {
-    border-left: 1px solid whitesmoke;
+ul.nav.nav-pills.nav-fill a {
+    border-right: 1px solid rgba(255, 255, 255, 0.29);
+    margin-right: 3px;
+    border-radius: 0;
+}
+.nav-pills .nav-item+.nav-item {
+    margin-right: .2rem;
 }

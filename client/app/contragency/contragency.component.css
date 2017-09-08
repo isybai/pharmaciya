@@ -1,0 +1,16 @@
+a.list-group-item {
+    background-color: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.6);
+}
+a:hover {
+    font-weight: 600;
+    background-color: rgba(2, 117, 216, 0.42);
+    color: white;
+}
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(2, 117, 216, 0.42);
+    border-color: #ffffff;
+}

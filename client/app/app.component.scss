@@ -10,9 +10,52 @@ a.nav-item.nav-link.logo:hover img {
     box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.76) !important;
 }
 a .material-icons {
-    color: #63b7ff;
-    float: left;
+    color: #e6e6e6;
 }
 .navbar {
     border-radius: 0;
+}
+.col-md-1 {
+    padding: 0;
+}
+.mat-list .mat-list-item div.mat-list-item-content {
+    height: auto;
+    padding: 0;
+}
+md-list-item.mat-list-item a:hover {
+    box-shadow: rgba(94, 212, 255, 0.61) 0 0 40px 3px inset;
+}
+md-list-item.mat-list-item a.nav-item.nav-link.active {
+    box-shadow: rgba(94, 212, 255, 0.61) 0 0 40px 3px inset;
+}
+md-list-item.mat-list-item a {
+    color: #e6e6e6;
+    text-align: center;
+    display: block;
+    width: 100%;
+	font-size: 12px;
+ 	transition: 0.3s;
+}
+md-list-item.mat-list-item a i {
+    font-size: 50px;
+}
+md-list-item.mat-list-item {
+    padding: 10px 0;
+}
+md-list.mat-list {
+    padding-top: 0;
+}
+nav.navbar.navbar-dark.bg-primary {
+    padding: 0 10px;
+}
+ul.nav.navbar-nav li {
+    display: inline-block;
+}
+button.mat-button md-icon.mat-icon.material-icons {
+    color: white;
+    font-size: 24px;
+}
+button.mat-button {
+    padding: 0;
+    width: 95%;
 }
