@@ -28,6 +28,8 @@ import { AccountComponent } from './account/account.component';
 import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { MedicService } from './services/medic.service';
+
 import { ContragencyComponent } from './contragency/contragency.component';
 import { NomenclatureComponent } from './nomenclature/nomenclature.component';
 import { AccomodationDbComponent } from './accomodation-db/accomodation-db.component';
@@ -90,7 +92,8 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     AuthGuardLogin,
     AuthGuardAdmin,
     CatService,
-    UserService
+    UserService,
+    MedicService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

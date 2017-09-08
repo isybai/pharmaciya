@@ -10,16 +10,16 @@ li h4 {
     border-radius: 0;
 }
 ul.nav.nav-pills.nav-fill {
-    border-bottom: 1px dashed #5bc0de;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.52);
 }
 ul.nav.nav-pills.nav-fill:first-child {
-    border-top: 1px dashed #5bc0de;
+    border-top: 1px solid rgba(255, 255, 255, 0.52);
 }
 ul.nav.nav-pills.nav-fill a:first-child {
-    border-left: 1px solid rgba(255, 255, 255, 0.29);
+    border-left: 1px dashed rgba(255, 255, 255, 0.29);
 }
 ul.nav.nav-pills.nav-fill a {
-    border-right: 1px solid rgba(255, 255, 255, 0.29);
+    border-right: 1px dashed rgba(255, 255, 255, 0.29);
     margin-right: 3px;
     border-radius: 0;
 }

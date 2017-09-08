@@ -1,9 +1,9 @@
 {
-  "name": "angular2-full-stack",
+  "name": "Pharmaciya",
   "version": "4.0.0",
   "license": "MIT",
-  "author": "Davide Violante",
-  "description": "Angular Full Stack project built using Angular 2+, Express, Mongoose and Node.",
+  "author": "Toichuev Islambek n Matyeva Elmira",
+  "description": "CRM Pharmaciya.",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",

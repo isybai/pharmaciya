@@ -49,3 +49,116 @@
      <a class="nav-link">Октябрьская</a>
   </li>
 </ul>
+
+<!-- CRUD -->
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="" *ngIf="!isLoading">
+  <h4 class="">Current medics ({{medics.length}})</h4>
+  <div class="">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>name</th>
+          <th>sur</th>
+          <th>dob</th>
+          <th>tel</th>
+          <th>spec</th>
+          <th>hos</th>
+          <th>type</th>
+          <th>local</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="medics.length === 0">
+        <tr>
+          <td colspan="9">There are no medics in the DB. Add a new medic below.</td>
+        </tr>  
+      </tbody>
+      <tbody *ngIf="!isEditing">
+        <tr *ngFor="let medic of medics">
+          <td>{{medic.name}}</td>
+          <td>{{medic.sur}}</td>
+          <td>{{medic.dob}}</td>
+          <td>{{medic.tel}}</td>
+          <td>{{medic.spec}}</td>
+          <td>{{medic.hos}}</td>
+          <td>{{medic.type}}</td>
+          <td>{{medic.local}}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="enableEditing(medic)"><i class="fa fa-pencil"></i> Edit</button> <button class="btn btn-sm btn-danger" (click)="deleteMedic(medic)"><i class="fa fa-trash"></i> Delete</button>
+          </td>
+        </tr>  
+      </tbody>
+      <tbody *ngIf="isEditing">
+        <tr>
+          <td colspan="8">
+            <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
+              <div class="form-group">
+                  <input class="form-control" type="text" name="name" [(ngModel)]="medic.name" placeholder="name" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="sur"  required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="dob" [(ngModel)]="medic.dob" placeholder="dob"  required>
+              </div>
+              <div class="form-group">
+                  <input class="form-control" type="text" name="tel" [(ngModel)]="medic.tel" placeholder="tel" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="spec" [(ngModel)]="medic.spec" placeholder="spec"  required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="hos" [(ngModel)]="medic.hos" placeholder="hos"  required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="type" [(ngModel)]="medic.type" placeholder="type"  required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="local" [(ngModel)]="medic.local" placeholder="local"  required>
+              </div>
+              <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
+            </form>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="" *ngIf="!isEditing">
+  <h4 class="">Add new medic</h4>
+  <div class="">
+    <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
+      <div class="form-group">
+        <input class="form-control" type="text" name="name"  placeholder="name" required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="sur"  placeholder="sur"  required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="dob"  placeholder="dob"  required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="tel" placeholder="tel" required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="spec" placeholder="spec"  required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="hos"  placeholder="hos"  required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="type" placeholder="type"  required>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="local"  placeholder="local"  required>
+      </div>
+      <button class="btn btn-primary" type="submit" ><i class="fa fa-floppy-o"></i> Add</button>
+    </form>
+  </div>
+</div>
