@@ -1,0 +1,31 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Account settings</h4>
+  <div class="card-block">
+    <form #accountForm="ngForm" (ngSubmit)="save(user)">
+      <md-form-field>
+        <i mdPrefix class="material-icons">person</i>
+        <input mdInput class="mat-input-element" type="text" name="username" [(ngModel)]="user.username" placeholder="Логин" required>
+        <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести  <strong _ngcontent-c24="">логин</strong></md-error>
+      </md-form-field>          
+      <md-form-field>
+        <i mdPrefix class="material-icons">mail</i>
+        <input mdInput class="mat-input-element" type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required>
+        <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести свою <strong _ngcontent-c24="">почту</strong></md-error>
+      </md-form-field>
+      <div class="input-group">
+        <i mdPrefix class="material-icons">vpn_key</i>
+        <md-select style="margin-left: 10px;" placeholder="Роль" class="mat-select" name="role" [(ngModel)]="user.role">
+          <md-option value="user">User</md-option>
+          <md-option value="admin">Admin</md-option>
+        </md-select>
+      </div>
+      <button md-raised-button type="submit" [disabled]="!accountForm.form.valid">
+        <i class="material-icons">person_add</i> Сохранить
+      </button>
+    </form>
+  </div>
+</div>

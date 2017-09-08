@@ -1,11 +1,12 @@
-import { browser, by, element } from 'protractor';
+import { $$, browser } from 'protractor';
 
-export class PharmaciyaPage {
+export class Angular2FullStackPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getNavbarElement(n) {
+    return $$('app-root a').get(n).getText();
   }
+
 }

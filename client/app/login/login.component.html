@@ -1,0 +1,24 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card">
+  <h4 class="card-header">Логин</h4>
+  <div class="card-block">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="mat-input-flex mat-form-field-flex" [ngClass]="setClassEmail()">
+        <md-form-field>
+          <i mdPrefix class="material-icons">mail</i>
+          <input class="mat-input-element" mdInput type="email" name="email" formControlName="email" placeholder=" Почта">
+          <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести свою <strong _ngcontent-c24="">почту</strong></md-error>
+        </md-form-field>
+      </div>
+      <div class="input-group" [ngClass]="setClassPassword()">
+        <md-form-field>
+          <i mdPrefix class="material-icons">vpn_key</i>
+          <input mdInput class="mat-input-element" type="password" name="password" formControlName="password" placeholder=" Пароль">
+           <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести <strong _ngcontent-c24="">пароль</strong></md-error>
+        </md-form-field>
+      </div>
+      <button md-raised-button color="warm" class="" type="submit" [disabled]="!loginForm.valid"><i class="material-icons">arrow_upward</i> Войти</button>
+    </form>
+  </div>
+</div>

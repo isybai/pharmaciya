@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+.mat-input-prefix {
+    margin-right: 10px;
+}
+.mat-form-field {
+    width: 100%;
+}
+.material-icons {
+	color: #63b7ff;
+}
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+}

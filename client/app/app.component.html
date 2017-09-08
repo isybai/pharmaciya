@@ -1,0 +1,42 @@
+<nav class="navbar navbar-dark bg-primary">
+  <div class="nav navbar-nav">
+    <a routerLink="/" class="nav-item nav-link logo">
+      <img src="../assets/fav.png" alt="logo">
+    </a>
+
+    <a routerLink="/contragency" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+      <i class="material-icons">account_circle</i> Контрагенты
+    </a>
+    <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+      <i class="material-icons">local_hospital</i>Номенклатура
+    </a>
+    <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+      <i class="material-icons">location_city</i>База данных помещений
+    </a>
+    <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+      <i class="material-icons">monetization_on</i>Финансы
+    </a>
+    <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+      <i class="material-icons">insert_chart</i>Сбыт
+    </a>
+    <a routerLink="/cats"  class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+      <i class="fa fa-list"></i> Котики
+    </a>
+    <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active" *ngIf="!auth.loggedIn">
+      <i class="fa fa-sign-in"></i> Логин
+    </a>
+    <a routerLink="/register" class="nav-item nav-link" routerLinkActive="active" *ngIf="!auth.loggedIn">
+      <i class="fa fa-user-plus"></i> Зарегестрироваться
+    </a>
+    <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+      <i class="fa fa-user"></i> Аккаунт ({{auth.currentUser.username}})
+    </a>
+    <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
+      <i class="fa fa-lock"></i> Админ
+    </a>
+    <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+      <i class="fa fa-sign-out"></i> Выйти
+    </a>
+  </div>
+</nav>
+<router-outlet></router-outlet>
