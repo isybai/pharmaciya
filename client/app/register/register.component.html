@@ -1,8 +1,8 @@
 <app-toast [message]="toast.message"></app-toast>
+<div class="col-md-9">
+<div class="">
+  <h4 class="page-title">Регистрация</h4>
 
-<div class="card">
-  <h4 class="card-header">Регистрация</h4>
-  <div class="card-block md-6">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
 
       <div class="input-group" [ngClass]="setClassUsername()">

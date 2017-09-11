@@ -20,9 +20,9 @@ mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
 (<any>mongoose).Promise = global.Promise;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'ошибка подключения:'));
 db.once('open', () => {
-  console.log('Connected to MongoDB');
+  console.log('Подключились к MongoDB');
 
   setRoutes(app);
 
@@ -31,7 +31,7 @@ db.once('open', () => {
   });
 
   app.listen(app.get('port'), () => {
-    console.log('Angular Full Stack listening on port ' + app.get('port'));
+    console.log('Фармация CRM запущена на порту ' + app.get('port'));
   });
 
 });

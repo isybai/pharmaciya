@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
+import { MedicService } from './services/medic.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
@@ -28,7 +29,7 @@ import { AccountComponent } from './account/account.component';
 import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-import { MedicService } from './services/medic.service';
+
 
 import { ContragencyComponent } from './contragency/contragency.component';
 import { NomenclatureComponent } from './nomenclature/nomenclature.component';
@@ -92,8 +93,9 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     AuthGuardLogin,
     AuthGuardAdmin,
     CatService,
-    UserService,
-    MedicService
+    MedicService,
+    UserService
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

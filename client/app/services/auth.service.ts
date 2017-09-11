@@ -37,7 +37,7 @@ export class AuthService {
     localStorage.removeItem('token');
     this.loggedIn = false;
     this.isAdmin = false;
-    this.currentUser = { _id: '', username: '', role: '' };
+    // this.currentUser = { _id: '', username: '', role: '' };
     this.router.navigate(['/']);
   }
 

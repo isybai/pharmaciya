@@ -21,11 +21,6 @@ export class MedicsComponent implements OnInit {
   name = new FormControl('', Validators.required);
   sur = new FormControl('', Validators.required);
   dob = new FormControl('', Validators.required);
-  tel = new FormControl('', Validators.required);
-  spec = new FormControl('', Validators.required);
-  hos = new FormControl('', Validators.required);
-  type = new FormControl('', Validators.required);
-  local = new FormControl('', Validators.required);
 
 
   constructor(private medicService: MedicService,
@@ -39,11 +34,6 @@ export class MedicsComponent implements OnInit {
       name: this.name,
       sur: this.sur,
       dob: this.dob,
-      tel: this.tel,
-      spec: this.spec,
-      hos: this.hos,
-      type: this.type,
-      local: this.local
     });
   }
 

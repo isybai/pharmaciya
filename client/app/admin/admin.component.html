@@ -2,21 +2,21 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card" *ngIf="!isLoading">
-  <h4 class="page-title">Registered users ({{users.length}})</h4>
+<div class="" *ngIf="!isLoading">
+  <h4 class="page-title">Пользователей ({{users.length}})</h4>
   <div class="">
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
+          <th>Логин</th>
+          <th>Почта</th>
+          <th>Роль</th>
+          <th>Действия</th>
         </tr>
       </thead>
       <tbody *ngIf="users.length === 0">
         <tr>
-          <td colspan="4">There are no registered users.</td>
+          <td colspan="4">Нету пользователей.</td>
         </tr>  
       </tbody>
       <tbody>

@@ -35,9 +35,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'account', component: AccountComponent, canActivate: [AuthGuardLogin] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardAdmin] },
-  { path: 'notfound', component: NotFoundComponent },
   { path: 'sales', component: SalesComponent },
   { path: 'accomodation-db', component: AccomodationDbComponent },
   { path: 'component', component: AppComponent },
@@ -94,7 +91,10 @@ const routes: Routes = [
     }
     ]
   },
-    { path: '**', redirectTo: '/notfound' }
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuardLogin] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardAdmin] },
+  { path: 'notfound', component: NotFoundComponent },
+  { path: '**', redirectTo: '/notfound' }
 ];
 
 @NgModule({

@@ -2,9 +2,9 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Current cats ({{cats.length}})</h4>
-  <div class="card-block">
+<div class="" *ngIf="!isLoading">
+  <h4 class="page-title">Current cats ({{cats.length}})</h4>
+  <div class="">
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
@@ -52,9 +52,9 @@
   </div>
 </div>
 
-<div class="card" *ngIf="!isEditing">
-  <h4 class="card-header">Add new cat</h4>
-  <div class="card-block">
+<div class="" *ngIf="!isEditing">
+  <h4 class="page-title">Add new cat</h4>
+  <div class="">
     <form class="form-inline" [formGroup]="addCatForm" (ngSubmit)="addCat()" style="text-align:center">
       <div class="form-group">
           <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">

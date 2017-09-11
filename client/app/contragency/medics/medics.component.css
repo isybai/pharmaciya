@@ -26,3 +26,16 @@ ul.nav.nav-pills.nav-fill a {
 .nav-pills .nav-item+.nav-item {
     margin-right: .2rem;
 }
+.row {
+    padding: 0 0 15px 0;
+}
+.table thead th {
+    font-size: 14px;
+    font-weight: 500;
+}
+md-form-field.mat-form-field {
+    width: 20%;
+}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background: rgba(255, 0, 0, 0) !important;
+}

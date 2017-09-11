@@ -1,8 +1,8 @@
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card">
-  <h4 class="card-header">Логин</h4>
-  <div class="card-block">
+<div class="col-md-6">
+  <h4 class="">Логин</h4>
+  <div class="">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="mat-input-flex mat-form-field-flex" [ngClass]="setClassEmail()">
         <md-form-field>

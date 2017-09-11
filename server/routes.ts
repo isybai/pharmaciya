@@ -2,11 +2,12 @@ import * as express from 'express';
 
 import CatCtrl from './controllers/cat';
 import UserCtrl from './controllers/user';
+import MedicCtrl from './controllers/medic';
+
 import Cat from './models/cat';
 import User from './models/user';
-
 import Medic from './models/medic';
-import MedicCtrl from './controllers/medic';
+
 
 export default function setRoutes(app) {
 
@@ -15,7 +16,7 @@ export default function setRoutes(app) {
   const catCtrl = new CatCtrl();
   const userCtrl = new UserCtrl();
 
-  const medicCtrl = new UserCtrl();
+  const medicCtrl = new MedicCtrl();
 
   // Cats
   router.route('/cats').get(catCtrl.getAll);
