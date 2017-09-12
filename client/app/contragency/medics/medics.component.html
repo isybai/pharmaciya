@@ -1,56 +1,182 @@
-<div class="row">
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-       <h4 class="label nav-link label-info">Специальность</h4>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Травматолог</a>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Терапевт</a>
-    </li>
-  </ul>
+<div class="example-container mat-elevation-z8">
+  <md-table #table [dataSource]="dataSource">
 
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-       <h4 class="label nav-link label-info">Больница</h4>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">ЦСМ</a>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Госпиаль</a>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Частная клиника</a>
-    </li>
-  </ul>
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
 
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-       <h4 class="label nav-link label-info">Тип</h4>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Государственная</a>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Частная</a>
-    </li>
-  </ul>
+    <!-- Position Column -->
+    <ng-container mdColumnDef="name">
+      <md-header-cell *mdHeaderCellDef> Имя </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
+    </ng-container>
+    
+    <ng-container mdColumnDef="sur">
+      <md-header-cell *mdHeaderCellDef> Фамилие </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.sur}} </md-cell>
+    </ng-container>
 
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-       <h4 class="label nav-link label-info">Локализация</h4>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Первомайская</a>
-    </li>
-    <li class="nav-item">
-       <a class="nav-link">Октябрьская</a>
-    </li>
-  </ul>
+    <ng-container mdColumnDef="dob">
+      <md-header-cell *mdHeaderCellDef> Д.р. </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.dob}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="spec">
+      <md-header-cell *mdHeaderCellDef> Специальность </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.spec}} </md-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container mdColumnDef="hos">
+      <md-header-cell *mdHeaderCellDef> Больница </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.hos}} </md-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container mdColumnDef="type">
+      <md-header-cell *mdHeaderCellDef> Тип </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.type}} </md-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container mdColumnDef="local">
+      <md-header-cell *mdHeaderCellDef> Локализация </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.local}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="workTime">
+      <md-header-cell *mdHeaderCellDef> График работы </md-header-cell>
+      <md-cell *mdCellDef="let element"> {{element.workTime}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="tel">
+      <md-header-cell *mdHeaderCellDef> Тел. </md-header-cell>
+      <md-cell *mdCellDef="let element"> 0 {{element.tel}} </md-cell>
+    </ng-container>
+
+    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
 </div>
 
+<!--
+<div class="row">
+ <table class="table table-bordered table-striped">
+        <thead class="thead-default">
+          <tr>
+            <th class="label  label-info">Специальность</th>
+            <th class="label  label-info">Больница</th>
+            <th class="label  label-info">Тип</th>
+            <th class="label  label-info">Локализация</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="">Акушер</a></td>
+            <td><a class="">Аллерголог</a></td>
+            <td><a class="">Андролог</a></td>
+            <td><a class="">Анестезиолог</a></td>
+            <td><a class="">Венеролог</a></td>
+            <td><a class="">Вертебролог</a></td>
+            <td><a class="">Врач ЛФ</a></td>
+            <td><a class="">Гастроэнтеролог</a></td>
+            <td><a class="">Гематолог</a></td>
+            <td><a class="">Генетик</a></td>
+            <td><a class="">Гепатолог</a></td>
+            <td><a class="">Гинеколог</a></td>
+            <td><a class="">Гинеколог-эндокринолог</a></td>
+            <td><a class="">Гирудотерапевт</a></td>
+            <td><a class="">Гомеопат</a></td>
+            <td><a class="">Дерматолог</a></td>
+            <td><a class="">Диетолог</a></td>
+            <td><a class="">Иммунолог</a></td>
+            <td><a class="">Инфекционист</a></td>
+            <td><a class="">Кардиолог</a></td>
+            <td><a class="">Кардиохирург</a></td>
+            <td><a class="">Кинезиолог</a></td>
+            <td><a class="">Колопроктолог</a></td>
+            <td><a class="">Косметолог</a></td>
+            <td><a class="">Логопед</a></td>
+            <td><a class="">Маммолог</a></td>
+            <td><a class="">Мануальный терапевт</a></td>
+            <td><a class="">Массажист</a></td>
+            <td><a class="">Миколог</a></td>
+            <td><a class="">Нарколог</a></td>
+            <td><a class="">Невролог</a></td>
+            <td><a class="">Нейрохирург</a></td>
+            <td><a class="">Неонатолог</a></td>
+            <td><a class="">Нефролог</a></td>
+            <td><a class="">Окулист</a></td>
+            <td><a class="">Онкогинеколог</a></td>
+            <td><a class="">Онкодерматолог</a></td>
+            <td><a class="">Онколог</a></td>
+            <td><a class="">Ортопед</a></td>
+            <td><a class="">Остеопат</a></td>
+            <td><a class="">Отоларинголог</a></td>
+            <td><a class="">Педиатр</a></td>
+            <td><a class="">Пластический хирург</a></td>
+            <td><a class="">Подолог</a></td>
+            <td><a class="">Проктолог</a></td>
+            <td><a class="">Психиатр</a></td>
+            <td><a class="">Психолог</a></td>
+            <td><a class="">Психотерапевт</a></td>
+            <td><a class="">Пульмонолог</a></td>
+            <td><a class="">Реабилитолог</a></td>
+            <td><a class="">Ревматолог</a></td>
+            <td><a class="">Рентгенолог</a></td>
+            <td><a class="">Репродуктолог</a></td>
+            <td><a class="">Рефлексотерапевт</a></td>
+            <td><a class="">Сексолог</a></td>
+            <td><a class="">Семейный врач</a></td>
+            <td><a class="">Сомнолог</a></td>
+            <td><a class="">Сосудистый хирург</a></td>
+            <td><a class="">Специалист по клет технологиям</a></td>
+            <td><a class="">Спортивный врач</a></td>
+            <td><a class="">Стоматолог</a></td>
+            <td><a class="">Стоматолог-гигиенис</a></td>
+            <td><a class="">Стоматолог-имплантоло</a></td>
+            <td><a class="">Стоматолог-ортодон</a></td>
+            <td><a class="">Стоматолог-ортопе</a></td>
+            <td><a class="">Стоматолог-пародонтоло</a></td>
+            <td><a class="">Стоматолог-терапев</a></td>
+            <td><a class="">Стоматолог-хирур</a></td>
+            <td><a class="">Сурдолог</a></td>
+            <td><a class="">Терапевт</a></td>
+            <td><a class="">Травматолог</a></td>
+            <td><a class="">Трихолог</a></td>
+            <td><a class="">УЗИ-специалист</a></td>
+            <td><a class="">Уролог</a></td>
+            <td><a class="">Физиотерапевт</a></td>
+            <td><a class="">Флеболог</a></td>
+            <td><a class="">Фтизиатр</a></td>
+            <td><a class="">Хирург</a></td>
+            <td><a class="">Эндокринолог</a></td>
+            <td><a class="">Эндоскопист</a></td>
+            <td><a class="">Эпилептологи</a></td>
+          </tr>
+          <tr>
+            <td><a class="">Амбулатория</a></td>
+            <td><a class="">Поликлиническое отделение</a></td>
+            <td><a class="">Диспансер</a></td>
+            <td><a class="">Медико-санитарная часть</a></td>
+            <td><a class="">Стационар</a></td>
+            <td><a class="">Клиника</a></td>
+            <td><a class="">Госпиталь</a></td>
+            <td><a class="">Родильный дом</a></td>
+          </tr>
+          <tr>
+            <td><a class="">Государственная</a></td>
+            <td><a class="">Частная</a></td>
+          </tr>
+          <tr>
+            <td><a class="">Первомайский район</a></td>
+            <td><a class="">Свердловский район</a></td>
+            <td><a class="">Октябрьский район</a></td>
+            <td><a class="">Ленинский район</a></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+-->
 
   <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>

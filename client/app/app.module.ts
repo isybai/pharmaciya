@@ -9,7 +9,7 @@ import { MdInputModule } from '@angular/material';
 import { MdSelectModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MdTableModule } from '@angular/material';
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -86,7 +86,8 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     MdSelectModule,
     MdSidenavModule,
     MdListModule,
-    MdGridListModule
+    MdGridListModule,
+    MdTableModule
   ],
   providers: [
     AuthService,
