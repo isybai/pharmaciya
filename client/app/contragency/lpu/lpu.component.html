@@ -1,307 +1,223 @@
-
-  <!-- CRUD -->
+<!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
-
 <app-toast [message]="toast.message"></app-toast>
-
 <div class="row info_table">
   <div class="" *ngIf="!isLoading">
-    <h4 class="">Текущие врачи {{lpus.length}}</h4>
-    <div class="">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-default">
-          <tr>
-            <th>Название</th>
-            <th>Адрес</th>
-            <th>Тип</th>
-            <th>Телефон</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="lpus.length === 0">
-          <tr>
-            <td colspan="10">В базе данных нету врачей добавьте их.</td>
-          </tr>  
-        </tbody>
-
-        <tbody *ngIf="!isEditing">
-          <tr *ngFor="let lpu of lpus">
-            <td>{{lpu.name}}</td>
-            <td>{{lpu.address}}</td>
-            <td>{{lpu.type}}</td>
-            <td>{{lpu.tel}}</td>
-            <td>
-              <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                <i class="fa fa-pencil"></i> 
-                Редактировать
-              </button> 
-              <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                <i class="fa fa-trash"></i>  
-                Удалить
-              </button>
-            </td>
-          </tr>  
-        </tbody>
-        <tbody *ngIf="isEditing">
-          <tr>
-            <td colspan="10">
-              <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="type" [(ngModel)]="lpu.type"  placeholder="Тип"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="tel" [(ngModel)]="lpu.tel"  placeholder="Телефон"  required>
-                </div>
-                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-              </form>
-              <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h4 class="">Текущие ЛПУ {{lpus.length}}</h4>
+    <md-tab-group>
+      <md-tab label="Ц.С.М.">
+        <div class="">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-default">
+              <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Тип</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="lpus.length === 0">
+              <tr>
+                <td colspan="10">В базе данных нету ЛПУ добавьте их.</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing">
+              <tr *ngFor="let lpu of lpus">
+                <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.name}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.address}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.type}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="isEditing">
+              <tr>
+                <td colspan="10">
+                  <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="type" [(ngModel)]="lpu.type" placeholder="Тип" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон" required>
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+      <md-tab label="Мед. Центр">
+        <div class="">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-default">
+              <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Тип</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="lpus.length === 0">
+              <tr>
+                <td colspan="10">В базе данных нету ЛПУ добавьте их.</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing">
+              <tr *ngFor="let lpu of lpus">
+                <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.name}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.address}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.type}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="isEditing">
+              <tr>
+                <td colspan="10">
+                  <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="type" [(ngModel)]="lpu.type" placeholder="Тип" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон" required>
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+      <md-tab label="Больницы">
+        <div class="">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-default">
+              <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Тип</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="lpus.length === 0">
+              <tr>
+                <td colspan="10">В базе данных нету ЛПУ добавьте их.</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing">
+              <tr *ngFor="let lpu of lpus">
+                <td *ngIf="lpu.type === 'Больница'">{{lpu.name}}</td>
+                <td *ngIf="lpu.type === 'Больница'">{{lpu.address}}</td>
+                <td *ngIf="lpu.type === 'Больница'">{{lpu.type}}</td>
+                <td *ngIf="lpu.type === 'Больница'">{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Больница'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="isEditing">
+              <tr>
+                <td colspan="10">
+                  <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="type" [(ngModel)]="lpu.type" placeholder="Тип" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон" required>
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+    </md-tab-group>
   </div>
-    <md-sidenav-container class="example-container">
-<div class="example-sidenav-content">
-        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить нового врача
-        </button>
-      </div>
-      <md-sidenav #sidenav class="example-sidenav">
-        <div  class="addItem" *ngIf="!isEditing">
-    <div>
-      <form class="form-inline" [formGroup]="addLpuForm" (ngSubmit)="addLpu()" style="text-align:center">
-        <md-form-field>
-          <span mdTooltip="Нужно ввести название"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название"></span>
-        </md-form-field>
-        <md-form-field>
-          <span mdTooltip="Нужно ввести адрес"><input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="адрес"></span>
-        </md-form-field>
-
-          <span mdTooltip="Нужно ввести тип">
+  <md-sidenav-container class="example-container">
+    <div class="example-sidenav-content">
+      <button md-raised-button (click)="sidenav.open()">
+        <md-icon>add</md-icon>Добавить ЛПУ
+      </button>
+    </div>
+    <md-sidenav #sidenav class="example-sidenav">
+      <div class="addItem" *ngIf="!isEditing">
+        <div>
+          <form class="form-inline" [formGroup]="addLpuForm" (ngSubmit)="addLpu()" style="text-align:center">
+            <md-form-field>
+              <span mdTooltip="Нужно ввести название"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название"></span>
+            </md-form-field>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести адрес"><input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="адрес"></span>
+            </md-form-field>
+            <span mdTooltip="Нужно ввести тип">
             <md-select  formControlName="type" placeholder="тип">
               <md-option *ngFor="let type of types" [value]="type.value">
                 {{ type.viewValue }}
               </md-option>
             </md-select>
           </span>
-
-        <md-form-field>
-          <span mdTooltip="Нужно ввести телефон"><input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="телефон"></span>
-        </md-form-field>
-        <button md-raised-button color="warm" class=""  type="submit" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>
-      </form>
-    </div>
-  </div>
-      </md-sidenav>
-   </md-sidenav-container>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести телефон"><input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="телефон"></span>
+            </md-form-field>
+            <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>
+          </form>
+        </div>
+      </div>
+    </md-sidenav>
+  </md-sidenav-container>
 </div>
-
-<!--
-<div class="row">
- <table class="table table-bordered table-striped">
-        <thead class="thead-default">
-          <tr>
-            <th class="label  label-info">тип</th>
-            <th class="label  label-info">телефон</th>
-            <th class="label  label-info">Тип</th>
-            <th class="label  label-info">Локализация</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            Акушер
-            Аллерголог
-            Андролог
-            Анестезиолог
-            Венеролог
-            Вертебролог
-            Врач ЛФ
-            Гастроэнтеролог
-            Гематолог
-            Генетик
-            Гепатолог
-            Гинеколог
-            Гинеколог-эндокринолог
-            Гирудотерапевт
-            Гомеопат
-            Дерматолог
-            Диетолог
-            Иммунолог
-            Инфекционист
-            Кардиолог
-            Кардиохирург
-            Кинезиолог
-            Колопроктолог
-            Косметолог
-            Логопед
-            Маммолог
-            Мануальный терапевт
-            Массажист
-            Миколог
-            Нарколог
-            Невролог
-            Нейрохирург
-            Неонатолог
-            Нефролог
-            Окулист
-            Онкогинеколог
-            Онкодерматолог
-            Онколог
-            Ортопед
-            Остеопат
-            Отоларинголог
-            Педиатр
-            Пластический хирург
-            Подолог
-            Проктолог
-            Психиатр
-            Психолог
-            Психотерапевт
-            Пульмонолог
-            Реабилитолог
-            Ревматолог
-            Рентгенолог
-            Репродуктолог
-            Рефлексотерапевт
-            Сексолог
-            Семейный врач
-            Сомнолог
-            Сосудистый хирург
-            Специалист по клет технологиям
-            Спортивный врач
-            Стоматолог
-            Стоматолог-гигиенис
-            Стоматолог-имплантоло
-            Стоматолог-ортодон
-            Стоматолог-ортопе
-            Стоматолог-пародонтоло
-            Стоматолог-терапев
-            Стоматолог-хирур
-            Сурдолог
-            Терапевт
-            Травматолог
-            Трихолог
-            УЗИ-Типиалист
-            Уролог
-            Физиотерапевт
-            Флеболог
-            Фтизиатр
-            Хирург
-            Эндокринолог
-            Эндоскопист
-            Эпилептологи
-          </tr>
-          <tr>
-            <td><a class="">Амбулатория</a></td>
-            <td><a class="">Поликлиническое отделение</a></td>
-            <td><a class="">Диспансер</a></td>
-            <td><a class="">Медико-санитарная часть</a></td>
-            <td><a class="">Стационар</a></td>
-            <td><a class="">Клиника</a></td>
-            <td><a class="">Госпиталь</a></td>
-            <td><a class="">Родильный дом</a></td>
-          </tr>
-          <tr>
-            <td><a class="">Государственная</a></td>
-            <td><a class="">Частная</a></td>
-          </tr>
-          <tr>
-            <td><a class="">Первомайский район</a></td>
-            <td><a class="">Свердловский район</a></td>
-            <td><a class="">Октябрьский район</a></td>
-            <td><a class="">Ленинский район</a></td>
-          </tr>
-        </tbody>
-      </table>
-</div>
--->
-
-
-
 <!--
 <nav class="navbar navbar-light">
   <div class="row">
-  	<md-tab-group>
-	  <md-tab label="Ц.С.М.">
-	   <div class="example-container mat-elevation-z8">
-		  <md-table #table [dataSource]="dataSource">
-
-		    <ng-container mdColumnDef="name">
-		      <md-header-cell *mdHeaderCellDef> Название </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-		    </ng-container>
-
-		    <ng-container mdColumnDef="address">
-		      <md-header-cell *mdHeaderCellDef> Адрес </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.address}} </md-cell>
-		    </ng-container>
-
-		    <ng-container mdColumnDef="tel">
-		      <md-header-cell *mdHeaderCellDef> Телефон </md-header-cell>
-		      <md-cell *mdCellDef="let element"><span mdPrefix>+996 (312) </span> {{element.tel}} </md-cell>
-		    </ng-container>
-
-		    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-		    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-		  </md-table>
-		</div>
-	  </md-tab>
-
-	  <md-tab label="Мед. Центр">
-  	    <div class="example-container mat-elevation-z8">
-		  <md-table #table [dataSource]="dataSourceM">
-
-		    <ng-container mdColumnDef="name">
-		      <md-header-cell *mdHeaderCellDef> Название </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-		    </ng-container>
-
-		    <ng-container mdColumnDef="address">
-		      <md-header-cell *mdHeaderCellDef> Адрес </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.address}} </md-cell>
-		    </ng-container>
-
-		    <ng-container mdColumnDef="tel">
-		      <md-header-cell *mdHeaderCellDef> Телефон </md-header-cell>
-		      <md-cell *mdCellDef="let element"><span mdPrefix>+996 (312) </span> {{element.tel}} </md-cell>
-		    </ng-container>
-
-		    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-		    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-		  </md-table>
-		</div>
-	  </md-tab>
-	  <md-tab label="Больницы">
-		<div class="example-container mat-elevation-z8">
-		  <md-table #table [dataSource]="dataSourceH">
-
-		    <ng-container mdColumnDef="name">
-		      <md-header-cell *mdHeaderCellDef> Название </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-		    </ng-container>
-
-		    <ng-container mdColumnDef="address">
-		      <md-header-cell *mdHeaderCellDef> Адрес </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.address}} </md-cell>
-		    </ng-container>
-
-		    <ng-container mdColumnDef="tel">
-		      <md-header-cell *mdHeaderCellDef> Телефон </md-header-cell>
-		      <md-cell *mdCellDef="let element"><span mdPrefix>+996 (312) </span> {{element.tel}} </md-cell>
-		    </ng-container>
-
-		    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-		    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-		  </md-table>
-		</div>
-	  </md-tab>
-	</md-tab-group>
+    
   </div>
 </nav>
 -->

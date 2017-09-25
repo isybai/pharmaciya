@@ -1,9 +1,6 @@
-
-  <!-- CRUD -->
+<!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
-
 <app-toast [message]="toast.message"></app-toast>
-
 <div class="row info_table">
   <div class="" *ngIf="!isLoading">
     <h4 class="">Текущие врачи {{medics.length}}</h4>
@@ -26,9 +23,8 @@
         <tbody *ngIf="medics.length === 0">
           <tr>
             <td colspan="10">В базе данных нету врачей добавьте их.</td>
-          </tr>  
+          </tr>
         </tbody>
-
         <tbody *ngIf="!isEditing">
           <tr *ngFor="let medic of medics">
             <td>{{medic.name}}</td>
@@ -42,48 +38,70 @@
             <td>0 {{medic.tel}}</td>
             <td>
               <button class="btn btn-sm btn-warning" (click)="enableEditing(medic)">
-                <i class="fa fa-pencil"></i> 
-                Редактировать
-              </button> 
+                <i class="fa fa-pencil"></i> Редактировать
+              </button>
               <button class="btn btn-sm btn-danger" (click)="deleteMedic(medic)">
-                <i class="fa fa-trash"></i>  
-                Удалить
+                <i class="fa fa-trash"></i> Удалить
               </button>
             </td>
-          </tr>  
+          </tr>
         </tbody>
         <tbody *ngIf="isEditing">
           <tr>
             <td colspan="10">
               <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="name" [(ngModel)]="medic.name" placeholder="Имя" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фам."  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="spec" [(ngModel)]="medic.spec"  placeholder="спец"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="hos" [(ngModel)]="medic.hos"  placeholder="больница"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="type" [(ngModel)]="medic.type"  placeholder="тип"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="local" [(ngModel)]="medic.local"  placeholder="локац"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="workTime" [(ngModel)]="medic.workTimeFrom"  placeholder="р.время с"  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="workTime" [(ngModel)]="medic.workTimeTill"  placeholder="р.время до"  required>
-                </div>
-                <div class="form-group">
-                <span mdPrefix>0</span>
-                  <input class="form-control" type="number" name="tel" [(ngModel)]="medic.tel"  placeholder="тел"  required>
-                </div>
+                <md-form-field>
+                  <span mdTooltip="Нужно ввести имя">
+                    <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="medic.name" placeholder="Имя">
+                  </span>
+                </md-form-field>
+                <md-form-field>
+                  <span mdTooltip="Нужно ввести фамилие">
+                    <input mdInput class="mat-input-element" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фамилие">
+                  </span>
+                </md-form-field>
+                <span mdTooltip="Нужно выбрать специальность">
+                  <md-select [(ngModel)]="medic.spec" name="spec" placeholder="Специальность">
+                    <md-option *ngFor="let spec of specs" [value]="spec.value">
+                      {{ spec.viewValue }}
+                    </md-option>
+                  </md-select>
+                </span>
+                <span mdTooltip="Нужно выбрать тип">
+                  <md-select #selectedType [(ngModel)]="medic.type" name="type"  placeholder="Тип Л.П.У.">
+                    <md-option *ngFor="let spec of lpus | slice:0:3;" [value]="spec.type">
+                      {{ spec.type }}
+                    </md-option>
+                  </md-select>
+                </span>
+                <span mdTooltip="Нужно выбрать больницу">
+                  <md-select  name="hos"  [(ngModel)]="medic.hos" placeholder="Л.П.У.">
+                    <md-option *ngFor="let spec of lpus" [value]="spec.name">
+                      <span *ngIf="selectedType.value === spec.type">{{spec.name}}</span>
+                    </md-option>
+                  </md-select>
+                </span>
+                <md-form-field>
+                  <span mdTooltip="Нужно ввести адрес">
+                    <input mdInput class="mat-input-element" type="text" name="local"  [(ngModel)]="medic.local"  placeholder="Адрес">
+                  </span>
+                </md-form-field>
+                <span mdTooltip="Нужно ввести телефон">
+                  <md-form-field>
+                    <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
+                    <input mdInput class="mat-input-element" type="tel" name="tel" [(ngModel)]="medic.tel" placeholder="Телефон">
+                  </md-form-field>
+                </span>
+                <md-form-field>
+                  <span mdTooltip="Нужно ввести р. время с">
+                    <input mdInput name="workTimeFrom" [(ngModel)]="medic.workTimeFrom" class="mat-input-element" type="time" placeholder="Р. время c">
+                  </span>
+                </md-form-field>
+                <md-form-field>
+                  <span mdTooltip="Нужно ввести р. время до">
+                    <input mdInput name="workTimeTill" [(ngModel)]="medic.workTimeTill" class="mat-input-element" type="time" placeholder="Р. время c">
+                  </span>
+                </md-form-field>
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
               </form>
               <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -93,178 +111,72 @@
       </table>
     </div>
   </div>
-    <md-sidenav-container class="example-container">
-<div class="example-sidenav-content">
-        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить нового врача
-        </button>
-      </div>
-      <md-sidenav #sidenav class="example-sidenav">
-        <div  class="addItem" *ngIf="!isEditing">
-    <div>
-      <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
-        <md-form-field>
-          <span mdTooltip="Нужно ввести имя"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя"></span>
-        </md-form-field>
-        <md-form-field>
-          <span mdTooltip="Нужно ввести фамилие"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилие"></span>
-        </md-form-field>
-
-          <span mdTooltip="Нужно ввести специальность">
-            <md-select  formControlName="spec" placeholder="Специальность">
-              <md-option *ngFor="let spec of specs" [value]="spec.value">
-                {{ spec.viewValue }}
-              </md-option>
-            </md-select>
-          </span>
-
-        <md-form-field>
-          <span mdTooltip="Нужно ввести больницу"><input mdInput class="mat-input-element" type="text" name="hos" formControlName="hos" placeholder="Больница"></span>
-        </md-form-field>
-        <md-form-field>
-          <span mdTooltip="Нужно ввести тип"><input mdInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="Тип"></span>
-        </md-form-field>
-        <md-form-field>
-          <span mdTooltip="Нужно ввести локацию"><input mdInput class="mat-input-element" type="text" name="local" formControlName="local" placeholder="Локация"></span>
-        </md-form-field>
-        <span mdTooltip="Нужно ввести телефон">
-        <md-form-field>
-          <span style="color: #757575;" mdPrefix>+996 &nbsp;</span><input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
-        </md-form-field>
-        </span>
-        <md-form-field>
-          <span mdTooltip="Нужно ввести р. время с">
-            <input mdInput  formControlName="workTimeFrom" class="mat-input-element" type="time" placeholder="Р. время c">
-          </span>
-        </md-form-field>
-        <md-form-field>
-          <span mdTooltip="Нужно ввести р. время до">
-            <input mdInput  formControlName="workTimeTill" class="mat-input-element" type="time" placeholder="Р. время c">
-          </span>
-        </md-form-field>
-        <button md-raised-button color="warm" class=""  type="submit" [disabled]="!addMedicForm.valid"><i class="material-icons">add</i> Добавить</button>
-      </form>
+  <md-sidenav-container class="example-container">
+    <div class="example-sidenav-content">
+      <button md-raised-button (click)="sidenav.open()">
+        <md-icon>add</md-icon>Добавить нового врача
+      </button>
     </div>
-  </div>
-      </md-sidenav>
-   </md-sidenav-container>
+    <md-sidenav #sidenav class="example-sidenav">
+      <div class="addItem" *ngIf="!isEditing">
+        <div>
+          <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
+            <md-form-field>
+              <span mdTooltip="Нужно ввести имя">
+                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
+              </span>
+            </md-form-field>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести фамилие">
+                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилие">
+              </span>
+            </md-form-field>
+            <span mdTooltip="Нужно выбрать специальность">
+              <md-select formControlName="spec" placeholder="Специальность">
+                <md-option *ngFor="let spec of specs" [value]="spec.value">
+                  {{ spec.viewValue }}
+                </md-option>
+              </md-select>
+            </span>
+            <span mdTooltip="Нужно выбрать тип">
+              <md-select #selectedType formControlName="type" placeholder="Тип Л.П.У.">
+                <md-option *ngFor="let spec of lpus | slice:0:3;" [value]="spec.type">
+                  {{ spec.type }}
+                </md-option>
+              </md-select>
+            </span>
+            <span mdTooltip="Нужно выбрать больницу">
+              <md-select *ngIf="selectedType.value !== undefined" formControlName="hos" placeholder="Л.П.У.">
+                <md-option *ngFor="let spec of lpus" [value]="spec.name">
+                  <span *ngIf="selectedType.value === spec.type">{{spec.name}}</span>
+                </md-option>
+              </md-select>
+            </span>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести адрес">
+                <input mdInput class="mat-input-element" type="text" name="local" formControlName="local" placeholder="Адрес">
+              </span>
+            </md-form-field>
+            <span mdTooltip="Нужно ввести телефон">
+              <md-form-field>
+                <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
+                <input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
+              </md-form-field>
+            </span>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести р. время с">
+                <input mdInput formControlName="workTimeFrom" class="mat-input-element" type="time" placeholder="Р. время c">
+              </span>
+            </md-form-field>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести р. время до">
+                <input mdInput formControlName="workTimeTill" class="mat-input-element" type="time" placeholder="Р. время c">
+              </span>
+            </md-form-field>
+            <button md-raised-button color="warm" (click)="sidenav.close()" type="submit" [disabled]="!addMedicForm.valid"><i class="material-icons">add</i> Добавить</button>
+          </form>
+        </div>
+      </div>
+    </md-sidenav>
+  </md-sidenav-container>
 </div>
-
-<!--
-<div class="row">
- <table class="table table-bordered table-striped">
-        <thead class="thead-default">
-          <tr>
-            <th class="label  label-info">Специальность</th>
-            <th class="label  label-info">Больница</th>
-            <th class="label  label-info">Тип</th>
-            <th class="label  label-info">Локализация</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            Акушер
-            Аллерголог
-            Андролог
-            Анестезиолог
-            Венеролог
-            Вертебролог
-            Врач ЛФ
-            Гастроэнтеролог
-            Гематолог
-            Генетик
-            Гепатолог
-            Гинеколог
-            Гинеколог-эндокринолог
-            Гирудотерапевт
-            Гомеопат
-            Дерматолог
-            Диетолог
-            Иммунолог
-            Инфекционист
-            Кардиолог
-            Кардиохирург
-            Кинезиолог
-            Колопроктолог
-            Косметолог
-            Логопед
-            Маммолог
-            Мануальный терапевт
-            Массажист
-            Миколог
-            Нарколог
-            Невролог
-            Нейрохирург
-            Неонатолог
-            Нефролог
-            Окулист
-            Онкогинеколог
-            Онкодерматолог
-            Онколог
-            Ортопед
-            Остеопат
-            Отоларинголог
-            Педиатр
-            Пластический хирург
-            Подолог
-            Проктолог
-            Психиатр
-            Психолог
-            Психотерапевт
-            Пульмонолог
-            Реабилитолог
-            Ревматолог
-            Рентгенолог
-            Репродуктолог
-            Рефлексотерапевт
-            Сексолог
-            Семейный врач
-            Сомнолог
-            Сосудистый хирург
-            Специалист по клет технологиям
-            Спортивный врач
-            Стоматолог
-            Стоматолог-гигиенис
-            Стоматолог-имплантоло
-            Стоматолог-ортодон
-            Стоматолог-ортопе
-            Стоматолог-пародонтоло
-            Стоматолог-терапев
-            Стоматолог-хирур
-            Сурдолог
-            Терапевт
-            Травматолог
-            Трихолог
-            УЗИ-специалист
-            Уролог
-            Физиотерапевт
-            Флеболог
-            Фтизиатр
-            Хирург
-            Эндокринолог
-            Эндоскопист
-            Эпилептологи
-          </tr>
-          <tr>
-            <td><a class="">Амбулатория</a></td>
-            <td><a class="">Поликлиническое отделение</a></td>
-            <td><a class="">Диспансер</a></td>
-            <td><a class="">Медико-санитарная часть</a></td>
-            <td><a class="">Стационар</a></td>
-            <td><a class="">Клиника</a></td>
-            <td><a class="">Госпиталь</a></td>
-            <td><a class="">Родильный дом</a></td>
-          </tr>
-          <tr>
-            <td><a class="">Государственная</a></td>
-            <td><a class="">Частная</a></td>
-          </tr>
-          <tr>
-            <td><a class="">Первомайский район</a></td>
-            <td><a class="">Свердловский район</a></td>
-            <td><a class="">Октябрьский район</a></td>
-            <td><a class="">Ленинский район</a></td>
-          </tr>
-        </tbody>
-      </table>
-</div>
--->

@@ -5,7 +5,7 @@ import UserCtrl from './controllers/user';
 import MedicCtrl from './controllers/medic';
 import IndividualCtrl from './controllers/individual';
 import RenterCtrl from './controllers/renter';
-import LpuCtrl from './controllers/renter';
+import LpuCtrl from './controllers/lpu';
 
 import Cat from './models/cat';
 import User from './models/user';

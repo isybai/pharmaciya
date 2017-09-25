@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { MedicService } from '../../services/medic.service';
+import { LpuService } from '../../services/lpu.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
@@ -18,6 +19,8 @@ export class MedicsComponent implements OnInit {
 
   medic = {};
   medics = [];
+  lpu = {};
+  lpus = [];
   isLoading = true;
   isEditing = false;
 
@@ -33,12 +36,14 @@ export class MedicsComponent implements OnInit {
   tel = new FormControl('', Validators.required);
 
   constructor(private medicService: MedicService,
+              private lpuService: LpuService,
               private formBuilder: FormBuilder,
               private http: Http,
               public toast: ToastComponent) {}
 
   ngOnInit() {
     this.getMedics();
+    this.getLpus();
     this.addMedicForm = this.formBuilder.group({
       name: this.name,
       sur: this.sur,
@@ -56,6 +61,14 @@ export class MedicsComponent implements OnInit {
   getMedics() {
     this.medicService.getMedics().subscribe(
       data => this.medics = data,
+      error => console.log(error),
+      () => this.isLoading = false
+
+    );
+  }
+  getLpus() {
+    this.lpuService.getLpus().subscribe(
+      data => this.lpus = data,
       error => console.log(error),
       () => this.isLoading = false
 

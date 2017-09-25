@@ -103,10 +103,10 @@ export class LpuComponent implements OnInit {
       );
     }
   }
-  specs = [
-    {value: 'Акушер', viewValue: 'Акушер'},
-    {value: 'Аллерголог', viewValue: 'Аллерголог'},
-    {value: 'Андролог', viewValue: 'Андролог'},    
+  types = [
+    {value: 'Ц.С.М.', viewValue: 'Ц.С.М.'},
+    {value: 'Мед. центр', viewValue: 'Мед. центр'},
+    {value: 'Больница', viewValue: 'Больница'},    
     ];
 }
 
