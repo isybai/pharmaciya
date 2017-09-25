@@ -1,22 +1,54 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// Material
-import { MdGridListModule } from '@angular/material';
-import { MdListModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
-import { MdInputModule } from '@angular/material';
-import { MdSelectModule } from '@angular/material';
-import { MdSidenavModule } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdTableModule } from '@angular/material';
+// Material
+import {
+  MdAutocompleteModule,
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdCheckboxModule,
+  MdChipsModule,
+  MdCoreModule,
+  MdDatepickerModule,
+  MdDialogModule,
+  MdExpansionModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
+  MdNativeDateModule,
+  MdPaginatorModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdRadioModule,
+  MdRippleModule,
+  MdSelectModule,
+  MdSidenavModule,
+  MdSliderModule,
+  MdSlideToggleModule,
+  MdSnackBarModule,
+  MdSortModule,
+  MdTableModule,
+  MdTabsModule,
+  MdToolbarModule,
+  MdTooltipModule,
+} from '@angular/material';
+
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
+
 import { MedicService } from './services/medic.service';
+import { IndividualService } from './services/individual.service';
+import { RenterService } from './services/renter.service';
+import { LpuService } from './services/lpu.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { AppComponent } from './app.component';
@@ -40,7 +72,7 @@ import { MedicsComponent } from './contragency/medics/medics.component';
 import { LpuComponent } from './contragency/lpu/lpu.component';
 import { DrugstoresComponent } from './contragency/drugstores/drugstores.component';
 import { IndividualsComponent } from './contragency/individuals/individuals.component';
-import { CoworkersComponent } from './contragency/coworkers/coworkers.component';
+import { CoworkersComponent } from './coworkers/coworkers.component';
 import { RentersComponent } from './contragency/renters/renters.component';
 import { DrugListComponent } from './nomenclature/drug-list/drug-list.component';
 import { PricesComponent } from './nomenclature/prices/prices.component';
@@ -80,14 +112,38 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
 
     // Material
     BrowserAnimationsModule,
+    MdAutocompleteModule,
     MdButtonModule,
+    MdButtonToggleModule,
+    MdCardModule,
+    MdCheckboxModule,
+    MdChipsModule,
+    MdCoreModule,
+    MdDatepickerModule,
+    MdDialogModule,
+    MdExpansionModule,
+    MdGridListModule,
     MdIconModule,
     MdInputModule,
+    MdListModule,
+    MdMenuModule,
+    MdNativeDateModule,
+    MdPaginatorModule,
+    MdProgressBarModule,
+    MdProgressSpinnerModule,
+    MdRadioModule,
+    MdRippleModule,
     MdSelectModule,
     MdSidenavModule,
-    MdListModule,
-    MdGridListModule,
-    MdTableModule
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdSnackBarModule,
+    MdSortModule,
+    MdTableModule,
+    MdTabsModule,
+    MdToolbarModule,
+    MdTooltipModule,
+    CdkTableModule,
   ],
   providers: [
     AuthService,
@@ -95,7 +151,10 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     AuthGuardAdmin,
     CatService,
     MedicService,
-    UserService
+    IndividualService,
+    RenterService,
+    UserService,
+    LpuService
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

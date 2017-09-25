@@ -19,7 +19,7 @@ import { MedicsComponent } from './contragency/medics/medics.component';
 import { LpuComponent } from './contragency/lpu/lpu.component';
 import { DrugstoresComponent } from './contragency/drugstores/drugstores.component';
 import { IndividualsComponent } from './contragency/individuals/individuals.component';
-import { CoworkersComponent } from './contragency/coworkers/coworkers.component';
+import { CoworkersComponent } from './coworkers/coworkers.component';
 import { RentersComponent } from './contragency/renters/renters.component';
 import { DrugListComponent } from './nomenclature/drug-list/drug-list.component';
 import { PricesComponent } from './nomenclature/prices/prices.component';
@@ -39,6 +39,7 @@ const routes: Routes = [
   { path: 'accomodation-db', component: AccomodationDbComponent },
   { path: 'component', component: AppComponent },
   { path: 'finance', component: FinanceComponent },
+  { path: 'coworkers',  component: CoworkersComponent },
   { 
     path: 'nomenclature', 
     component: NomenclatureComponent,
@@ -80,10 +81,6 @@ const routes: Routes = [
     {
       path: 'individuals',
       component: IndividualsComponent
-    },
-    {
-      path: 'coworkers',
-      component: CoworkersComponent
     },
     {
       path: 'renters',

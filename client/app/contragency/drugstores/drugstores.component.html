@@ -1,12 +1,45 @@
+<!--
+      <li><a> -  (Неман, Бимед, Фармамир, Лекарь)   </a></li>
+      <li><a> - </a></li>
+      <li><a> - </a></li>
+-->
 <nav class="navbar navbar-light">
   <div class="row">
-    <ul class="nav navbar-nav">
-      <li><a>Категория A - крупные сети аптек (Неман, Бимед, Фармамир, Лекарь)   </a></li>
-      <li><a>Категория B - сети до 3-5 аптек</a></li>
-      <li><a>Категория C - одиночки, ЧП</a></li>
-    </ul>
+  	<md-tab-group>
+	  	<md-tab label="Категория A(крупные сети аптек)">
+			<div class="example-container mat-elevation-z8">
+			  <md-table #table [dataSource]="dataSource">
+			    <!-- Position Column -->
+			    <ng-container mdColumnDef="name">
+			      <md-header-cell *mdHeaderCellDef> Название </md-header-cell>
+			      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
+			    </ng-container>
+			    <!-- Name Column -->
+			    <ng-container mdColumnDef="address">
+			      <md-header-cell *mdHeaderCellDef> Адрес </md-header-cell>
+			      <md-cell *mdCellDef="let element"> {{element.address}} </md-cell>
+			    </ng-container>
+			    <!-- Weight Column -->
+			    <ng-container mdColumnDef="tel">
+			      <md-header-cell *mdHeaderCellDef> Телефон </md-header-cell>
+			      <md-cell *mdCellDef="let element"><span mdPrefix>+996 (312) </span> {{element.tel}} </md-cell>
+			    </ng-container>
+			    <ng-container mdColumnDef="workTime">
+			      <md-header-cell *mdHeaderCellDef> График работы </md-header-cell>
+			      <md-cell *mdCellDef="let element">{{element.workTime}} </md-cell>
+			    </ng-container>
+			    <!-- Color Column -->
+			    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+			    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+			  </md-table>
+			</div>
+	  	</md-tab>
+  		<md-tab label="Категория B(сети до 3-5 аптек)">
+
+  		</md-tab>
+  		<md-tab label="Категория C(одиночки, ЧП)">
+
+	  	</md-tab>
+	</md-tab-group>
   </div>
 </nav>
-
-
-

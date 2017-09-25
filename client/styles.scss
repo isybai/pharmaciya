@@ -32,15 +32,16 @@ a.nav-item.nav-link.logo {
 .mat-form-field {
     width: 100%;
 }
-.material-icons {
-	color: white;
-}
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
 }
 h4.page-title {
-    text-align: center;
+    text-align: left;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.52);
+    font-size: 24px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 md-sidenav.example-sidenav.mat-drawer {
 	overflow-y: visible;
@@ -78,4 +79,100 @@ div.mat-drawer-backdrop.mat-drawer-shown {
     text-decoration: none;
     background-color: rgba(2, 117, 216, 0.42);
     border-color: #ffffff;
+}
+button.mat-button {
+    padding: 0;
+    width: 95%;
+}
+button.mat-raised-button.mat-warm{
+    background-color: #2670af;
+    color: black;
+}
+.mat-tab-labels {
+    background-color: rgba(255, 255, 255, 0.81);
+}
+.mat-tab-label.mat-ripple.mat-tab-label-active {
+    background: white;
+}
+.mat-tab-group.mat-primary .mat-tab-label:focus, .mat-tab-group.mat-primary .mat-tab-link:focus, .mat-tab-nav-bar.mat-primary .mat-tab-label:focus, .mat-tab-nav-bar.mat-primary .mat-tab-link:focus {
+    background-color: rgb(255, 255, 255);
+}
+.info_table li h4 {
+    width: 140px;
+    margin-right: 10px;
+    display: block;
+    padding: .5em 1em;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1rem;
+    background: rgb(53, 132, 203);
+    border-radius: 0;
+}
+.info_table ul.nav.nav-pills.nav-fill {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.52);
+}
+.info_table ul.nav.nav-pills.nav-fill:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.52);
+}
+.info_table ul.nav.nav-pills.nav-fill a:first-child {
+    border-left: 1px dashed rgba(255, 255, 255, 0.29);
+}
+.info_table ul.nav.nav-pills.nav-fill a {
+    border-right: 1px dashed rgba(255, 255, 255, 0.29);
+    margin-right: 3px;
+    border-radius: 0;
+}
+.info_table .nav-pills .nav-item+.nav-item {
+    margin-right: .2rem;
+}
+.info_table .row {
+    padding: 0 0 15px 0;
+}
+.info_table .table thead th {
+    font-size: 14px;
+    font-weight: 500;
+}
+.info_table md-form-field.mat-form-field {
+    width: 19%;
+}
+.info_table input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background: rgba(255, 0, 0, 0) !important;
+}
+.info_table table.table.table-bordered.table-striped {
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    background: white;
+    border: none;
+}
+.info_table .table-striped tbody tr:nth-of-type(odd) {
+    background-color: transparent;
+}
+.info_table .table-bordered td, .table-bordered th {
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    color: #212121;
+}
+.info_table .table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+    color: rgba(0,0,0,.54);
+    font-weight: 400;
+    font-size: 14px;
+}
+.info_table .thead-default th {
+    color: #55595c;
+    background-color: #ffffff;
+}
+.info_table .addItem form.form-inline {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.21);
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.info_table .mat-input-element {
+    color: black;
+}
+.info_table .mat-input-prefix span {
+    color: black;
+}
+.info_table md-sidenav.example-sidenav.mat-drawer {
+    background: transparent;
 }

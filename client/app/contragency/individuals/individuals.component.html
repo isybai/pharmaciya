@@ -1,3 +1,100 @@
-<h2>
-	физ лица
-</h2>
+
+  <!-- CRUD -->
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="row info_table">
+  <div class="" *ngIf="!isLoading">
+    <h4 class="">Физ. лица {{individuals.length}}</h4>
+    <div class="">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-default">
+          <tr>
+            <th>Имя</th>
+            <th>Фам.</th>
+            <th>Д.р.</th>
+            <th>Тел.</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="individuals.length === 0">
+          <tr>
+            <td colspan="5">В базе данных нету физ. лиц добавьте их.</td>
+          </tr>  
+        </tbody>
+
+        <tbody *ngIf="!isEditing">
+          <tr  *ngFor="let individual of individuals">
+            <td>{{individual.name}}</td>
+            <td>{{individual.sur}}</td>
+            <td>{{individual.dob}}</td>
+            <td>0 {{individual.tel}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" (click)="enableEditing(individual)">
+                <i class="fa fa-pencil"></i> 
+                Редактировать
+              </button> 
+              <button class="btn btn-sm btn-danger" (click)="deleteIndividual(individual)">
+                <i class="fa fa-trash"></i>  
+                Удалить
+              </button>
+            </td>
+          </tr>  
+        </tbody>
+        <tbody *ngIf="isEditing">
+          <tr>
+            <td colspan="5">
+              <form class="form-inline" #form="ngForm" (ngSubmit)="editIndividual(individual)" style="display:inline">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фам."  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="dob" [(ngModel)]="individual.dob" step="any" min="0" placeholder="д.р."  required>
+                </div>
+                <div class="form-group">
+                <span mdPrefix>0</span>
+                  <input class="form-control" type="number" name="tel" [(ngModel)]="individual.tel"  placeholder="тел"  required>
+                </div>
+                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+              </form>
+              <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <md-sidenav-container class="example-container">
+<div class="example-sidenav-content">
+        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить физ. лицо
+        </button>
+      </div>
+      <md-sidenav #sidenav class="example-sidenav">
+        <div  class="addItem" *ngIf="!isEditing">
+    <div>
+      <form class="form-inline" [formGroup]="addIndividualForm" (ngSubmit)="addIndividual()" style="text-align:center">
+        <md-form-field>
+          <span mdTooltip="Нужно ввести имя"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя"></span>
+        </md-form-field>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести фамилие"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилие"></span>
+        </md-form-field>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести день рождения"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="dob" placeholder="Д.р."></span>
+        </md-form-field>
+        <span mdTooltip="Нужно ввести телефон">
+        <md-form-field>
+          <span style="color: #757575;" mdPrefix>+996 &nbsp;</span><input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
+        </md-form-field>
+        </span>
+        <button md-raised-button color="warm" class=""  type="submit" [disabled]="!addIndividualForm.valid"><i class="material-icons">add</i> Добавить</button>
+      </form>
+    </div>
+  </div>
+      </md-sidenav>
+   </md-sidenav-container>
+</div>

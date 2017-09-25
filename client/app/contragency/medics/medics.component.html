@@ -1,61 +1,152 @@
-<div class="example-container mat-elevation-z8">
-  <md-table #table [dataSource]="dataSource">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+  <!-- CRUD -->
+<app-loading [condition]="isLoading"></app-loading>
 
-    <!-- Position Column -->
-    <ng-container mdColumnDef="name">
-      <md-header-cell *mdHeaderCellDef> Имя </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-    </ng-container>
-    
-    <ng-container mdColumnDef="sur">
-      <md-header-cell *mdHeaderCellDef> Фамилие </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.sur}} </md-cell>
-    </ng-container>
+<app-toast [message]="toast.message"></app-toast>
 
-    <ng-container mdColumnDef="dob">
-      <md-header-cell *mdHeaderCellDef> Д.р. </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.dob}} </md-cell>
-    </ng-container>
+<div class="row info_table">
+  <div class="" *ngIf="!isLoading">
+    <h4 class="">Текущие врачи {{medics.length}}</h4>
+    <div class="">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-default">
+          <tr>
+            <th>Имя</th>
+            <th>Фам.</th>
+            <th>Спец.</th>
+            <th>Больница</th>
+            <th>Тип</th>
+            <th>Локал.</th>
+            <th>Р.время с</th>
+            <th>Р.время До</th>
+            <th>Тел.</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="medics.length === 0">
+          <tr>
+            <td colspan="10">В базе данных нету врачей добавьте их.</td>
+          </tr>  
+        </tbody>
 
-    <ng-container mdColumnDef="spec">
-      <md-header-cell *mdHeaderCellDef> Специальность </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.spec}} </md-cell>
-    </ng-container>
+        <tbody *ngIf="!isEditing">
+          <tr *ngFor="let medic of medics">
+            <td>{{medic.name}}</td>
+            <td>{{medic.sur}}</td>
+            <td>{{medic.spec}}</td>
+            <td>{{medic.hos}}</td>
+            <td>{{medic.type}}</td>
+            <td>{{medic.local}}</td>
+            <td>{{medic.workTimeFrom}}</td>
+            <td>{{medic.workTimeTill}}</td>
+            <td>0 {{medic.tel}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" (click)="enableEditing(medic)">
+                <i class="fa fa-pencil"></i> 
+                Редактировать
+              </button> 
+              <button class="btn btn-sm btn-danger" (click)="deleteMedic(medic)">
+                <i class="fa fa-trash"></i>  
+                Удалить
+              </button>
+            </td>
+          </tr>  
+        </tbody>
+        <tbody *ngIf="isEditing">
+          <tr>
+            <td colspan="10">
+              <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" [(ngModel)]="medic.name" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фам."  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="spec" [(ngModel)]="medic.spec"  placeholder="спец"  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="hos" [(ngModel)]="medic.hos"  placeholder="больница"  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="type" [(ngModel)]="medic.type"  placeholder="тип"  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="local" [(ngModel)]="medic.local"  placeholder="локац"  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="workTime" [(ngModel)]="medic.workTimeFrom"  placeholder="р.время с"  required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="workTime" [(ngModel)]="medic.workTimeTill"  placeholder="р.время до"  required>
+                </div>
+                <div class="form-group">
+                <span mdPrefix>0</span>
+                  <input class="form-control" type="number" name="tel" [(ngModel)]="medic.tel"  placeholder="тел"  required>
+                </div>
+                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+              </form>
+              <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <md-sidenav-container class="example-container">
+<div class="example-sidenav-content">
+        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить нового врача
+        </button>
+      </div>
+      <md-sidenav #sidenav class="example-sidenav">
+        <div  class="addItem" *ngIf="!isEditing">
+    <div>
+      <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
+        <md-form-field>
+          <span mdTooltip="Нужно ввести имя"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя"></span>
+        </md-form-field>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести фамилие"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилие"></span>
+        </md-form-field>
 
-    <!-- Name Column -->
-    <ng-container mdColumnDef="hos">
-      <md-header-cell *mdHeaderCellDef> Больница </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.hos}} </md-cell>
-    </ng-container>
+          <span mdTooltip="Нужно ввести специальность">
+            <md-select  formControlName="spec" placeholder="Специальность">
+              <md-option *ngFor="let spec of specs" [value]="spec.value">
+                {{ spec.viewValue }}
+              </md-option>
+            </md-select>
+          </span>
 
-    <!-- Weight Column -->
-    <ng-container mdColumnDef="type">
-      <md-header-cell *mdHeaderCellDef> Тип </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.type}} </md-cell>
-    </ng-container>
-
-    <!-- Color Column -->
-    <ng-container mdColumnDef="local">
-      <md-header-cell *mdHeaderCellDef> Локализация </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.local}} </md-cell>
-    </ng-container>
-
-    <ng-container mdColumnDef="workTime">
-      <md-header-cell *mdHeaderCellDef> График работы </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.workTime}} </md-cell>
-    </ng-container>
-
-    <ng-container mdColumnDef="tel">
-      <md-header-cell *mdHeaderCellDef> Тел. </md-header-cell>
-      <md-cell *mdCellDef="let element"> 0 {{element.tel}} </md-cell>
-    </ng-container>
-
-    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-  </md-table>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести больницу"><input mdInput class="mat-input-element" type="text" name="hos" formControlName="hos" placeholder="Больница"></span>
+        </md-form-field>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести тип"><input mdInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="Тип"></span>
+        </md-form-field>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести локацию"><input mdInput class="mat-input-element" type="text" name="local" formControlName="local" placeholder="Локация"></span>
+        </md-form-field>
+        <span mdTooltip="Нужно ввести телефон">
+        <md-form-field>
+          <span style="color: #757575;" mdPrefix>+996 &nbsp;</span><input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
+        </md-form-field>
+        </span>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести р. время с">
+            <input mdInput  formControlName="workTimeFrom" class="mat-input-element" type="time" placeholder="Р. время c">
+          </span>
+        </md-form-field>
+        <md-form-field>
+          <span mdTooltip="Нужно ввести р. время до">
+            <input mdInput  formControlName="workTimeTill" class="mat-input-element" type="time" placeholder="Р. время c">
+          </span>
+        </md-form-field>
+        <button md-raised-button color="warm" class=""  type="submit" [disabled]="!addMedicForm.valid"><i class="material-icons">add</i> Добавить</button>
+      </form>
+    </div>
+  </div>
+      </md-sidenav>
+   </md-sidenav-container>
 </div>
 
 <!--
@@ -71,87 +162,87 @@
         </thead>
         <tbody>
           <tr>
-            <td><a class="">Акушер</a></td>
-            <td><a class="">Аллерголог</a></td>
-            <td><a class="">Андролог</a></td>
-            <td><a class="">Анестезиолог</a></td>
-            <td><a class="">Венеролог</a></td>
-            <td><a class="">Вертебролог</a></td>
-            <td><a class="">Врач ЛФ</a></td>
-            <td><a class="">Гастроэнтеролог</a></td>
-            <td><a class="">Гематолог</a></td>
-            <td><a class="">Генетик</a></td>
-            <td><a class="">Гепатолог</a></td>
-            <td><a class="">Гинеколог</a></td>
-            <td><a class="">Гинеколог-эндокринолог</a></td>
-            <td><a class="">Гирудотерапевт</a></td>
-            <td><a class="">Гомеопат</a></td>
-            <td><a class="">Дерматолог</a></td>
-            <td><a class="">Диетолог</a></td>
-            <td><a class="">Иммунолог</a></td>
-            <td><a class="">Инфекционист</a></td>
-            <td><a class="">Кардиолог</a></td>
-            <td><a class="">Кардиохирург</a></td>
-            <td><a class="">Кинезиолог</a></td>
-            <td><a class="">Колопроктолог</a></td>
-            <td><a class="">Косметолог</a></td>
-            <td><a class="">Логопед</a></td>
-            <td><a class="">Маммолог</a></td>
-            <td><a class="">Мануальный терапевт</a></td>
-            <td><a class="">Массажист</a></td>
-            <td><a class="">Миколог</a></td>
-            <td><a class="">Нарколог</a></td>
-            <td><a class="">Невролог</a></td>
-            <td><a class="">Нейрохирург</a></td>
-            <td><a class="">Неонатолог</a></td>
-            <td><a class="">Нефролог</a></td>
-            <td><a class="">Окулист</a></td>
-            <td><a class="">Онкогинеколог</a></td>
-            <td><a class="">Онкодерматолог</a></td>
-            <td><a class="">Онколог</a></td>
-            <td><a class="">Ортопед</a></td>
-            <td><a class="">Остеопат</a></td>
-            <td><a class="">Отоларинголог</a></td>
-            <td><a class="">Педиатр</a></td>
-            <td><a class="">Пластический хирург</a></td>
-            <td><a class="">Подолог</a></td>
-            <td><a class="">Проктолог</a></td>
-            <td><a class="">Психиатр</a></td>
-            <td><a class="">Психолог</a></td>
-            <td><a class="">Психотерапевт</a></td>
-            <td><a class="">Пульмонолог</a></td>
-            <td><a class="">Реабилитолог</a></td>
-            <td><a class="">Ревматолог</a></td>
-            <td><a class="">Рентгенолог</a></td>
-            <td><a class="">Репродуктолог</a></td>
-            <td><a class="">Рефлексотерапевт</a></td>
-            <td><a class="">Сексолог</a></td>
-            <td><a class="">Семейный врач</a></td>
-            <td><a class="">Сомнолог</a></td>
-            <td><a class="">Сосудистый хирург</a></td>
-            <td><a class="">Специалист по клет технологиям</a></td>
-            <td><a class="">Спортивный врач</a></td>
-            <td><a class="">Стоматолог</a></td>
-            <td><a class="">Стоматолог-гигиенис</a></td>
-            <td><a class="">Стоматолог-имплантоло</a></td>
-            <td><a class="">Стоматолог-ортодон</a></td>
-            <td><a class="">Стоматолог-ортопе</a></td>
-            <td><a class="">Стоматолог-пародонтоло</a></td>
-            <td><a class="">Стоматолог-терапев</a></td>
-            <td><a class="">Стоматолог-хирур</a></td>
-            <td><a class="">Сурдолог</a></td>
-            <td><a class="">Терапевт</a></td>
-            <td><a class="">Травматолог</a></td>
-            <td><a class="">Трихолог</a></td>
-            <td><a class="">УЗИ-специалист</a></td>
-            <td><a class="">Уролог</a></td>
-            <td><a class="">Физиотерапевт</a></td>
-            <td><a class="">Флеболог</a></td>
-            <td><a class="">Фтизиатр</a></td>
-            <td><a class="">Хирург</a></td>
-            <td><a class="">Эндокринолог</a></td>
-            <td><a class="">Эндоскопист</a></td>
-            <td><a class="">Эпилептологи</a></td>
+            Акушер
+            Аллерголог
+            Андролог
+            Анестезиолог
+            Венеролог
+            Вертебролог
+            Врач ЛФ
+            Гастроэнтеролог
+            Гематолог
+            Генетик
+            Гепатолог
+            Гинеколог
+            Гинеколог-эндокринолог
+            Гирудотерапевт
+            Гомеопат
+            Дерматолог
+            Диетолог
+            Иммунолог
+            Инфекционист
+            Кардиолог
+            Кардиохирург
+            Кинезиолог
+            Колопроктолог
+            Косметолог
+            Логопед
+            Маммолог
+            Мануальный терапевт
+            Массажист
+            Миколог
+            Нарколог
+            Невролог
+            Нейрохирург
+            Неонатолог
+            Нефролог
+            Окулист
+            Онкогинеколог
+            Онкодерматолог
+            Онколог
+            Ортопед
+            Остеопат
+            Отоларинголог
+            Педиатр
+            Пластический хирург
+            Подолог
+            Проктолог
+            Психиатр
+            Психолог
+            Психотерапевт
+            Пульмонолог
+            Реабилитолог
+            Ревматолог
+            Рентгенолог
+            Репродуктолог
+            Рефлексотерапевт
+            Сексолог
+            Семейный врач
+            Сомнолог
+            Сосудистый хирург
+            Специалист по клет технологиям
+            Спортивный врач
+            Стоматолог
+            Стоматолог-гигиенис
+            Стоматолог-имплантоло
+            Стоматолог-ортодон
+            Стоматолог-ортопе
+            Стоматолог-пародонтоло
+            Стоматолог-терапев
+            Стоматолог-хирур
+            Сурдолог
+            Терапевт
+            Травматолог
+            Трихолог
+            УЗИ-специалист
+            Уролог
+            Физиотерапевт
+            Флеболог
+            Фтизиатр
+            Хирург
+            Эндокринолог
+            Эндоскопист
+            Эпилептологи
           </tr>
           <tr>
             <td><a class="">Амбулатория</a></td>
@@ -177,90 +268,3 @@
       </table>
 </div>
 -->
-
-  <!-- CRUD -->
-<app-loading [condition]="isLoading"></app-loading>
-
-<app-toast [message]="toast.message"></app-toast>
-
-<div class="row">
-  <div class="" *ngIf="!isLoading">
-    <h4 class="">Текущие врачи {{medics.length}}</h4>
-    <div class="">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-default">
-          <tr>
-            <th>Имя</th>
-            <th>Фам.</th>
-            <th>д.р.</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="medics.length === 0">
-          <tr>
-            <td colspan="4">В базе данных нету врачей добавьте их.</td>
-          </tr>  
-        </tbody>
-        <tbody *ngIf="!isEditing">
-          <tr *ngFor="let medic of medics">
-            <td>{{medic.name}}</td>
-            <td>{{medic.sur}}</td>
-            <td>{{medic.dob}}</td>
-            <td>
-              <button class="btn btn-sm btn-warning" (click)="enableEditing(medic)">
-                <i class="fa fa-pencil"></i> 
-                Редактировать
-              </button> 
-              <button class="btn btn-sm btn-danger" (click)="deleteMedic(medic)">
-                <i class="fa fa-trash"></i>  
-                Удалить
-              </button>
-            </td>
-          </tr>  
-        </tbody>
-        <tbody *ngIf="isEditing">
-          <tr>
-            <td colspan="4">
-              <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="name" [(ngModel)]="medic.name" placeholder="Имя" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фам."  required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="number" name="dob" [(ngModel)]="medic.dob" step="any" min="0" placeholder="д.р."  required>
-                </div>
-                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-              </form>
-              <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-  <div *ngIf="!isEditing">
-    <h4 class="page-title">Добавить нового врача</h4>
-    <div >
-      <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
-        <md-form-field>
-          <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
-           <md-error class="mat-error" role="alert">Нужно ввести <strong>имя</strong></md-error>
-        </md-form-field>
-        <md-form-field>
-          <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фам.">
-           <md-error class="mat-error" role="alert">Нужно ввести <strong>фамилие</strong></md-error>
-        </md-form-field>
-        <md-form-field>
-          <input mdInput class="mat-input-element" type="number" name="sur" formControlName="dob" step="any" min="0" placeholder="д.р.">
-           <md-error class="mat-error" role="alert">Нужно ввести <strong>день рождения</strong></md-error>
-        </md-form-field>
-        <button md-raised-button color="warm" class="" type="submit" [disabled]="!addMedicForm.valid"><i class="material-icons">add</i> Добавить</button>
-      </form>
-    </div>
-  </div>
-</div>
-

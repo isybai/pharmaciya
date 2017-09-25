@@ -15,8 +15,6 @@ import { ToastComponent } from '../../shared/toast/toast.component';
   styleUrls: ['./medics.component.css']
 })
 export class MedicsComponent implements OnInit {
-  displayedColumns = ['name', 'sur', 'dob', 'spec', 'hos', 'type', 'local', 'workTime', 'tel'];
-  dataSource = new ExampleDataSource();
 
   medic = {};
   medics = [];
@@ -26,21 +24,33 @@ export class MedicsComponent implements OnInit {
   addMedicForm: FormGroup;
   name = new FormControl('', Validators.required);
   sur = new FormControl('', Validators.required);
-  dob = new FormControl('', Validators.required);
-
+  spec = new FormControl(null, Validators.required);
+  hos = new FormControl('', Validators.required);
+  type = new FormControl('', Validators.required);
+  local = new FormControl('', Validators.required);
+  workTimeFrom = new FormControl('', Validators.required);
+  workTimeTill = new FormControl('', Validators.required);
+  tel = new FormControl('', Validators.required);
 
   constructor(private medicService: MedicService,
               private formBuilder: FormBuilder,
               private http: Http,
-              public toast: ToastComponent) { }
+              public toast: ToastComponent) {}
 
   ngOnInit() {
     this.getMedics();
     this.addMedicForm = this.formBuilder.group({
       name: this.name,
       sur: this.sur,
-      dob: this.dob,
+      spec: this.spec,
+      hos: this.hos,
+      type: this.type,
+      local: this.local,
+      workTimeFrom: this.workTimeFrom,
+      workTimeTill: this.workTimeTill,
+      tel: this.tel
     });
+
   }
 
   getMedics() {
@@ -48,6 +58,7 @@ export class MedicsComponent implements OnInit {
       data => this.medics = data,
       error => console.log(error),
       () => this.isLoading = false
+
     );
   }
 
@@ -57,7 +68,7 @@ export class MedicsComponent implements OnInit {
         const newMedic = res.json();
         this.medics.push(newMedic);
         this.addMedicForm.reset();
-        this.toast.setMessage('item added successfully.', 'success');
+        this.toast.setMessage('Врач успешно добавлен.', 'success');
       },
       error => console.log(error)
     );
@@ -71,7 +82,7 @@ export class MedicsComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
     this.medic = {};
-    this.toast.setMessage('item editing cancelled.', 'warning');
+    this.toast.setMessage('Редактирование врача отменена.', 'warning');
     // reload the medics to reset the editing
     this.getMedics();
   }
@@ -81,54 +92,105 @@ export class MedicsComponent implements OnInit {
       res => {
         this.isEditing = false;
         this.medic = medic;
-        this.toast.setMessage('item edited successfully.', 'success');
+        this.toast.setMessage('Врач успешно отредактирован.', 'success');
       },
       error => console.log(error)
     );
   }
 
   deleteMedic(medic) {
-    if (window.confirm('Are you sure you want to permanently delete this item?')) {
+    if (window.confirm('Вы уверенны что хотите удалить этого варча?')) {
       this.medicService.deleteMedic(medic).subscribe(
         res => {
           const pos = this.medics.map(elem => elem._id).indexOf(medic._id);
           this.medics.splice(pos, 1);
-          this.toast.setMessage('item deleted successfully.', 'success');
+          this.toast.setMessage('Врач успешно удален.', 'success');
         },
         error => console.log(error)
       );
     }
   }
-}
-
-export interface Element {
-  name: string;
-  sur: string;
-  dob: string;
-  spec: string;
-  hos: string;
-  type: string;
-  local: string;
-  workTime: string;
-  tel: number; 
-}
-
-const data: Element[] = [
-  {name:'Alena', sur: 'Volkova', dob: '12.1.85', spec:'Акушер', hos: 'Hydrogen', type: 'Клиника', local: 'Первомайский район', workTime:'8:00 - 20:00', tel: 552007324},
-  {name:'Olga', sur: 'Volkova', dob: '11.2.88', spec:'Андролог', hos: 'Hydrogen', type: 'Клиника', local: 'Свердловский район',  workTime:'8:00 - 20:00', tel: 552007324}
-];
-
-/**
- * Data source to provide what data should be rendered in the table. The observable provided
- * in connect should emit exactly the data that should be rendered by the table. If the data is
- * altered, the observable should emit that new set of data on the stream. In our case here,
- * we return a stream that contains only one set of data that doesn't change.
- */
-export class ExampleDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Element[]> {
-    return Observable.of(data);
-  }
-
-  disconnect() {}
+  specs = [
+    {value: 'Акушер', viewValue: 'Акушер'},
+    {value: 'Аллерголог', viewValue: 'Аллерголог'},
+    {value: 'Андролог', viewValue: 'Андролог'},    
+    {value: 'Анестезиолог', viewValue: 'Анестезиолог'},    
+    {value: 'Венеролог', viewValue: 'Венеролог'},    
+    {value: 'Вертебролог', viewValue: 'Вертебролог'},    
+    {value: 'Врач ЛФ', viewValue: 'Врач ЛФ'},    
+    {value: 'Гастроэнтеролог', viewValue: 'Гастроэнтеролог'},    
+    {value: 'Гематолог', viewValue: 'Гематолог'},    
+    {value: 'Генетик', viewValue: 'Генетик'},    
+    {value: 'Гепатолог', viewValue: 'Гепатолог'},
+    {value: 'Гинеколог', viewValue: 'Гинеколог'},
+    {value: 'Гинеколог-эндокринолог', viewValue: 'Гинеколог-эндокринолог'},    
+    {value: 'Гирудотерапевт', viewValue: 'Гирудотерапевт'},    
+    {value: 'Гомеопат', viewValue: 'Гомеопат'},    
+    {value: 'Дерматолог', viewValue: 'Дерматолог'},    
+    {value: 'Диетолог', viewValue: 'Диетолог'},    
+    {value: 'Иммунолог', viewValue: 'Иммунолог'},    
+    {value: 'Инфекционист', viewValue: 'Инфекционист'},    
+    {value: 'Кардиолог', viewValue: 'Кардиолог'},    
+    {value: 'Кардиохирург', viewValue: 'Кардиохирург'},
+    {value: 'Кинезиолог', viewValue: 'Кинезиолог'},
+    {value: 'Колопроктолог', viewValue: 'Колопроктолог'},    
+    {value: 'Косметолог', viewValue: 'Косметолог'},    
+    {value: 'Логопед', viewValue: 'Логопед'},    
+    {value: 'Маммолог', viewValue: 'Маммолог'},    
+    {value: 'Мануальный терапевт', viewValue: 'Мануальный терапевт'},    
+    {value: 'Массажист', viewValue: 'Массажист'},    
+    {value: 'Миколог', viewValue: 'Миколог'},    
+    {value: 'Нарколог', viewValue: 'Нарколог'},    
+    {value: 'Невролог', viewValue: 'Невролог'},
+    {value: 'Нейрохирург', viewValue: 'Нейрохирург'},
+    {value: 'Неонатолог', viewValue: 'Неонатолог'},    
+    {value: 'Нефролог', viewValue: 'Нефролог'},    
+    {value: 'Окулист', viewValue: 'Окулист'},    
+    {value: 'Онкогинеколог', viewValue: 'Онкогинеколог'},    
+    {value: 'Онкодерматолог', viewValue: 'Онкодерматолог'},    
+    {value: 'Онколог', viewValue: 'Онколог'},    
+    {value: 'Ортопед', viewValue: 'Ортопед'},    
+    {value: 'Остеопат', viewValue: 'Остеопат'},    
+    {value: 'Отоларинголог', viewValue: 'Отоларинголог'},
+    {value: 'Педиатр', viewValue: 'Педиатр'},
+    {value: 'Пластический хирург', viewValue: 'Пластический хирург'},    
+    {value: 'Подолог', viewValue: 'Подолог'},    
+    {value: 'Проктолог', viewValue: 'Проктолог'},    
+    {value: 'Психиатр', viewValue: 'Психиатр'},    
+    {value: 'Психолог', viewValue: 'Психолог'},    
+    {value: 'Психотерапевт', viewValue: 'Психотерапевт'},    
+    {value: 'Пульмонолог', viewValue: 'Пульмонолог'},    
+    {value: 'Реабилитолог', viewValue: 'Реабилитолог'},    
+    {value: 'Ревматолог', viewValue: 'Ревматолог'},
+    {value: 'Рентгенолог', viewValue: 'Рентгенолог'},
+    {value: 'Репродуктолог', viewValue: 'Репродуктолог'},    
+    {value: 'Рефлексотерапевт', viewValue: 'Рефлексотерапевт'},    
+    {value: 'Сексолог', viewValue: 'Сексолог'},    
+    {value: 'Семейный врач', viewValue: 'Семейный врач'},    
+    {value: 'Сомнолог', viewValue: 'Сомнолог'},    
+    {value: 'Сосудистый хирург', viewValue: 'Сосудистый хирург'},    
+    {value: 'Специалист по клет технологиям', viewValue: 'Специалист по клет технологиям'},    
+    {value: 'Спортивный врач', viewValue: 'Спортивный врач'},    
+    {value: 'Стоматолог', viewValue: 'Стоматолог'},
+    {value: 'Стоматолог-гигиенис', viewValue: 'Стоматолог-гигиенис'},
+    {value: 'Стоматолог-имплантоло', viewValue: 'Стоматолог-имплантоло'},    
+    {value: 'Стоматолог-ортодон', viewValue: 'Стоматолог-ортодон'},    
+    {value: 'Стоматолог-ортопе', viewValue: 'Стоматолог-ортопе'},    
+    {value: 'Стоматолог-пародонтоло', viewValue: 'Стоматолог-пародонтоло'},    
+    {value: 'Стоматолог-терапев', viewValue: 'Стоматолог-терапев'},    
+    {value: 'Стоматолог-хирур', viewValue: 'Стоматолог-хирур'},    
+    {value: 'Сурдолог', viewValue: 'Сурдолог'},    
+    {value: 'Терапевт', viewValue: 'Терапевт'},    
+    {value: 'Травматолог', viewValue: 'Травматолог'},
+    {value: 'Трихолог', viewValue: 'Трихолог'},
+    {value: 'УЗИ-специалист', viewValue: 'УЗИ-специалист'},    
+    {value: 'Уролог', viewValue: 'Уролог'},    
+    {value: 'Физиотерапевт', viewValue: 'Физиотерапевт'},    
+    {value: 'Флеболог', viewValue: 'Флеболог'},    
+    {value: 'Фтизиатр', viewValue: 'Фтизиатр'},    
+    {value: 'Хирург', viewValue: 'Хирург'},    
+    {value: 'Эндокринолог', viewValue: 'Эндокринолог'},    
+    {value: 'Эндоскопист', viewValue: 'Эндоскопист'},    
+    {value: 'Эпилептологи', viewValue: 'Эпилептологи'},  
+    ];
 }

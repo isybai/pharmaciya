@@ -22,11 +22,10 @@ a .material-icons {
     height: auto;
     padding: 0;
 }
-md-list-item.mat-list-item a:hover {
-    box-shadow: rgba(94, 212, 255, 0.61) 0 0 40px 3px inset;
-}
-md-list-item.mat-list-item a.nav-item.nav-link.active {
-    box-shadow: rgba(94, 212, 255, 0.61) 0 0 40px 3px inset;
+
+md-list-item.mat-list-item a.nav-item.nav-link.active, md-list-item.mat-list-item a:hover {
+outline: 1px dashed rgb(206, 206, 206);
+    transform: scale(1.1);
 }
 md-list-item.mat-list-item a {
     color: #e6e6e6;
@@ -54,8 +53,4 @@ ul.nav.navbar-nav li {
 button.mat-button md-icon.mat-icon.material-icons {
     color: white;
     font-size: 24px;
-}
-button.mat-button {
-    padding: 0;
-    width: 95%;
 }

@@ -3,10 +3,16 @@ import * as express from 'express';
 import CatCtrl from './controllers/cat';
 import UserCtrl from './controllers/user';
 import MedicCtrl from './controllers/medic';
+import IndividualCtrl from './controllers/individual';
+import RenterCtrl from './controllers/renter';
+import LpuCtrl from './controllers/renter';
 
 import Cat from './models/cat';
 import User from './models/user';
 import Medic from './models/medic';
+import Individual from './models/individual';
+import Renter from './models/renter';
+import Lpu from './models/lpu';
 
 
 export default function setRoutes(app) {
@@ -17,6 +23,9 @@ export default function setRoutes(app) {
   const userCtrl = new UserCtrl();
 
   const medicCtrl = new MedicCtrl();
+  const individualCtrl = new IndividualCtrl();
+  const renterCtrl = new RenterCtrl();
+  const lpuCtrl = new LpuCtrl();
 
   // Cats
   router.route('/cats').get(catCtrl.getAll);
@@ -43,6 +52,30 @@ export default function setRoutes(app) {
   router.route('/medic/:id').put(medicCtrl.update);
   router.route('/medic/:id').delete(medicCtrl.delete);
 
+  // individuals
+  router.route('/individuals').get(individualCtrl.getAll);
+  router.route('/individuals/count').get(individualCtrl.count);
+  router.route('/individual').post(individualCtrl.insert);
+  router.route('/individual/:id').get(individualCtrl.get);
+  router.route('/individual/:id').put(individualCtrl.update);
+  router.route('/individual/:id').delete(individualCtrl.delete);
+
+  // renters
+  router.route('/renters').get(renterCtrl.getAll);
+  router.route('/renters/count').get(renterCtrl.count);
+  router.route('/renter').post(renterCtrl.insert);
+  router.route('/renter/:id').get(renterCtrl.get);
+  router.route('/renter/:id').put(renterCtrl.update);
+  router.route('/renter/:id').delete(renterCtrl.delete);
+  
+  // lpus
+  router.route('/lpus').get(lpuCtrl.getAll);
+  router.route('/lpus/count').get(lpuCtrl.count);
+  router.route('/lpu').post(lpuCtrl.insert);
+  router.route('/lpu/:id').get(lpuCtrl.get);
+  router.route('/lpu/:id').put(lpuCtrl.update);
+  router.route('/lpu/:id').delete(lpuCtrl.delete);
+  
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
 

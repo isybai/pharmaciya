@@ -24,6 +24,11 @@
               </a>
             </md-list-item>
             <md-list-item>
+              <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+                <i class="material-icons">supervisor_account</i><br>Сотрудники
+              </a>
+            </md-list-item>
+            <md-list-item>
               <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
                 <i class="material-icons">monetization_on</i><br>Финансы
               </a>
@@ -31,11 +36,6 @@
             <md-list-item>
               <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
                 <i class="material-icons">insert_chart</i><br>Сбыт
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/cats" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-                <i class="fa fa-list"></i><br> Котики
               </a>
             </md-list-item>
             <md-list-item *ngIf="!auth.loggedIn">
@@ -50,17 +50,17 @@
             </md-list-item>
             <md-list-item>
               <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-                <i class="fa fa-user"></i><br> Аккаунт ({{auth.currentUser.username}})
+                <i class="material-icons">settings</i><br> Аккаунт ({{auth.currentUser.username}})
               </a>
             </md-list-item>
             <md-list-item>
               <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
-                <i class="fa fa-lock"></i><br> Админ
+                <i class="material-icons">verified_user</i><br> Админ
               </a>
             </md-list-item>
             <md-list-item>
               <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-                <i class="fa fa-sign-out"></i><br> Выйти
+                <i class="material-icons">exit_to_app</i><br> Выйти
               </a>
             </md-list-item>
           </md-list>
