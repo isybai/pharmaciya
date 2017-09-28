@@ -4,7 +4,7 @@ const individualSchema = new mongoose.Schema({
   name: String,
   sur: String,
   dob: String,
-  tel: Number
+  tel: String
 });
 
 const individual = mongoose.model('individual', individualSchema);

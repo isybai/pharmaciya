@@ -6,6 +6,7 @@ import MedicCtrl from './controllers/medic';
 import IndividualCtrl from './controllers/individual';
 import RenterCtrl from './controllers/renter';
 import LpuCtrl from './controllers/lpu';
+import DrugstoreCtrl from './controllers/drugstore';
 
 import Cat from './models/cat';
 import User from './models/user';
@@ -13,6 +14,7 @@ import Medic from './models/medic';
 import Individual from './models/individual';
 import Renter from './models/renter';
 import Lpu from './models/lpu';
+import Drugstore from './models/drugstore';
 
 
 export default function setRoutes(app) {
@@ -26,6 +28,7 @@ export default function setRoutes(app) {
   const individualCtrl = new IndividualCtrl();
   const renterCtrl = new RenterCtrl();
   const lpuCtrl = new LpuCtrl();
+  const drugstoreCtrl = new DrugstoreCtrl();
 
   // Cats
   router.route('/cats').get(catCtrl.getAll);
@@ -75,6 +78,14 @@ export default function setRoutes(app) {
   router.route('/lpu/:id').get(lpuCtrl.get);
   router.route('/lpu/:id').put(lpuCtrl.update);
   router.route('/lpu/:id').delete(lpuCtrl.delete);
+    
+  // drugstore
+  router.route('/drugstores').get(drugstoreCtrl.getAll);
+  router.route('/drugstores/count').get(drugstoreCtrl.count);
+  router.route('/drugstore').post(drugstoreCtrl.insert);
+  router.route('/drugstore/:id').get(drugstoreCtrl.get);
+  router.route('/drugstore/:id').put(drugstoreCtrl.update);
+  router.route('/drugstore/:id').delete(drugstoreCtrl.delete);
   
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

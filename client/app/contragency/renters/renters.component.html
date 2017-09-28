@@ -13,57 +13,83 @@
           <tr>
             <th>Имя</th>
             <th>Фам.</th>
+            <!--
             <th>Д.р.</th>
             <th>Тел.</th>
-            <th>type</th>
-            <th>liter</th>
-            <th>square</th>
-            <th>price</th>
-            <th>dateFrom</th>
-            <th>dateUntil</th>
-            <th>priceSum</th>
-            <th>deposite</th>
-            <th>tbo</th>
-            <th>electric</th>
-            <th>telNet</th>
-            <th>sumAll</th>
-            <th>factPay</th>
-            <th>datePay</th>
-            <th>typePay</th>
+            <th>Тип</th>
+            <th>Литер</th>
+            <th>Кв. м</th>
+            <th>Цена</th>
+            <th>Срок от</th>
+            <th>Срок до</th>
+            <th>Сумма</th>
+            <th>Депозит</th>
+            <th>ТБО</th>
+            <th>Электричество</th>
+            <th>Городской телефон</th>
+            <th>Сумма всего</th>
+            <th>Факт. оплата</th>
+            <th>Дата оплаты</th>
+            <th>Тип оплаты</th>
             <th>status</th>
-            <th>note</th>
+            <th>Заметка</th>-->
             <th>Действия</th>
           </tr>
         </thead>
         <tbody *ngIf="renters.length === 0">
           <tr>
-            <td colspan="5">В базе данных нету Арендаторов добавьте их.</td>
+            <td colspan="22">В базе данных нету Арендаторов добавьте их.</td>
           </tr>  
         </tbody>
 
         <tbody *ngIf="!isEditing">
           <tr  *ngFor="let renter of renters">
-            <td>{{renter.name}}</td>
-            <td>{{renter.sur}}</td>
-            <td>{{renter.dob}}</td>
-            <td>0 {{renter.tel}}</td>
-            <td>{{renter.type}}</td>
-            <td>{{renter.liter}}</td>
-            <td>{{renter.square}}</td>
-            <td>{{renter.price}}</td>
-            <td>{{renter.dateFrom}}</td>
-            <td>{{renter.dateUntil}}</td>
-            <td>{{renter.priceSum}}</td>
-            <td>{{renter.deposite}}</td>
-            <td>{{renter.tbo}}</td>
-            <td>{{renter.electric}}</td>
-            <td>{{renter.telNet}}</td>
-            <td>{{renter.sumAll}}</td>
-            <td>{{renter.factPay}}</td>
-            <td>{{renter.datePay}}</td>
-            <td>{{renter.typePay}}</td>
-            <td>{{renter.status}}</td>
-            <td>{{renter.note}}</td>
+            <td  data-toggle="modal"  [attr.data-target]="'#'+renter.name">{{renter.name}}</td>
+            <td  data-toggle="modal"  [attr.data-target]="'#'+renter.name">{{renter.sur}}</td>
+            <!-- Modal -->
+            <div class="modal fade" [attr.id]="renter.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <md-card class="example-card">
+                    <md-card-header>
+                      <md-card-title>ФИО: {{renter.name + ' ' + renter.sur}}</md-card-title>
+                      <md-card-subtitle>Статус: {{renter.status}}</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                      <td>{{renter.dob}}</td>
+                      <td>0 {{renter.tel}}</td>
+                      <td>{{renter.type}}</td>
+                      <td>{{renter.liter}}</td>
+                      <td>{{renter.square}}</td>
+                      <td>{{renter.price}}</td>
+                      <td>{{renter.dateFrom}}</td>
+                      <td>{{renter.dateUntil}}</td>
+                      <td>{{renter.priceSum}}</td>
+                      <td>{{renter.deposite}}</td>
+                      <td>{{renter.tbo}}</td>
+                      <td>{{renter.electric}}</td>
+                      <td>{{renter.telNet}}</td>
+                      <td>{{renter.sumAll}}</td>
+                      <td>{{renter.factPay}}</td>
+                      <td>{{renter.datePay}}</td>
+                      <td>{{renter.typePay}}</td>
+                      <td>{{renter.note}}</td>
+                    </md-card-content>
+                    <md-card-actions>
+                      <button class="btn btn-sm btn-warning" (click)="enableEditing(renter)">
+                        <i class="fa fa-pencil"></i> 
+                        Редактировать
+                      </button> 
+                      <button class="btn btn-sm btn-danger" (click)="deleteRenter(renter)">
+                        <i class="fa fa-trash"></i>  
+                        Удалить
+                      </button>
+                      <button md-button type="button" data-dismiss="modal">Закрыть</button>
+                    </md-card-actions>
+                  </md-card>
+                </div>
+              </div>
+            </div>
             <td>
               <button class="btn btn-sm btn-warning" (click)="enableEditing(renter)">
                 <i class="fa fa-pencil"></i> 
@@ -91,58 +117,58 @@
                 </div>
                 <div class="form-group">
                 <span mdPrefix>0</span>
-                  <input class="form-control" type="text" name="tel" [(ngModel)]="renter.tel"  placeholder="тел"  required>
+                  <input class="form-control" type="text" name="tel" [(ngModel)]="renter.tel"  placeholder="Тел"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="type" [(ngModel)]="renter.type" placeholder="type"  required>
+                  <input class="form-control" type="text" name="type" [(ngModel)]="renter.type" placeholder="Тип"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="liter" [(ngModel)]="renter.liter" placeholder="liter"  required>
+                  <input class="form-control" type="text" name="liter" [(ngModel)]="renter.liter" placeholder="Литер"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="square" [(ngModel)]="renter.square" placeholder="square"  required>
+                  <input class="form-control" type="text" name="square" [(ngModel)]="renter.square" placeholder="Кв. метр"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="price" [(ngModel)]="renter.price" placeholder="price"  required>
+                  <input class="form-control" type="text" name="price" [(ngModel)]="renter.price" placeholder="Цена"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="dateFrom" [(ngModel)]="renter.dateFrom" placeholder="dateFrom"  required>
+                  <input class="form-control" type="text" name="dateFrom" [(ngModel)]="renter.dateFrom" placeholder="Дата от"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="dateUntil" [(ngModel)]="renter.dateUntil" placeholder="dateUntil"  required>
+                  <input class="form-control" type="text" name="dateUntil" [(ngModel)]="renter.dateUntil" placeholder="Дата до"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="priceSum" [(ngModel)]="renter.priceSum" placeholder="priceSum"  required>
+                  <input class="form-control" type="text" name="priceSum" [(ngModel)]="renter.priceSum" placeholder="Сумма"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="deposite" [(ngModel)]="renter.deposite" placeholder="deposite"  required>
+                  <input class="form-control" type="text" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="tbo" [(ngModel)]="renter.tbo" placeholder="tbo"  required>
+                  <input class="form-control" type="text" name="tbo" [(ngModel)]="renter.tbo" placeholder="ТБО"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="electric" [(ngModel)]="renter.electric" placeholder="electric"  required>
+                  <input class="form-control" type="text" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="telNet" [(ngModel)]="renter.telNet" placeholder="telNet"  required>
+                  <input class="form-control" type="text" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="sumAll" [(ngModel)]="renter.sumAll" placeholder="sumAll"  required>
+                  <input class="form-control" type="text" name="sumAll" [(ngModel)]="renter.sumAll" placeholder="Сумма всего"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="factPay" [(ngModel)]="renter.factPay" placeholder="factPay"  required>
+                  <input class="form-control" type="text" name="factPay" [(ngModel)]="renter.factPay" placeholder="Фактическая оплата"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="datePay" [(ngModel)]="renter.datePay" placeholder="datePay"  required>
+                  <input class="form-control" type="text" name="datePay" [(ngModel)]="renter.datePay" placeholder="Дата оплаты"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="typePay" [(ngModel)]="renter.typePay" placeholder="typePay"  required>
+                  <input class="form-control" type="text" name="typePay" [(ngModel)]="renter.typePay" placeholder="Тип оплаты"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="status" [(ngModel)]="renter.status" placeholder="status"  required>
+                  <input class="form-control" type="text" name="status" [(ngModel)]="renter.status" placeholder="Статус"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="note" [(ngModel)]="renter.note" placeholder="note"  required>
+                  <input class="form-control" type="text" name="note" [(ngModel)]="renter.note" placeholder="Примечание"  required>
                 </div>
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
               </form>
@@ -155,7 +181,7 @@
   </div>
     <md-sidenav-container class="example-container">
 <div class="example-sidenav-content">
-        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить Арендатора
+        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить арендатора
         </button>
       </div>
       <md-sidenav #sidenav class="example-sidenav">
@@ -177,55 +203,55 @@
         </md-form-field>
         </span>
         <md-form-field>
-          <span mdTooltip="Нужно ввести type"><input mdInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="type"></span>
+          <span mdTooltip="Нужно ввести type"><input mdInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="Тип"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести liter"><input mdInput class="mat-input-element" type="text" name="liter" formControlName="liter" placeholder="liter"></span>
+          <span mdTooltip="Нужно ввести liter"><input mdInput class="mat-input-element" type="text" name="liter" formControlName="liter" placeholder="Литер"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести square"><input mdInput class="mat-input-element" type="text" name="square" formControlName="square" placeholder="square"></span>
+          <span mdTooltip="Нужно ввести square"><input mdInput class="mat-input-element" type="text" name="square" formControlName="square" placeholder="Кв. м"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести price"><input mdInput class="mat-input-element" type="text" name="price" formControlName="price" placeholder="price"></span>
+          <span mdTooltip="Нужно ввести price"><input mdInput class="mat-input-element" type="text" name="price" formControlName="price" placeholder="Цена"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести dateFrom"><input mdInput class="mat-input-element" type="text" name="dateFrom" formControlName="dateFrom" placeholder="dateFrom"></span>
+          <span mdTooltip="Нужно ввести dateFrom"><input mdInput class="mat-input-element" type="text" name="dateFrom" formControlName="dateFrom" placeholder="Дата от"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести dateUntil"><input mdInput class="mat-input-element" type="text" name="dateUntil" formControlName="dateUntil" placeholder="dateUntil"></span>
+          <span mdTooltip="Нужно ввести dateUntil"><input mdInput class="mat-input-element" type="text" name="dateUntil" formControlName="dateUntil" placeholder="Дата до"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести priceSum"><input mdInput class="mat-input-element" type="text" name="priceSum" formControlName="priceSum" placeholder="priceSum"></span>
+          <span mdTooltip="Нужно ввести priceSum"><input mdInput class="mat-input-element" type="text" name="priceSum" formControlName="priceSum" placeholder="Сумма"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести deposite"><input mdInput class="mat-input-element" type="text" name="deposite" formControlName="deposite" placeholder="deposite"></span>
+          <span mdTooltip="Нужно ввести deposite"><input mdInput class="mat-input-element" type="text" name="deposite" formControlName="deposite" placeholder="Депозит"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести tbo"><input mdInput class="mat-input-element" type="text" name="tbo" formControlName="tbo" placeholder="tbo"></span>
+          <span mdTooltip="Нужно ввести tbo"><input mdInput class="mat-input-element" type="text" name="tbo" formControlName="tbo" placeholder="ТБО"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести electric"><input mdInput class="mat-input-element" type="text" name="electric" formControlName="electric" placeholder="electric"></span>
+          <span mdTooltip="Нужно ввести electric"><input mdInput class="mat-input-element" type="text" name="electric" formControlName="electric" placeholder="Электричество"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести telNet"><input mdInput class="mat-input-element" type="text" name="telNet" formControlName="telNet" placeholder="telNet"></span>
+          <span mdTooltip="Нужно ввести telNet"><input mdInput class="mat-input-element" type="text" name="telNet" formControlName="telNet" placeholder="Тел. связь"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести sumAll"><input mdInput class="mat-input-element" type="text" name="sumAll" formControlName="sumAll" placeholder="sumAll"></span>
+          <span mdTooltip="Нужно ввести sumAll"><input mdInput class="mat-input-element" type="text" name="sumAll" formControlName="sumAll" placeholder="Сумма всего"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести factPay"><input mdInput class="mat-input-element" type="text" name="factPay" formControlName="factPay" placeholder="factPay"></span>
+          <span mdTooltip="Нужно ввести factPay"><input mdInput class="mat-input-element" type="text" name="factPay" formControlName="factPay" placeholder="Факт оплата"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести datePay"><input mdInput class="mat-input-element" type="text" name="datePay" formControlName="datePay" placeholder="datePay"></span>
+          <span mdTooltip="Нужно ввести datePay"><input mdInput class="mat-input-element" type="text" name="datePay" formControlName="datePay" placeholder="Дата оплаты"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести typePay"><input mdInput class="mat-input-element" type="text" name="typePay" formControlName="typePay" placeholder="typePay"></span>
+          <span mdTooltip="Нужно ввести typePay"><input mdInput class="mat-input-element" type="text" name="typePay" formControlName="typePay" placeholder="Тип оплаты"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести status"><input mdInput class="mat-input-element" type="text" name="status" formControlName="status" placeholder="status"></span>
+          <span mdTooltip="Нужно ввести status"><input mdInput class="mat-input-element" type="text" name="status" formControlName="status" placeholder="Статус"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести note"><input mdInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="note"></span>
+          <span mdTooltip="Нужно ввести note"><input mdInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="Заметка"></span>
         </md-form-field>
         <button md-raised-button color="warm" class=""  type="submit" [disabled]="!addRenterForm.valid"><i class="material-icons">add</i> Добавить</button>
       </form>

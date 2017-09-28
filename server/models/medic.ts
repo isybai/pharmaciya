@@ -9,7 +9,7 @@ const medicSchema = new mongoose.Schema({
   local: String,
   workTimeFrom: String,
   workTimeTill: String,
-  tel: Number
+  tel: String
 });
 
 const Medic = mongoose.model('Medic', medicSchema);

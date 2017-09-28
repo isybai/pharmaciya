@@ -43,6 +43,7 @@ import { SharedModule } from './shared/shared.module';
 import { CatService } from './services/cat.service';
 
 import { MedicService } from './services/medic.service';
+import { DrugstoreService } from './services/drugstore.service';
 import { IndividualService } from './services/individual.service';
 import { RenterService } from './services/renter.service';
 import { LpuService } from './services/lpu.service';
@@ -154,7 +155,8 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     IndividualService,
     RenterService,
     UserService,
-    LpuService
+    LpuService,
+    DrugstoreService
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

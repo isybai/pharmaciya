@@ -3,7 +3,7 @@
 const lpuSchema = new mongoose.Schema({
   name: String,
   address: String,
-  tel: Number,
+  tel: String,
   type: String,
 });
 

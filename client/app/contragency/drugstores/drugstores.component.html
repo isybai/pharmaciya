@@ -1,45 +1,298 @@
+<!-- CRUD -->
+<app-loading [condition]="isLoading"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="row info_table">
+  <div class="" *ngIf="!isLoading">
+    <h4 class="">Текущие аптеки {{drugstores.length}}</h4>
+    <md-tab-group>
+      <md-tab label="Категория A(крупные сети аптек)">
+        <div class="">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-default">
+              <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Рабочее время</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="drugstores.length === 0">
+              <tr>
+                <td colspan="5">В базе данных нету аптек добавьте их.</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing">
+              <tr *ngFor="let drugstore of drugstores">
+                <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.name}}</td>
+                <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.address}}</td>
+                <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.type}}</td>
+                <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.workTime}}</td>
+                <td *ngIf="drugstore.type === 'Категория A'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория A'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="isEditing">
+              <tr>
+                <td colspan="10">
+                  <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести название">
+                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
+                      </span>
+                    </md-form-field>
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="адрес">
+                      </span>
+                    </md-form-field>
+                    <span mdTooltip="Нужно выбрать тип">
+                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="тип">
+                        <md-option *ngFor="let type of types" [value]="type.value">
+                          {{ type.viewValue }}
+                        </md-option>
+                      </md-select>
+                    </span>
+                    <md-form-field>
+                      <span mdTooltip="Рабочее время">
+                        <input mdInput class="mat-input-element" type="text" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                      </span>
+                    </md-form-field>
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести телефон">
+                        <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="телефон">
+                      </span>
+                    </md-form-field>
+                    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+      <md-tab label="Категория B(сети до 3-5 аптек)">
+        <div class="">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-default">
+              <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Рабочее время</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="drugstores.length === 0">
+              <tr>
+                <td colspan="10">В базе данных нету аптек добавьте их.</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing">
+              <tr *ngFor="let drugstore of drugstores">
+                <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.name}}</td>
+                <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.address}}</td>
+                <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.workTime}}</td>
+                <td *ngIf="drugstore.type === 'Категория B'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория B'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="isEditing">
+              <tr>
+                <td colspan="10">
+                  <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести название">
+                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
+                      </span>
+                    </md-form-field>
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="адрес">
+                      </span>
+                    </md-form-field>
+                    <span mdTooltip="Нужно выбрать тип">
+                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="тип">
+                        <md-option *ngFor="let type of types" [value]="type.value">
+                          {{ type.viewValue }}
+                        </md-option>
+                      </md-select>
+                    </span>
+                    <md-form-field>
+                      <span mdTooltip="Рабочее время">
+                        <input mdInput class="mat-input-element" type="text" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                      </span>
+                    </md-form-field>
+                    <md-form-field>
+                      <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
+                      <span mdTooltip="Нужно ввести телефон">
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="телефон">
+                      </span>
+                    </md-form-field>
+                    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+      <md-tab label="Категория C(одиночки, ЧП)">
+        <div class="">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-default">
+              <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Рабочее время</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="drugstores.length === 0">
+              <tr>
+                <td colspan="10">В базе данных нету аптек добавьте их.</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing"> 
+              <tr *ngFor="let drugstore of drugstores ">
+                <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.name}}</td>
+                <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.address}}</td>
+                <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.workTime}}</td>
+                <td *ngIf="drugstore.type === 'Категория C'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория C'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="isEditing">
+              <tr>
+                <td colspan="10">
+                  <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести название">
+                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
+                      </span>
+                    </md-form-field>
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="адрес">
+                      </span>
+                    </md-form-field>
+                    <span mdTooltip="Нужно выбрать тип">
+                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="тип">
+                        <md-option *ngFor="let type of types" [value]="type.value">
+                          {{ type.viewValue }}
+                        </md-option>
+                      </md-select>
+                    </span>
+                    <md-form-field>
+                      <span mdTooltip="Рабочее время">
+                        <input mdInput class="mat-input-element" type="text" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                      </span>
+                    </md-form-field>
+                    <md-form-field>
+                      <span mdTooltip="Нужно ввести телефон">
+                        <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="телефон">
+                      </span>
+                    </md-form-field>
+                    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </md-tab>
+    </md-tab-group>
+  </div>
+  <md-sidenav-container class="example-container">
+    <div class="example-sidenav-content">
+      <button md-raised-button (click)="sidenav.open()">
+        <md-icon>add</md-icon>Добавить аптеку
+      </button>
+    </div>
+    <md-sidenav #sidenav class="example-sidenav">
+      <div class="addItem" *ngIf="!isEditing">
+        <div>
+          <form class="form-inline" [formGroup]="addDrugstoreForm" (ngSubmit)="addDrugstore()" style="text-align:center">
+            <md-form-field>
+              <span mdTooltip="Нужно ввести название">
+                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
+              </span>
+            </md-form-field>
+            <md-form-field>
+              <span mdTooltip="Нужно ввести адрес">
+                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="адрес">
+              </span>
+            </md-form-field>
+            <span mdTooltip="Нужно выбрать тип">
+              <md-select formControlName="type" placeholder="тип">
+                <md-option *ngFor="let type of types" [value]="type.value">
+                  {{ type.viewValue }}
+                </md-option>
+              </md-select>
+            </span>
+            <md-form-field>
+              <span mdTooltip="Рабочее время">
+                <input mdInput class="mat-input-element" type="text" name="workTime" formControlName="workTime" placeholder="Рабочее время">
+              </span>
+            </md-form-field>
+            <span mdTooltip="Нужно ввести телефон">
+              <md-form-field>
+                <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
+                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="телефон">
+              </md-form-field>
+            </span>
+            <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addDrugstoreForm.valid"><i class="material-icons">add</i> Добавить</button>
+          </form>
+        </div>
+      </div>
+    </md-sidenav>
+  </md-sidenav-container>
+</div>
+
+<!--
+<nav class="navbar navbar-light">
+  <div class="row">
+    
+  </div>
+</nav>
+-->
+
+
 <!--
       <li><a> -  (Неман, Бимед, Фармамир, Лекарь)   </a></li>
       <li><a> - </a></li>
       <li><a> - </a></li>
 -->
-<nav class="navbar navbar-light">
-  <div class="row">
-  	<md-tab-group>
-	  	<md-tab label="Категория A(крупные сети аптек)">
-			<div class="example-container mat-elevation-z8">
-			  <md-table #table [dataSource]="dataSource">
-			    <!-- Position Column -->
-			    <ng-container mdColumnDef="name">
-			      <md-header-cell *mdHeaderCellDef> Название </md-header-cell>
-			      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-			    </ng-container>
-			    <!-- Name Column -->
-			    <ng-container mdColumnDef="address">
-			      <md-header-cell *mdHeaderCellDef> Адрес </md-header-cell>
-			      <md-cell *mdCellDef="let element"> {{element.address}} </md-cell>
-			    </ng-container>
-			    <!-- Weight Column -->
-			    <ng-container mdColumnDef="tel">
-			      <md-header-cell *mdHeaderCellDef> Телефон </md-header-cell>
-			      <md-cell *mdCellDef="let element"><span mdPrefix>+996 (312) </span> {{element.tel}} </md-cell>
-			    </ng-container>
-			    <ng-container mdColumnDef="workTime">
-			      <md-header-cell *mdHeaderCellDef> График работы </md-header-cell>
-			      <md-cell *mdCellDef="let element">{{element.workTime}} </md-cell>
-			    </ng-container>
-			    <!-- Color Column -->
-			    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-			    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-			  </md-table>
-			</div>
-	  	</md-tab>
-  		<md-tab label="Категория B(сети до 3-5 аптек)">
 
-  		</md-tab>
-  		<md-tab label="Категория C(одиночки, ЧП)">
+	  	
+  		
+  		
 
-	  	</md-tab>
-	</md-tab-group>
-  </div>
-</nav>
