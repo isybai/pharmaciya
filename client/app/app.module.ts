@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CdkTableModule } from '@angular/cdk/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Material
+
 import {
   MdAutocompleteModule,
   MdButtonModule,
@@ -10,7 +10,6 @@ import {
   MdCardModule,
   MdCheckboxModule,
   MdChipsModule,
-  MdCoreModule,
   MdDatepickerModule,
   MdDialogModule,
   MdExpansionModule,
@@ -119,7 +118,6 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     MdCardModule,
     MdCheckboxModule,
     MdChipsModule,
-    MdCoreModule,
     MdDatepickerModule,
     MdDialogModule,
     MdExpansionModule,
