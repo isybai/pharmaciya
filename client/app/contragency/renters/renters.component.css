@@ -1,0 +1,42 @@
+md-card.example-card.mat-card {
+    box-shadow: 0 6px 8px 5px rgba(0, 0, 0, 0.3);
+}
+md-card.example-card.mat-card span.float-right {
+    border-bottom: 1px dashed #62b4cc;
+    background: rgba(0, 219, 255, 0.1);
+}
+td.clickable {
+    cursor: pointer;
+}
+td.clickable:hover {
+    color: blue;
+}
+md-card.example-card.mat-card span {
+    display: inline-block;
+    vertical-align: super;
+    width: 49%;
+    padding: 8px;
+    font-size: 16px;
+}
+md-card.example-card.mat-card span.float-left {
+    text-indent: 20px;
+    border-bottom: 1px dashed #d4d4d4;
+    font-style: italic;
+}
+.mat-card-header-text {
+    width: 100%;
+}
+div md-card.example-card.mat-card .mat-card-header-text span {
+    background: transparent;
+    border-bottom: 1px solid #62b4cc;
+    text-indent: 0;
+    font-style: italic;
+}
+md-card.edit-card.mat-card span {
+    display: inline-block;
+    width: 46%;
+    vertical-align: super;
+}
+md-card.edit-card.mat-card span.float-left {
+    text-indent: 20px;
+}
