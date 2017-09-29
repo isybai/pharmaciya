@@ -37,6 +37,9 @@ md-card.edit-card.mat-card span {
     width: 46%;
     vertical-align: super;
 }
+md-card.edit-card.mat-card {
+    margin-bottom: 20px;
+}
 md-card.edit-card.mat-card span.float-left {
     text-indent: 20px;
 }

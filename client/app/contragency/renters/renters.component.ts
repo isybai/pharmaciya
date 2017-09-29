@@ -21,27 +21,27 @@ export class RentersComponent implements OnInit {
   isEditing = false;
 
   addRenterForm: FormGroup;
-  name		= new FormControl('', Validators.required);
-  sur		= new FormControl('', Validators.required);
-  dob		= new FormControl('', Validators.required);
-  tel		= new FormControl('', Validators.required);
-  type		= new FormControl('', Validators.required);
-  liter		= new FormControl('', Validators.required);
-  square	= new FormControl('', Validators.required);
-  price		= new FormControl('', Validators.required);
-  dateFrom	= new FormControl('', Validators.required);
-  dateUntil	= new FormControl('', Validators.required);
-  priceSum	= new FormControl('', Validators.required);
-  deposite	= new FormControl('', Validators.required);
-  tbo		= new FormControl('', Validators.required);
-  electric	= new FormControl('', Validators.required);
-  telNet	= new FormControl('', Validators.required);
-  sumAll	= new FormControl('', Validators.required);
-  factPay	= new FormControl('', Validators.required);
-  datePay	= new FormControl('', Validators.required);
-  typePay	= new FormControl('', Validators.required);
-  status	= new FormControl('', Validators.required);
-  note		= new FormControl('', Validators.required);
+  name = new FormControl('', Validators.required);
+  sur = new FormControl('', Validators.required);
+  dob = new FormControl('', Validators.required);
+  tel = new FormControl('', Validators.required);
+  type = new FormControl('', Validators.required);
+  liter = new FormControl('', Validators.required);
+  square = new FormControl('', Validators.required);
+  price = new FormControl('', Validators.required);
+  dateFrom = new FormControl('', Validators.required);
+  dateUntil = new FormControl('', Validators.required);
+  priceSum = new FormControl('', Validators.required);
+  deposite = new FormControl('', Validators.required);
+  tbo = new FormControl('', Validators.required);
+  electric = new FormControl('', Validators.required);
+  telNet = new FormControl('', Validators.required);
+  sumAll = new FormControl('', Validators.required);
+  factPay = new FormControl('', Validators.required);
+  datePay = new FormControl('', Validators.required);
+  typePay = new FormControl('', Validators.required);
+  status = new FormControl('', Validators.required);
+  note = new FormControl('', Validators.required);
 
   constructor(private renterService: RenterService,
               private formBuilder: FormBuilder,
@@ -51,7 +51,7 @@ export class RentersComponent implements OnInit {
   ngOnInit() {
     this.getRenters();
     this.addRenterForm = this.formBuilder.group({
-	     name: this.name,	
+     name: this.name,	
 		 sur: this.sur,		
 		 dob: this.dob,		
 		 tel: this.tel,		
