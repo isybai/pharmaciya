@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit  } from '@angular/core';
+declare var jquery:any;
+declare var $ :any;
+
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -40,6 +43,9 @@ export class IndividualsComponent implements OnInit {
       tel: this.tel
     });
 
+  }
+  onHover(){      
+    $(this).parent().parent().addClass("animated infinite hinge");
   }
 
   getIndividuals() {
