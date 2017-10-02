@@ -3,15 +3,31 @@
 	    Контрагенты
 	</h4>
 </header>
-<div class="col-6 col-md-2 sidebar-offcanvas" id="sidebar">
-  <div class="list-group">
-    <a routerLink="medics" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-user"></i> Врачи</a>
-    <a routerLink="lpu" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-home"></i> ЛПУ</a>
-    <a routerLink="drugstores" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-plus"></i> Аптеки</a>
-    <a routerLink="individuals" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-user"></i> Физ. лица</a>
-    <a routerLink="renters" routerLinkActive="active" class="list-group-item"><i class="glyphicon glyphicon-user"></i> Арендаторы</a>
+<div class="col-12 col-md-12">
+<nav class="navbar navbar-light">
+  <div class="navbar" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="medics" routerLinkActive="active" class="nav-link">Врачи</a>
+      </li>  
+      <li class="nav-item">
+        <a routerLink="lpu" routerLinkActive="active" class="nav-link">ЛПУ</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="drugstores" routerLinkActive="active" class="nav-link">Аптеки</a>
+      </li>
+      <li class="nav-item">  
+        <a routerLink="individuals" routerLinkActive="active" class="nav-link">Физ. лица</a>
+      </li>
+      <li class="nav-item">  
+        <a routerLink="renters" routerLinkActive="active" class="nav-link">Арендаторы</a>
+      </li>
+    </ul>
   </div>
+</nav>
 </div>
-<div class="col-6 col-md-10 content">
+
+
+<div class="col-12 col-md-12 content">
   <router-outlet></router-outlet>
 </div>

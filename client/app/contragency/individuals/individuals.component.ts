@@ -45,7 +45,8 @@ export class IndividualsComponent implements OnInit {
 
   }
   onHover(){      
-    $(this).parent().parent().addClass("animated infinite hinge");
+    $('#remove').parent().parent().addClass("animated infinite hinge");
+    console.log('hover is workin');
   }
 
   getIndividuals() {

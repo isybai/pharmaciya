@@ -1,7 +1,7 @@
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
-<div class="row info_table">
+<div class="info_table">
   <div class="" *ngIf="!isLoading">
     <h4 class="">Арендаторы {{renters.length}}</h4>
     <table class="table table-bordered table-striped" *ngIf="!isEditing">

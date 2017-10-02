@@ -1,8 +1,8 @@
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
-<div class="row info_table">
-  <div class="animated fadeInDown" *ngIf="!isLoading">
+<div class="info_table">
+  <div class="animated bounceInRight" *ngIf="!isLoading">
     <h4 class="">Текущие ЛПУ {{lpus.length}}</h4>
     <md-tab-group>
       <md-tab label="Ц.С.М.">

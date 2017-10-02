@@ -4,8 +4,8 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="row info_table">
-  <div class="animated fadeInDown" *ngIf="!isLoading">
+<div class="info_table">
+  <div class="animated bounceInRight" *ngIf="!isLoading">
     <h4 class="">Физ. лица {{individuals.length}}</h4>
     <div class="">
       <table class="table table-bordered table-striped">
@@ -35,7 +35,7 @@
                 <i class="fa fa-pencil"></i> 
                 Редактировать
               </button> 
-              <button class="btn btn-sm btn-danger" id="remove" (hover)="onHover()" (click)="deleteIndividual(individual)">
+              <button class="btn btn-sm btn-danger" id="remove" (click)="deleteIndividual(individual)">
                 <i class="fa fa-trash"></i>  
                 Удалить
               </button>

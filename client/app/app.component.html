@@ -1,82 +1,95 @@
-<div class="col-md-1">
-    <md-sidenav-container class="example-container">
-      <div class="example-sidenav-content">
-        <button type="button" md-button (click)="sidenav.open()">
-          <md-icon>menu</md-icon>
-        </button>
-      </div>
-      <md-sidenav opened #sidenav class="example-sidenav">
-        <nav class="navbar navbar-dark bg-primary">
-          <md-list>
-            <md-list-item>
-              <a routerLink="/contragency" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
-                <i class="material-icons">account_circle</i><br>Контрагенты
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
-                <i class="material-icons">local_hospital</i><br>Номенклатура
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
-                <i class="material-icons">location_city</i><br>Помещения
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
-                <i class="material-icons">supervisor_account</i><br>Сотрудники
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
-                <i class="material-icons">monetization_on</i><br>Финансы
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
-                <i class="material-icons">insert_chart</i><br>Сбыт
-              </a>
-            </md-list-item>
-            <md-list-item *ngIf="!auth.loggedIn">
-              <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active">
-                <i class="fa fa-sign-in"></i><br> Логин
-              </a>
-            </md-list-item>
-            <md-list-item *ngIf="!auth.loggedIn">
-              <a routerLink="/register" class="nav-item nav-link" routerLinkActive="active">
-                <i class="fa fa-user-plus"></i><br> Зарегестрироваться
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-                <i class="material-icons">settings</i><br> Аккаунт ({{auth.currentUser.username}})
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
-                <i class="material-icons">verified_user</i><br> Админ
-              </a>
-            </md-list-item>
-            <md-list-item>
-              <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
-                <i class="material-icons">exit_to_app</i><br> Выйти
-              </a>
-            </md-list-item>
-          </md-list>
-        </nav>
-      </md-sidenav>
-    </md-sidenav-container>
-</div>
-<div class="col-md-11"> 
-  <ul class="nav navbar-nav">
-    <li>
-      <a routerLink="/" class="nav-item nav-link logo">
-        <img src="../assets/fav.png" alt="logo">
-        pharmaciyaCRM
-      </a>
-    </li>
-  </ul>
-
-  <router-outlet></router-outlet>
+<md-sidenav id="main-menu" opened #sidenav class="example-sidenav">
+    <nav class="navbar navbar-light">
+      <md-list>
+        <md-list-item mdClass='homelink'>
+          <a routerLink="/" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <img src="../assets/fav.png" alt="logo">
+            <span>  pharmaciyaCRM
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/contragency" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <i class="material-icons">account_circle</i>
+            <span>Контрагенты
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <i class="material-icons">local_hospital</i>
+            <span>Номенклатура
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <i class="material-icons">location_city</i>
+            <span>Помещения
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <i class="material-icons">supervisor_account</i>
+            <span>Сотрудники
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <i class="material-icons">monetization_on</i>
+            <span>Финансы
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+            <i class="material-icons">insert_chart</i>
+            <span>Сбыт
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item *ngIf="!auth.loggedIn">
+          <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active">
+            <i class="fa fa-sign-in"></i>
+            <span> Логин
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item *ngIf="!auth.loggedIn">
+          <a routerLink="/register" class="nav-item nav-link" routerLinkActive="active">
+            <i class="fa fa-user-plus"></i>
+            <span> Зарегестрироваться
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+            <i class="material-icons">settings</i>
+            <span> Аккаунт ({{auth.currentUser.username}})
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
+            <i class="material-icons">verified_user</i>
+            <span> Админ
+            </span>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+            <i class="material-icons">exit_to_app</i>
+            <span> Выйти
+            </span>
+          </a>
+        </md-list-item>
+      </md-list>
+    </nav>
+  </md-sidenav>
+<div class="content">
+  <div class="box">
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -68,7 +68,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html {
-  background: url(assets/bg.jpg) no-repeat;
+  background: #e0e0e0;
   background-size: 100%;
   background-attachment: fixed;
 }
@@ -78,7 +78,7 @@ a {
 body {
     margin-top: 0;
     margin-bottom: 0;
-    color: white;
+    color: #272727;
 } 
 a:focus, a:hover {
     color: #003a6d;
@@ -99,20 +99,35 @@ a.nav-item.nav-link.logo {
 .mat-form-field {
     width: 100%;
 }
-
+.mat-drawer {
+    position: relative;
+    transform: translate3d(0,0,0);
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    min-width: 5vw;
+    outline: 0;
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
+    transform: translate3d(-100%,0,0);
+}
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
 }
 h4.page-title {
     text-align: left;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.52);
     font-size: 24px;
-    margin-left: 20px;
     margin-bottom: 20px;
+    background: #4caf50;
+    text-indent: 40px;
+    padding: 12px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
 }
 md-sidenav.example-sidenav.mat-drawer {
 	overflow-y: visible;
-	top: 36px;
 }
 .example-container {
   	height: 100%;
