@@ -20,7 +20,7 @@
             </thead>
             <tbody *ngIf="drugstores.length === 0">
               <tr>
-                <td colspan="5">В базе данных нету аптек добавьте их.</td>
+                <td colspan="5">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
             <tbody *ngIf="!isEditing">
@@ -45,17 +45,17 @@
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести название">
+                      <span mdTooltip="Введите название">
                         <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="адрес">
+                      <span mdTooltip="Введите адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
                       </span>
                     </md-form-field>
-                    <span mdTooltip="Нужно выбрать тип">
-                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="тип">
+                    <span mdTooltip="Выберите тип">
+                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
                         <md-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
                         </md-option>
@@ -67,9 +67,9 @@
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести телефон">
+                      <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="телефон">
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -95,7 +95,7 @@
             </thead>
             <tbody *ngIf="drugstores.length === 0">
               <tr>
-                <td colspan="10">В базе данных нету аптек добавьте их.</td>
+                <td colspan="10">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
             <tbody *ngIf="!isEditing">
@@ -119,17 +119,17 @@
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести название">
+                      <span mdTooltip="Введите название">
                         <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="адрес">
+                      <span mdTooltip="Введите адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
                       </span>
                     </md-form-field>
-                    <span mdTooltip="Нужно выбрать тип">
-                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="тип">
+                    <span mdTooltip="Выберите тип">
+                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
                         <md-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
                         </md-option>
@@ -142,8 +142,8 @@
                     </md-form-field>
                     <md-form-field>
                       <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                      <span mdTooltip="Нужно ввести телефон">
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="телефон">
+                      <span mdTooltip="Введите телефон">
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -169,7 +169,7 @@
             </thead>
             <tbody *ngIf="drugstores.length === 0">
               <tr>
-                <td colspan="10">В базе данных нету аптек добавьте их.</td>
+                <td colspan="10">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
             <tbody *ngIf="!isEditing"> 
@@ -193,17 +193,17 @@
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести название">
+                      <span mdTooltip="Введите название">
                         <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="адрес">
+                      <span mdTooltip="Введите адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
                       </span>
                     </md-form-field>
-                    <span mdTooltip="Нужно выбрать тип">
-                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="тип">
+                    <span mdTooltip="Выберите тип">
+                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
                         <md-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
                         </md-option>
@@ -215,9 +215,9 @@
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести телефон">
+                      <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="телефон">
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -242,17 +242,17 @@
         <div>
           <form class="form-inline" [formGroup]="addDrugstoreForm" (ngSubmit)="addDrugstore()" style="text-align:center">
             <md-form-field>
-              <span mdTooltip="Нужно ввести название">
+              <span mdTooltip="Введите название">
                 <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
               </span>
             </md-form-field>
             <md-form-field>
-              <span mdTooltip="Нужно ввести адрес">
-                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="адрес">
+              <span mdTooltip="Введите адрес">
+                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="Адрес">
               </span>
             </md-form-field>
-            <span mdTooltip="Нужно выбрать тип">
-              <md-select formControlName="type" placeholder="тип">
+            <span mdTooltip="Выберите тип">
+              <md-select formControlName="type" placeholder="Тип">
                 <md-option *ngFor="let type of types" [value]="type.value">
                   {{ type.viewValue }}
                 </md-option>
@@ -263,10 +263,10 @@
                 <input mdInput class="mat-input-element" type="text" name="workTime" formControlName="workTime" placeholder="Рабочее время">
               </span>
             </md-form-field>
-            <span mdTooltip="Нужно ввести телефон">
+            <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="телефон">
+                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addDrugstoreForm.valid"><i class="material-icons">add</i> Добавить</button>

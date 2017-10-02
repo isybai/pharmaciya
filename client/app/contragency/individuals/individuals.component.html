@@ -6,21 +6,21 @@
 
 <div class="row info_table">
   <div class="animated fadeInDown" *ngIf="!isLoading">
-    <h4 class="">Физ. лица {{individuals.length}}</h4>
+    <h4 class="">Физические лица {{individuals.length}}</h4>
     <div class="">
       <table class="table table-bordered table-striped">
         <thead class="thead-default">
           <tr>
             <th>Имя</th>
-            <th>Фам.</th>
-            <th>Д.р.</th>
-            <th>Тел.</th>
+            <th>Фамилия </th>
+            <th>День рождения</th>
+            <th>Телефон</th>
             <th>Действия</th>
           </tr>
         </thead>
         <tbody *ngIf="individuals.length === 0">
           <tr>
-            <td colspan="5">В базе данных нету физ. лиц добавьте их.</td>
+            <td colspan="5">В базе данных еще нет физических лиц. Добавьте их.</td>
           </tr>  
         </tbody>
 
@@ -50,14 +50,14 @@
                     <input class="form-control" type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фам."  required>
+                  <input class="form-control" type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия"  required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="dob" [(ngModel)]="individual.dob" step="any" min="0" placeholder="д.р."  required>
+                  <input class="form-control" type="text" name="dob" [(ngModel)]="individual.dob" step="any" min="0" placeholder="День рождения"  required>
                 </div>
                 <div class="form-group">
                 <span mdPrefix>0</span>
-                  <input class="form-control" type="number" name="tel" [(ngModel)]="individual.tel"  placeholder="тел"  required>
+                  <input class="form-control" type="number" name="tel" [(ngModel)]="individual.tel"  placeholder="Телефон"  required>
                 </div>
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
               </form>
@@ -70,7 +70,7 @@
   </div>
     <md-sidenav-container class="example-container">
 <div class="example-sidenav-content">
-        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить физ. лицо
+        <button md-raised-button (click)="sidenav.open()"><md-icon>add</md-icon>Добавить физическое лицо
         </button>
       </div>
       <md-sidenav #sidenav class="example-sidenav">
@@ -78,15 +78,15 @@
     <div>
       <form class="form-inline" [formGroup]="addIndividualForm" (ngSubmit)="addIndividual()" style="text-align:center">
         <md-form-field>
-          <span mdTooltip="Нужно ввести имя"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя"></span>
+          <span mdTooltip="Введите имя"><input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести фамилие"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилие"></span>
+          <span mdTooltip="Введите фамилию"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия"></span>
         </md-form-field>
         <md-form-field>
-          <span mdTooltip="Нужно ввести день рождения"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="dob" placeholder="Д.р."></span>
+          <span mdTooltip="Введите день рождения"><input mdInput class="mat-input-element" type="text" name="sur" formControlName="dob" placeholder="День рождения"></span>
         </md-form-field>
-        <span mdTooltip="Нужно ввести телефон">
+        <span mdTooltip="Введите телефон">
         <md-form-field>
           <span style="color: #757575;" mdPrefix>+996 &nbsp;</span><input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
         </md-form-field>
