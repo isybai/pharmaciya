@@ -9,20 +9,20 @@
         <thead class="thead-default">
           <tr>
             <th>Имя</th>
-            <th>Фам.</th>
-            <th>Спец.</th>
-            <th>Больница</th>
+            <th>Фамилия</th>
+            <th>Специальность</th>
+            <th>ЛПУ</th>
             <th>Тип</th>
-            <th>Локал.</th>
-            <th>Р.время с</th>
-            <th>Р.время До</th>
+            <th>Адрес</th>
+            <th>Раб.время с</th>
+            <th>Раб.время до</th>
             <th>Тел.</th>
             <th>Действия</th>
           </tr>
         </thead>
         <tbody *ngIf="medics.length === 0">
           <tr>
-            <td colspan="10">В базе данных нету врачей добавьте их.</td>
+            <td colspan="10">В базе данных еще нет врачей. Добавьте их</td>
           </tr>
         </tbody>
         <tbody *ngIf="!isEditing">
@@ -51,55 +51,55 @@
             <td colspan="10">
               <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
                 <md-form-field>
-                  <span mdTooltip="Нужно ввести имя">
+                  <span mdTooltip="Введите имя">
                     <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="medic.name" placeholder="Имя">
                   </span>
                 </md-form-field>
                 <md-form-field>
-                  <span mdTooltip="Нужно ввести фамилие">
-                    <input mdInput class="mat-input-element" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фамилие">
+                  <span mdTooltip="Введите фамилию">
+                    <input mdInput class="mat-input-element" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фамилия">
                   </span>
                 </md-form-field>
-                <span mdTooltip="Нужно выбрать специальность">
+                <span mdTooltip="Выберите специальность">
                   <md-select [(ngModel)]="medic.spec" name="spec" placeholder="Специальность">
                     <md-option *ngFor="let spec of specs" [value]="spec.value">
                       {{ spec.viewValue }}
                     </md-option>
                   </md-select>
                 </span>
-                <span mdTooltip="Нужно выбрать тип">
-                  <md-select #selectedType [(ngModel)]="medic.type" name="type"  placeholder="Тип Л.П.У.">
+                <span mdTooltip="Выберите тип">
+                  <md-select #selectedType [(ngModel)]="medic.type" name="type"  placeholder="Тип">
                     <md-option *ngFor="let spec of lpus | slice:0:3;" [value]="spec.type">
                       {{ spec.type }}
                     </md-option>
                   </md-select>
                 </span>
-                <span mdTooltip="Нужно выбрать больницу">
-                  <md-select  name="hos"  [(ngModel)]="medic.hos" placeholder="Л.П.У.">
+                <span mdTooltip="Выберите больницу">
+                  <md-select  name="hos"  [(ngModel)]="medic.hos" placeholder="ЛПУ">
                     <md-option *ngFor="let spec of lpus" [value]="spec.name">
                       <span *ngIf="selectedType.value === spec.type">{{spec.name}}</span>
                     </md-option>
                   </md-select>
                 </span>
                 <md-form-field>
-                  <span mdTooltip="Нужно ввести адрес">
+                  <span mdTooltip="Введите адрес">
                     <input mdInput class="mat-input-element" type="text" name="local"  [(ngModel)]="medic.local"  placeholder="Адрес">
                   </span>
                 </md-form-field>
-                <span mdTooltip="Нужно ввести телефон">
+                <span mdTooltip="Введите телефон">
                   <md-form-field>
                     <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
                     <input mdInput class="mat-input-element" type="tel" name="tel" [(ngModel)]="medic.tel" placeholder="Телефон">
                   </md-form-field>
                 </span>
                 <md-form-field>
-                  <span mdTooltip="Нужно ввести р. время с">
-                    <input mdInput name="workTimeFrom" [(ngModel)]="medic.workTimeFrom" class="mat-input-element" type="time" placeholder="Р. время c">
+                  <span mdTooltip="Раб.время с">
+                    <input mdInput name="workTimeFrom" [(ngModel)]="medic.workTimeFrom" class="mat-input-element" type="time" placeholder="Раб.время c">
                   </span>
                 </md-form-field>
                 <md-form-field>
-                  <span mdTooltip="Нужно ввести р. время до">
-                    <input mdInput name="workTimeTill" [(ngModel)]="medic.workTimeTill" class="mat-input-element" type="time" placeholder="Р. время c">
+                  <span mdTooltip="Раб.время до">
+                    <input mdInput name="workTimeTill" [(ngModel)]="medic.workTimeTill" class="mat-input-element" type="time" placeholder="Раб.время до">
                   </span>
                 </md-form-field>
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -122,55 +122,55 @@
         <div>
           <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
             <md-form-field>
-              <span mdTooltip="Нужно ввести имя">
+              <span mdTooltip="Введите имя">
                 <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
               </span>
             </md-form-field>
             <md-form-field>
-              <span mdTooltip="Нужно ввести фамилие">
-                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилие">
+              <span mdTooltip="Введите фамилию">
+                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
               </span>
             </md-form-field>
-            <span mdTooltip="Нужно выбрать специальность">
+            <span mdTooltip="Выберите специальность">
               <md-select formControlName="spec" placeholder="Специальность">
                 <md-option *ngFor="let spec of specs" [value]="spec.value">
                   {{ spec.viewValue }}
                 </md-option>
               </md-select>
             </span>
-            <span mdTooltip="Нужно выбрать тип">
-              <md-select #selectedType formControlName="type" placeholder="Тип Л.П.У.">
+            <span mdTooltip="Выберите тип ЛПУ">
+              <md-select #selectedType formControlName="type" placeholder="Тип ЛПУ">
                 <md-option *ngFor="let spec of lpus | slice:0:3;" [value]="spec.type">
                   {{ spec.type }}
                 </md-option>
               </md-select>
             </span>
-            <span mdTooltip="Нужно выбрать больницу">
-              <md-select *ngIf="selectedType.value !== undefined" formControlName="hos" placeholder="Л.П.У.">
+            <span mdTooltip="Выберите больницу">
+              <md-select *ngIf="selectedType.value !== undefined" formControlName="hos" placeholder="ЛПУ">
                 <md-option *ngFor="let spec of lpus" [value]="spec.name">
                   <span *ngIf="selectedType.value === spec.type">{{spec.name}}</span>
                 </md-option>
               </md-select>
             </span>
             <md-form-field>
-              <span mdTooltip="Нужно ввести адрес">
+              <span mdTooltip="Введите адрес">
                 <input mdInput class="mat-input-element" type="text" name="local" formControlName="local" placeholder="Адрес">
               </span>
             </md-form-field>
-            <span mdTooltip="Нужно ввести телефон">
+            <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
                 <input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <md-form-field>
-              <span mdTooltip="Нужно ввести р. время с">
-                <input mdInput formControlName="workTimeFrom" class="mat-input-element" type="time" placeholder="Р. время c">
+              <span mdTooltip="Раб.время с">
+                <input mdInput formControlName="workTimeFrom" class="mat-input-element" type="time" placeholder="Раб.время c">
               </span>
             </md-form-field>
             <md-form-field>
-              <span mdTooltip="Нужно ввести р. время до">
-                <input mdInput formControlName="workTimeTill" class="mat-input-element" type="time" placeholder="Р. время c">
+              <span mdTooltip="Раб.время до">
+                <input mdInput formControlName="workTimeTill" class="mat-input-element" type="time" placeholder="Раб.время до">
               </span>
             </md-form-field>
             <button md-raised-button color="warm" (click)="sidenav.close()" type="submit" [disabled]="!addMedicForm.valid"><i class="material-icons">add</i> Добавить</button>

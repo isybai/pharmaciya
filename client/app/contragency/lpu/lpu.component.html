@@ -5,7 +5,7 @@
   <div class="animated bounceInRight" *ngIf="!isLoading">
     <h4 class="">Текущие ЛПУ {{lpus.length}}</h4>
     <md-tab-group>
-      <md-tab label="Ц.С.М.">
+      <md-tab label="ЦСМ - Центры Семейной Медицины">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default">
@@ -19,7 +19,7 @@
             </thead>
             <tbody *ngIf="lpus.length === 0">
               <tr>
-                <td colspan="10">В базе данных нету ЛПУ добавьте их.</td>
+                <td colspan="10">В базе данных еще нет ЦСМ. Добавьте их</td>
               </tr>
             </tbody>
             <tbody *ngIf="!isEditing">
@@ -43,26 +43,26 @@
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести название">
+                      <span mdTooltip="Введите название">
                         <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести адрес">
+                      <span mdTooltip="Введите адрес">
                         <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="адрес">
                       </span>
                     </md-form-field>
-                    <span mdTooltip="Нужно ввести тип">
-                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="тип">
+                    <span mdTooltip="ВВедите тип">
+                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
                         <md-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
                         </md-option>
                       </md-select>
                     </span>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести телефон">
+                      <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -74,7 +74,7 @@
           </table>
         </div>
       </md-tab>
-      <md-tab label="Мед. Центр">
+      <md-tab label="Медицинские Центры">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default">
@@ -88,7 +88,7 @@
             </thead>
             <tbody *ngIf="lpus.length === 0">
               <tr>
-                <td colspan="10">В базе данных нету ЛПУ добавьте их.</td>
+                <td colspan="10">В базе данных еще нет Мед.Центров. Добавьте их</td>
               </tr>
             </tbody>
             <tbody *ngIf="!isEditing">
@@ -112,17 +112,17 @@
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести название">
+                      <span mdTooltip="Введите название">
                         <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="адрес">
+                      <span mdTooltip="ВВедите адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
                       </span>
                     </md-form-field>
-                    <span mdTooltip="Нужно ввести тип">
-                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="тип">
+                    <span mdTooltip="Введите тип">
+                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
                         <md-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
                         </md-option>
@@ -130,7 +130,7 @@
                     </span>
                     <md-form-field>
                       <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                      <span mdTooltip="Нужно ввести телефон">
+                      <span mdTooltip="Введите телефон">
                         <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
                       </span>
                     </md-form-field>
@@ -157,7 +157,7 @@
             </thead>
             <tbody *ngIf="lpus.length === 0">
               <tr>
-                <td colspan="10">В базе данных нету ЛПУ добавьте их.</td>
+                <td colspan="10">В базе данных еще нет Больниц. Добавьте их</td>
               </tr>
             </tbody>
             <tbody *ngIf="!isEditing"> 
@@ -181,26 +181,26 @@
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести название">
+                      <span mdTooltip="Введите название">
                         <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
                       </span>
                     </md-form-field>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="адрес">
+                      <span mdTooltip="Введите адрес">
+                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
                       </span>
                     </md-form-field>
-                    <span mdTooltip="Нужно ввести тип">
-                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="тип">
+                    <span mdTooltip="Введите тип">
+                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
                         <md-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
                         </md-option>
                       </md-select>
                     </span>
                     <md-form-field>
-                      <span mdTooltip="Нужно ввести телефон">
+                      <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
+                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -225,26 +225,26 @@
         <div>
           <form class="form-inline" [formGroup]="addLpuForm" (ngSubmit)="addLpu()" style="text-align:center">
             <md-form-field>
-              <span mdTooltip="Нужно ввести название">
+              <span mdTooltip="Введите название">
                 <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
               </span>
             </md-form-field>
             <md-form-field>
-              <span mdTooltip="Нужно ввести адрес">
-                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="адрес">
+              <span mdTooltip="Введите адрес">
+                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="Адрес">
               </span>
             </md-form-field>
-            <span mdTooltip="Нужно ввести тип">
-              <md-select formControlName="type" placeholder="тип">
+            <span mdTooltip="Введите тип">
+              <md-select formControlName="type" placeholder="Тип">
                 <md-option *ngFor="let type of types" [value]="type.value">
                   {{ type.viewValue }}
                 </md-option>
               </md-select>
             </span>
-            <span mdTooltip="Нужно ввести телефон">
+            <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="телефон">
+                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>
