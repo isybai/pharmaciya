@@ -123,12 +123,12 @@
           <form class="form-inline" [formGroup]="addMedicForm" (ngSubmit)="addMedic()" style="text-align:center">
             <md-form-field>
               <span mdTooltip="Введите имя">
-                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
+                <input (click)="onlyCyrilick()" mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
               </span>
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите фамилию">
-                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
+                <input (click)="onlyCyrilick()" mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
               </span>
             </md-form-field>
             <span mdTooltip="Выберите специальность">
@@ -160,7 +160,7 @@
             <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
+                <input mdInput class="mat-input-element" type="number" min="5" name="tel" formControlName="tel" placeholder="Телефон" required>
               </md-form-field>
             </span>
             <md-form-field>

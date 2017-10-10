@@ -1,6 +1,7 @@
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
+
 <div class="info_table">
   <div class="animated bounceInRight" *ngIf="!isLoading">
     <h4 class="">Физические лица {{individuals.length}}</h4>
@@ -47,7 +48,7 @@
                   <input class="form-control" type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия" required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="dob" [(ngModel)]="individual.dob" step="any" min="0" placeholder="День рождения" required>
+                  <input class="form-control" type="date" name="dob" [(ngModel)]="individual.dob" step="any" min="0" placeholder="День рождения" required>
                 </div>
                 <div class="form-group">
                   <span mdPrefix>0</span>
@@ -84,13 +85,13 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите день рождения">
-                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="dob" placeholder="День рождения">
+                <input mdInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="День рождения">
               </span>
             </md-form-field>
             <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
+                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <button md-raised-button color="warm" class="" type="submit" [disabled]="!addIndividualForm.valid"><i class="material-icons">add</i> Добавить</button>

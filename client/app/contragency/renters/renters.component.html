@@ -91,11 +91,11 @@
         </div>
         <div class="form-group"><label><i class="material-icons">call</i>
          Телефон: </label>
-          <input class="form-control" type="text" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон" required>
+          <input class="form-control" type="number" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон" required>
         </div>
         <div class="form-group"><label><i class="material-icons">cake</i>
          Дата рождения: </label>
-          <input class="form-control" type="text" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения" required>
+          <input class="form-control" type="date" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения" required>
         </div>
         <div class="form-group"><label><i class="material-icons">domain</i>
          Тип помещения: </label>
@@ -111,17 +111,17 @@
         </div>
         <div class="form-group"><label><i class="material-icons">sort_by_alpha</i>
          Цена: </label>
-          <input class="form-control" type="text" name="price" [(ngModel)]="renter.price" placeholder="Цена" required>
+          <input class="form-control" type="number" name="price" [(ngModel)]="renter.price" placeholder="Цена" required>
         </div>
         <div class="form-group"><label><i class="material-icons">access_time</i>
          Дата от: </label>
-          <input class="form-control" type="text" name="dateFrom" [(ngModel)]="renter.dateFrom" placeholder="Дата от" required>
+          <input class="form-control" type="date" name="dateFrom" [(ngModel)]="renter.dateFrom" placeholder="Дата от" required>
         </div>
       </div>
       <div class="col-6 col-md-6">
         <div class="form-group"><label><i class="material-icons">access_time</i>
          Дата до: </label>
-          <input class="form-control" type="text" name="dateUntil" [(ngModel)]="renter.dateUntil" placeholder="Дата до" required>
+          <input class="form-control" type="date" name="dateUntil" [(ngModel)]="renter.dateUntil" placeholder="Дата до" required>
         </div>
         <div class="form-group"><label><i class="material-icons">query_builder</i>
          Сумма оплаты: </label>
@@ -129,19 +129,19 @@
         </div>
         <div class="form-group"><label><i class="material-icons">query_builder</i>
          Депозит: </label>
-          <input class="form-control" type="text" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит" required>
+          <input class="form-control" type="number" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит" required>
         </div>
         <div class="form-group"><label><i class="material-icons">local_florist</i>
          ТБО: </label>
-          <input class="form-control" type="text" name="ТБО" [(ngModel)]="renter.tbo" placeholder="ТБО" required>
+          <input class="form-control" type="number" name="tbo" [(ngModel)]="renter.tbo" placeholder="ТБО" required>
         </div>
         <div class="form-group"><label><i class="material-icons">power</i>
          Электричество: </label>
-          <input class="form-control" type="text" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество" required>
+          <input class="form-control" type="number" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество" required>
         </div>
         <div class="form-group"><label><i class="material-icons">network_cell</i>
          Тел. связь: </label>
-          <input class="form-control" type="text" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь" required>
+          <input class="form-control" type="number" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь" required>
         </div>
         <div class="form-group"><label><i class="material-icons">attach_money</i>
          Сумма всего: </label>
@@ -153,7 +153,7 @@
         </div>
         <div class="form-group"><label><i class="material-icons">attach_money</i>
          Дата оплаты: </label>
-          <input class="form-control" type="text" name="datePay" [(ngModel)]="renter.datePay" placeholder="Дата оплаты" required>
+          <input class="form-control" type="date" name="datePay" [(ngModel)]="renter.datePay" placeholder="Дата оплаты" required>
         </div>
         <div class="form-group"><label><i class="material-icons">local_atm</i>
          Тип оплаты: </label>
@@ -194,13 +194,13 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите день рождения">
-                <input mdInput class="mat-input-element" type="text" name="dob" formControlName="dob" placeholder="Дата рождения">
+                <input mdInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="Дата рождения">
               </span>
             </md-form-field>
             <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="tel" name="tel" formControlName="tel" placeholder="Телефон">
+                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <md-form-field>
@@ -220,17 +220,17 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="">
-                <input mdInput class="mat-input-element" type="text" name="price" formControlName="price" placeholder="Цена">
+                <input mdInput class="mat-input-element" type="number" name="price" formControlName="price" placeholder="Цена">
               </span>
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите дату начала аренды">
-                <input mdInput class="mat-input-element" type="text" name="dateFrom" formControlName="dateFrom" placeholder="Дата от">
+                <input mdInput class="mat-input-element" type="date" name="dateFrom" formControlName="dateFrom" placeholder="Дата от">
               </span>
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите дату окончания аренды">
-                <input mdInput class="mat-input-element" type="text" name="dateUntil" formControlName="dateUntil" placeholder="Дата до">
+                <input mdInput class="mat-input-element" type="date" name="dateUntil" formControlName="dateUntil" placeholder="Дата до">
               </span>
             </md-form-field>
             <md-form-field>
@@ -240,22 +240,22 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите депозит">
-                <input mdInput class="mat-input-element" type="text" name="deposite" formControlName="deposite" placeholder="Депозит">
+                <input mdInput class="mat-input-element" type="number" name="deposite" formControlName="deposite" placeholder="Депозит">
               </span>
             </md-form-field>
             <md-form-field>
               <span mdTooltip="ТБО">
-                <input mdInput class="mat-input-element" type="text" name="tbo" formControlName="tbo" placeholder="ТБО">
+                <input mdInput class="mat-input-element" type="number" name="tbo" formControlName="tbo" placeholder="ТБО">
               </span>
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Электричество">
-                <input mdInput class="mat-input-element" type="text" name="electric" formControlName="electric" placeholder="Электричество">
+                <input mdInput class="mat-input-element" type="number" name="electric" formControlName="electric" placeholder="Электричество">
               </span>
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Сумма за тел.связь">
-                <input mdInput class="mat-input-element" type="text" name="telNet" formControlName="telNet" placeholder="Тел. связь">
+                <input mdInput class="mat-input-element" type="number" name="telNet" formControlName="telNet" placeholder="Тел. связь">
               </span>
             </md-form-field>
             <md-form-field>
@@ -270,7 +270,7 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Дата оплаты">
-                <input mdInput class="mat-input-element" type="text" name="datePay" formControlName="datePay" placeholder="Дата оплаты">
+                <input mdInput class="mat-input-element" type="date" name="datePay" formControlName="datePay" placeholder="Дата оплаты">
               </span>
             </md-form-field>
             <md-form-field>
@@ -285,7 +285,7 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Заметки">
-                <input mdInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="Заметки">
+                <textarea mdInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="Заметки"></textarea>
               </span>
             </md-form-field>
             <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addRenterForm.valid"><i class="material-icons">add</i> Добавить</button>

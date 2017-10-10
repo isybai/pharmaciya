@@ -246,7 +246,7 @@ button.mat-raised-button.mat-warm{
 .info_table .addItem form.form-inline {
     background: rgb(255, 255, 255);
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.21);
-    margin-top: 20px;
+    margin-top: 70px;
     padding-top: 20px;
 }
 .info_table .mat-input-element {
@@ -257,6 +257,7 @@ button.mat-raised-button.mat-warm{
 }
 .info_table md-sidenav.example-sidenav.mat-drawer {
     background: transparent;
+    z-index: 1;
 }
 .info_table .table tr{
     white-space: nowrap;

@@ -62,7 +62,7 @@
                     <md-form-field>
                       <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
+                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -131,7 +131,7 @@
                     <md-form-field>
                       <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
                       <span mdTooltip="Введите телефон">
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
+                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -200,7 +200,7 @@
                     <md-form-field>
                       <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
+                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -244,7 +244,7 @@
             <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="Телефон">
+                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>

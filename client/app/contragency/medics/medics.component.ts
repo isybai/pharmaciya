@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+declare var jquery:any;
+declare var $ :any;
 
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
@@ -39,8 +41,13 @@ export class MedicsComponent implements OnInit {
               private lpuService: LpuService,
               private formBuilder: FormBuilder,
               private http: Http,
-              public toast: ToastComponent) {}
+              public toast: ToastComponent) { }
 
+onlyCyrilick(){      
+        $("input[name='sur'], input[name='name']").keyup(function() {
+            this.value = this.value.replace(/[^а-я]/i, "");
+        });
+      }
   ngOnInit() {
     this.getMedics();
     this.getLpus();
