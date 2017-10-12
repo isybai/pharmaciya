@@ -6,7 +6,7 @@
     <h4 class="">Текущие врачи {{medics.length}}</h4>
     <div class="">
       <table class="table table-bordered table-striped">
-        <thead class="thead-default">
+        <thead class="thead-default"  *ngIf="!isEditing">
           <tr>
             <th>Имя</th>
             <th>Фамилия</th>
@@ -46,17 +46,16 @@
             </td>
           </tr>
         </tbody>
-        <tbody *ngIf="isEditing">
-          <tr>
-            <td colspan="10">
+        </table>
+        <div class="col-md-4 animated rotateInDownRight" *ngIf="isEditing">
               <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
                 <md-form-field>
-                  <span mdTooltip="Введите имя">
+                  <span mdTooltip="Введите имя" class="time">
                     <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="medic.name" placeholder="Имя">
                   </span>
                 </md-form-field>
                 <md-form-field>
-                  <span mdTooltip="Введите фамилию">
+                  <span mdTooltip="Введите фамилию" class="time">
                     <input mdInput class="mat-input-element" type="text" name="sur" [(ngModel)]="medic.sur" placeholder="Фамилия">
                   </span>
                 </md-form-field>
@@ -92,12 +91,12 @@
                     <input mdInput class="mat-input-element" type="tel" name="tel" [(ngModel)]="medic.tel" placeholder="Телефон">
                   </md-form-field>
                 </span>
-                <md-form-field>
+                <md-form-field class="time">
                   <span mdTooltip="Раб.время с">
                     <input mdInput name="workTimeFrom" [(ngModel)]="medic.workTimeFrom" class="mat-input-element" type="time" placeholder="Раб.время c">
                   </span>
                 </md-form-field>
-                <md-form-field>
+                <md-form-field class="time">
                   <span mdTooltip="Раб.время до">
                     <input mdInput name="workTimeTill" [(ngModel)]="medic.workTimeTill" class="mat-input-element" type="time" placeholder="Раб.время до">
                   </span>
@@ -105,13 +104,11 @@
                 <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
               </form>
               <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        </div>
+        <div class="bg-over" *ngIf="isEditing" (click)="cancelEditing()"></div>
     </div>
   </div>
-  <md-sidenav-container class="example-container">
+  <md-sidenav-container class="example-container" *ngIf="!isEditing">
     <div class="example-sidenav-content">
       <button md-raised-button (click)="sidenav.open()">
         <md-icon>add</md-icon>Добавить нового врача

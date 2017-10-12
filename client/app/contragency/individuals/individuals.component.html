@@ -7,7 +7,7 @@
     <h4 class="">Физические лица {{individuals.length}}</h4>
     <div class="">
       <table class="table table-bordered table-striped">
-        <thead class="thead-default">
+        <thead class="thead-default" *ngIf="!isEditing">
           <tr>
             <th>Имя</th>
             <th>Фамилия </th>
@@ -37,29 +37,25 @@
             </td>
           </tr>
         </tbody>
-        <tbody *ngIf="isEditing">
-          <tr>
-            <td colspan="5">
-              <form class="form-inline" #form="ngForm" (ngSubmit)="editIndividual(individual)" style="display:inline">
-                <div class="form-group">
-                  <input class="form-control" type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="date" name="dob" [(ngModel)]="individual.dob" step="any" min="0" placeholder="День рождения" required>
-                </div>
-                <div class="form-group">
-                  <span mdPrefix>0</span>
-                  <input class="form-control" type="number" name="tel" [(ngModel)]="individual.tel" placeholder="Телефон" required>
-                </div>
-                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-              </form>
-              <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
-            </td>
-          </tr>
-        </tbody>
+        <div class="edit" *ngIf="isEditing">
+          <form class="form-inline" #form="ngForm" (ngSubmit)="editIndividual(individual)" style="display:inline">
+            <md-form-field>
+              <input class="form-control" mdInput type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
+            </md-form-field>
+            <md-form-field>
+              <input class="form-control" mdInput type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия" required>
+            </md-form-field>
+            <md-form-field>
+              <input class="form-control" mdInput type="date" name="dob" [(ngModel)]="individual.dob" placeholder="День рождения" required>
+            </md-form-field>
+            <md-form-field>
+              <span mdPrefix>+996 </span>
+              <input class="form-control" mdInput type="number" name="tel" [(ngModel)]="individual.tel" placeholder="Телефон" required>
+            </md-form-field>
+            <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+          </form>
+        </div>
       </table>
     </div>
   </div>
@@ -85,6 +81,7 @@
             </md-form-field>
             <md-form-field>
               <span mdTooltip="Введите день рождения">
+                
                 <input mdInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="День рождения">
               </span>
             </md-form-field>

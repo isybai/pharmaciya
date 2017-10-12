@@ -39,7 +39,22 @@ md-card.edit-card.mat-card span {
 }
 md-card.edit-card.mat-card {
     margin-bottom: 20px;
+    margin: 0 auto;
+    float: none;
+    background: transparent;
+    box-shadow: none;
 }
 md-card.edit-card.mat-card span.float-left {
     text-indent: 20px;
+}
+.animated.bounceInRight .col-md-4 .inline{
+    width: 49%;
+    display: inline-block;
+}
+md-card-content.mat-card-content .col-4.col-md-4 {
+    background: white;
+    padding: 15px;
+    margin-right: 11px;
+    width: 32.333333%;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.23);
 }
