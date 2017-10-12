@@ -1,6 +1,4 @@
 import { Component, OnInit, AfterViewInit  } from '@angular/core';
-declare var jquery:any;
-declare var $ :any;
 
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -18,6 +16,11 @@ import { ToastComponent } from '../../shared/toast/toast.component';
   styleUrls: ['./individuals.component.css']
 })
 export class IndividualsComponent implements OnInit {
+
+
+  displayedColumns = ['name', 'sur', 'dob', 'tel'];
+  dataSource = new ExampleDataSource();
+
   individual = {};
   individuals = [];
   isLoading = true;
@@ -42,11 +45,7 @@ export class IndividualsComponent implements OnInit {
       dob: this.dob,
       tel: this.tel
     });
-
-  }
-  onHover(){      
-    $('#remove').parent().parent().addClass("animated infinite hinge");
-    console.log('hover is workin');
+    
   }
 
   getIndividuals() {
@@ -106,4 +105,26 @@ export class IndividualsComponent implements OnInit {
       );
     }
   }
+
+}
+export interface Individ {
+  name: string;
+  sur: string;
+  dob: string;
+  tel: string;
+}
+
+const data: Individ[] = [
+  {name: '1', sur: 'Hydrogen', dob: '1.0079', tel: 'H'},
+  {name: '2', sur: 'Helium', dob: '4.0026', tel: 'He'},
+];
+
+
+export class ExampleDataSource extends DataSource<any> {
+
+  connect(): Observable<Individ[]> {
+    return Observable.of(data);
+  }
+
+  disconnect() {}
 }

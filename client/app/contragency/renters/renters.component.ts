@@ -41,7 +41,7 @@ export class RentersComponent implements OnInit {
   datePay = new FormControl('', Validators.required);
   typePay = new FormControl('', Validators.required);
   status = new FormControl('', Validators.required);
-  note = new FormControl('', Validators.required);
+  note = new FormControl(null, Validators.nullValidator);
 
   constructor(private renterService: RenterService,
               private formBuilder: FormBuilder,

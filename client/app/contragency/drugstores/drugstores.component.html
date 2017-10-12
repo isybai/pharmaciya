@@ -8,7 +8,7 @@
       <md-tab label="Категория A(крупные сети аптек)">
         <div class="">
           <table class="table table-bordered table-striped">
-            <thead class="thead-default">
+            <thead class="thead-default" *ngIf="!isEditing">
               <tr>
                 <th>Название</th>
                 <th>Адрес</th>
@@ -62,13 +62,13 @@
                     </span>
                     <md-form-field>
                       <span mdTooltip="Рабочее время">
-                        <input mdInput class="mat-input-element" type="text" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                        <input mdInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
                       </span>
                     </md-form-field>
                     <md-form-field>
                       <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
+                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -83,7 +83,7 @@
       <md-tab label="Категория B(сети до 3-5 аптек)">
         <div class="">
           <table class="table table-bordered table-striped">
-            <thead class="thead-default">
+            <thead class="thead-default" *ngIf="!isEditing">
               <tr>
                 <th>Название</th>
                 <th>Адрес</th>
@@ -136,13 +136,13 @@
                     </span>
                     <md-form-field>
                       <span mdTooltip="Рабочее время">
-                        <input mdInput class="mat-input-element" type="text" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                        <input mdInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
                       </span>
                     </md-form-field>
                     <md-form-field>
                       <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
                       <span mdTooltip="Введите телефон">
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
+                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -157,7 +157,7 @@
       <md-tab label="Категория C(одиночки, ЧП)">
         <div class="">
           <table class="table table-bordered table-striped">
-            <thead class="thead-default">
+            <thead class="thead-default" *ngIf="!isEditing">
               <tr>
                 <th>Название</th>
                 <th>Адрес</th>
@@ -210,13 +210,13 @@
                     </span>
                     <md-form-field>
                       <span mdTooltip="Рабочее время">
-                        <input mdInput class="mat-input-element" type="text" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                        <input mdInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
                       </span>
                     </md-form-field>
                     <md-form-field>
                       <span mdTooltip="Введите телефон">
                         <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="text" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
+                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
                     </md-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -259,13 +259,13 @@
             </span>
             <md-form-field>
               <span mdTooltip="Рабочее время">
-                <input mdInput class="mat-input-element" type="text" name="workTime" formControlName="workTime" placeholder="Рабочее время">
+                <input mdInput class="mat-input-element" type="time" name="workTime" formControlName="workTime" placeholder="Рабочее время">
               </span>
             </md-form-field>
             <span mdTooltip="Введите телефон">
               <md-form-field>
                 <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="text" name="tel" formControlName="tel" placeholder="Телефон">
+                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
               </md-form-field>
             </span>
             <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addDrugstoreForm.valid"><i class="material-icons">add</i> Добавить</button>
