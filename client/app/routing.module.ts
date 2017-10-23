@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { CatsComponent } from './cats/cats.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -20,7 +19,7 @@ import { LpuComponent } from './contragency/lpu/lpu.component';
 import { DrugstoresComponent } from './contragency/drugstores/drugstores.component';
 import { IndividualsComponent } from './contragency/individuals/individuals.component';
 import { CoworkersComponent } from './coworkers/coworkers.component';
-import { RentersComponent } from './contragency/renters/renters.component';
+import { RentersComponent } from './accomodation-db/renters/renters.component';
 import { DrugListComponent } from './nomenclature/drug-list/drug-list.component';
 import { PricesComponent } from './nomenclature/prices/prices.component';
 import { RemainsComponent } from './nomenclature/remains/remains.component';
@@ -31,12 +30,15 @@ import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 
 const routes: Routes = [
   { path: '', component: AboutComponent },
-  { path: 'cats', component: CatsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'sales', component: SalesComponent },
-  { path: 'accomodation-db', component: AccomodationDbComponent },
+  { 
+    path: 'accomodation-db', 
+    component: AccomodationDbComponent,
+    children:[{path: 'renters',component: RentersComponent}]
+  },
   { path: 'component', component: AppComponent },
   { path: 'finance', component: FinanceComponent },
   { path: 'coworkers',  component: CoworkersComponent },
@@ -81,10 +83,6 @@ const routes: Routes = [
     {
       path: 'individuals',
       component: IndividualsComponent
-    },
-    {
-      path: 'renters',
-      component: RentersComponent
     }
     ]
   },

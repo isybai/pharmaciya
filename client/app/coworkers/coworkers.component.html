@@ -1,4 +1,17 @@
-<img src="../../assets/fav.png" alt="logo">
-<h2>
-	Сотрудники
-</h2>
+<header class="marketing-banner">
+	<h4 class="page-title">
+	    Сотрудники
+	</h4>
+</header>
+<div class="col-12 col-md-12" style="text-align: center;">
+
+	<div class="container">
+    <form #heroForm="ngForm">
+      <div class="form-group">
+        <label for="tel">tel</label>
+    	<input (keyup)=(change($event.srcElement.value)) type="number" id="tel" name=""> <span> {{price}}</span>
+      </div>
+
+    </form>
+</div>
+</div>

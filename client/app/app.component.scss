@@ -47,7 +47,7 @@ md-list-item.mat-list-item a {
     transition: 0.3s;
     position: relative;
     display: inline-block;
-    padding: 0 16px;
+    padding: 10px 16px;
     font-weight: normal;
     text-align: left;
     border-radius: 0 !important;
@@ -73,9 +73,6 @@ md-sidenav#main-menu:hover md-list-item.mat-list-item a span{
     display: inline-block;
 }
 
-md-list-item.mat-list-item {
-    padding: 10px 0;
-}
 md-list.mat-list {
     padding-top: 0;
 }

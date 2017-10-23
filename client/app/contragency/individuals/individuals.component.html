@@ -1,3 +1,7 @@
+<md-form-field class="searchField">
+  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
+  <span mdSuffix><i class="material-icons">search</i></span>
+</md-form-field>
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
@@ -21,13 +25,29 @@
             <td colspan="5">В базе данных еще нет физических лиц. Добавьте их.</td>
           </tr>
         </tbody>
-        <tbody *ngIf="!isEditing">
+        <tbody *ngIf="!isEditing  && !isSearching">
           <tr *ngFor="let individual of individuals">
             <td>{{individual.name}}</td>
             <td>{{individual.sur}}</td>
             <td>{{individual.dob}}</td>
             <td>0 {{individual.tel}}</td>
             <td>
+              <button class="btn btn-sm btn-warning" (click)="enableEditing(individual)">
+                <i class="fa fa-pencil"></i> Редактировать
+              </button>
+              <button class="btn btn-sm btn-danger" id="remove" (click)="deleteIndividual(individual)">
+                <i class="fa fa-trash"></i> Удалить
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="!isEditing  && isSearching">
+          <tr *ngFor="let individual of individuals">
+            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">{{individual.name}}</td>
+            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">{{individual.sur}}</td>
+            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">{{individual.dob}}</td>
+            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">0 {{individual.tel}}</td>
+            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">
               <button class="btn btn-sm btn-warning" (click)="enableEditing(individual)">
                 <i class="fa fa-pencil"></i> Редактировать
               </button>
