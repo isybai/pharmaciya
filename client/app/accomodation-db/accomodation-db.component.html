@@ -1,12 +1,23 @@
 <header class="marketing-banner">
-<h4 class="page-title">
-  База данных помещений
-</h4>
+	<h4 class="page-title">
+	  База данных помещений
+	</h4>
 </header>
-<li class="nav-item">  
-	<a routerLink="renters" routerLinkActive="active" class="nav-link">Арендаторы</a>
-</li>
+<div class="col-12 col-md-12">
+<nav class="navbar navbar-light">
+  <div class="navbar" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+    	<a routerLink="./" routerLinkActive="" class="nav-link">Помещения</a>
+      </li>  
+      <li class="nav-item">
+       	<a routerLink="renters" routerLinkActive="active" class="nav-link">Арендаторы</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
+
 <div class="col-12 col-md-12 content">
   <router-outlet></router-outlet>
 </div>
- 

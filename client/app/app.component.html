@@ -65,7 +65,7 @@
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">settings</i>
             <span> Аккаунт ({{auth.currentUser.username}})
             </span>
