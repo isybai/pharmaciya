@@ -3,9 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CdkTableModule } from '@angular/cdk/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { OverlayModule } from 'angular-io-overlay';
-import { DatePickerModule } from 'angular-io-datepicker';
-
 import {
   MdAutocompleteModule,
   MdButtonModule,
@@ -113,8 +110,6 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
   imports: [
     RoutingModule,
     SharedModule,
-    OverlayModule,
-    DatePickerModule,
 
     // Material
     BrowserAnimationsModule,
