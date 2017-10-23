@@ -22,7 +22,9 @@ export class LpuComponent implements OnInit {
   lpus = [];
   isLoading = true;
   isEditing = false;
-
+  isSearching = false;
+  searchItem: string;
+  
   addLpuForm: FormGroup;
   name = new FormControl('', Validators.required);
   address = new FormControl('', Validators.required);
@@ -46,6 +48,15 @@ export class LpuComponent implements OnInit {
 
   }
 
+  search(e) {
+    this.searchItem = e.toUpperCase();
+    if(e.length === 0 || !e.trim()){
+     this.isSearching = false;
+    }
+    else{
+     this.isSearching = true;
+    }
+  }
   getLpus() {
     this.lpuService.getLpus().subscribe(
       data => this.lpus = data,

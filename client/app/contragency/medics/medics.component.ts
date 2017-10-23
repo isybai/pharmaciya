@@ -25,6 +25,8 @@ export class MedicsComponent implements OnInit {
   lpus = [];
   isLoading = true;
   isEditing = false;
+  isSearching = false;
+  searchItem: string;
 
   addMedicForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -43,11 +45,22 @@ export class MedicsComponent implements OnInit {
               private http: Http,
               public toast: ToastComponent) { }
 
-onlyCyrilick(){      
-        $("input[name='sur'], input[name='name']").keyup(function() {
-            this.value = this.value.replace(/[^а-я]/i, "");
-        });
-      }
+  onlyCyrilick(){      
+    $("input[name='sur'], input[name='name']").keyup(function() {
+        this.value = this.value.replace(/[^а-я]/i, "");
+    });
+  }
+
+  search(e) {
+    this.searchItem = e.toUpperCase();
+    if(e.length === 0 || !e.trim()){
+     this.isSearching = false;
+    }
+    else{
+     this.isSearching = true;
+    }
+  }
+
   ngOnInit() {
     this.getMedics();
     this.getLpus();
@@ -62,7 +75,6 @@ onlyCyrilick(){
       workTimeTill: this.workTimeTill,
       tel: this.tel
     });
-
   }
 
   getMedics() {
@@ -70,7 +82,6 @@ onlyCyrilick(){
       data => this.medics = data,
       error => console.log(error),
       () => this.isLoading = false
-
     );
   }
   getLpus() {
@@ -103,7 +114,6 @@ onlyCyrilick(){
     this.isEditing = false;
     this.medic = {};
     this.toast.setMessage('Редактирование врача отменена.', 'warning');
-    // reload the medics to reset the editing
     this.getMedics();
   }
 
@@ -130,6 +140,7 @@ onlyCyrilick(){
       );
     }
   }
+  
   specs = [
     {value: 'Акушер', viewValue: 'Акушер'},
     {value: 'Аллерголог', viewValue: 'Аллерголог'},

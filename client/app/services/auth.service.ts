@@ -7,7 +7,10 @@ import { UserService } from '../services/user.service';
 @Injectable()
 export class AuthService {
   loggedIn = false;
-  isAdmin = false;
+  isSuperAdmin = false;
+  isSalesAdmin = false;
+  isRentersAdmin = false;
+  isUser = false;
 
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -36,8 +39,9 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.loggedIn = false;
-    this.isAdmin = false;
-    // this.currentUser = { _id: '', username: '', role: '' };
+    this.isSuperAdmin = false;
+    this.isSalesAdmin = false;
+    this.isRentersAdmin = false;
     this.router.navigate(['/']);
   }
 
@@ -50,7 +54,19 @@ export class AuthService {
     this.currentUser._id = decodedUser._id;
     this.currentUser.username = decodedUser.username;
     this.currentUser.role = decodedUser.role;
-    decodedUser.role === 'admin' ? this.isAdmin = true : this.isAdmin = false;
+    if (decodedUser.role === 'superAdmin') { 
+      this.isSuperAdmin = true;
+    } else if (decodedUser.role === 'salesAdmin') {
+      this.isSalesAdmin = true;
+    } else if (decodedUser.role === 'rentersAdmin' ) {
+      this.isRentersAdmin = true;
+    } else {
+      this.isUser = true;
+      this.isSuperAdmin = false;
+      this.isSalesAdmin = false;
+      this.isRentersAdmin = false;
+      this.isUser = false;
+    }
     delete decodedUser.role;
   }
 

@@ -40,7 +40,6 @@ import {
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
-import { CatService } from './services/cat.service';
 
 import { MedicService } from './services/medic.service';
 import { DrugstoreService } from './services/drugstore.service';
@@ -53,7 +52,6 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { AppComponent } from './app.component';
-import { CatsComponent } from './cats/cats.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -74,7 +72,7 @@ import { LpuComponent } from './contragency/lpu/lpu.component';
 import { DrugstoresComponent } from './contragency/drugstores/drugstores.component';
 import { IndividualsComponent } from './contragency/individuals/individuals.component';
 import { CoworkersComponent } from './coworkers/coworkers.component';
-import { RentersComponent } from './contragency/renters/renters.component';
+import { RentersComponent } from './accomodation-db/renters/renters.component';
 import { DrugListComponent } from './nomenclature/drug-list/drug-list.component';
 import { PricesComponent } from './nomenclature/prices/prices.component';
 import { RemainsComponent } from './nomenclature/remains/remains.component';
@@ -83,7 +81,6 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CatsComponent,
     AboutComponent,
     RegisterComponent,
     LoginComponent,
@@ -149,7 +146,6 @@ import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
     AuthService,
     AuthGuardLogin,
     AuthGuardAdmin,
-    CatService,
     MedicService,
     IndividualService,
     RenterService,

@@ -19,8 +19,10 @@
       <div class="input-group">
         <i mdPrefix class="material-icons">vpn_key</i>
         <md-select style="margin-left: 10px;" placeholder="Роль" class="mat-select" name="role" [(ngModel)]="user.role">
-          <md-option value="user">User</md-option>
-          <md-option value="admin">Admin</md-option>
+          <md-option value="superAdmin">Супер админ</md-option>
+          <md-option value="salesAdmin">Админ сбыта</md-option>
+          <md-option value="rentersAdmin">Админ аренды</md-option>
+          <md-option value="user">Агент</md-option>
         </md-select>
       </div>
       <button md-raised-button type="submit" [disabled]="!accountForm.form.valid">

@@ -22,6 +22,8 @@ export class DrugstoresComponent implements OnInit {
   drugstores = [];
   isLoading = true;
   isEditing = false;
+  isSearching = false;
+  searchItem: string;
 
   addDrugstoreForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -47,7 +49,15 @@ export class DrugstoresComponent implements OnInit {
     });
 
   }
-
+  search(e) {
+    this.searchItem = e.toUpperCase();
+    if(e.length === 0 || !e.trim()){
+     this.isSearching = false;
+    }
+    else{
+     this.isSearching = true;
+    }
+  }
   getDrugstores() {
     this.drugstoreService.getDrugstores().subscribe(
       data => this.drugstores = data,

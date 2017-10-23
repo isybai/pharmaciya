@@ -25,6 +25,8 @@ export class IndividualsComponent implements OnInit {
   individuals = [];
   isLoading = true;
   isEditing = false;
+  isSearching = false;
+  searchItem: string;
 
   addIndividualForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -45,9 +47,16 @@ export class IndividualsComponent implements OnInit {
       dob: this.dob,
       tel: this.tel
     });
-    
   }
-
+  search(e) {
+    this.searchItem = e.toUpperCase();
+    if(e.length === 0 || !e.trim()){
+     this.isSearching = false;
+    }
+    else{
+     this.isSearching = true;
+    }
+  }
   getIndividuals() {
     this.individualService.getIndividuals().subscribe(
       data => this.individuals = data,

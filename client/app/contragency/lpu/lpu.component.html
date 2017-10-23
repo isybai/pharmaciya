@@ -1,3 +1,7 @@
+<md-form-field class="searchField">
+  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
+  <span mdSuffix><i class="material-icons">search</i></span>
+</md-form-field>
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
@@ -22,13 +26,29 @@
                 <td colspan="10">В базе данных еще нет ЦСМ. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing">
+            <tbody *ngIf="!isEditing && !isSearching">
               <tr *ngFor="let lpu of lpus">
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.type}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="result" *ngIf="!isEditing && isSearching">
+              <tr *ngFor="let lpu of lpus">
+                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.name}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.address}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.type}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>
@@ -91,13 +111,29 @@
                 <td colspan="10">В базе данных еще нет Мед.Центров. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing">
+            <tbody *ngIf="!isEditing && !isSearching">
               <tr *ngFor="let lpu of lpus">
                 <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.type}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="result" *ngIf="!isEditing && isSearching">
+              <tr *ngFor="let lpu of lpus">
+                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.name}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.address}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.type}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>
@@ -160,13 +196,29 @@
                 <td colspan="10">В базе данных еще нет Больниц. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing"> 
-              <tr *ngFor="let lpu of lpus ">
+            <tbody *ngIf="!isEditing && !isSearching"> 
+              <tr *ngFor="let lpu of lpus">
                 <td *ngIf="lpu.type === 'Больница'">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Больница'">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Больница'">{{lpu.type}}</td>
                 <td *ngIf="lpu.type === 'Больница'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Больница'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="result" *ngIf="!isEditing && isSearching">
+                <tr *ngFor="let lpu of lpus">
+                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.name}}</td>
+                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.address}}</td>
+                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.type}}</td>
+                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>

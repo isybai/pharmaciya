@@ -1,4 +1,9 @@
 <!-- CRUD -->
+<md-form-field class="searchField">
+  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
+  <span mdSuffix><i class="material-icons">search</i></span>
+</md-form-field>
+
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
 <div class="info_table">
@@ -25,7 +30,7 @@
             <td colspan="10">В базе данных еще нет врачей. Добавьте их</td>
           </tr>
         </tbody>
-        <tbody *ngIf="!isEditing">
+        <tbody class="result" *ngIf="!isEditing && !isSearching">
           <tr *ngFor="let medic of medics">
             <td>{{medic.name}}</td>
             <td>{{medic.sur}}</td>
@@ -46,8 +51,29 @@
             </td>
           </tr>
         </tbody>
+        <tbody class="result" *ngIf="!isEditing && isSearching">
+          <tr *ngFor="let medic of medics">
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.name}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.sur}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.spec}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.hos}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.type}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.local}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.workTimeFrom}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">{{medic.workTimeTill}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">0 {{medic.tel}}</td>
+            <td *ngIf="medic.name.toUpperCase().startsWith(searchItem)">
+              <button class="btn btn-sm btn-warning" (click)="enableEditing(medic)">
+                <i class="fa fa-pencil"></i> Редактировать
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteMedic(medic)">
+                <i class="fa fa-trash"></i> Удалить
+              </button>
+            </td>
+          </tr>
+        </tbody>
         </table>
-        <div class="col-md-4 animated rotateInDownRight" *ngIf="isEditing">
+        <div class="col-md-4 animated fadeInDown" *ngIf="isEditing">
               <form class="form-inline" #form="ngForm" (ngSubmit)="editMedic(medic)" style="display:inline">
                 <md-form-field>
                   <span mdTooltip="Введите имя" class="time">

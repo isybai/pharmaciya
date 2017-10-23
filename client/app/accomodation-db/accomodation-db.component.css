@@ -1,0 +1,20 @@
+a.nav-link {
+    background-color: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.22);
+    padding: 5px 20px;
+}
+a:hover {
+    background-color: rgba(76, 175, 80, 0.69);
+    border-color: #737373;
+    color: white;
+}
+.nav-link.active, .nav-link.active:focus, .nav-link.active:hover {
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(76, 175, 80, 0.69);
+    border-color: #737373;
+}
+.navbar-nav .nav-item {
+    list-style: none;
+}

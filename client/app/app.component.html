@@ -2,54 +2,54 @@
     <nav class="navbar navbar-light">
       <md-list>
         <md-list-item mdClass='homelink'>
-          <a routerLink="/" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/" class="nav-item nav-link" *ngIf="auth.loggedIn || auth.isSuperAdmin">
             <img src="../assets/fav.png" alt="logo">
             <span>  pharmaciyaCRM
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
             <i class="material-icons">account_circle</i>
             <span>Контрагенты
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">local_hospital</i>
             <span>Номенклатура
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isRentersAdmin || auth.isSuperAdmin">
             <i class="material-icons">location_city</i>
             <span>Помещения
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">supervisor_account</i>
             <span>Сотрудники
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">monetization_on</i>
             <span>Финансы
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn">
+          <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
             <i class="material-icons">insert_chart</i>
             <span>Сбыт
             </span>
           </a>
-        </md-list-item>
+        </md-list-item> 
         <md-list-item *ngIf="!auth.loggedIn">
           <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active">
             <i class="fa fa-sign-in"></i>
@@ -65,14 +65,14 @@
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">settings</i>
             <span> Аккаунт ({{auth.currentUser.username}})
             </span>
           </a>
         </md-list-item>
         <md-list-item>
-          <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
+          <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">verified_user</i>
             <span> Админ
             </span>

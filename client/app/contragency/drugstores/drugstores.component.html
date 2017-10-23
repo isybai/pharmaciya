@@ -1,3 +1,7 @@
+<md-form-field class="searchField">
+  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
+  <span mdSuffix><i class="material-icons">search</i></span>
+</md-form-field>
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
@@ -22,14 +26,29 @@
                 <td colspan="5">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing">
+            <tbody *ngIf="!isEditing && !isSearching">
               <tr *ngFor="let drugstore of drugstores">
                 <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.address}}</td>
-                <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.type}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.workTime}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing && isSearching">
+              <tr *ngFor="let drugstore of drugstores">
+                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.name}}</td>
+                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.address}}</td>
+                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.workTime}}</td>
+                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>
@@ -97,13 +116,29 @@
                 <td colspan="10">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing">
+            <tbody *ngIf="!isEditing  && !isSearching">
               <tr *ngFor="let drugstore of drugstores">
                 <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.workTime}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!isEditing && isSearching">
+              <tr *ngFor="let drugstore of drugstores">
+                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.name}}</td>
+                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.address}}</td>
+                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.workTime}}</td>
+                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>
@@ -171,13 +206,29 @@
                 <td colspan="10">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing"> 
-              <tr *ngFor="let drugstore of drugstores ">
+            <tbody *ngIf="!isEditing  && !isSearching"> 
+              <tr *ngFor="let drugstore of drugstores">
                 <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.workTime}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">
+                  <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
+                    <i class="fa fa-pencil"></i> Редактировать
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
+                    <i class="fa fa-trash"></i> Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+             <tbody *ngIf="!isEditing && isSearching">
+              <tr *ngFor="let drugstore of drugstores">
+                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.name}}</td>
+                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.address}}</td>
+                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.workTime}}</td>
+                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>

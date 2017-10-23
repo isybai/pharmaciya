@@ -1,6 +1,5 @@
 import * as express from 'express';
 
-import CatCtrl from './controllers/cat';
 import UserCtrl from './controllers/user';
 import MedicCtrl from './controllers/medic';
 import IndividualCtrl from './controllers/individual';
@@ -8,7 +7,6 @@ import RenterCtrl from './controllers/renter';
 import LpuCtrl from './controllers/lpu';
 import DrugstoreCtrl from './controllers/drugstore';
 
-import Cat from './models/cat';
 import User from './models/user';
 import Medic from './models/medic';
 import Individual from './models/individual';
@@ -21,7 +19,6 @@ export default function setRoutes(app) {
 
   const router = express.Router();
 
-  const catCtrl = new CatCtrl();
   const userCtrl = new UserCtrl();
 
   const medicCtrl = new MedicCtrl();
@@ -29,14 +26,6 @@ export default function setRoutes(app) {
   const renterCtrl = new RenterCtrl();
   const lpuCtrl = new LpuCtrl();
   const drugstoreCtrl = new DrugstoreCtrl();
-
-  // Cats
-  router.route('/cats').get(catCtrl.getAll);
-  router.route('/cats/count').get(catCtrl.count);
-  router.route('/cat').post(catCtrl.insert);
-  router.route('/cat/:id').get(catCtrl.get);
-  router.route('/cat/:id').put(catCtrl.update);
-  router.route('/cat/:id').delete(catCtrl.delete);
 
   // Users
   router.route('/login').post(userCtrl.login);
