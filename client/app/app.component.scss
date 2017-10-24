@@ -3,7 +3,7 @@ a.nav-item.nav-link.logo img {
     box-shadow: none;
     transition: 0.3s;
 }
-md-sidenav.example-sidenav.mat-drawer {
+mat-sidenav.example-sidenav.mat-drawer {
     float: left;
     box-shadow: 0 64px 5px 0 rgba(0,0,0,0.26);
 }
@@ -18,7 +18,7 @@ a .material-icons {
     float: left;
     line-height: 30px;
 }
-md-sidenav#main-menu.hovered md-list-item.mat-list-item span {
+mat-sidenav#main-menu.hovered mat-list-item.mat-list-item span {
     float: left;
     display: inline-block;
     text-indent: 20px;
@@ -26,7 +26,7 @@ md-sidenav#main-menu.hovered md-list-item.mat-list-item span {
 .navbar {
     border-radius: 0;
 }
-.col-md-1 {
+.col-mat-1 {
     padding: 0;
 }
 .mat-list .mat-list-item div.mat-list-item-content {
@@ -34,13 +34,13 @@ md-sidenav#main-menu.hovered md-list-item.mat-list-item span {
     padding: 0;
 }
 
-md-list-item.mat-list-item a.nav-item.nav-link.active *, md-list-item.mat-list-item a:hover *{
+mat-list-item.mat-list-item a.nav-item.nav-link.active *, mat-list-item.mat-list-item a:hover *{
     color:  #4caf50 !important;
 }
 nav.navbar.navbar-light {
     padding: 0;
 }
-md-list-item.mat-list-item a {
+mat-list-item.mat-list-item a {
     color: #777;
     width: 100%;
     font-size: 12px;
@@ -54,26 +54,26 @@ md-list-item.mat-list-item a {
     white-space: nowrap;
     line-height: 30px;
 }
-md-list-item.mat-list-item a img {
+mat-list-item.mat-list-item a img {
     height: 24px;
 }
-md-sidenav#main-menu {
+mat-sidenav#main-menu {
     width: 0px;
     transition: 0.4s;
 }
-md-sidenav#main-menu md-list-item.mat-list-item a span {
+mat-sidenav#main-menu mat-list-item.mat-list-item a span {
     display: none;
     text-indent: 20px;
     transition: 0.4s;
 }
-md-sidenav#main-menu:hover {
+mat-sidenav#main-menu:hover {
     width: 200px;
 }
-md-sidenav#main-menu:hover md-list-item.mat-list-item a span{
+mat-sidenav#main-menu:hover mat-list-item.mat-list-item a span{
     display: inline-block;
 }
 
-md-list.mat-list {
+mat-list.mat-list {
     padding-top: 0;
 }
 nav.navbar.navbar-dark.bg-primary {
@@ -82,17 +82,17 @@ nav.navbar.navbar-dark.bg-primary {
 ul.nav.navbar-nav li {
     display: inline-block;
 }
-button.mat-button md-icon.mat-icon.material-icons {
+button.mat-button mat-icon.mat-icon.material-icons {
     color: white;
     font-size: 24px;
 }
 nav.navbar.navbar-light {
     background: white;
 }
-md-list-item.mat-list-item[mdclass] {
+mat-list-item.mat-list-item[matclass] {
     background: #4caf50;
 }
-md-list-item.mat-list-item[mdclass] span {
+mat-list-item.mat-list-item[matclass] span {
     color: white;
 }
 .content {

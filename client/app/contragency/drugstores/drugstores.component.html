@@ -1,15 +1,15 @@
-<md-form-field class="searchField">
-  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
-  <span mdSuffix><i class="material-icons">search</i></span>
-</md-form-field>
+<mat-form-field class="searchField">
+  <input type="text" (keyup)=(search($event.srcElement.value)) matInput placeholder="Поиск">
+  <span matSuffix><i class="material-icons">search</i></span>
+</mat-form-field>
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
 <div class="info_table">
   <div class="animated bounceInRight" *ngIf="!isLoading">
     <h4 class="">Текущие аптеки {{drugstores.length}}</h4>
-    <md-tab-group>
-      <md-tab label="Категория A(крупные сети аптек)">
+    <mat-tab-group>
+      <mat-tab label="Категория A(крупные сети аптек)">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default" *ngIf="!isEditing">
@@ -31,7 +31,7 @@
                 <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">{{drugstore.workTime}}</td>
-                <td *ngIf="drugstore.type === 'Категория A'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория A'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -47,7 +47,7 @@
                 <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.workTime}}</td>
-                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -62,34 +62,36 @@
               <tr>
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
-                    <md-form-field>
-                      <span mdTooltip="Введите название">
-                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
+                    <mat-form-field>
+                      <span matTooltip="Введите название">
+                        <input matInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите адрес">
+                        <input matInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
                       </span>
-                    </md-form-field>
-                    <span mdTooltip="Выберите тип">
-                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
-                        <md-option *ngFor="let type of types" [value]="type.value">
+                    </mat-form-field>
+                    <mat-form-field>
+                    <span matTooltip="Выберите тип">
+                      <mat-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </span>
-                    <md-form-field>
-                      <span mdTooltip="Рабочее время">
-                        <input mdInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Рабочее время">
+                        <input matInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите телефон">
-                        <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите телефон">
+                        <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                        <input matInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
-                    </md-form-field>
+                    </mat-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
                   </form>
                   <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -98,8 +100,8 @@
             </tbody>
           </table>
         </div>
-      </md-tab>
-      <md-tab label="Категория B(сети до 3-5 аптек)">
+      </mat-tab>
+      <mat-tab label="Категория B(сети до 3-5 аптек)">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default" *ngIf="!isEditing">
@@ -121,7 +123,7 @@
                 <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">{{drugstore.workTime}}</td>
-                <td *ngIf="drugstore.type === 'Категория B'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория B'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -137,7 +139,7 @@
                 <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.workTime}}</td>
-                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -152,34 +154,36 @@
               <tr>
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
-                    <md-form-field>
-                      <span mdTooltip="Введите название">
-                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
+                    <mat-form-field>
+                      <span matTooltip="Введите название">
+                        <input matInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите адрес">
+                        <input matInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
                       </span>
-                    </md-form-field>
-                    <span mdTooltip="Выберите тип">
-                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
-                        <md-option *ngFor="let type of types" [value]="type.value">
+                    </mat-form-field>
+                    <mat-form-field>
+                    <span matTooltip="Выберите тип">
+                      <mat-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </span>
-                    <md-form-field>
-                      <span mdTooltip="Рабочее время">
-                        <input mdInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Рабочее время">
+                        <input matInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                      <span mdTooltip="Введите телефон">
-                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                      <span matTooltip="Введите телефон">
+                        <input matInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
-                    </md-form-field>
+                    </mat-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
                   </form>
                   <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -188,8 +192,8 @@
             </tbody>
           </table>
         </div>
-      </md-tab>
-      <md-tab label="Категория C(одиночки, ЧП)">
+      </mat-tab>
+      <mat-tab label="Категория C(одиночки, ЧП)">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default" *ngIf="!isEditing">
@@ -206,12 +210,12 @@
                 <td colspan="10">В базе данных еще нет аптек. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing  && !isSearching"> 
+            <tbody *ngIf="!isEditing  && !isSearching">
               <tr *ngFor="let drugstore of drugstores">
                 <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">{{drugstore.workTime}}</td>
-                <td *ngIf="drugstore.type === 'Категория C'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория C'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -227,7 +231,7 @@
                 <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.name}}</td>
                 <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.address}}</td>
                 <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">{{drugstore.workTime}}</td>
-                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
+                <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -242,34 +246,36 @@
               <tr>
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editDrugstore(drugstore)" style="display:inline">
-                    <md-form-field>
-                      <span mdTooltip="Введите название">
-                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
+                    <mat-form-field>
+                      <span matTooltip="Введите название">
+                        <input matInput class="mat-input-element" type="text" name="name" [(ngModel)]="drugstore.name" placeholder="Название">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите адрес">
+                        <input matInput class="mat-input-element" type="text" name="address" [(ngModel)]="drugstore.address" placeholder="Адрес">
                       </span>
-                    </md-form-field>
-                    <span mdTooltip="Выберите тип">
-                      <md-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
-                        <md-option *ngFor="let type of types" [value]="type.value">
+                    </mat-form-field>
+                    <mat-form-field>
+                    <span matTooltip="Выберите тип">
+                      <mat-select name="type" [(ngModel)]="drugstore.type" placeholder="Тип">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </span>
-                    <md-form-field>
-                      <span mdTooltip="Рабочее время">
-                        <input mdInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Рабочее время">
+                        <input matInput class="mat-input-element" type="time" name="workTime" [(ngModel)]="drugstore.workTime" placeholder="Рабочее время">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите телефон">
-                        <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите телефон">
+                        <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                        <input matInput class="mat-input-element" type="number" name="tel" [(ngModel)]="drugstore.tel" placeholder="Телефон">
                       </span>
-                    </md-form-field>
+                    </mat-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
                   </form>
                   <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -278,59 +284,61 @@
             </tbody>
           </table>
         </div>
-      </md-tab>
-    </md-tab-group>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-  <md-sidenav-container class="example-container">
+  <mat-sidenav-container class="example-container">
     <div class="example-sidenav-content">
-      <button md-raised-button (click)="sidenav.open()">
-        <md-icon>add</md-icon>Добавить аптеку
+      <button mat-raised-button (click)="sidenav.open()">
+        <mat-icon>add</mat-icon>Добавить аптеку
       </button>
     </div>
-    <md-sidenav #sidenav class="example-sidenav">
+    <mat-sidenav #sidenav class="example-sidenav">
       <div class="addItem" *ngIf="!isEditing">
         <div>
           <form class="form-inline" [formGroup]="addDrugstoreForm" (ngSubmit)="addDrugstore()" style="text-align:center">
-            <md-form-field>
-              <span mdTooltip="Введите название">
-                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
+            <mat-form-field>
+              <span matTooltip="Введите название">
+                <input matInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите адрес">
-                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="Адрес">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите адрес">
+                <input matInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="Адрес">
               </span>
-            </md-form-field>
-            <span mdTooltip="Выберите тип">
-              <md-select formControlName="type" placeholder="Тип">
-                <md-option *ngFor="let type of types" [value]="type.value">
+            </mat-form-field>
+            <mat-form-field>
+            <span matTooltip="Выберите тип">
+              <mat-select formControlName="type" placeholder="Тип">
+                <mat-option *ngFor="let type of types" [value]="type.value">
                   {{ type.viewValue }}
-                </md-option>
-              </md-select>
+                </mat-option>
+              </mat-select>
             </span>
-            <md-form-field>
-              <span mdTooltip="Рабочее время">
-                <input mdInput class="mat-input-element" type="time" name="workTime" formControlName="workTime" placeholder="Рабочее время">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Рабочее время">
+                <input matInput class="mat-input-element" type="time" name="workTime" formControlName="workTime" placeholder="Рабочее время">
               </span>
-            </md-form-field>
-            <span mdTooltip="Введите телефон">
-              <md-form-field>
-                <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
-              </md-form-field>
+            </mat-form-field>
+            <span matTooltip="Введите телефон">
+              <mat-form-field>
+                <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                <input matInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
+              </mat-form-field>
             </span>
-            <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addDrugstoreForm.valid"><i class="material-icons">add</i> Добавить</button>
+            <button mat-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addDrugstoreForm.valid"><i class="material-icons">add</i> Добавить</button>
           </form>
         </div>
       </div>
-    </md-sidenav>
-  </md-sidenav-container>
+    </mat-sidenav>
+  </mat-sidenav-container>
 </div>
 
 <!--
 <nav class="navbar navbar-light">
   <div class="row">
-    
+
   </div>
 </nav>
 -->
@@ -342,7 +350,7 @@
       <li><a> - </a></li>
 -->
 
-	  	
-  		
-  		
+
+
+
 

@@ -1,93 +1,93 @@
-<md-sidenav id="main-menu" opened #sidenav class="example-sidenav">
+<mat-sidenav id="main-menu" opened #sidenav class="example-sidenav">
     <nav class="navbar navbar-light">
-      <md-list>
-        <md-list-item mdClass='homelink'>
-          <a routerLink="/" class="nav-item nav-link" *ngIf="auth.loggedIn || auth.isSuperAdmin">
+      <mat-list>
+        <mat-list-item matClass='homelink'>
+          <a routerLink="/" class="nav-item nav-link">
             <img src="../assets/fav.png" alt="logo">
             <span>  pharmaciyaCRM
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
             <i class="material-icons">account_circle</i>
             <span>Контрагенты
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">local_hospital</i>
             <span>Номенклатура
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isRentersAdmin || auth.isSuperAdmin">
             <i class="material-icons">location_city</i>
             <span>Помещения
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">supervisor_account</i>
             <span>Сотрудники
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">monetization_on</i>
             <span>Финансы
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
             <i class="material-icons">insert_chart</i>
             <span>Сбыт
             </span>
           </a>
-        </md-list-item> 
-        <md-list-item *ngIf="!auth.loggedIn">
+        </mat-list-item>
+        <mat-list-item *ngIf="!auth.loggedIn">
           <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active">
             <i class="fa fa-sign-in"></i>
             <span> Логин
             </span>
           </a>
-        </md-list-item>
-        <md-list-item *ngIf="!auth.loggedIn">
+        </mat-list-item>
+        <mat-list-item *ngIf="!auth.loggedIn">
           <a routerLink="/register" class="nav-item nav-link" routerLinkActive="active">
             <i class="fa fa-user-plus"></i>
             <span> Зарегестрироваться
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">settings</i>
             <span> Аккаунт ({{auth.currentUser.username}})
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">verified_user</i>
             <span> Админ
             </span>
           </a>
-        </md-list-item>
-        <md-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
             <i class="material-icons">exit_to_app</i>
             <span> Выйти
             </span>
           </a>
-        </md-list-item>
-      </md-list>
+        </mat-list-item>
+      </mat-list>
     </nav>
-  </md-sidenav>
+  </mat-sidenav>
 <div class="content">
   <div class="box">
     <router-outlet></router-outlet>

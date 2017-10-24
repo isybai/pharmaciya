@@ -1,7 +1,7 @@
-<md-form-field class="searchField">
-  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
-  <span mdSuffix><i class="material-icons">search</i></span>
-</md-form-field>
+<mat-form-field class="searchField">
+  <input type="text" (keyup)=(search($event.srcElement.value)) matInput placeholder="Поиск">
+  <span matSuffix><i class="material-icons">search</i></span>
+</mat-form-field>
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
@@ -59,19 +59,19 @@
         </tbody>
         <div class="edit" *ngIf="isEditing">
           <form class="form-inline" #form="ngForm" (ngSubmit)="editIndividual(individual)" style="display:inline">
-            <md-form-field>
-              <input class="form-control" mdInput type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
-            </md-form-field>
-            <md-form-field>
-              <input class="form-control" mdInput type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия" required>
-            </md-form-field>
-            <md-form-field>
-              <input class="form-control" mdInput type="date" name="dob" [(ngModel)]="individual.dob" placeholder="День рождения" required>
-            </md-form-field>
-            <md-form-field>
-              <span mdPrefix>+996 </span>
-              <input class="form-control" mdInput type="number" name="tel" [(ngModel)]="individual.tel" placeholder="Телефон" required>
-            </md-form-field>
+            <mat-form-field>
+              <input class="form-control" matInput type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input class="form-control" matInput type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input class="form-control" matInput type="date" name="dob" [(ngModel)]="individual.dob" placeholder="День рождения" required>
+            </mat-form-field>
+            <mat-form-field>
+              <span matPrefix>+996 </span>
+              <input class="form-control" matInput type="number" name="tel" [(ngModel)]="individual.tel" placeholder="Телефон" required>
+            </mat-form-field>
             <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
             <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
           </form>
@@ -79,42 +79,42 @@
       </table>
     </div>
   </div>
-  <md-sidenav-container class="example-container">
+  <mat-sidenav-container class="example-container">
     <div class="example-sidenav-content">
-      <button md-raised-button (click)="sidenav.open()">
-        <md-icon>add</md-icon>Добавить физическое лицо
+      <button mat-raised-button (click)="sidenav.open()">
+        <mat-icon>add</mat-icon>Добавить физическое лицо
       </button>
     </div>
-    <md-sidenav #sidenav class="example-sidenav">
+    <mat-sidenav #sidenav class="example-sidenav">
       <div class="addItem" *ngIf="!isEditing">
         <div>
           <form class="form-inline" [formGroup]="addIndividualForm" (ngSubmit)="addIndividual()" style="text-align:center">
-            <md-form-field>
-              <span mdTooltip="Введите имя">
-                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
+            <mat-form-field>
+              <span matTooltip="Введите имя">
+                <input matInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите фамилию">
-                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите фамилию">
+                <input matInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите день рождения">
-                
-                <input mdInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="День рождения">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите день рождения">
+
+                <input matInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="День рождения">
               </span>
-            </md-form-field>
-            <span mdTooltip="Введите телефон">
-              <md-form-field>
-                <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
-              </md-form-field>
+            </mat-form-field>
+            <span matTooltip="Введите телефон">
+              <mat-form-field>
+                <span style="color: #757575;" matPrefix>+996 &nbsp;</span>
+                <input matInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
+              </mat-form-field>
             </span>
-            <button md-raised-button color="warm" class="" type="submit" [disabled]="!addIndividualForm.valid"><i class="material-icons">add</i> Добавить</button>
+            <button mat-raised-button color="warm" class="" type="submit" [disabled]="!addIndividualForm.valid"><i class="material-icons">add</i> Добавить</button>
           </form>
         </div>
       </div>
-    </md-sidenav>
-  </md-sidenav-container>
+    </mat-sidenav>
+  </mat-sidenav-container>
 </div>

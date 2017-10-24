@@ -1,41 +1,43 @@
 <app-toast [message]="toast.message"></app-toast>
-<div class="col-md-9">
-<div class="">
-  <h4 class="page-title">Регистрация</h4>
+<div class="col-md-12">
 
+    <h4 class="page-title">Регистрация</h4>
+    <div class="col-md-6 mx-auto float-md-none">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
 
       <div class="input-group" [ngClass]="setClassUsername()">
-        <md-form-field>
-          <i mdPrefix class="material-icons">person</i>
-          <input class="mat-input-element" mdInput type="text" name="username" formControlName="username" placeholder="Логин" autofocus>
-          <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести <strong _ngcontent-c24="">логин</strong></md-error>
-        </md-form-field>
+        <mat-form-field>
+          <i matPrefix class="material-icons">person</i>
+          <input class="mat-input-element" matInput type="text" name="username" formControlName="username" placeholder="Логин" autofocus>
+          <mat-error  class="mat-error" role="alert" >Нужно ввести <strong >логин</strong></mat-error>
+        </mat-form-field>
       </div>
       <div class="input-group" [ngClass]="setClassEmail()">
-       <md-form-field>
-          <i mdPrefix class="material-icons">mail</i>
-          <input class="mat-input-element" mdInput type="email" name="email" formControlName="email" placeholder="Почта">
-          <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести <strong _ngcontent-c24="">почту</strong></md-error>
-        </md-form-field>
+       <mat-form-field>
+          <i matPrefix class="material-icons">mail</i>
+          <input class="mat-input-element" matInput type="email" name="email" formControlName="email" placeholder="Почта">
+          <mat-error  class="mat-error" role="alert" >Нужно ввести <strong >почту</strong></mat-error>
+        </mat-form-field>
       </div>
       <div class="input-group" [ngClass]="setClassPassword()">
-        <md-form-field>
-          <i mdPrefix class="material-icons">vpn_key</i>
-          <input class="mat-input-element" mdInput type="password" name="password" formControlName="password" placeholder="Пароль">
-          <md-error _ngcontent-c24="" class="mat-error" role="alert" id="mat-error-3">Нужно ввести <strong _ngcontent-c24="">пароль</strong></md-error>
-        </md-form-field>
+        <mat-form-field>
+          <i matPrefix class="material-icons">vpn_key</i>
+          <input class="mat-input-element" matInput type="password" name="password" formControlName="password" placeholder="Пароль">
+          <mat-error  class="mat-error" role="alert" >Нужно ввести <strong >пароль</strong></mat-error>
+        </mat-form-field>
       </div>
       <div class="input-group">
-       <i mdPrefix class="material-icons">vpn_key</i>
-        <md-select placeholder="Роль" class="mat-select" name="role" formControlName="role" style="margin-left: 10px;">
-          <md-option value="superAdmin">Супер админ</md-option>
-          <md-option value="salesAdmin">Админ сбыта</md-option>
-          <md-option value="rentersAdmin">Админ аренды</md-option>
-          <md-option value="user">Агент</md-option>
-        </md-select>
+       <i matPrefix class="material-icons">vpn_key</i>
+        <mat-form-field>
+          <mat-select placeholder="Роль" class="mat-select" name="role" formControlName="role" style="margin-left: 10px;">
+            <mat-option value="superAdmin">Супер админ</mat-option>
+            <mat-option value="salesAdmin">Админ сбыта</mat-option>
+            <mat-option value="rentersAdmin">Админ аренды</mat-option>
+            <mat-option value="user">Агент</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <button md-raised-button color="warm" class="" type="submit" [disabled]="!registerForm.valid"><i class="material-icons">person_add</i> Зарегестрировать</button>
+      <button mat-raised-button color="warm" class="" type="submit" [disabled]="!registerForm.valid"><i class="material-icons">person_add</i> Зарегестрировать</button>
     </form>
   </div>
 </div>
