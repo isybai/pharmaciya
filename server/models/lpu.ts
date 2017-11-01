@@ -4,9 +4,13 @@ const lpuSchema = new mongoose.Schema({
   name: String,
   address: String,
   tel: String,
+  localArea: String,
+  workTime: String,
   type: String,
+  director: String,
+  directorPhone: String,
 });
 
 const Lpu = mongoose.model('Lpu', lpuSchema);
 
-export default Lpu; 
+export default Lpu;

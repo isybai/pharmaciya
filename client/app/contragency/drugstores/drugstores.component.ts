@@ -29,6 +29,7 @@ export class DrugstoresComponent implements OnInit {
   type = new FormControl('', Validators.required);
   workTime = new FormControl('', Validators.required);
   tel = new FormControl('', Validators.required);
+  s = new FormControl('', Validators.required);
 
 
   constructor(private drugstoreService: DrugstoreService,
@@ -49,7 +50,7 @@ export class DrugstoresComponent implements OnInit {
   }
   search(e) {
     this.searchItem = e.toUpperCase();
-    if(e.length === 0 || !e.trim()){
+    if (e.length === 0 || !e.trim()){
      this.isSearching = false;
     }
     else{

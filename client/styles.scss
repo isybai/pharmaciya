@@ -74,6 +74,24 @@
 
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+button.add-item-button.btn.btn-sm.btn-success span {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  text-transform: lowercase;
+  font-family: Arial;
+  font-weight: 600;
+}
+button.add-item-button.btn.btn-sm.btn-success {
+  position: fixed;
+  right: 0;
+  z-index: 100;
+}
+div.cdk-overlay-container {
+  z-index: 9000;
+}
+div.cdk-overlay-pane {
+  z-index: 9000;
+}
 html {
   background: #e0e0e0;
   background-size: 100%;
@@ -277,4 +295,29 @@ form.form-inline.searcher {
   right: 20px;
   top: -140px;
   width: 400px;
+}
+.bg-over {
+  display: block;
+  position: absolute;
+  top: -300%;
+  left: -70px;
+  z-index: 10;
+  width: 106%;
+  height: 400%;
+  background: rgba(0, 0, 0, 0.36);
+}
+.addItem .mat-form-field {
+  width: 49%;
+}
+.addItem {
+  background-color: white;
+}
+.col-md-4.animated.fadeInDown.editingForm {
+  position: relative;
+  z-index: 20;
+  background: white;
+  padding: 10px;
+  margin: 0 auto;
+  float: none;
+  top: -40px;
 }
