@@ -212,7 +212,7 @@
     </mat-tab>
   </mat-tab-group>
 </div>
-<div class="modal fade" id="editingItem" role="dialog">
+<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">

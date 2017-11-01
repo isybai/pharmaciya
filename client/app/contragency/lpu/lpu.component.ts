@@ -40,9 +40,8 @@ export class LpuComponent implements OnInit {
   lpu = {};
   lpus = [];
   isLoading = true;
-/*
+  isEditing = false;
 
-*/
   isDataAvailable = false;
   displayedColumns = ['name', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
@@ -113,10 +112,12 @@ export class LpuComponent implements OnInit {
     this.ngOnInit();
   }
   enableEditing(lpu) {
+    this.isEditing = true;
     this.lpu = lpu;
   }
 
   cancelEditing() {
+    this.isEditing = false;
     this.lpu = {};
     this.toast.setMessage('Редактирование ЛПУ отменена.', 'warning');
     this.getLpus();
@@ -125,6 +126,7 @@ export class LpuComponent implements OnInit {
   editLpu(lpu) {
     this.lpuService.editLpu(lpu).subscribe(
       res => {
+        this.isEditing = false;
         this.lpu = lpu;
         this.toast.setMessage('ЛПУ успешно отредактирован.', 'success');
       },

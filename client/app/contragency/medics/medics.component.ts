@@ -113,6 +113,7 @@ export class MedicsComponent implements OnInit {
   lpu = {};
   lpus = [];
   isLoading = true;
+  isEditing = false;
 
   isDataAvailable = false;
   displayedColumns = ['name', 'spec', 'hos', 'type', 'local', 'workTime', 'tel', 'action'];
@@ -191,10 +192,12 @@ export class MedicsComponent implements OnInit {
     this.ngOnInit();
   }
   enableEditing(medic) {
+    this.isEditing = true;
     this.medic = medic;
   }
 
   cancelEditing() {
+    this.isEditing = false;
     this.medic = {};
     this.toast.setMessage('Редактирование врача отменена.', 'warning');
     this.getMedics();
@@ -203,6 +206,7 @@ export class MedicsComponent implements OnInit {
   editMedic(medic) {
     this.medicService.editMedic(medic).subscribe(
       res => {
+        this.isEditing = false;
         this.medic = medic;
         this.toast.setMessage('Врач успешно отредактирован.', 'success');
       },

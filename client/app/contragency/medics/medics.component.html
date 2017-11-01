@@ -71,7 +71,7 @@
     <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
   </div>
-  <div class="modal fade" id="editingItem" role="dialog">
+  <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
