@@ -1,11 +1,16 @@
-import { Component, OnInit, AfterViewInit  } from '@angular/core';
-
-import { Http } from '@angular/http';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
+import { Component, ElementRef, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { MatPaginator, MatSort } from '@angular/material';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
+import { Http } from '@angular/http';
 
 import { IndividualService } from '../../services/individual.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
@@ -18,51 +23,54 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 export class IndividualsComponent implements OnInit {
 
 
-  displayedColumns = ['name', 'sur', 'dob', 'tel'];
-  dataSource = new ExampleDataSource();
-
   individual = {};
   individuals = [];
   isLoading = true;
   isEditing = false;
-  isSearching = false;
-  searchItem: string;
+
+  isDataAvailable = false;
+  displayedColumns = ['name', 'dob', 'tel', 'action'];
+  dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
+  get data(): ChangeData[] { return this.dataChange.value; }
+  dataSource: ExampleDataSource | null;
 
   addIndividualForm: FormGroup;
   name = new FormControl('', Validators.required);
-  sur = new FormControl('', Validators.required);
   dob = new FormControl('', Validators.required);
   tel = new FormControl('', Validators.required);
 
-  constructor(private individualService: IndividualService,
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('filter') filter: ElementRef;
+
+  constructor(private individualService: IndividualService, private cdRef: ChangeDetectorRef,
               private formBuilder: FormBuilder,
               private http: Http,
-              public toast: ToastComponent) {}
+              public toast: ToastComponent) { }
+  placeIndividuals() {
+    this.individualService.getIndividuals().subscribe(rcgitems => {
+      this.dataChange.next(rcgitems);
+      this.isDataAvailable = true;
+      this.cdRef.detectChanges();
+      this.initSource();
+    });
+  }
 
   ngOnInit() {
+    this.placeIndividuals();
     this.getIndividuals();
     this.addIndividualForm = this.formBuilder.group({
       name: this.name,
-      sur: this.sur,
       dob: this.dob,
       tel: this.tel
     });
   }
-  search(e) {
-    this.searchItem = e.toUpperCase();
-    if(e.length === 0 || !e.trim()){
-     this.isSearching = false;
-    }
-    else{
-     this.isSearching = true;
-    }
-  }
+
   getIndividuals() {
     this.individualService.getIndividuals().subscribe(
       data => this.individuals = data,
       error => console.log(error),
       () => this.isLoading = false
-
     );
   }
 
@@ -76,8 +84,8 @@ export class IndividualsComponent implements OnInit {
       },
       error => console.log(error)
     );
+    this.ngOnInit();
   }
-
   enableEditing(individual) {
     this.isEditing = true;
     this.individual = individual;
@@ -86,8 +94,7 @@ export class IndividualsComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
     this.individual = {};
-    this.toast.setMessage('Редактирование врача отменена.', 'warning');
-    // reload the individuals to reset the editing
+    this.toast.setMessage('Редактирование физ.лица отменена.', 'warning');
     this.getIndividuals();
   }
 
@@ -96,44 +103,111 @@ export class IndividualsComponent implements OnInit {
       res => {
         this.isEditing = false;
         this.individual = individual;
-        this.toast.setMessage('Врач успешно отредактирован.', 'success');
+        this.toast.setMessage('Физ.лицо успешно отредактирован.', 'success');
       },
       error => console.log(error)
     );
   }
 
   deleteIndividual(individual) {
-    if (window.confirm('Вы уверенны что хотите удалить этого варча?')) {
+    if (window.confirm('Вы уверенны что хотите удалить физ.лицо?')) {
       this.individualService.deleteIndividual(individual).subscribe(
         res => {
           const pos = this.individuals.map(elem => elem._id).indexOf(individual._id);
           this.individuals.splice(pos, 1);
-          this.toast.setMessage('Врач успешно удален.', 'success');
+          this.toast.setMessage('Физ.лицо успешно удален.', 'success');
         },
         error => console.log(error)
       );
+      this.ngOnInit();
     }
   }
 
+  initSource() {
+    this.dataSource = new ExampleDataSource(this, this.paginator, this.sort);
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) { return; }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
+    this.cdRef.detectChanges();
+  }
 }
-export interface Individ {
+
+export interface ChangeData {
   name: string;
-  sur: string;
   dob: string;
   tel: string;
 }
 
-const data: Individ[] = [
-  {name: '1', sur: 'Hydrogen', dob: '1.0079', tel: 'H'},
-  {name: '2', sur: 'Helium', dob: '4.0026', tel: 'He'},
-];
-
-
 export class ExampleDataSource extends DataSource<any> {
+  _filterChange = new BehaviorSubject('');
+  get filter(): string { return this._filterChange.value; }
+  set filter(filter: string) { this._filterChange.next(filter); }
 
-  connect(): Observable<Individ[]> {
-    return Observable.of(data);
+  dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
+  get data(): ChangeData[] { return this.dataChange.value; }
+
+  filteredData: ChangeData[] = [];
+  renderedData: ChangeData[] = [];
+
+  constructor(private rcgcomponent: IndividualsComponent,
+              private _paginator: MatPaginator,
+              private _sort: MatSort) {
+    super();
+
+    this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
   }
 
-  disconnect() {}
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<ChangeData[]> {
+    // Listen for any changes in the base data, sorting, filtering, or pagination
+    const displayDataChanges = [
+      this.rcgcomponent.dataChange,
+      this._sort.sortChange,
+      this._filterChange,
+      this._paginator.page,
+    ];
+
+    return Observable.merge(...displayDataChanges).map(() => {
+      // Filter data
+      this.filteredData = this.rcgcomponent.data.slice().filter((item: ChangeData) => {
+        const searchStr = (item.name).toLowerCase();
+        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+      });
+
+      // Sort filtered data
+      const sortedData = this.sortData(this.filteredData.slice());
+
+      // Grab the page's slice of the filtered sorted data.
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+      return this.renderedData;
+    });
+  }
+
+  disconnect() { }
+
+  /** Returns a sorted copy of the database data. */
+  sortData(data: ChangeData[]): ChangeData[] {
+    if (!this._sort.active || this._sort.direction === '') { return data; }
+
+    return data.sort((a, b) => {
+      let propertyA: number | string = '';
+      let propertyB: number | string = '';
+
+      switch (this._sort.active) {
+        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
+        case 'dob': [propertyA, propertyB] = [a.dob, b.dob]; break;
+        case 'tel': [propertyA, propertyB] = [a.tel, b.tel]; break;
+      }
+
+      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+
+      return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
+    });
+  }
 }

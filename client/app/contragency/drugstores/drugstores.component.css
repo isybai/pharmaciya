@@ -1,3 +1,6 @@
 .info_table mat-form-field.mat-form-field {
     width: 17%;
 }
+mat-row.mat-row {
+  min-height: initial;
+}
