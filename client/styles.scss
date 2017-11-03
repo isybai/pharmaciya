@@ -71,7 +71,15 @@
             transform: rotate(360deg) scale(1);
   }
 }
-
+mat-row.mat-row {
+  display: flex;
+  border-bottom-width: 0;
+  border-bottom-style: solid;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  outline: 1px solid #e0e0e0;
+}
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 button.add-item-button.btn.btn-sm.btn-success span {
