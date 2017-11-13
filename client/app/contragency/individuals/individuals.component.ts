@@ -29,7 +29,7 @@ export class IndividualsComponent implements OnInit {
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'dob', 'tel', 'action'];
+  displayedColumns = ['name', 'dob', 'tel', 'history', 'calledBy', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -38,6 +38,8 @@ export class IndividualsComponent implements OnInit {
   name = new FormControl('', Validators.required);
   dob = new FormControl('', Validators.required);
   tel = new FormControl('', Validators.required);
+  history = new FormControl(null);
+  calledBy = new FormControl(null);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -62,7 +64,9 @@ export class IndividualsComponent implements OnInit {
     this.addIndividualForm = this.formBuilder.group({
       name: this.name,
       dob: this.dob,
-      tel: this.tel
+      tel: this.tel,
+      history: this.history,
+      calledBy: this.calledBy,
     });
   }
 
@@ -140,6 +144,8 @@ export interface ChangeData {
   name: string;
   dob: string;
   tel: string;
+  history: string;
+  calledBy: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -202,6 +208,8 @@ export class ExampleDataSource extends DataSource<any> {
         case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
         case 'dob': [propertyA, propertyB] = [a.dob, b.dob]; break;
         case 'tel': [propertyA, propertyB] = [a.tel, b.tel]; break;
+        case 'history': [propertyA, propertyB] = [a.history, b.history]; break;
+        case 'calledBy': [propertyA, propertyB] = [a.calledBy, b.calledBy]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

@@ -28,6 +28,14 @@
         <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
         <mat-cell *cdkCellDef="let row">{{row.tel}}</mat-cell>
       </ng-container>
+      <ng-container cdkColumnDef="history">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> История продаж </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.history}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="calledBy">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Привел </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.calledBy}}</mat-cell>
+      </ng-container>
       <ng-container cdkColumnDef="action">
         <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
         <mat-cell *cdkCellDef="let row">
@@ -70,11 +78,21 @@
                   <input matInput class="mat-input-element"  name="dob"  [(ngModel)]="individual.dob"  placeholder="Д.р">
                   </span>
             </mat-form-field>
+            <mat-form-field>
+                  <span matTooltip="История продаж">
+                  <input matInput class="mat-input-element"  name="history"  [(ngModel)]="individual.history"  placeholder="Д.р">
+                  </span>
+            </mat-form-field>
+            <mat-form-field>
+                  <span matTooltip="Привел">
+                  <input matInput class="mat-input-element"  name="calledBy"  [(ngModel)]="individual.calledBy"  placeholder="Д.р">
+                  </span>
+            </mat-form-field>
             <span matTooltip="Введите телефон">
                   <mat-form-field>
                      <input matInput class="mat-input-element"  name="tel" [(ngModel)]="individual.tel" placeholder="Телефон">
                   </mat-form-field>
-               </span>
+             </span>
           </div>
           <div class="modal-footer">
             <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -109,6 +127,16 @@
               <mat-form-field>
                      <span matTooltip="Введите Д.р">
                      <input matInput class="mat-input-element"  name="dob" formControlName="dob" placeholder="Д.р">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="История продаж">
+                     <input matInput class="mat-input-element"  name="history" formControlName="history" placeholder="История продаж">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Привел">
+                     <input matInput class="mat-input-element"  name="calledBy" formControlName="calledBy" placeholder="Привел">
                      </span>
               </mat-form-field>
               <span matTooltip="Введите телефон">
