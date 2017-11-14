@@ -1,0 +1,94 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="!isLoading">
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile>
+      <mat-grid-tile-header>header</mat-grid-tile-header>
+      <mat-grid-tile-footer>footer</mat-grid-tile-footer>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-grid-tile-header>header</mat-grid-tile-header>
+      <mat-grid-tile-footer>footer</mat-grid-tile-footer>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-grid-tile-header>header</mat-grid-tile-header>
+      <mat-grid-tile-footer>footer</mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <h4 class="card-header">Количество задач агентов ({{tasks.length}})</h4>
+  <div class="card-block">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+      <tr>
+        <th>Название</th>
+        <th>Тип</th>
+        <th>Кому</th>
+        <th>Статус</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="tasks.length === 0">
+      <tr>
+        <td colspan="4">Нету задач. Создайте задачу</td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="!isEditing">
+      <tr *ngFor="let task of tasks">
+        <td>{{task.name}}</td>
+        <td>{{task.type}}</td>
+        <td>{{task.belongTo}}</td>
+        <td>{{task.plan}}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="enableEditing(task)"><i class="fa fa-pencil"></i> Редактировать</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteTask(task)"><i class="fa fa-trash"></i> Удалить</button>
+        </td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="isEditing">
+      <tr>
+        <td colspan="4">
+          <form class="form-inline" #form="ngForm" (ngSubmit)="editTask(task)" style="display:inline">
+            <div class="form-group">
+              <input class="form-control" name="name" [(ngModel)]="task.name" placeholder="Название" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" name="type" [(ngModel)]="task.type" placeholder="Тип" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" name="weight" [(ngModel)]="task.belongTo" placeholder="Принадлежит" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" name="weight" [(ngModel)]="task.plan" placeholder="План" required>
+            </div>
+            <button class="btn btn-sm btn-primary" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+          </form>
+          <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="!isEditing">
+  <h4 class="card-header">Создать задачу</h4>
+  <div class="card-block">
+    <form class="form-inline" [formGroup]="addTaskForm" (ngSubmit)="addTask()" style="text-align:center">
+      <div class="form-group">
+        <input class="form-control" name="name" formControlName="name" placeholder="Название">
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="type" formControlName="type" placeholder="Тип">
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="belongTo" formControlName="belongTo" placeholder="Принадлежит">
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="plan" formControlName="plan" placeholder="План">
+      </div>
+      <button class="btn btn-primary" [disabled]="!addTaskForm.valid"><i class="fa fa-floppy-o"></i> Создать</button>
+    </form>
+  </div>
+</div>

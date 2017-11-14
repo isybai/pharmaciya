@@ -6,6 +6,7 @@ import IndividualCtrl from './controllers/individual';
 import RenterCtrl from './controllers/renter';
 import LpuCtrl from './controllers/lpu';
 import DrugstoreCtrl from './controllers/drugstore';
+import TaskCtrl from './controllers/task';
 
 
 export default function setRoutes(app) {
@@ -19,6 +20,7 @@ export default function setRoutes(app) {
   const renterCtrl = new RenterCtrl();
   const lpuCtrl = new LpuCtrl();
   const drugstoreCtrl = new DrugstoreCtrl();
+  const taskCtrl = new TaskCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -68,6 +70,14 @@ export default function setRoutes(app) {
   router.route('/drugstore/:id').get(drugstoreCtrl.get);
   router.route('/drugstore/:id').put(drugstoreCtrl.update);
   router.route('/drugstore/:id').delete(drugstoreCtrl.delete);
+
+  // drugstore
+  router.route('/tasks').get(taskCtrl.getAll);
+  router.route('/tasks/count').get(taskCtrl.count);
+  router.route('/task').post(taskCtrl.insert);
+  router.route('/task/:id').get(taskCtrl.get);
+  router.route('/task/:id').put(taskCtrl.update);
+  router.route('/task/:id').delete(taskCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
