@@ -26,11 +26,11 @@
         <div class="modal inmodal in" [attr.id]="renter.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content animated flipInY">
-              <md-card class="example-card">
-                <md-card-header>
-                 <md-card-title><span class="float-left"><i class="material-icons">account_circle</i>Ф.И.О.: </span><span class="float-right">{{renter.name + ' ' + renter.sur}}</span></md-card-title>
-                </md-card-header>
-                <md-card-content>
+              <mat-card class="example-card">
+                <mat-card-header>
+                 <mat-card-title><span class="float-left"><i class="material-icons">account_circle</i>Ф.И.О.: </span><span class="float-right">{{renter.name + ' ' + renter.sur}}</span></mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
                   <div><i class="material-icons">notifications</i><span class="float-left">Статус: </span><span class="float-right">{{renter.status}}</span></div>
                   <div><i class="material-icons">call</i><span class="float-left">Телефон: </span><span class="float-right">0 {{renter.tel}}</span></div>
                   <div><i class="material-icons">cake</i><span class="float-left">Дата рождения: </span><span class="float-right">{{renter.dob}}</span></div>
@@ -50,8 +50,8 @@
                   <div><i class="material-icons">attach_money</i><span class="float-left">Дата оплаты: </span><span class="float-right">{{renter.datePay}}</span></div>
                   <div><i class="material-icons">local_atm</i><span class="float-left">Тип оплаты: </span><span class="float-right">{{renter.typePay}}</span></div>
                   <div><i class="material-icons">event_note</i><span class="float-left">Примечания: </span><span class="float-right">{{renter.note}}</span></div>
-                </md-card-content>
-                <md-card-actions>
+                </mat-card-content>
+                <mat-card-actions>
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(renter)" data-dismiss="modal">
                     <i class="fa fa-pencil"></i> Редактировать
                   </button>
@@ -61,8 +61,8 @@
                   <button class="btn btn-sm btn-default" data-dismiss="modal">
                     <i class="fa fa-close"></i> Закрыть
                   </button>
-                </md-card-actions>
-              </md-card>
+                </mat-card-actions>
+              </mat-card>
             </div>
           </div>
         </div>
@@ -73,9 +73,9 @@
         <div colspan="22">В базе данных еще нет Арендаторов. Добавьте их.</div>
       </div>
     </div>
-    <md-card class="edit-card col-12 col-md-12 animated bounceInRight" *ngIf="isEditing">
+    <mat-card class="edit-card col-12 col-md-12 animated bounceInRight" *ngIf="isEditing">
   <form class="" #form="ngForm" (ngSubmit)="editRenter(renter)" style="display:inline">
-    <md-card-content>
+    <mat-card-content>
       <div class="col-4 col-md-4">
         <h5>Информация арендатора</h5>
         <div class="form-group inline"><label><i class="material-icons">account_circle</i>
@@ -171,133 +171,133 @@
       </div>
       <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
       <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
-    </md-card-content>
-    <md-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
 
-    </md-card-actions>
+    </mat-card-actions>
   </form>
-</md-card>
+</mat-card>
   </div>
-  <md-sidenav-container class="example-container" *ngIf="!isEditing">
+  <mat-sidenav-container class="example-container" *ngIf="!isEditing">
     <div class="example-sidenav-content">
-      <button md-raised-button (click)="sidenav.open()">
-        <md-icon>add</md-icon>Добавить арендатора
+      <button mat-raised-button (click)="sidenav.open()">
+        <mat-icon>add</mat-icon>Добавить арендатора
       </button>
     </div>
-    <md-sidenav #sidenav class="example-sidenav">
+    <mat-sidenav #sidenav class="example-sidenav">
       <div class="addItem" *ngIf="!isEditing">
         <div>
           <form class="form-inline" [formGroup]="addRenterForm" (ngSubmit)="addRenter()" style="text-align:center">
-            <md-form-field>
-              <span mdTooltip="Введите имя">
-                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
+            <mat-form-field>
+              <span matTooltip="Введите имя">
+                <input matInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите фамилию">
-                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите фамилию">
+                <input matInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите день рождения">
-                <input mdInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="Дата рождения">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите день рождения">
+                <input matInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="Дата рождения">
               </span>
-            </md-form-field>
-            <span mdTooltip="Введите телефон">
-              <md-form-field>
-                <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
-              </md-form-field>
+            </mat-form-field>
+            <span matTooltip="Введите телефон">
+              <mat-form-field>
+                <span style="color: #757575;" matPrefix>+996 &nbsp;</span>
+                <input matInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
+              </mat-form-field>
             </span>
-            <md-form-field>
-              <span mdTooltip="Введите тип помещения">
-                <input mdInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="Тип">
+            <mat-form-field>
+              <span matTooltip="Введите тип помещения">
+                <input matInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="Тип">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите литер">
-                <input mdInput class="mat-input-element" type="text" name="liter" formControlName="liter" placeholder="Литер">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите литер">
+                <input matInput class="mat-input-element" type="text" name="liter" formControlName="liter" placeholder="Литер">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите площадь">
-                <input mdInput class="mat-input-element" type="text" name="square" formControlName="square" placeholder="Площадь">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите площадь">
+                <input matInput class="mat-input-element" type="text" name="square" formControlName="square" placeholder="Площадь">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="">
-                <input mdInput class="mat-input-element" type="number" name="price" formControlName="price" placeholder="Цена">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="">
+                <input matInput class="mat-input-element" type="number" name="price" formControlName="price" placeholder="Цена">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите дату начала аренды">
-                <input mdInput class="mat-input-element" type="date" name="dateFrom" formControlName="dateFrom" placeholder="Дата от">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите дату начала аренды">
+                <input matInput class="mat-input-element" type="date" name="dateFrom" formControlName="dateFrom" placeholder="Дата от">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите дату окончания аренды">
-                <input mdInput class="mat-input-element" type="date" name="dateUntil" formControlName="dateUntil" placeholder="Дата до">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите дату окончания аренды">
+                <input matInput class="mat-input-element" type="date" name="dateUntil" formControlName="dateUntil" placeholder="Дата до">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите общую сумму">
-                <input mdInput class="mat-input-element" type="text" name="priceSum" formControlName="priceSum" placeholder="Сумма">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите общую сумму">
+                <input matInput class="mat-input-element" type="text" name="priceSum" formControlName="priceSum" placeholder="Сумма">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите депозит">
-                <input mdInput class="mat-input-element" type="number" name="deposite" formControlName="deposite" placeholder="Депозит">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите депозит">
+                <input matInput class="mat-input-element" type="number" name="deposite" formControlName="deposite" placeholder="Депозит">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="ТБО">
-                <input mdInput class="mat-input-element" type="number" name="tbo" formControlName="tbo" placeholder="ТБО">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="ТБО">
+                <input matInput class="mat-input-element" type="number" name="tbo" formControlName="tbo" placeholder="ТБО">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Электричество">
-                <input mdInput class="mat-input-element" type="number" name="electric" formControlName="electric" placeholder="Электричество">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Электричество">
+                <input matInput class="mat-input-element" type="number" name="electric" formControlName="electric" placeholder="Электричество">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Сумма за тел.связь">
-                <input mdInput class="mat-input-element" type="number" name="telNet" formControlName="telNet" placeholder="Тел. связь">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Сумма за тел.связь">
+                <input matInput class="mat-input-element" type="number" name="telNet" formControlName="telNet" placeholder="Тел. связь">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Общая сумма">
-                <input mdInput class="mat-input-element" type="text" name="sumAll" formControlName="sumAll" placeholder="Сумма всего">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Общая сумма">
+                <input matInput class="mat-input-element" type="text" name="sumAll" formControlName="sumAll" placeholder="Сумма всего">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Фактическая оплата">
-                <input mdInput class="mat-input-element" type="text" name="factPay" formControlName="factPay" placeholder="Фактическая оплата">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Фактическая оплата">
+                <input matInput class="mat-input-element" type="text" name="factPay" formControlName="factPay" placeholder="Фактическая оплата">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Дата оплаты">
-                <input mdInput class="mat-input-element" type="date" name="datePay" formControlName="datePay" placeholder="Дата оплаты">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Дата оплаты">
+                <input matInput class="mat-input-element" type="date" name="datePay" formControlName="datePay" placeholder="Дата оплаты">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Тип оплаты">
-                <input mdInput class="mat-input-element" type="text" name="typePay" formControlName="typePay" placeholder="Тип оплаты">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Тип оплаты">
+                <input matInput class="mat-input-element" type="text" name="typePay" formControlName="typePay" placeholder="Тип оплаты">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Статус">
-                <input mdInput class="mat-input-element" type="text" name="status" formControlName="status" placeholder="Статус">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Статус">
+                <input matInput class="mat-input-element" type="text" name="status" formControlName="status" placeholder="Статус">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Заметки">
-                <textarea mdInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="Заметки"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Заметки">
+                <textarea matInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="Заметки"></textarea>
               </span>
-            </md-form-field>
-            <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addRenterForm.valid"><i class="material-icons">add</i> Добавить</button>
+            </mat-form-field>
+            <button mat-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addRenterForm.valid"><i class="material-icons">add</i> Добавить</button>
           </form>
         </div>
       </div>
-    </md-sidenav>
-  </md-sidenav-container>
+    </mat-sidenav>
+  </mat-sidenav-container>
 </div>

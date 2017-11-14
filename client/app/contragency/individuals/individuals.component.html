@@ -1,120 +1,157 @@
-<md-form-field class="searchField">
-  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
-  <span mdSuffix><i class="material-icons">search</i></span>
-</md-form-field>
-<!-- CRUD -->
+<!-- CRUD-->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="info_table">
-  <div class="animated bounceInRight" *ngIf="!isLoading">
-    <h4 class="">Физические лица {{individuals.length}}</h4>
-    <div class="">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-default" *ngIf="!isEditing">
-          <tr>
-            <th>Имя</th>
-            <th>Фамилия </th>
-            <th>День рождения</th>
-            <th>Телефон</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="individuals.length === 0">
-          <tr>
-            <td colspan="5">В базе данных еще нет физических лиц. Добавьте их.</td>
-          </tr>
-        </tbody>
-        <tbody *ngIf="!isEditing  && !isSearching">
-          <tr *ngFor="let individual of individuals">
-            <td>{{individual.name}}</td>
-            <td>{{individual.sur}}</td>
-            <td>{{individual.dob}}</td>
-            <td>0 {{individual.tel}}</td>
-            <td>
-              <button class="btn btn-sm btn-warning" (click)="enableEditing(individual)">
-                <i class="fa fa-pencil"></i> Редактировать
-              </button>
-              <button class="btn btn-sm btn-danger" id="remove" (click)="deleteIndividual(individual)">
-                <i class="fa fa-trash"></i> Удалить
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody *ngIf="!isEditing  && isSearching">
-          <tr *ngFor="let individual of individuals">
-            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">{{individual.name}}</td>
-            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">{{individual.sur}}</td>
-            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">{{individual.dob}}</td>
-            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">0 {{individual.tel}}</td>
-            <td *ngIf="individual.name.toUpperCase().startsWith(searchItem)">
-              <button class="btn btn-sm btn-warning" (click)="enableEditing(individual)">
-                <i class="fa fa-pencil"></i> Редактировать
-              </button>
-              <button class="btn btn-sm btn-danger" id="remove" (click)="deleteIndividual(individual)">
-                <i class="fa fa-trash"></i> Удалить
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <div class="edit" *ngIf="isEditing">
-          <form class="form-inline" #form="ngForm" (ngSubmit)="editIndividual(individual)" style="display:inline">
-            <md-form-field>
-              <input class="form-control" mdInput type="text" name="name" [(ngModel)]="individual.name" placeholder="Имя" required>
-            </md-form-field>
-            <md-form-field>
-              <input class="form-control" mdInput type="text" name="sur" [(ngModel)]="individual.sur" placeholder="Фамилия" required>
-            </md-form-field>
-            <md-form-field>
-              <input class="form-control" mdInput type="date" name="dob" [(ngModel)]="individual.dob" placeholder="День рождения" required>
-            </md-form-field>
-            <md-form-field>
-              <span mdPrefix>+996 </span>
-              <input class="form-control" mdInput type="number" name="tel" [(ngModel)]="individual.tel" placeholder="Телефон" required>
-            </md-form-field>
-            <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-            <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
-          </form>
+<div class="info_table col-md-12">
+  <div *ngIf="individuals.length === 0 && !isLoading">
+    <h2>В базе данных еще нет физ.лиц. Добавьте их</h2>
+  </div>
+  <h6>Количество физ.лиц в базе: {{individuals.length}}</h6>
+  <div class="table-hover animated bounceInRight">
+    <div class="example-header">
+      <mat-input-container>
+        <input matInput #filter placeholder="поиск">
+      </mat-input-container>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- ChangeId Column -->
+      <ng-container cdkColumnDef="name">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Ф.И.О. </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+      <!-- DateSubmitted -->
+      <ng-container cdkColumnDef="dob">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Д.р </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.dob}} </mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="tel">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.tel}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="history">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> История продаж </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.history}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="calledBy">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Привел </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.calledBy}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="action">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+          <button class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
+            <i class="fa fa-pencil"></i> Редактировать
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteIndividual(row)">
+            <i class="fa fa-trash"></i> Удалить
+          </button>
+        </mat-cell>
+      </ng-container>
+      <!-- ChangeDescription -->
+      <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+      Ничего не найденно по вашему запросу.
+    </div>
+    <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+  <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Редактирование врача</h4>
         </div>
-      </table>
+        <form class="form-inline" #form="ngForm" (ngSubmit)="editIndividual(individual)" style="display:inline">
+          <div class="modal-body">
+            <mat-form-field>
+                  <span matTooltip="Введите Ф.И.О." class="time">
+                  <input matInput class="mat-input-element"  name="name" [(ngModel)]="individual.name" placeholder="Ф.И.О.">
+                  </span>
+            </mat-form-field>
+            <mat-form-field>
+                  <span matTooltip="Введите д.р">
+                  <input matInput class="mat-input-element"  name="dob"  [(ngModel)]="individual.dob"  placeholder="Д.р">
+                  </span>
+            </mat-form-field>
+            <mat-form-field>
+                  <span matTooltip="История продаж">
+                  <input matInput class="mat-input-element"  name="history"  [(ngModel)]="individual.history"  placeholder="Д.р">
+                  </span>
+            </mat-form-field>
+            <mat-form-field>
+                  <span matTooltip="Привел">
+                  <input matInput class="mat-input-element"  name="calledBy"  [(ngModel)]="individual.calledBy"  placeholder="Д.р">
+                  </span>
+            </mat-form-field>
+            <span matTooltip="Введите телефон">
+                  <mat-form-field>
+                     <input matInput class="mat-input-element"  name="tel" [(ngModel)]="individual.tel" placeholder="Телефон">
+                  </mat-form-field>
+             </span>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()"><i class="fa fa-times"></i> Отменить</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-  <md-sidenav-container class="example-container">
-    <div class="example-sidenav-content">
-      <button md-raised-button (click)="sidenav.open()">
-        <md-icon>add</md-icon>Добавить физическое лицо
-      </button>
-    </div>
-    <md-sidenav #sidenav class="example-sidenav">
-      <div class="addItem" *ngIf="!isEditing">
-        <div>
-          <form class="form-inline" [formGroup]="addIndividualForm" (ngSubmit)="addIndividual()" style="text-align:center">
-            <md-form-field>
-              <span mdTooltip="Введите имя">
-                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
-              </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите фамилию">
-                <input mdInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
-              </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите день рождения">
-                
-                <input mdInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="День рождения">
-              </span>
-            </md-form-field>
-            <span mdTooltip="Введите телефон">
-              <md-form-field>
-                <span style="color: #757575;" mdPrefix>+996 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
-              </md-form-field>
-            </span>
-            <button md-raised-button color="warm" class="" type="submit" [disabled]="!addIndividualForm.valid"><i class="material-icons">add</i> Добавить</button>
-          </form>
+</div>
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить физ.лицо</span>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Добавление нового физ.лиц</h4>
+      </div>
+      <div class="modal-body">
+        <div class="addItem">
+          <div>
+            <form class="form-inline" [formGroup]="addIndividualForm" (ngSubmit)="addIndividual()" style="text-align:center">
+              <mat-form-field>
+                     <span matTooltip="Введите Ф.И.О.">
+                     <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Ф.И.О.">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Введите Д.р">
+                     <input matInput class="mat-input-element"  name="dob" formControlName="dob" placeholder="Д.р">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="История продаж">
+                     <input matInput class="mat-input-element"  name="history" formControlName="history" placeholder="История продаж">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Привел">
+                     <input matInput class="mat-input-element"  name="calledBy" formControlName="calledBy" placeholder="Привел">
+                     </span>
+              </mat-form-field>
+              <span matTooltip="Введите телефон">
+                     <mat-form-field>
+                        <input matInput class="mat-input-element"  name="tel" formControlName="tel" placeholder="Телефон">
+                     </mat-form-field>
+                  </span>
+              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addIndividualForm.valid"><i class="material-icons">add</i> Добавить</button>
+            </form>
+          </div>
         </div>
       </div>
-    </md-sidenav>
-  </md-sidenav-container>
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
 </div>

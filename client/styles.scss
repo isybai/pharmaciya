@@ -5,7 +5,7 @@
     right: 100px;
     top: -140px;
 }
-.wrap { 
+.wrap {
   text-align: center;
   vertical-align: middle;
   padding-top: 200px;
@@ -16,7 +16,7 @@
 .spinner {
   width: 100px;
   height: 100px;
-  position: relative; 
+  position: relative;
   border-radius: 50%;
   display: inline-block;
   radius: 50%;
@@ -71,9 +71,35 @@
             transform: rotate(360deg) scale(1);
   }
 }
-
+mat-row.mat-row {
+  display: flex;
+  border-bottom-width: 0;
+  border-bottom-style: solid;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  outline: 1px solid #e0e0e0;
+}
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+button.add-item-button.btn.btn-sm.btn-success span {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  text-transform: lowercase;
+  font-family: Arial;
+  font-weight: 600;
+}
+button.add-item-button.btn.btn-sm.btn-success {
+  position: fixed;
+  right: 0;
+  z-index: 100;
+}
+div.cdk-overlay-container {
+  z-index: 9000;
+}
+div.cdk-overlay-pane {
+  z-index: 9000;
+}
 html {
   background: #e0e0e0;
   background-size: 100%;
@@ -86,7 +112,7 @@ body {
     margin-top: 0;
     margin-bottom: 0;
     color: #272727;
-} 
+}
 a:focus, a:hover {
     color: #003a6d;
     text-decoration: none;
@@ -133,13 +159,13 @@ h4.page-title {
     padding: 12px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
 }
-md-sidenav.example-sidenav.mat-drawer {
+mat-sidenav.example-sidenav.mat-drawer {
 	overflow-y: visible;
 }
 .example-container {
   	height: 100%;
 }
-md-sidenav-container.mat-drawer-container{
+mat-sidenav-container.mat-drawer-container{
 	overflow: visible;
 }
 div.mat-drawer-backdrop.mat-drawer-shown {
@@ -149,7 +175,7 @@ div.mat-drawer-backdrop.mat-drawer-shown {
 .mat-list .mat-list-item div.mat-list-item-content {
     height: auto;
     padding: 0;
-} 
+}
 .mat-drawer-container {
     background-color: transparent;
 }
@@ -221,8 +247,8 @@ button.mat-raised-button.mat-warm{
     font-size: 14px;
     font-weight: 500;
 }
-.info_table md-form-field.mat-form-field {
-    width: 19%;
+.add-item {
+  top: 10px;
 }
 .info_table input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background: rgba(255, 0, 0, 0) !important;
@@ -262,10 +288,44 @@ button.mat-raised-button.mat-warm{
 .info_table .mat-input-prefix span {
     color: black;
 }
-.info_table md-sidenav.example-sidenav.mat-drawer {
+.info_table mat-sidenav.example-sidenav.mat-drawer {
     background: transparent;
     z-index: 1;
 }
 .info_table .table tr{
     white-space: nowrap;
+}
+form.form-inline.searcher mat-form-field {
+  width: 48%;
+}
+form.form-inline.searcher {
+  position: absolute;
+  right: 20px;
+  top: -140px;
+  width: 400px;
+}
+.bg-over {
+  display: block;
+  position: absolute;
+  top: -300%;
+  left: -70px;
+  z-index: 10;
+  width: 106%;
+  height: 400%;
+  background: rgba(0, 0, 0, 0.36);
+}
+.addItem .mat-form-field {
+  width: 49%;
+}
+.addItem {
+  background-color: white;
+}
+.col-md-4.animated.fadeInDown.editingForm {
+  position: relative;
+  z-index: 20;
+  background: white;
+  padding: 10px;
+  margin: 0 auto;
+  float: none;
+  top: -40px;
 }

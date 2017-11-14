@@ -1,23 +1,375 @@
-<md-form-field class="searchField">
-  <input type="text" (keyup)=(search($event.srcElement.value)) mdInput placeholder="Поиск">
-  <span mdSuffix><i class="material-icons">search</i></span>
-</md-form-field>
+
 <!-- CRUD -->
 <app-loading [condition]="isLoading"></app-loading>
 <app-toast [message]="toast.message"></app-toast>
+
+<div class="info_table col-md-12">
+  <div *ngIf="lpus.length === 0 && !isLoading">
+    <h2>В базе данных еще нет ЛПУ. Добавьте их</h2>
+  </div>
+  <h6>Количество ЛПУ в базе: {{lpus.length}}</h6>
+  <mat-tab-group>
+    <mat-tab label="ЦСМ - Центры Семейной Медицины">
+      <div class="table-hover animated bounceInRight">
+        <div class="example-header">
+          <mat-input-container>
+            <input matInput #filter placeholder="поиск">
+          </mat-input-container>
+        </div>
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <!-- ChangeId Column -->
+          <ng-container cdkColumnDef="name">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.name : ''}} </mat-cell>
+          </ng-container>
+          <!-- DateSubmitted -->
+          <ng-container cdkColumnDef="localArea">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Район </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.localArea : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeSponsor -->
+          <ng-container cdkColumnDef="address">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.address : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="tel">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.tel : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="workTime">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Раб. время </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.workTime : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="director">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.director : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="directorPhone">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">{{row.type === 'Ц.С.М.'? row.directorPhone : ''}}</mat-cell>
+          </ng-container>
+          <ng-container cdkColumnDef="action">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+              <button *ngIf="row.type === 'Ц.С.М.'" class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
+                <i class="fa fa-pencil"></i> Редактировать
+              </button>
+              <button *ngIf="row.type === 'Ц.С.М.'" class="btn btn-sm btn-danger" (click)="deleteLpu(row)">
+                <i class="fa fa-trash"></i> Удалить
+              </button>
+            </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+        <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+          Ничего не найденно по вашему запросу.
+        </div>
+        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Медицинские Центры">
+      <div class="table-hover animated bounceInRight">
+        <div class="example-header">
+          <mat-input-container>
+            <input matInput #filter placeholder="поиск">
+          </mat-input-container>
+        </div>
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <!-- ChangeId Column -->
+          <ng-container cdkColumnDef="name">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.name : ''}} </mat-cell>
+          </ng-container>
+          <!-- DateSubmitted -->
+          <ng-container cdkColumnDef="localArea">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Район </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.localArea : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeSponsor -->
+          <ng-container cdkColumnDef="address">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.address : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="tel">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.tel : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="workTime">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Раб. время </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.workTime : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="director">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.director : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="directorPhone">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">{{row.type === 'Мед. центр'? row.directorPhone : ''}}</mat-cell>
+          </ng-container>
+          <ng-container cdkColumnDef="action">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+              <button *ngIf="row.type === 'Мед. центр'" class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
+                <i class="fa fa-pencil"></i> Редактировать
+              </button>
+              <button *ngIf="row.type === 'Мед. центр'" class="btn btn-sm btn-danger" (click)="deleteLpu(row)">
+                <i class="fa fa-trash"></i> Удалить
+              </button>
+            </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+        <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+          Ничего не найденно по вашему запросу.
+        </div>
+        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Больницы">
+      <div class="table-hover animated bounceInRight">
+        <div class="example-header">
+          <mat-input-container>
+            <input matInput #filter placeholder="поиск">
+          </mat-input-container>
+        </div>
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <!-- ChangeId Column -->
+          <ng-container cdkColumnDef="name">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.name : ''}} </mat-cell>
+          </ng-container>
+          <!-- DateSubmitted -->
+          <ng-container cdkColumnDef="localArea">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Район </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.localArea : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeSponsor -->
+          <ng-container cdkColumnDef="address">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.address : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="tel">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.tel : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="workTime">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Раб. время </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.workTime : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="director">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.director : ''}} </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <ng-container cdkColumnDef="directorPhone">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">{{row.type === 'Больница'? row.directorPhone : ''}}</mat-cell>
+          </ng-container>
+          <ng-container cdkColumnDef="action">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+              <button *ngIf="row.type === 'Больница'"  class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
+                <i class="fa fa-pencil"></i> Редактировать
+              </button>
+              <button *ngIf="row.type === 'Больница'"  class="btn btn-sm btn-danger" (click)="deleteLpu(row)">
+                <i class="fa fa-trash"></i> Удалить
+              </button>
+            </mat-cell>
+          </ng-container>
+          <!-- ChangeDescription -->
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+        <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+          Ничего не найденно по вашему запросу.
+        </div>
+        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Редактирование ЛПУ</h4>
+      </div>
+
+      <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
+        <div class="modal-body">
+          <mat-form-field>
+                  <span matTooltip="Введите название" class="time">
+                    <input matInput class="mat-input-element"  name="name" [(ngModel)]="lpu.name" placeholder="Название">
+                  </span>
+          </mat-form-field>
+          <mat-form-field>
+                     <span matTooltip="Выберите район">
+                        <mat-select [(ngModel)]="lpu.localArea" name="localArea" placeholder="Выберите район">
+                           <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
+                           {{ spec.viewValue }}
+                           </mat-option>
+                        </mat-select>
+                     </span>
+          </mat-form-field>
+          <mat-form-field>
+                  <span matTooltip="Введите адрес" class="time">
+                    <input matInput class="mat-input-element"  name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
+                  </span>
+          </mat-form-field>
+          <mat-form-field>
+                  <span matTooltip="Выберите тип">
+                    <mat-select [(ngModel)]="lpu.type" name="type" placeholder="Выберите тип">
+                      <mat-option *ngFor="let spec of types" [value]="spec.value">
+                        {{ spec.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </span>
+          </mat-form-field>
+          <mat-form-field>
+                  <span matTooltip="Введите телефон" class="time">
+                    <input matInput class="mat-input-element"  name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
+                  </span>
+          </mat-form-field>
+          <mat-form-field>
+                  <span matTooltip="Введите раб. время">
+                    <input matInput class="mat-input-element"  name="workTime"  [(ngModel)]="lpu.workTime"  placeholder="Введите раб. время">
+                  </span>
+          </mat-form-field>
+          <span matTooltip="Введите имя директора">
+                  <mat-form-field>
+                     <input matInput class="mat-input-element"  name="tel" [(ngModel)]="lpu.director" placeholder="Введите имя директора">
+                  </mat-form-field>
+               </span>
+          <mat-form-field class="time">
+                  <span matTooltip="Телефон директора">
+                    <input matInput name="directorPhone" [(ngModel)]="lpu.directorPhone" class="mat-input-element"  placeholder="Телефон директора">
+                  </span>
+          </mat-form-field>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+          <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()"><i class="fa fa-times"></i> Отменить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить ЛПУ</span>
+</button>
+
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Добавление нового ЛПУ</h4>
+      </div>
+      <div class="modal-body">
+        <div class="addItem">
+          <div>
+            <form class="form-inline" [formGroup]="addLpuForm" (ngSubmit)="addLpu()" style="text-align:center">
+              <mat-form-field>
+                     <span matTooltip="Введите название">
+                     <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Название">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Выберите район">
+                        <mat-select formControlName="localArea" placeholder="Выберите район">
+                           <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
+                           {{ spec.viewValue }}
+                           </mat-option>
+                        </mat-select>
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Введите адрес">
+                     <input matInput class="mat-input-element"  name="address" formControlName="address" placeholder="Адрес">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Выберите тип ЛПУ">
+                        <mat-select formControlName="type" placeholder="Выберите тип ЛПУ">
+                           <mat-option *ngFor="let spec of types" [value]="spec.value">
+                           {{ spec.viewValue }}
+                           </mat-option>
+                        </mat-select>
+                     </span>
+              </mat-form-field>
+              <span matTooltip="Введите телефон">
+                     <mat-form-field>
+                        <input matInput class="mat-input-element"  name="tel" formControlName="tel" placeholder="Телефон">
+                     </mat-form-field>
+                  </span>
+              <mat-form-field>
+                     <span matTooltip="Раб.время">
+                     <input matInput formControlName="workTime" class="mat-input-element"  placeholder="Раб.время">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Имя директора">
+                     <input matInput formControlName="director" class="mat-input-element"  placeholder="Имя директора">
+                     </span>
+              </mat-form-field>
+              <mat-form-field>
+                     <span matTooltip="Телефон директора">
+                     <input matInput formControlName="directorPhone" class="mat-input-element"  placeholder="Телефон директора">
+                     </span>
+              </mat-form-field>
+              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
 <div class="info_table">
   <div class="animated bounceInRight" *ngIf="!isLoading">
-    <h4 class="">Текущие ЛПУ {{lpus.length}}</h4>
-    <md-tab-group>
-      <md-tab label="ЦСМ - Центры Семейной Медицины">
+    <mat-tab-group>
+      <mat-tab label="ЦСМ - Центры Семейной Медицины">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default" *ngIf="!isEditing">
               <tr>
                 <th>Название</th>
                 <th>Адрес</th>
-                <th>Тип</th>
-                <th>Телефон</th>
+                <th>Рабочее время</th>
+                <th>Район</th>
+                <th>Директор</th>
+                <th>Тел. директора</th>
                 <th>Действия</th>
               </tr>
             </thead>
@@ -26,12 +378,12 @@
                 <td colspan="10">В базе данных еще нет ЦСМ. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing && !isSearching">
+            <tbody *ngIf="!isEditing">
               <tr *ngFor="let lpu of lpus">
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.type}}</td>
-                <td *ngIf="lpu.type === 'Ц.С.М.'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -47,7 +399,7 @@
                 <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.type}}</td>
-                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -62,29 +414,31 @@
               <tr>
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
-                    <md-form-field>
-                      <span mdTooltip="Введите название">
-                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
+                    <mat-form-field>
+                      <span matTooltip="Введите название">
+                        <input matInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="адрес">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите адрес">
+                        <input matInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="адрес">
                       </span>
-                    </md-form-field>
-                    <span mdTooltip="ВВедите тип">
-                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
-                        <md-option *ngFor="let type of types" [value]="type.value">
-                          {{ type.viewValue }}
-                        </md-option>
-                      </md-select>
-                    </span>
-                    <md-form-field>
-                      <span mdTooltip="Введите телефон">
-                        <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="ВВедите тип">
+                        <mat-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
+                          <mat-option *ngFor="let type of types" [value]="type.value">
+                            {{ type.viewValue }}
+                          </mat-option>
+                        </mat-select>
                       </span>
-                    </md-form-field>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите телефон">
+                        <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                        <input matInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
+                      </span>
+                    </mat-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
                   </form>
                   <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -93,8 +447,8 @@
             </tbody>
           </table>
         </div>
-      </md-tab>
-      <md-tab label="Медицинские Центры">
+      </mat-tab>
+      <mat-tab label="Медицинские Центры">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default" *ngIf="!isEditing">
@@ -116,7 +470,7 @@
                 <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">{{lpu.type}}</td>
-                <td *ngIf="lpu.type === 'Мед. центр'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -132,7 +486,7 @@
                 <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.type}}</td>
-                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -147,29 +501,31 @@
               <tr>
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
-                    <md-form-field>
-                      <span mdTooltip="Введите название">
-                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
+                    <mat-form-field>
+                      <span matTooltip="Введите название">
+                        <input matInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="ВВедите адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="ВВедите адрес">
+                        <input matInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
                       </span>
-                    </md-form-field>
-                    <span mdTooltip="Введите тип">
-                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
-                        <md-option *ngFor="let type of types" [value]="type.value">
+                    </mat-form-field>
+                    <mat-form-field>
+                    <span matTooltip="Введите тип">
+                      <mat-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </span>
-                    <md-form-field>
-                      <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                      <span mdTooltip="Введите телефон">
-                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                      <span matTooltip="Введите телефон">
+                        <input matInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="телефон">
                       </span>
-                    </md-form-field>
+                    </mat-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
                   </form>
                   <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -178,8 +534,8 @@
             </tbody>
           </table>
         </div>
-      </md-tab>
-      <md-tab label="Больницы">
+      </mat-tab>
+      <mat-tab label="Больницы">
         <div class="">
           <table class="table table-bordered table-striped">
             <thead class="thead-default" *ngIf="!isEditing">
@@ -196,12 +552,12 @@
                 <td colspan="10">В базе данных еще нет Больниц. Добавьте их</td>
               </tr>
             </tbody>
-            <tbody *ngIf="!isEditing && !isSearching"> 
+            <tbody *ngIf="!isEditing && !isSearching">
               <tr *ngFor="let lpu of lpus">
                 <td *ngIf="lpu.type === 'Больница'">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Больница'">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Больница'">{{lpu.type}}</td>
-                <td *ngIf="lpu.type === 'Больница'"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Больница'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Больница'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -217,7 +573,7 @@
                 <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.name}}</td>
                 <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.address}}</td>
                 <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">{{lpu.type}}</td>
-                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" mdPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
+                <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
                     <i class="fa fa-pencil"></i> Редактировать
@@ -232,29 +588,31 @@
               <tr>
                 <td colspan="10">
                   <form class="form-inline" #form="ngForm" (ngSubmit)="editLpu(lpu)" style="display:inline">
-                    <md-form-field>
-                      <span mdTooltip="Введите название">
-                        <input mdInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
+                    <mat-form-field>
+                      <span matTooltip="Введите название">
+                        <input matInput class="mat-input-element" type="text" name="name" [(ngModel)]="lpu.name" placeholder="Название">
                       </span>
-                    </md-form-field>
-                    <md-form-field>
-                      <span mdTooltip="Введите адрес">
-                        <input mdInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите адрес">
+                        <input matInput class="mat-input-element" type="text" name="address" [(ngModel)]="lpu.address" placeholder="Адрес">
                       </span>
-                    </md-form-field>
-                    <span mdTooltip="Введите тип">
-                      <md-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
-                        <md-option *ngFor="let type of types" [value]="type.value">
+                    </mat-form-field>
+                    <mat-form-field>
+                    <span matTooltip="Введите тип">
+                      <mat-select name="type" [(ngModel)]="lpu.type" placeholder="Тип">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
                           {{ type.viewValue }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </span>
-                    <md-form-field>
-                      <span mdTooltip="Введите телефон">
-                        <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                        <input mdInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите телефон">
+                        <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                        <input matInput class="mat-input-element" type="number" name="tel" [(ngModel)]="lpu.tel" placeholder="Телефон">
                       </span>
-                    </md-form-field>
+                    </mat-form-field>
                     <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
                   </form>
                   <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
@@ -263,54 +621,57 @@
             </tbody>
           </table>
         </div>
-      </md-tab>
-    </md-tab-group>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-  <md-sidenav-container class="example-container">
+  <mat-sidenav-container class="example-container">
     <div class="example-sidenav-content">
-      <button md-raised-button (click)="sidenav.open()">
-        <md-icon>add</md-icon>Добавить ЛПУ
+      <button mat-raised-button (click)="sidenav.open()">
+        <mat-icon>add</mat-icon>Добавить ЛПУ
       </button>
     </div>
-    <md-sidenav #sidenav class="example-sidenav">
+    <mat-sidenav #sidenav class="example-sidenav">
       <div class="addItem" *ngIf="!isEditing">
         <div>
           <form class="form-inline" [formGroup]="addLpuForm" (ngSubmit)="addLpu()" style="text-align:center">
-            <md-form-field>
-              <span mdTooltip="Введите название">
-                <input mdInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
+            <mat-form-field>
+              <span matTooltip="Введите название">
+                <input matInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Название">
               </span>
-            </md-form-field>
-            <md-form-field>
-              <span mdTooltip="Введите адрес">
-                <input mdInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="Адрес">
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите адрес">
+                <input matInput class="mat-input-element" type="text" name="address" formControlName="address" placeholder="Адрес">
               </span>
-            </md-form-field>
-            <span mdTooltip="Введите тип">
-              <md-select formControlName="type" placeholder="Тип">
-                <md-option *ngFor="let type of types" [value]="type.value">
+            </mat-form-field>
+            <mat-form-field>
+            <span matTooltip="Введите тип">
+              <mat-select formControlName="type" placeholder="Тип">
+                <mat-option *ngFor="let type of types" [value]="type.value">
                   {{ type.viewValue }}
-                </md-option>
-              </md-select>
+                </mat-option>
+              </mat-select>
             </span>
-            <span mdTooltip="Введите телефон">
-              <md-form-field>
-                <span style="color: #757575;" mdPrefix>+312 &nbsp;</span>
-                <input mdInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
-              </md-form-field>
+            </mat-form-field>
+            <span matTooltip="Введите телефон">
+              <mat-form-field>
+                <span style="color: #757575;" matPrefix>+312 &nbsp;</span>
+                <input matInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
+              </mat-form-field>
             </span>
-            <button md-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>
+            <button mat-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addLpuForm.valid"><i class="material-icons">add</i> Добавить</button>
           </form>
         </div>
       </div>
-    </md-sidenav>
-  </md-sidenav-container>
+    </mat-sidenav>
+  </mat-sidenav-container>
 </div>
+
 
 <!--
 <nav class="navbar navbar-light">
   <div class="row">
-    
+
   </div>
 </nav>
 -->

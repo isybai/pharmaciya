@@ -6,8 +6,11 @@ const drugstoreSchema = new mongoose.Schema({
   tel: String,
   workTime: String,
   type: String,
+  localArea: String,
+  director: String,
+  directorPhone: String
 });
 
 const Drugstore = mongoose.model('Drugstore', drugstoreSchema);
 
-export default Drugstore; 
+export default Drugstore;

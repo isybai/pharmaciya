@@ -2,10 +2,10 @@
 .mat-option{
 	height: initial;
 }
-.animated.bounceInRight .col-md-4 md-form-field.mat-form-field {
+.col-md-4 mat-form-field.mat-form-field {
     width: 100%;
 }
-.animated.bounceInRight .col-md-4 {
+col-md-4 {
     background-color: white;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -16,19 +16,11 @@
     margin-bottom: 20px;
     box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.25);
 }
-.animated.bounceInRight .col-md-4 md-form-field.mat-form-field.time{
+.col-md-4 mat-form-field.mat-form-field.time{
     width: 48%;
 }
 .box {
     overflow: hidden;
 }
-.bg-over {
-    display: block;
-    position: absolute;
-    top: -300%;
-    left: -70px;
-    z-index: 10;
-    width: 106%;
-    height: 1300%;
-    background: rgba(0, 0, 0, 0.36);
-}
+
+
