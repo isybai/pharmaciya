@@ -2,93 +2,134 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
+
 <div class="card" *ngIf="!isLoading">
-  <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile>
-      <mat-grid-tile-header>header</mat-grid-tile-header>
-      <mat-grid-tile-footer>footer</mat-grid-tile-footer>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-grid-tile-header>header</mat-grid-tile-header>
-      <mat-grid-tile-footer>footer</mat-grid-tile-footer>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-grid-tile-header>header</mat-grid-tile-header>
-      <mat-grid-tile-footer>footer</mat-grid-tile-footer>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <h4 class="card-header">Количество задач агентов ({{tasks.length}})</h4>
-  <div class="card-block">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-default">
-      <tr>
-        <th>Название</th>
-        <th>Тип</th>
-        <th>Кому</th>
-        <th>Статус</th>
-        <th>Действия</th>
-      </tr>
-      </thead>
-      <tbody *ngIf="tasks.length === 0">
-      <tr>
-        <td colspan="4">Нету задач. Создайте задачу</td>
-      </tr>
-      </tbody>
-      <tbody *ngIf="!isEditing">
-      <tr *ngFor="let task of tasks">
-        <td>{{task.name}}</td>
-        <td>{{task.type}}</td>
-        <td>{{task.belongTo}}</td>
-        <td>{{task.plan}}</td>
-        <td>
-          <button class="btn btn-sm btn-warning" (click)="enableEditing(task)"><i class="fa fa-pencil"></i> Редактировать</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteTask(task)"><i class="fa fa-trash"></i> Удалить</button>
-        </td>
-      </tr>
-      </tbody>
-      <tbody *ngIf="isEditing">
-      <tr>
-        <td colspan="4">
-          <form class="form-inline" #form="ngForm" (ngSubmit)="editTask(task)" style="display:inline">
-            <div class="form-group">
-              <input class="form-control" name="name" [(ngModel)]="task.name" placeholder="Название" required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" name="type" [(ngModel)]="task.type" placeholder="Тип" required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" name="weight" [(ngModel)]="task.belongTo" placeholder="Принадлежит" required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" name="weight" [(ngModel)]="task.plan" placeholder="План" required>
-            </div>
-            <button class="btn btn-sm btn-primary" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-          </form>
-          <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="col-md-9" *ngIf="!isEditing">
+
+    <mat-card *ngFor="let task of tasks" class="col-md-4">
+      <mat-card-header>
+        <!--<div mat-card-avatar>{{task.type}}</div>-->
+        <mat-card-title>{{task.name}}<span class="float-right">{{task.type}}</span></mat-card-title>
+        <mat-card-subtitle>{{task.belongTo}}<span class="float-right">До {{task.until}}</span></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        {{task.plan}}
+      </mat-card-content>
+      <mat-card-actions>
+        <span matTooltip="Редактировать">
+          <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="fa fa-pencil"></i> </button>
+        </span>
+        <span matTooltip="Удалить">
+          <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="fa fa-trash"></i> </button>
+        </span>
+      </mat-card-actions>
+    </mat-card>
+</div>
+</div>
+
+<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Редактирование плана</h4>
+      </div>
+      <form class="form-inline" #form="ngForm" (ngSubmit)="editTask(task)" style="display:inline">
+        <div class="modal-body">
+          <mat-form-field>
+            <span matTooltip="Введите название" class="time">
+              <input matInput class="mat-input-element"  name="name" [(ngModel)]="task.name" placeholder="Название">
+            </span>
+          </mat-form-field>
+          <mat-form-field>
+           <span matTooltip="Выберите тип">
+              <mat-select [(ngModel)]="task.type" name="type" placeholder="Выберите тип">
+                 <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
+                 {{ spec.viewValue }}
+                 </mat-option>
+              </mat-select>
+           </span>
+          </mat-form-field>
+          <mat-form-field>
+            <span matTooltip="Принадлежит" class="time">
+              <input matInput class="mat-input-element"  name="belongTo" [(ngModel)]="task.belongTo" placeholder="Принадлежит">
+            </span>
+          </mat-form-field>
+          <mat-form-field>
+            <span matTooltip="Задача" class="time">
+              <textarea matInput class="mat-input-element"  name="plan" [(ngModel)]="task.plan" placeholder="Задача"></textarea>
+            </span>
+          </mat-form-field>
+          <mat-form-field>
+            <span matTooltip="Срок" class="time">
+              <input matInput class="mat-input-element" min={{todays}}  type="date"  name="until" [(ngModel)]="task.until">
+            </span>
+          </mat-form-field>          
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+          <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()"><i class="fa fa-times"></i> Отменить</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="card" *ngIf="!isEditing">
-  <h4 class="card-header">Создать задачу</h4>
-  <div class="card-block">
-    <form class="form-inline" [formGroup]="addTaskForm" (ngSubmit)="addTask()" style="text-align:center">
-      <div class="form-group">
-        <input class="form-control" name="name" formControlName="name" placeholder="Название">
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить ЛПУ</span>
+</button>
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Созданть план</h4>
       </div>
-      <div class="form-group">
-        <input class="form-control" name="type" formControlName="type" placeholder="Тип">
+      <div class="modal-body">
+        <div class="addItem">
+          <div>
+            <form class="form-inline" [formGroup]="addTaskForm" (ngSubmit)="addTask()" style="text-align:center">
+              <mat-form-field>
+                 <span matTooltip="Введите название">
+                    <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Название">
+                 </span>
+              </mat-form-field>
+              <mat-form-field>
+                 <span matTooltip="Выберите район">
+                    <mat-select formControlName="type" placeholder="Тип">
+                       <mat-option *ngFor="let item of types" [value]="item.value">
+                       {{ item.viewValue }}
+                       </mat-option>
+                    </mat-select>
+                 </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Принадлежит">
+                  <input matInput class="mat-input-element"  name="belongTo" formControlName="belongTo" placeholder="Принадлежит">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="План">
+                  <textarea  matInput class="mat-input-element"  name="plan" formControlName="plan" placeholder="Задача"></textarea>
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Срок">
+                  <input type="date" matInput class="mat-input-element" min={{todays}}  name="until" formControlName="until">
+                </span>
+              </mat-form-field>
+              
+              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addTaskForm.valid"><i class="material-icons">add</i> Добавить</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <input class="form-control" name="belongTo" formControlName="belongTo" placeholder="Принадлежит">
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
       </div>
-      <div class="form-group">
-        <input class="form-control" name="plan" formControlName="plan" placeholder="План">
-      </div>
-      <button class="btn btn-primary" [disabled]="!addTaskForm.valid"><i class="fa fa-floppy-o"></i> Создать</button>
-    </form>
+    </div>
   </div>
 </div>
+

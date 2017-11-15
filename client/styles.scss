@@ -1,9 +1,18 @@
+.mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+    background-color: #5cb85c !important;
+}
 .mat-form-field.searchField {
     text-indent: 0;
     width: 15%;
     position: absolute;
     right: 100px;
     top: -140px;
+}
+.float-right{
+  float: right;
+}
+.mat-card-header-text {
+    width: 100%;
 }
 .wrap {
   text-align: center;
@@ -158,6 +167,7 @@ h4.page-title {
     text-indent: 40px;
     padding: 12px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+    margin-top: 0;
 }
 mat-sidenav.example-sidenav.mat-drawer {
 	overflow-y: visible;

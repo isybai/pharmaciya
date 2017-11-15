@@ -1,3 +1,27 @@
-mat-grid-tile {
-  background: lightblue;
+mat-grid-tile.week-plan {
+  background: rgb(182, 255, 146);
+}
+mat-grid-tile.month-plan{
+    background: rgb(159, 153, 255);
+}
+mat-grid-tile.result-plan{
+	
+    background: rgb(153, 255, 231);
+}
+.mat-grid-tile .mat-grid-tile-header span.label {
+    display: inline;
+    padding: .2em .6em .3em;
+}
+.mat-grid-tile .mat-grid-tile-footer button.btn-sm {
+	padding: 0px 3px;
+}
+.mat-grid-tile .mat-grid-tile-header h2 {
+    font-size: 20px;
+}
+
+mat-card-header.mat-card-header {
+    width: 100%;
+}
+mat-card.col-md-4.mat-card {
+    outline: 2px solid #c1c1c1;
 }

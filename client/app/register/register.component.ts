@@ -21,8 +21,9 @@ export class RegisterComponent implements OnInit {
                                Validators.maxLength(100)]);
   password = new FormControl('', [Validators.required,
                                   Validators.minLength(6)]);
-
+  //avatar = new FormControl('', [Validators.required]);
   role = new FormControl('', [Validators.required]);
+  
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -34,7 +35,8 @@ export class RegisterComponent implements OnInit {
       username: this.username,
       email: this.email,
       password: this.password,
-      role: this.role
+      role: this.role,
+      //avatar: this.avatar
     });
   }
 
@@ -51,10 +53,10 @@ export class RegisterComponent implements OnInit {
   register() {
     this.userService.register(this.registerForm.value).subscribe(
       res => {
-        this.toast.setMessage('you successfully registered!', 'success');
+        this.toast.setMessage('Вы учпешно зарегестрировались!', 'success');
         this.router.navigate(['/login']);
       },
-      error => this.toast.setMessage('email already exists', 'danger')
+      error => this.toast.setMessage('Эта почта занята', 'danger')
     );
   }
 }

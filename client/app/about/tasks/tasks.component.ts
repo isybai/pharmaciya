@@ -11,20 +11,29 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 export class TasksComponent implements OnInit {
 
+
+
   task = {};
   tasks = [];
   isLoading = true;
   isEditing = false;
-
+  types = [
+    {value: 'overall', viewValue: 'Общий'},
+    {value: 'week', viewValue: 'На неделю'},
+    {value: 'month', viewValue: 'На месяц'},
+  ];
   addTaskForm: FormGroup;
   name = new FormControl('', Validators.required);
   type = new FormControl('', Validators.required);
   belongTo = new FormControl('', Validators.required);
   plan = new FormControl('', Validators.required);
+  until = new FormControl('', Validators.required);
 
   constructor(private taskService: TaskService,
               private formBuilder: FormBuilder,
-              public toast: ToastComponent) { }
+              public toast: ToastComponent) {
+this.todaySday();
+               }
 
   ngOnInit() {
     this.getTasks();
@@ -32,7 +41,8 @@ export class TasksComponent implements OnInit {
       name: this.name,
       type: this.type,
       belongTo: this.belongTo,
-      plan: this.plan
+      plan: this.plan,
+      until: this.until
     });
   }
 
@@ -92,5 +102,23 @@ export class TasksComponent implements OnInit {
       );
     }
   }
+  todays:string;
 
+  todaySday() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd < 10) {
+        dd = 0+dd
+    } 
+
+    if(mm<10) {
+        mm = 0 + mm
+    } 
+
+    this.todays = yyyy+ '-' + mm + '-' + dd;
+    console.log(this.todays);
+  }
 }
