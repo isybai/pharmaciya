@@ -9,7 +9,7 @@
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
+          <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin || auth.isUser">
             <i class="material-icons">account_circle</i>
             <span>Контрагенты
             </span>

@@ -42,6 +42,7 @@ export class AuthService {
     this.isSuperAdmin = false;
     this.isSalesAdmin = false;
     this.isRentersAdmin = false;
+    this.isUser = false;
     this.router.navigate(['/']);
   }
 
@@ -65,7 +66,6 @@ export class AuthService {
       this.isSuperAdmin = false;
       this.isSalesAdmin = false;
       this.isRentersAdmin = false;
-      this.isUser = false;
     }
     delete decodedUser.role;
   }
