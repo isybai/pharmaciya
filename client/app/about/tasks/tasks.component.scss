@@ -25,3 +25,24 @@ mat-card-header.mat-card-header {
 mat-card.col-md-4.mat-card {
     outline: 2px solid #c1c1c1;
 }
+span.в.процессе {
+    float: right;
+    background: #fcff7d;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+span.на.расмотрении {
+    float: right;
+    background: #dadada;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+span.выполнен {
+    background: #62ff68;
+    padding: 2px 10px;
+    border-radius: 5px;
+    float: right;
+}
+span.не.выполнен {
+    background: #f44336;
+}

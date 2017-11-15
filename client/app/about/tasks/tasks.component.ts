@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
+import { AuthService } from '../../services/auth.service';
 import { TaskService } from '../../services/task.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 
@@ -18,9 +18,15 @@ export class TasksComponent implements OnInit {
   isLoading = true;
   isEditing = false;
   types = [
-    {value: 'overall', viewValue: 'Общий'},
-    {value: 'week', viewValue: 'На неделю'},
-    {value: 'month', viewValue: 'На месяц'},
+    {value: 'Общий', viewValue: 'Общий'},
+    {value: 'На неделю', viewValue: 'На неделю'},
+    {value: 'На месяц', viewValue: 'На месяц'},
+  ];
+  statuses = [
+    {value: 'на расмотрении', viewValue: 'на расмотрении'},
+    {value: 'в процессе', viewValue: 'в процессе'},
+    {value: 'выполнен', viewValue: 'выполнен'},
+    {value: 'не выполнен', viewValue: 'не выполнен'},
   ];
   addTaskForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -28,10 +34,12 @@ export class TasksComponent implements OnInit {
   belongTo = new FormControl('', Validators.required);
   plan = new FormControl('', Validators.required);
   until = new FormControl('', Validators.required);
+  status = new FormControl('на расмотрении');
 
   constructor(private taskService: TaskService,
               private formBuilder: FormBuilder,
-              public toast: ToastComponent) {
+              public toast: ToastComponent,
+              public auth: AuthService) {
 this.todaySday();
                }
 
@@ -42,7 +50,8 @@ this.todaySday();
       type: this.type,
       belongTo: this.belongTo,
       plan: this.plan,
-      until: this.until
+      until: this.until,
+      status: this.status
     });
   }
 
@@ -68,7 +77,7 @@ this.todaySday();
 
   enableEditing(task) {
     this.isEditing = true;
-    this.task = task;
+    this.task = task; 
   }
 
   cancelEditing() {

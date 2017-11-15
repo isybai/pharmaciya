@@ -2,7 +2,7 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-
+<div *ngIf="auth.isSalesAdmin || auth.isSuperAdmin || auth.isUser">
 <div class="card" *ngIf="!isLoading">
   <div class="col-md-9" *ngIf="!isEditing">
 
@@ -19,9 +19,10 @@
         <span matTooltip="Редактировать">
           <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="fa fa-pencil"></i> </button>
         </span>
-        <span matTooltip="Удалить">
+        <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
           <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="fa fa-trash"></i> </button>
         </span>
+        <span class={{task.status}}>{{task.status}}</span>
       </mat-card-actions>
     </mat-card>
 </div>
@@ -37,12 +38,12 @@
       </div>
       <form class="form-inline" #form="ngForm" (ngSubmit)="editTask(task)" style="display:inline">
         <div class="modal-body">
-          <mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
             <span matTooltip="Введите название" class="time">
               <input matInput class="mat-input-element"  name="name" [(ngModel)]="task.name" placeholder="Название">
             </span>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
            <span matTooltip="Выберите тип">
               <mat-select [(ngModel)]="task.type" name="type" placeholder="Выберите тип">
                  <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
@@ -51,17 +52,26 @@
               </mat-select>
            </span>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
             <span matTooltip="Принадлежит" class="time">
               <input matInput class="mat-input-element"  name="belongTo" [(ngModel)]="task.belongTo" placeholder="Принадлежит">
             </span>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
             <span matTooltip="Задача" class="time">
               <textarea matInput class="mat-input-element"  name="plan" [(ngModel)]="task.plan" placeholder="Задача"></textarea>
             </span>
           </mat-form-field>
           <mat-form-field>
+           <span matTooltip="Статус">
+              <mat-select [(ngModel)]="task.status" name="type" placeholder="Статус">
+                 <mat-option *ngFor="let spec of statuses" [value]="spec.value">
+                 {{ spec.viewValue }}
+                 </mat-option>
+              </mat-select>
+           </span>
+          </mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
             <span matTooltip="Срок" class="time">
               <input matInput class="mat-input-element" min={{todays}}  type="date"  name="until" [(ngModel)]="task.until">
             </span>
@@ -76,7 +86,7 @@
   </div>
 </div>
 
-<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
   <span>Создать план</span>
 </button>
 <div class="modal fade" id="addNewItem" role="dialog">
@@ -120,7 +130,15 @@
                   <input type="date" matInput class="mat-input-element" min={{todays}}  name="until" formControlName="until">
                 </span>
               </mat-form-field>
-              
+              <mat-form-field>
+                 <span matTooltip="Статус">
+                    <mat-select formControlName="status" placeholder="Тип">
+                       <mat-option *ngFor="let item of statuses" [value]="item.value">
+                       {{ item.viewValue }}
+                       </mat-option>
+                    </mat-select>
+                 </span>
+              </mat-form-field>
               <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addTaskForm.valid"><i class="material-icons">add</i> Добавить</button>
             </form>
           </div>
@@ -133,3 +151,4 @@
   </div>
 </div>
 
+</div>
