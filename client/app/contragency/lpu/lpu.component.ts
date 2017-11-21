@@ -42,6 +42,16 @@ export class LpuComponent implements OnInit {
   lpus = [];
   isLoading = true;
   isEditing = false;
+  checkb: boolean;
+
+  show(e) {
+    
+    if(e.checked){
+      this.checkb = true;
+    } else {
+      this.checkb = false;
+    }
+  }
 
   isDataAvailable = false;
   displayedColumns = ['name', 'department', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];

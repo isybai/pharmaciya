@@ -166,7 +166,7 @@
           </ng-container>
           <ng-container cdkColumnDef="department">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Отделения / Филиалы </mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? '<button md-fab color="primary">Показать</button>' : ''}} </mat-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? <button md-fab color="primary">Показать</button> : ''}} </mat-cell>
           </ng-container>
           <!-- DateSubmitted -->
           <ng-container cdkColumnDef="localArea">
@@ -318,8 +318,8 @@
                      <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Название">
                      </span>
               </mat-form-field>
-              <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Филиал</mat-checkbox>
-              <mat-form-field *ngIf="checked">
+              <mat-checkbox (change)="show($event)">Филиал</mat-checkbox>
+              <mat-form-field *ngIf="checkb">
                      <span matTooltip="Выберите больницу">
                         <mat-select  formControlName="department" placeholder="Филиал">
                            <mat-option *ngFor="let item of lpus" [value]="item.name">
