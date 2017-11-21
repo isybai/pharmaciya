@@ -49,7 +49,7 @@
           </ng-container>
           <!-- ChangeDescription -->
           <ng-container cdkColumnDef="directorPhone">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Почта / Сайт </mat-header-cell>
             <mat-cell *cdkCellDef="let row">{{row.type === 'Категория A'? row.directorPhone : ''}}</mat-cell>
           </ng-container>
           <ng-container cdkColumnDef="action">

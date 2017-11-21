@@ -41,7 +41,9 @@ import {
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 
+import { HandbookService } from './services/handbook.service';
 import { MedicService } from './services/medic.service';
+import { CoworkerService } from './services/coworker.service';
 import { TaskService } from './services/task.service';
 import { DrugstoreService } from './services/drugstore.service';
 import { IndividualService } from './services/individual.service';
@@ -79,6 +81,7 @@ import { PricesComponent } from './nomenclature/prices/prices.component';
 import { RemainsComponent } from './nomenclature/remains/remains.component';
 import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
 import { TasksComponent } from './about/tasks/tasks.component';
+import { HandbooksComponent } from './contragency/handbooks/handbooks.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +108,8 @@ import { TasksComponent } from './about/tasks/tasks.component';
     PricesComponent,
     RemainsComponent,
     PjvlsComponent,
-    TasksComponent
+    TasksComponent,
+    HandbooksComponent
   ],
   imports: [
     RoutingModule,
@@ -156,6 +160,8 @@ import { TasksComponent } from './about/tasks/tasks.component';
     LpuService,
     DrugstoreService,
     TaskService,
+    CoworkerService,
+    HandbookService,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -35,6 +35,7 @@ export class LpuComponent implements OnInit {
     {value: 'Свердловский район', viewValue: 'Свердловский район'},
     {value: 'Октябрьский район', viewValue: 'Октябрьский район'},
     {value: 'Ленинский район', viewValue: 'Ленинский район'},
+    {value: 'Аламединский район', viewValue: 'Аламединский район'},
   ];
 
   lpu = {};
@@ -43,7 +44,7 @@ export class LpuComponent implements OnInit {
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];
+  displayedColumns = ['name', 'department', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -57,6 +58,7 @@ export class LpuComponent implements OnInit {
   tel = new FormControl('', Validators.required);
   director = new FormControl(null);
   directorPhone = new FormControl(null);
+  department = new FormControl(null);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -80,6 +82,7 @@ export class LpuComponent implements OnInit {
       workTime: this.workTime,
       tel: this.tel,
       director: this.director,
+      department: this.department,
       directorPhone: this.directorPhone
     });
   }
@@ -170,6 +173,7 @@ export interface ChangeData {
   tel: string;
   director: string;
   directorPhone: string;
+  department: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -236,6 +240,7 @@ export class ExampleDataSource extends DataSource<any> {
         case 'tel': [propertyA, propertyB] = [a.tel, b.tel]; break;
         case 'director': [propertyA, propertyB] = [a.director, b.director]; break;
         case 'directorPhone': [propertyA, propertyB] = [a.directorPhone, b.directorPhone]; break;
+        case 'department': [propertyA, propertyB] = [a.department, b.department]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

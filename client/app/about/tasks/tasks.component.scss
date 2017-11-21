@@ -30,18 +30,21 @@ span.в.процессе {
     background: #fcff7d;
     padding: 2px 10px;
     border-radius: 5px;
+    box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.47);
 }
 span.на.расмотрении {
     float: right;
     background: #dadada;
     padding: 2px 10px;
     border-radius: 5px;
+    box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.47);
 }
 span.выполнен {
     background: #62ff68;
     padding: 2px 10px;
     border-radius: 5px;
     float: right;
+    box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.47);
 }
 span.не.выполнен {
     background: #f44336;

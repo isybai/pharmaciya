@@ -1,0 +1,168 @@
+<!-- CRUD-->
+<app-loading [condition]="isLoading"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+<div class="info_table col-md-12">
+  <div *ngIf="handbooks.length === 0 && !isLoading">
+    <h2>В базе данных еще нет элементов справочника. Добавьте их</h2>
+  </div>
+  <h6>Количество физ.лиц в базе: {{handbooks.length}}</h6>
+  <div class="table-hover animated bounceInRight">
+    <div class="example-header">
+      <mat-input-container>
+        <input matInput #filter placeholder="поиск">
+      </mat-input-container>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- ChangeId Column -->
+      <ng-container cdkColumnDef="name">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Ф.И.О. </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+      <!-- DateSubmitted -->
+      <ng-container cdkColumnDef="website">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Сайт </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.website}} </mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="contactPz">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Контактное лицо (закуп)</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.contactPz}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="contactEz">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Почта (закуп)</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.contactEz}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="contactTz">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон (закуп)</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.contactTz}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="contactPs">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Контактное лицо (склад)</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.contactPs}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="contactEs">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Почта (склад)</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.contactEs}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="contactTs">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон (склад)</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.contactTs}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="action">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+          <button class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
+            <i class="fa fa-pencil"></i> Редактировать
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteHandbook(row)">
+            <i class="fa fa-trash"></i> Удалить
+          </button>
+        </mat-cell>
+      </ng-container>
+      <!-- ChangeDescription -->
+      <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+      Ничего не найденно по вашему запросу.
+    </div>
+    <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+  <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Редактирование элемента справочника</h4>
+        </div>
+        <form class="form-inline" #form="ngForm" (ngSubmit)="editHandbook(handbook)" style="display:inline">
+          <div class="modal-body">
+            <mat-form-field>
+              <span matTooltip="Введите Ф.И.О." class="time">
+                <input matInput class="mat-input-element" name="name" [(ngModel)]="handbook.name" placeholder="Ф.И.О.">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите д.р">
+                <input matInput class="mat-input-element" name="website" [(ngModel)]="handbook.website" placeholder="Сайт">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Почта">
+                <input matInput class="mat-input-element" name="contactEz" [(ngModel)]="handbook.contactEz" placeholder="Контактное лицо">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Телефон">
+                <input matInput class="mat-input-element" name="contactTz" [(ngModel)]="handbook.contactTz" placeholder="Сайт">
+              </span>
+            </mat-form-field>
+            <span matTooltip="Введите телефон">
+              <mat-form-field>
+                <input matInput class="mat-input-element" name="contactPz" [(ngModel)]="handbook.contactPz" placeholder="Контактное лицо">
+              </mat-form-field>
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()"><i class="fa fa-times"></i> Отменить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить физ.лицо</span>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Добавление нового элемента справочника</h4>
+      </div>
+      <div class="modal-body">
+        <div class="addItem">
+          <div>
+            <form class="form-inline" [formGroup]="addHandbookForm" (ngSubmit)="addHandbook()" style="text-align:center">
+              <mat-form-field>
+                <span matTooltip="Введите Ф.И.О.">
+                  <input matInput class="mat-input-element" name="name" formControlName="name" placeholder="Ф.И.О.">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Введите Сайт">
+                  <input matInput class="mat-input-element" name="website" formControlName="website" placeholder="Сайт">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Почта">
+                  <input matInput class="mat-input-element" name="contactEz" formControlName="contactEz" placeholder="Почта">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Телефон">
+                  <input matInput class="mat-input-element" name="contactTz" formControlName="contactTz" placeholder="Телефон">
+                </span>
+              </mat-form-field>
+              <span matTooltip="Введите телефон">
+                <mat-form-field>
+                  <input matInput class="mat-input-element" name="contactPz" formControlName="contactPz" placeholder="Контактное лицо">
+                </mat-form-field>
+              </span>
+              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addHandbookForm.valid"><i class="material-icons">add</i> Добавить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

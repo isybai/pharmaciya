@@ -22,6 +22,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.name : ''}} </mat-cell>
           </ng-container>
+          <ng-container cdkColumnDef="department">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Отделения / Филиалы </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Ц.С.М.'? row.department : ''}} </mat-cell>
+          </ng-container>
           <!-- DateSubmitted -->
           <ng-container cdkColumnDef="localArea">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Район </mat-header-cell>
@@ -49,7 +53,7 @@
           </ng-container>
           <!-- ChangeDescription -->
           <ng-container cdkColumnDef="directorPhone">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Почта / Сайт </mat-header-cell>
             <mat-cell *cdkCellDef="let row">{{row.type === 'Ц.С.М.'? row.directorPhone : ''}}</mat-cell>
           </ng-container>
           <ng-container cdkColumnDef="action">
@@ -88,6 +92,10 @@
           <ng-container cdkColumnDef="name">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.name : ''}} </mat-cell>
+          </ng-container>
+          <ng-container cdkColumnDef="department">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Отделения / Филиалы </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Мед. центр'? row.department : ''}} </mat-cell>
           </ng-container>
           <!-- DateSubmitted -->
           <ng-container cdkColumnDef="localArea">
@@ -155,6 +163,10 @@
           <ng-container cdkColumnDef="name">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.name : ''}} </mat-cell>
+          </ng-container>
+          <ng-container cdkColumnDef="department">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Отделения / Филиалы </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? '<button md-fab color="primary">Показать</button>' : ''}} </mat-cell>
           </ng-container>
           <!-- DateSubmitted -->
           <ng-container cdkColumnDef="localArea">
@@ -229,10 +241,15 @@
                   </span>
           </mat-form-field>
           <mat-form-field>
+                  <span matTooltip="Введите department" class="time">
+                    <input matInput class="mat-input-element"  name="department" [(ngModel)]="lpu.department" placeholder="department">
+                  </span>
+          </mat-form-field>
+          <mat-form-field>
                      <span matTooltip="Выберите район">
                         <mat-select [(ngModel)]="lpu.localArea" name="localArea" placeholder="Выберите район">
-                           <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
-                           {{ spec.viewValue }}
+                           <mat-option *ngFor="let item of localAreas" [value]="item.value">
+                           {{ item.viewValue }}
                            </mat-option>
                         </mat-select>
                      </span>
@@ -245,8 +262,8 @@
           <mat-form-field>
                   <span matTooltip="Выберите тип">
                     <mat-select [(ngModel)]="lpu.type" name="type" placeholder="Выберите тип">
-                      <mat-option *ngFor="let spec of types" [value]="spec.value">
-                        {{ spec.viewValue }}
+                      <mat-option *ngFor="let item of types" [value]="item.value">
+                        {{ item.viewValue }}
                       </mat-option>
                     </mat-select>
                   </span>
@@ -301,11 +318,21 @@
                      <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Название">
                      </span>
               </mat-form-field>
+              <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Филиал</mat-checkbox>
+              <mat-form-field *ngIf="checked">
+                     <span matTooltip="Выберите больницу">
+                        <mat-select  formControlName="department" placeholder="Филиал">
+                           <mat-option *ngFor="let item of lpus" [value]="item.name">
+                           <span *ngIf="!item.department">{{item.name}}</span>
+                           </mat-option>
+                        </mat-select>
+                     </span>
+              </mat-form-field>
               <mat-form-field>
                      <span matTooltip="Выберите район">
                         <mat-select formControlName="localArea" placeholder="Выберите район">
-                           <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
-                           {{ spec.viewValue }}
+                           <mat-option *ngFor="let item of localAreas" [value]="item.value">
+                           {{ item.viewValue }}
                            </mat-option>
                         </mat-select>
                      </span>
@@ -318,8 +345,8 @@
               <mat-form-field>
                      <span matTooltip="Выберите тип ЛПУ">
                         <mat-select formControlName="type" placeholder="Выберите тип ЛПУ">
-                           <mat-option *ngFor="let spec of types" [value]="spec.value">
-                           {{ spec.viewValue }}
+                           <mat-option *ngFor="let item of types" [value]="item.value">
+                           {{ item.viewValue }}
                            </mat-option>
                         </mat-select>
                      </span>

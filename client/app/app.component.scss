@@ -88,12 +88,14 @@ button.mat-button mat-icon.mat-icon.material-icons {
 }
 nav.navbar.navbar-light {
     background: white;
+     border: 0;
 }
 mat-list-item.mat-list-item[matclass] {
     background: #4caf50;
 }
 mat-list-item.mat-list-item[matclass] span {
     color: white;
+
 }
 .content {
     position: absolute;

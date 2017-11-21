@@ -9,6 +9,7 @@ const lpuSchema = new mongoose.Schema({
   type: String,
   director: String,
   directorPhone: String,
+  department: String,
 });
 
 const Lpu = mongoose.model('Lpu', lpuSchema);

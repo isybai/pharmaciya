@@ -12,55 +12,49 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import { Http } from '@angular/http';
 
-import { CoworkerService } from '../services/coworker.service';
-import { ToastComponent } from '../shared/toast/toast.component';
+import { HandbookService } from '../../services/handbook.service';
+import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
-  selector: 'app-coworkers',
-  templateUrl: './coworkers.component.html',
-  styleUrls: ['./coworkers.component.css']
+  selector: 'app-handbooks',
+  templateUrl: './handbooks.component.html',
+  styleUrls: ['./handbooks.component.scss']
 })
-export class CoworkersComponent implements OnInit {
+export class HandbooksComponent implements OnInit {
 
-  companies = [
-    {value: 'ООО “Фармация”', viewValue: 'ООО “Фармация”'},
-    {value: 'Фармация-плюс', viewValue: 'Фармация-плюс'},
-    {value: 'Новитер', viewValue: 'Новитер'},
-    {value: 'Бронс-строй', viewValue: 'Бронс-строй'},
-    {value: 'Экспофарм', viewValue: 'Экспофарм'},
-    {value: 'Форвард', viewValue: 'Форвард'},
-    {value: 'Бимакс компани', viewValue: 'Бимакс компани'},
-    ];
-  coworker = {};
-  coworkers = [];
+
+  handbook = {}; 
+  handbooks = [];
   isLoading = true;
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'workPlace', 'position', 'dob', 'tel', 'adress', 'action'];
+  displayedColumns = ['name', 'website', 'contactPz', 'contactEz', 'contactTz', 'contactPs', 'contactEs', 'contactTs', 'action'];
+
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
 
-  addCoworkerForm: FormGroup;
+  addHandbookForm: FormGroup;
   name = new FormControl('', Validators.required);
-  workPlace = new FormControl('', Validators.required);
-  tel = new FormControl('', Validators.required);
-  position = new FormControl('', Validators.required);
-  dob = new FormControl('', Validators.required);
-  adress = new FormControl('', Validators.required);
-
+  website = new FormControl('', Validators.required);
+  contactPz = new FormControl('', Validators.required);
+  contactEz = new FormControl('', Validators.required);
+  contactTz = new FormControl('', Validators.required);
+  contactPs = new FormControl('', Validators.required);
+  contactEs = new FormControl('', Validators.required);
+  contactTs = new FormControl('', Validators.required);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('filter') filter: ElementRef;
 
-  constructor(private coworkerService: CoworkerService, private cdRef: ChangeDetectorRef,
+  constructor(private handbookService: HandbookService, private cdRef: ChangeDetectorRef,
               private formBuilder: FormBuilder,
               private http: Http,
               public toast: ToastComponent) { }
-  placeCoworkers() {
-    this.coworkerService.getCoworkers().subscribe(rcgitems => {
+  placeHandbooks() {
+    this.handbookService.getHandbooks().subscribe(rcgitems => {
       this.dataChange.next(rcgitems);
       this.isDataAvailable = true;
       this.cdRef.detectChanges();
@@ -69,68 +63,70 @@ export class CoworkersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.placeCoworkers();
-    this.getCoworkers();
-    this.addCoworkerForm = this.formBuilder.group({
+    this.placeHandbooks();
+    this.getHandbooks();
+    this.addHandbookForm = this.formBuilder.group({
       name: this.name,
-      workPlace: this.workPlace,
-      tel: this.tel,
-      position: this.position,
-      dob: this.dob,
-      adress: this.adress,
+      website: this.website,
+      contactPz: this.contactPz,
+      contactEz: this.contactEz,
+      contactTz: this.contactTz,
+      contactPs: this.contactPs,
+      contactEs: this.contactEs,
+      contactTs: this.contactTs,
     });
   }
 
-  getCoworkers() {
-    this.coworkerService.getCoworkers().subscribe(
-      data => this.coworkers = data,
+  getHandbooks() {
+    this.handbookService.getHandbooks().subscribe(
+      data => this.handbooks = data,
       error => console.log(error),
       () => this.isLoading = false
     );
   }
 
-  addCoworker() {
-    this.coworkerService.addCoworker(this.addCoworkerForm.value).subscribe(
+  addHandbook() {
+    this.handbookService.addHandbook(this.addHandbookForm.value).subscribe(
       res => {
-        const newCoworker = res.json();
-        this.coworkers.push(newCoworker);
-        this.addCoworkerForm.reset();
-        this.toast.setMessage('сотрудник успешно добавлен.', 'success');
+        const newHandbook = res.json();
+        this.handbooks.push(newHandbook);
+        this.addHandbookForm.reset();
+        this.toast.setMessage('Элемент справочника успешно добавлен.', 'success');
       },
       error => console.log(error)
     );
     this.ngOnInit();
   }
-  enableEditing(coworker) {
+  enableEditing(handbook) {
     this.isEditing = true;
-    this.coworker = coworker;
+    this.handbook = handbook;
   }
 
   cancelEditing() {
     this.isEditing = false;
-    this.coworker = {};
-    this.toast.setMessage('Редактирование сотрудника отменена.', 'warning');
-    this.getCoworkers();
+    this.handbook = {};
+    this.toast.setMessage('Редактирование элемента справочника отменена.', 'warning');
+    this.getHandbooks();
   }
 
-  editCoworker(coworker) {
-    this.coworkerService.editCoworker(coworker).subscribe(
+  editHandbook(handbook) {
+    this.handbookService.editHandbook(handbook).subscribe(
       res => {
         this.isEditing = false;
-        this.coworker = coworker;
-        this.toast.setMessage('сотрудник успешно отредактирован.', 'success');
+        this.handbook = handbook;
+        this.toast.setMessage('Элемент справочника успешно отредактирован.', 'success');
       },
       error => console.log(error)
     );
   }
 
-  deleteCoworker(coworker) {
-    if (window.confirm('Вы уверенны что хотите удалить физ.лицо?')) {
-      this.coworkerService.deleteCoworker(coworker).subscribe(
+  deleteHandbook(handbook) {
+    if (window.confirm('Вы уверенны что хотите удалить?')) {
+      this.handbookService.deleteHandbook(handbook).subscribe(
         res => {
-          const pos = this.coworkers.map(elem => elem._id).indexOf(coworker._id);
-          this.coworkers.splice(pos, 1);
-          this.toast.setMessage('сотрудник успешно удален.', 'success');
+          const pos = this.handbooks.map(elem => elem._id).indexOf(handbook._id);
+          this.handbooks.splice(pos, 1);
+          this.toast.setMessage('Элемент справочника успешно удален.', 'success');
         },
         error => console.log(error)
       );
@@ -152,13 +148,14 @@ export class CoworkersComponent implements OnInit {
 }
 
 export interface ChangeData {
-
-    name: string;
-    workPlace: string;
-    tel: string;
-    position: string;
-    dob: string;
-    adress: string;
+  name: string;
+  website: string;
+  contactPz: string;
+  contactEz: string;
+  contactTz: string;
+  contactPs: string;
+  contactEs: string;
+  contactTs: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -172,7 +169,7 @@ export class ExampleDataSource extends DataSource<any> {
   filteredData: ChangeData[] = [];
   renderedData: ChangeData[] = [];
 
-  constructor(private rcgcomponent: CoworkersComponent,
+  constructor(private rcgcomponent: HandbooksComponent,
               private _paginator: MatPaginator,
               private _sort: MatSort) {
     super();
@@ -219,11 +216,13 @@ export class ExampleDataSource extends DataSource<any> {
 
       switch (this._sort.active) {
         case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
-        case 'dob': [propertyA, propertyB] = [a.dob, b.dob]; break;
-        case 'tel': [propertyA, propertyB] = [a.tel, b.tel]; break;
-        case 'adress': [propertyA, propertyB] = [a.adress, b.adress]; break;
-        case 'position': [propertyA, propertyB] = [a.position, b.position]; break;
-        case 'workPlace': [propertyA, propertyB] = [a.workPlace, b.workPlace]; break;
+        case 'website': [propertyA, propertyB] = [a.website, b.website]; break;
+        case 'contactPz': [propertyA, propertyB] = [a.contactPz, b.contactPz]; break;
+        case 'contactEz': [propertyA, propertyB] = [a.contactEz, b.contactEz]; break;
+        case 'contactTz': [propertyA, propertyB] = [a.contactTz, b.contactTz]; break;
+        case 'contactPs': [propertyA, propertyB] = [a.contactPs, b.contactPs]; break;
+        case 'contactEs': [propertyA, propertyB] = [a.contactEs, b.contactEs]; break;
+        case 'contactTs': [propertyA, propertyB] = [a.contactTs, b.contactTs]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

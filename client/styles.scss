@@ -339,3 +339,9 @@ form.form-inline.searcher {
   float: none;
   top: -40px;
 }
+span.mat-option-text {
+    display: inline;
+}
+.mat-select-panel mat-option.mat-option {
+    height: initial;
+}

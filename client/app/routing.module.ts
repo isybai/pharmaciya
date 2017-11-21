@@ -24,6 +24,7 @@ import { DrugListComponent } from './nomenclature/drug-list/drug-list.component'
 import { PricesComponent } from './nomenclature/prices/prices.component';
 import { RemainsComponent } from './nomenclature/remains/remains.component';
 import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
+import { HandbooksComponent } from './contragency/handbooks/handbooks.component';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -83,6 +84,10 @@ const routes: Routes = [
     {
       path: 'individuals',
       component: IndividualsComponent
+    },
+    {
+      path: 'handbooks',
+      component: HandbooksComponent
     }
     ]
   },

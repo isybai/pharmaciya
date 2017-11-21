@@ -7,6 +7,8 @@ import RenterCtrl from './controllers/renter';
 import LpuCtrl from './controllers/lpu';
 import DrugstoreCtrl from './controllers/drugstore';
 import TaskCtrl from './controllers/task';
+import CoworkerCtrl from './controllers/coworker';
+import HandbookCtrl from './controllers/handbook';
 
 
 export default function setRoutes(app) {
@@ -21,6 +23,8 @@ export default function setRoutes(app) {
   const lpuCtrl = new LpuCtrl();
   const drugstoreCtrl = new DrugstoreCtrl();
   const taskCtrl = new TaskCtrl();
+  const coworkerCtrl = new CoworkerCtrl();
+  const handbookCtrl = new HandbookCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -71,13 +75,30 @@ export default function setRoutes(app) {
   router.route('/drugstore/:id').put(drugstoreCtrl.update);
   router.route('/drugstore/:id').delete(drugstoreCtrl.delete);
 
-  // drugstore
+  // task
   router.route('/tasks').get(taskCtrl.getAll);
   router.route('/tasks/count').get(taskCtrl.count);
   router.route('/task').post(taskCtrl.insert);
   router.route('/task/:id').get(taskCtrl.get);
   router.route('/task/:id').put(taskCtrl.update);
   router.route('/task/:id').delete(taskCtrl.delete);
+  
+  // coworker
+  router.route('/coworkers').get(coworkerCtrl.getAll);
+  router.route('/coworkers/count').get(coworkerCtrl.count);
+  router.route('/coworker').post(coworkerCtrl.insert);
+  router.route('/coworker/:id').get(coworkerCtrl.get);
+  router.route('/coworker/:id').put(coworkerCtrl.update);
+  router.route('/coworker/:id').delete(coworkerCtrl.delete);
+
+  
+  // Handbook
+  router.route('/handbooks').get(handbookCtrl.getAll);
+  router.route('/handbooks/count').get(handbookCtrl.count);
+  router.route('/handbook').post(handbookCtrl.insert);
+  router.route('/handbook/:id').get(handbookCtrl.get);
+  router.route('/handbook/:id').put(handbookCtrl.update);
+  router.route('/handbook/:id').delete(handbookCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

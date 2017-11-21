@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { TaskService } from '../../services/task.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,9 +13,11 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 export class TasksComponent implements OnInit {
 
 
-
+  user = {};
+  users = [];
   task = {};
   tasks = [];
+
   isLoading = true;
   isEditing = false;
   types = [
@@ -36,7 +39,8 @@ export class TasksComponent implements OnInit {
   until = new FormControl('', Validators.required);
   status = new FormControl('на расмотрении');
 
-  constructor(private taskService: TaskService,
+  constructor(private userService: UserService,
+              private taskService: TaskService,
               private formBuilder: FormBuilder,
               public toast: ToastComponent,
               public auth: AuthService) {
@@ -44,6 +48,7 @@ this.todaySday();
                }
 
   ngOnInit() {
+    this.getUsers();
     this.getTasks();
     this.addTaskForm = this.formBuilder.group({
       name: this.name,
@@ -53,6 +58,15 @@ this.todaySday();
       until: this.until,
       status: this.status
     });
+    console.log(this.getUsers());
+  }
+  getUsers() {
+    this.userService.getUsers().subscribe(
+      data => this.users = data,
+      error => console.log(error),
+      () => this.isLoading = false
+
+    );
   }
 
   getTasks() {

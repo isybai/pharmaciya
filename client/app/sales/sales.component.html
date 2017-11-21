@@ -3,12 +3,23 @@
 	    Сбыт
 	</h4>
 </header>
-<div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
-	<div class="list-group">
-	    <a class="list-group-item">1) Тендеры</a>
-	    <a class="list-group-item">2) Кальций</a>
-	    <a class="list-group-item">3) Рецептурно-Производственный Отдел (РПО)</a>
-	    <a class="list-group-item">4) “Новитер” (список препаратов)</a>
+<div class="col-12 col-md-12">
+	<div class="info_table">
+		<table class="table table-bordered table-striped">
+			<thead class="thead-default">
+			<tr>
+			  <th>Список товаров</th>
+			  <th>План</th>
+			  <th>Факт</th>
+			  <th>% отставания</th>
+			  <th>Итого: по товару</th>
+			  <th>Итого: по агенту</th>
+			</tr>
+			</thead>
+		  	<tr *ngFor="let renter of renters">
+		        <td></td>
+			</tr>
+		</table>
 	</div>
 </div>
 <div class="col-6 col-md-9 content">

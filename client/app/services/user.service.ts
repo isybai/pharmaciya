@@ -23,6 +23,9 @@ export class UserService {
   getUsers(): Observable<any> {
     return this.http.get('/api/users').map(res => res.json());
   }
+  getUsersById(): Observable<any> {
+    return this.http.get('/api/users/${user.role === "salesAdmin"}').map(res => res.json());
+  }
 
   countUsers(): Observable<any> {
     return this.http.get('/api/users/count').map(res => res.json());

@@ -2,7 +2,7 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div *ngIf="auth.isSalesAdmin || auth.isSuperAdmin || auth.isUser">
+<div *ngIf="auth.isSalesAdmin || auth.isUser">
 <div class="card" *ngIf="!isLoading">
   <div class="col-md-9" *ngIf="!isEditing">
 
@@ -19,7 +19,7 @@
         <span matTooltip="Редактировать">
           <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="fa fa-pencil"></i> </button>
         </span>
-        <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
+        <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin">
           <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="fa fa-trash"></i> </button>
         </span>
         <span class={{task.status}}>{{task.status}}</span>
@@ -38,26 +38,32 @@
       </div>
       <form class="form-inline" #form="ngForm" (ngSubmit)="editTask(task)" style="display:inline">
         <div class="modal-body">
-          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
+          <mat-form-field *ngIf="auth.isSalesAdmin">
             <span matTooltip="Введите название" class="time">
               <input matInput class="mat-input-element"  name="name" [(ngModel)]="task.name" placeholder="Название">
             </span>
           </mat-form-field>
-          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
+          <mat-form-field *ngIf="auth.isSalesAdmin">
            <span matTooltip="Выберите тип">
               <mat-select [(ngModel)]="task.type" name="type" placeholder="Выберите тип">
-                 <mat-option *ngFor="let spec of localAreas" [value]="spec.value">
-                 {{ spec.viewValue }}
+                 <mat-option *ngFor="let item of localAreas" [value]="item.value">
+                 {{ item.viewValue }}
                  </mat-option>
               </mat-select>
            </span>
           </mat-form-field>
-          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
-            <span matTooltip="Принадлежит" class="time">
-              <input matInput class="mat-input-element"  name="belongTo" [(ngModel)]="task.belongTo" placeholder="Принадлежит">
-            </span>
-          </mat-form-field>
-          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
+            <mat-form-field>
+                  <span matTooltip="Принадлежит">
+                  <mat-select  name="belongTo"  [(ngModel)]="task.belongTo" placeholder="Принадлежит">
+                  <mat-option *ngFor="let item of users" [value]="item.name">
+                  <span>{{item.name}}</span>
+                  </mat-option>
+                  </mat-select>
+                  </span>
+            </mat-form-field>
+
+
+          <mat-form-field *ngIf="auth.isSalesAdmin">
             <span matTooltip="Задача" class="time">
               <textarea matInput class="mat-input-element"  name="plan" [(ngModel)]="task.plan" placeholder="Задача"></textarea>
             </span>
@@ -71,7 +77,7 @@
               </mat-select>
            </span>
           </mat-form-field>
-          <mat-form-field *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
+          <mat-form-field *ngIf="auth.isSalesAdmin">
             <span matTooltip="Срок" class="time">
               <input matInput class="mat-input-element" min={{todays}}  type="date"  name="until" [(ngModel)]="task.until">
             </span>
@@ -86,7 +92,7 @@
   </div>
 </div>
 
-<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin || auth.isSuperAdmin">
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin">
   <span>Создать план</span>
 </button>
 <div class="modal fade" id="addNewItem" role="dialog">
@@ -116,8 +122,12 @@
                  </span>
               </mat-form-field>
               <mat-form-field>
-                <span matTooltip="Принадлежит">
-                  <input matInput class="mat-input-element"  name="belongTo" formControlName="belongTo" placeholder="Принадлежит">
+               <span matTooltip="Принадлежит" *ngIf="auth.isSalesAdmin">
+                   <mat-select formControlName="belongTo" placeholder="Принадлежит">
+                      <mat-option *ngFor="let item of users" [value]="item.username">
+                      {{ item.username }}
+                      </mat-option>
+                   </mat-select>
                 </span>
               </mat-form-field>
               <mat-form-field>
