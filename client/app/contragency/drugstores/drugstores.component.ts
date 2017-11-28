@@ -33,6 +33,7 @@ export class DrugstoresComponent implements OnInit {
     {value: 'Свердловский район', viewValue: 'Свердловский район'},
     {value: 'Октябрьский район', viewValue: 'Октябрьский район'},
     {value: 'Ленинский район', viewValue: 'Ленинский район'},
+    {value: 'Аламединский район', viewValue: 'Аламединский район'},
   ];
 
   drugstore = {};
@@ -41,7 +42,7 @@ export class DrugstoresComponent implements OnInit {
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];
+  displayedColumns = ['name', 'localArea', 'address', 'workTime', 'tel', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -53,8 +54,6 @@ export class DrugstoresComponent implements OnInit {
   type = new FormControl('', Validators.required);
   workTime = new FormControl('', Validators.required);
   tel = new FormControl('', Validators.required);
-  director = new FormControl(null);
-  directorPhone = new FormControl(null);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -166,8 +165,6 @@ export interface ChangeData {
   type: string;
   workTime: string;
   tel: string;
-  director: string;
-  directorPhone: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -232,8 +229,6 @@ export class ExampleDataSource extends DataSource<any> {
         case 'address': [propertyA, propertyB] = [a.address, b.address]; break;
         case 'workTime': [propertyA, propertyB] = [a.workTime, b.workTime]; break;
         case 'tel': [propertyA, propertyB] = [a.tel, b.tel]; break;
-        case 'director': [propertyA, propertyB] = [a.director, b.director]; break;
-        case 'directorPhone': [propertyA, propertyB] = [a.directorPhone, b.directorPhone]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

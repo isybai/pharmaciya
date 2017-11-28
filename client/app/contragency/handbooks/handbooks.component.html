@@ -15,7 +15,7 @@
     <mat-table #table [dataSource]="dataSource" matSort>
       <!-- ChangeId Column -->
       <ng-container cdkColumnDef="name">
-        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Ф.И.О. </mat-header-cell>
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Сеть аптек </mat-header-cell>
         <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
       <!-- DateSubmitted -->
@@ -85,7 +85,7 @@
               </span>
             </mat-form-field>
             <mat-form-field>
-              <span matTooltip="Введите д.р">
+              <span matTooltip="Введите сайт">
                 <input matInput class="mat-input-element" name="website" [(ngModel)]="handbook.website" placeholder="Сайт">
               </span>
             </mat-form-field>
@@ -115,7 +115,7 @@
   </div>
 </div>
 <button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
-  <span>Добавить физ.лицо</span>
+  <span>Добавить сеть аптек</span>
 </button>
 <!-- Modal -->
 <div class="modal fade" id="addNewItem" role="dialog">

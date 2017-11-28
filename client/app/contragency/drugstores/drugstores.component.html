@@ -43,15 +43,6 @@
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Категория A'? row.workTime : ''}} </mat-cell>
           </ng-container>
           <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="director">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.type === 'Категория A'? row.director : ''}} </mat-cell>
-          </ng-container>
-          <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="directorPhone">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Почта / Сайт </mat-header-cell>
-            <mat-cell *cdkCellDef="let row">{{row.type === 'Категория A'? row.directorPhone : ''}}</mat-cell>
-          </ng-container>
           <ng-container cdkColumnDef="action">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
@@ -110,15 +101,6 @@
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Категория B'? row.workTime : ''}} </mat-cell>
           </ng-container>
           <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="director">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.type === 'Категория B'? row.director : ''}} </mat-cell>
-          </ng-container>
-          <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="directorPhone">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
-            <mat-cell *cdkCellDef="let row">{{row.type === 'Категория B'? row.directorPhone : ''}}</mat-cell>
-          </ng-container>
           <ng-container cdkColumnDef="action">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
@@ -177,15 +159,6 @@
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Категория C'? row.workTime : ''}} </mat-cell>
           </ng-container>
           <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="director">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.type === 'Категория C'? row.director : ''}} </mat-cell>
-          </ng-container>
-          <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="directorPhone">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
-            <mat-cell *cdkCellDef="let row">{{row.type === 'Категория C'? row.directorPhone : ''}}</mat-cell>
-          </ng-container>
           <ng-container cdkColumnDef="action">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
