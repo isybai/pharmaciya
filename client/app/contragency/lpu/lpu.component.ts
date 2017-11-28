@@ -43,16 +43,6 @@ export class LpuComponent implements OnInit {
   isLoading = true;
   isEditing = false;
   checkb: boolean;
-
-  show(e) {
-    
-    if(e.checked){
-      this.checkb = true;
-    } else {
-      this.checkb = false;
-    }
-  }
-
   isDataAvailable = false;
   displayedColumns = ['name', 'department', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
@@ -73,6 +63,14 @@ export class LpuComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('filter') filter: ElementRef;
+
+  show(e) {
+    if (e.checked) {
+      this.checkb = true;
+    } else {
+      this.checkb = false;
+    }
+  }
 
   constructor(private lpuService: LpuService, private cdRef: ChangeDetectorRef,
               private formBuilder: FormBuilder,

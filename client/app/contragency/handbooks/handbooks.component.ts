@@ -23,19 +23,20 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 export class HandbooksComponent implements OnInit {
 
 
-  handbook = {}; 
+  handbook = {};
   handbooks = [];
   isLoading = true;
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'website', 'contactPz', 'contactEz', 'contactTz', 'contactPs', 'contactEs', 'contactTs', 'action'];
+  displayedColumns = ['head', 'name', 'website', 'contactPz', 'contactEz', 'contactTz', 'contactPs', 'contactEs', 'contactTs', 'action'];
 
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
 
   addHandbookForm: FormGroup;
+  head = new FormControl('', Validators.required);
   name = new FormControl('', Validators.required);
   website = new FormControl('', Validators.required);
   contactPz = new FormControl('', Validators.required);
@@ -67,6 +68,7 @@ export class HandbooksComponent implements OnInit {
     this.getHandbooks();
     this.addHandbookForm = this.formBuilder.group({
       name: this.name,
+      head: this.head,
       website: this.website,
       contactPz: this.contactPz,
       contactEz: this.contactEz,
@@ -149,6 +151,7 @@ export class HandbooksComponent implements OnInit {
 
 export interface ChangeData {
   name: string;
+  head: string;
   website: string;
   contactPz: string;
   contactEz: string;
@@ -223,6 +226,7 @@ export class ExampleDataSource extends DataSource<any> {
         case 'contactPs': [propertyA, propertyB] = [a.contactPs, b.contactPs]; break;
         case 'contactEs': [propertyA, propertyB] = [a.contactEs, b.contactEs]; break;
         case 'contactTs': [propertyA, propertyB] = [a.contactTs, b.contactTs]; break;
+        case 'head': [propertyA, propertyB] = [a.head, b.head]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

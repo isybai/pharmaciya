@@ -15,6 +15,10 @@
     <mat-table #table [dataSource]="dataSource" matSort>
       <!-- ChangeId Column -->
       <ng-container cdkColumnDef="name">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес голов. офиса </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.head}} </mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="name">
         <mat-header-cell *cdkHeaderCellDef mat-sort-header> Сеть аптек </mat-header-cell>
         <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
@@ -80,6 +84,11 @@
         <form class="form-inline" #form="ngForm" (ngSubmit)="editHandbook(handbook)" style="display:inline">
           <div class="modal-body">
             <mat-form-field>
+              <span matTooltip="Введите адрес головного офиса" class="time">
+                <input matInput class="mat-input-element" name="head" [(ngModel)]="handbook.head" placeholder="Адрес головного офиса">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
               <span matTooltip="Введите Ф.И.О." class="time">
                 <input matInput class="mat-input-element" name="name" [(ngModel)]="handbook.name" placeholder="Ф.И.О.">
               </span>
@@ -133,6 +142,11 @@
               <mat-form-field>
                 <span matTooltip="Введите Ф.И.О.">
                   <input matInput class="mat-input-element" name="name" formControlName="name" placeholder="Ф.И.О.">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Введите адрес">
+                  <input matInput class="mat-input-element" name="head" formControlName="head" placeholder="Адрес головного офиса">
                 </span>
               </mat-form-field>
               <mat-form-field>

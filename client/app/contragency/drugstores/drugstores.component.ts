@@ -75,9 +75,7 @@ export class DrugstoresComponent implements OnInit {
       address: this.address,
       type: this.type,
       workTime: this.workTime,
-      tel: this.tel,
-      director: this.director,
-      directorPhone: this.directorPhone
+      tel: this.tel
     });
   }
   placeDrugstores() {

@@ -2,6 +2,7 @@
 
 const handbookSchema = new mongoose.Schema({
   name: String,
+  head: String,
   website: String,
   contactPz: String,
   contactEz: String,
