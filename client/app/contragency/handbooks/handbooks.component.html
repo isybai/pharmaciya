@@ -14,7 +14,7 @@
     </div>
     <mat-table #table [dataSource]="dataSource" matSort>
       <!-- ChangeId Column -->
-      <ng-container cdkColumnDef="name">
+      <ng-container cdkColumnDef="head">
         <mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес голов. офиса </mat-header-cell>
         <mat-cell *cdkCellDef="let row"> {{row.head}} </mat-cell>
       </ng-container>
