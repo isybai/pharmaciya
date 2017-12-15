@@ -1,31 +1,32 @@
 <app-loading [condition]="isLoading"></app-loading>
 
 <app-toast [message]="toast.message"></app-toast>
-
+<h5 class="text-md-center">Задачи для агентов</h5>
 <div *ngIf="auth.isSalesAdmin || auth.isUser">
-<div class="card" *ngIf="!isLoading">
-  <div class="col-md-9" *ngIf="!isEditing">
+  <div class="card" *ngIf="!isLoading">
+    <div class="col-md-12" *ngIf="!isEditing">
+      <mat-card *ngFor="let task of tasks" class="col-md-3">
+        <mat-card-header class={{task.type}}>
+          <!--<div mat-card-avatar>{{task.type}}</div>-->
+          <mat-card-title>{{task.name}}</mat-card-title>
+          <mat-card-subtitle>{{task.belongTo}}<span class="float-right">До {{task.until}}</span></mat-card-subtitle>
+          <mat-card-subtitle><div>Приоритет: {{task.type}}</div></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
 
-    <mat-card *ngFor="let task of tasks" class="col-md-4">
-      <mat-card-header>
-        <!--<div mat-card-avatar>{{task.type}}</div>-->
-        <mat-card-title>{{task.name}}<span class="float-right">{{task.type}}</span></mat-card-title>
-        <mat-card-subtitle>{{task.belongTo}}<span class="float-right">До {{task.until}}</span></mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        {{task.plan}}
-      </mat-card-content>
-      <mat-card-actions>
-        <span matTooltip="Редактировать">
-          <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="fa fa-pencil"></i> </button>
-        </span>
-        <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin">
-          <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="fa fa-trash"></i> </button>
-        </span>
-        <span class={{task.status}}>{{task.status}}</span>
-      </mat-card-actions>
-    </mat-card>
-</div>
+          {{task.plan}}
+        </mat-card-content>
+        <mat-card-actions>
+          <span matTooltip="Редактировать">
+            <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="fa fa-pencil"></i> </button>
+          </span>
+          <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin">
+            <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="fa fa-trash"></i> </button>
+          </span>
+          <span class="task_status {{task.status}}">{{task.status}}</span>
+        </mat-card-actions>
+      </mat-card>
+  </div>
 </div>
 
 <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
@@ -46,20 +47,20 @@
           <mat-form-field *ngIf="auth.isSalesAdmin">
            <span matTooltip="Выберите тип">
               <mat-select [(ngModel)]="task.type" name="type" placeholder="Выберите тип">
-                 <mat-option *ngFor="let item of localAreas" [value]="item.value">
+                 <mat-option *ngFor="let item of types" [value]="item.value">
                  {{ item.viewValue }}
                  </mat-option>
               </mat-select>
            </span>
           </mat-form-field>
             <mat-form-field>
-                  <span matTooltip="Принадлежит">
-                  <mat-select  name="belongTo"  [(ngModel)]="task.belongTo" placeholder="Принадлежит">
-                  <mat-option *ngFor="let item of users" [value]="item.name">
-                  <span>{{item.name}}</span>
+              <span matTooltip="Принадлежит">
+                <mat-select  name="belongTo"  [(ngModel)]="task.belongTo" placeholder="Принадлежит">
+                  <mat-option *ngFor="let item of users" [value]="item.username">
+                    <span *ngIf="item.role === 'user'">{{item.username}}</span>
                   </mat-option>
-                  </mat-select>
-                  </span>
+                </mat-select>
+              </span>
             </mat-form-field>
 
 
@@ -79,9 +80,9 @@
           </mat-form-field>
           <mat-form-field *ngIf="auth.isSalesAdmin">
             <span matTooltip="Срок" class="time">
-              <input matInput class="mat-input-element" min={{todays}}  type="date"  name="until" [(ngModel)]="task.until">
+              <input placeholder="Срок" matInput class="mat-input-element" min={{todays}}  type="date"  name="until" [(ngModel)]="task.until">
             </span>
-          </mat-form-field>          
+          </mat-form-field>
         </div>
         <div class="modal-footer">
           <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>

@@ -17,13 +17,14 @@ export class TasksComponent implements OnInit {
   users = [];
   task = {};
   tasks = [];
+  todays:string;
 
   isLoading = true;
   isEditing = false;
   types = [
-    {value: 'Общий', viewValue: 'Общий'},
-    {value: 'На неделю', viewValue: 'На неделю'},
-    {value: 'На месяц', viewValue: 'На месяц'},
+    {value: 'Высокий', viewValue: 'Высокий'},
+    {value: 'Нормальный', viewValue: 'Нормальный'},
+    {value: 'Низкий', viewValue: 'Низкий'},
   ];
   statuses = [
     {value: 'на расмотрении', viewValue: 'на расмотрении'},
@@ -58,7 +59,6 @@ this.todaySday();
       until: this.until,
       status: this.status
     });
-    console.log(this.getUsers());
   }
   getUsers() {
     this.userService.getUsers().subscribe(
@@ -91,7 +91,7 @@ this.todaySday();
 
   enableEditing(task) {
     this.isEditing = true;
-    this.task = task; 
+    this.task = task;
   }
 
   cancelEditing() {
@@ -125,23 +125,19 @@ this.todaySday();
       );
     }
   }
-  todays:string;
 
   todaySday() {
     var today = new Date();
     var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
+    var mm = today.getMonth() + 1; // January is 0!
     var yyyy = today.getFullYear();
 
-    if(dd < 10) {
-        dd = 0+dd
-    } 
-
-    if(mm<10) {
-        mm = 0 + mm
-    } 
-
+    if (dd < 10) {
+        dd = 0 + dd;
+    }
+    if (mm < 10) {
+        mm = 0 + mm;
+    }
     this.todays = yyyy+ '-' + mm + '-' + dd;
-    console.log(this.todays);
   }
 }

@@ -25,6 +25,7 @@ import { PricesComponent } from './nomenclature/prices/prices.component';
 import { RemainsComponent } from './nomenclature/remains/remains.component';
 import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
 import { HandbooksComponent } from './contragency/handbooks/handbooks.component';
+import { OrdersComponent } from './orders/orders.component';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -35,16 +36,17 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'sales', component: SalesComponent },
-  { 
-    path: 'accomodation-db', 
+  {
+    path: 'accomodation-db',
     component: AccomodationDbComponent,
     children:[{path: 'renters',component: RentersComponent}]
   },
   { path: 'component', component: AppComponent },
   { path: 'finance', component: FinanceComponent },
+  { path: 'order', component: OrdersComponent },
   { path: 'coworkers',  component: CoworkersComponent },
-  { 
-    path: 'nomenclature', 
+  {
+    path: 'nomenclature',
     component: NomenclatureComponent,
     children:[
     {
@@ -63,10 +65,10 @@ const routes: Routes = [
       path: 'pjvls',
       component: PjvlsComponent
     }
-    ] 
+    ]
   },
-  { 
-    path: 'contragency', 
+  {
+    path: 'contragency',
     component: ContragencyComponent,
     children:[
     {

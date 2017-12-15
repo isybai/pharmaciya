@@ -1,6 +1,6 @@
 <div>
   <h4 class="page-title">Рабочий стол <span class="greeting-text float-right">{{auth.currentUser.username}} <br>Сегодня: {{todays}}</span></h4>
 </div>
-<div class="col-md-12">
+<div class="col-md-12" *ngIf="auth.loggedIn && auth.isSalesAdmin">
   <app-tasks></app-tasks>
 </div>

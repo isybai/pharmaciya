@@ -9,6 +9,7 @@ import DrugstoreCtrl from './controllers/drugstore';
 import TaskCtrl from './controllers/task';
 import CoworkerCtrl from './controllers/coworker';
 import HandbookCtrl from './controllers/handbook';
+import OrderCtrl from './controllers/order';
 
 
 export default function setRoutes(app) {
@@ -25,6 +26,7 @@ export default function setRoutes(app) {
   const taskCtrl = new TaskCtrl();
   const coworkerCtrl = new CoworkerCtrl();
   const handbookCtrl = new HandbookCtrl();
+  const orderCtrl = new OrderCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -82,7 +84,7 @@ export default function setRoutes(app) {
   router.route('/task/:id').get(taskCtrl.get);
   router.route('/task/:id').put(taskCtrl.update);
   router.route('/task/:id').delete(taskCtrl.delete);
-  
+
   // coworker
   router.route('/coworkers').get(coworkerCtrl.getAll);
   router.route('/coworkers/count').get(coworkerCtrl.count);
@@ -91,7 +93,7 @@ export default function setRoutes(app) {
   router.route('/coworker/:id').put(coworkerCtrl.update);
   router.route('/coworker/:id').delete(coworkerCtrl.delete);
 
-  
+
   // Handbook
   router.route('/handbooks').get(handbookCtrl.getAll);
   router.route('/handbooks/count').get(handbookCtrl.count);
@@ -99,6 +101,14 @@ export default function setRoutes(app) {
   router.route('/handbook/:id').get(handbookCtrl.get);
   router.route('/handbook/:id').put(handbookCtrl.update);
   router.route('/handbook/:id').delete(handbookCtrl.delete);
+
+  // Orders
+  router.route('/orders').get(orderCtrl.getAll);
+  router.route('/orders/count').get(orderCtrl.count);
+  router.route('/order').post(orderCtrl.insert);
+  router.route('/order/:id').get(orderCtrl.get);
+  router.route('/order/:id').put(orderCtrl.update);
+  router.route('/order/:id').delete(orderCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

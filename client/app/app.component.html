@@ -16,6 +16,13 @@
           </a>
         </mat-list-item>
         <mat-list-item>
+          <a routerLink="/order" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
+            <i class="material-icons">shopping_cart</i>
+            <span>Заказы
+            </span>
+          </a>
+        </mat-list-item>
+        <mat-list-item>
           <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">local_hospital</i>
             <span>Номенклатура

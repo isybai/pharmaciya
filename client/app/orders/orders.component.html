@@ -1,0 +1,121 @@
+<header class="marketing-banner">
+  <h4 class="page-title">
+    Заказы
+  </h4>
+</header>
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+<div *ngIf="auth.isSalesAdmin || auth.isUser">
+  <div class="card" *ngIf="!isLoading">
+    <div class="col-md-12" *ngIf="!isEditing">
+      <mat-card *ngFor="let order of orders" class="col-md-3">
+        <mat-card-header>
+          <!--<div mat-card-avatar>{{order.product}}</div>-->
+          <mat-card-title>{{order.name}}<span class="float-right">{{order.product}}</span></mat-card-title>
+          <mat-card-subtitle>{{order.count}}<span class="float-right">До {{order.date}}</span></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <span matTooltip="Редактировать">
+            <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(order)"><i class="fa fa-pencil"></i> </button>
+          </span>
+          <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin">
+            <button mat-mini-fab color="warn" (click)="deleteOrder(order)"><i class="fa fa-trash"></i> </button>
+          </span>
+
+        </mat-card-actions>
+      </mat-card>
+  </div>
+</div>
+
+<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Редактирование плана</h4>
+      </div>
+      <form class="form-inline" #form="ngForm" (ngSubmit)="editOrder(order)" style="display:inline">
+        <div class="modal-body">
+          <mat-form-field *ngIf="auth.isSalesAdmin">
+            <span matTooltip="Введите название" class="time">
+              <input matInput class="mat-input-element"  name="name" [(ngModel)]="order.name" placeholder="Название">
+            </span>
+          </mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin">
+           <span matTooltip="Выберите продукт">
+             <input placeholder="Продукт" matInput class="mat-input-element" [(ngModel)]="order.product" name="type" placeholder="Выберите продукт">
+           </span>
+          </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Количество">
+                 <input placeholder="Количество" matInput class="mat-input-element" name="count"  [(ngModel)]="order.count" placeholder="Количество">
+              </span>
+            </mat-form-field>
+          <mat-form-field *ngIf="auth.isSalesAdmin">
+            <span matTooltip="Срок" class="time">
+              <input placeholder="Срок" matInput class="mat-input-element" type="date"  name="date" [(ngModel)]="order.date">
+            </span>
+          </mat-form-field>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
+          <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()"><i class="fa fa-times"></i> Отменить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin">
+  <span>Создать заказ</span>
+</button>
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Созданть заказ</h4>
+      </div>
+      <div class="modal-body">
+        <div class="addItem">
+          <div>
+            <form class="form-inline" [formGroup]="addOrderForm" (ngSubmit)="addOrder()" style="text-align:center">
+              <mat-form-field>
+                 <span matTooltip="Введите название">
+                    <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Название">
+                 </span>
+              </mat-form-field>
+              <mat-form-field>
+               <span matTooltip="Количество" *ngIf="auth.isSalesAdmin">
+                  <input matInput class="mat-input-element"  name="count" formControlName="count" placeholder="Количество">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Срок">
+                  <input type="date" matInput class="mat-input-element"  name="date" formControlName="date">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+               <span matTooltip="Продукт" *ngIf="auth.isSalesAdmin">
+                  <input matInput class="mat-input-element"  name="product" formControlName="product" placeholder="Продукт">
+                </span>
+              </mat-form-field>
+              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addOrderForm.valid"><i class="material-icons">add</i> Добавить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

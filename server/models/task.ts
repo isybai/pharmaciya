@@ -7,6 +7,7 @@ const taskSchema = new mongoose.Schema({
   plan: String,
   until: String,
   status: String,
+  why: String,
 });
 
 const Task = mongoose.model('Task', taskSchema);
