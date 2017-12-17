@@ -1,11 +1,12 @@
 mat-grid-tile.week-plan {
   background: rgb(182, 255, 146);
 }
+
 mat-grid-tile.month-plan{
     background: rgb(159, 153, 255);
 }
 mat-grid-tile.result-plan{
-	
+
     background: rgb(153, 255, 231);
 }
 .mat-grid-tile .mat-grid-tile-header span.label {
@@ -48,4 +49,10 @@ span.выполнен {
 }
 span.не.выполнен {
     background: #f44336;
+}
+mat-card.col-md-3.mat-card {
+  width: 24%;
+  margin-right: 10px;
+  min-height: 110px;
+  margin-bottom: 10px;
 }

@@ -6,14 +6,14 @@
 <app-loading [condition]="isLoading"></app-loading>
 
 <app-toast [message]="toast.message"></app-toast>
-<div *ngIf="auth.isSalesAdmin || auth.isUser">
+<div>
   <div class="card" *ngIf="!isLoading">
     <div class="col-md-12" *ngIf="!isEditing">
       <mat-card *ngFor="let order of orders" class="col-md-3">
         <mat-card-header>
           <!--<div mat-card-avatar>{{order.product}}</div>-->
-          <mat-card-title>{{order.name}}<span class="float-right">{{order.product}}</span></mat-card-title>
-          <mat-card-subtitle>{{order.count}}<span class="float-right">До {{order.date}}</span></mat-card-subtitle>
+          <mat-card-title>Название: {{order.name}}<span class="float-right">Товар: {{order.product}}</span></mat-card-title>
+          <mat-card-subtitle>Количество:{{order.count}}<span class="float-right">До: {{order.date}}</span></mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
 
@@ -22,7 +22,7 @@
           <span matTooltip="Редактировать">
             <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(order)"><i class="fa fa-pencil"></i> </button>
           </span>
-          <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin">
+          <span matTooltip="Удалить">
             <button mat-mini-fab color="warn" (click)="deleteOrder(order)"><i class="fa fa-trash"></i> </button>
           </span>
 
@@ -37,16 +37,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Редактирование плана</h4>
+        <h4 class="modal-title">Редактирование заказа</h4>
       </div>
       <form class="form-inline" #form="ngForm" (ngSubmit)="editOrder(order)" style="display:inline">
         <div class="modal-body">
-          <mat-form-field *ngIf="auth.isSalesAdmin">
+          <mat-form-field>
             <span matTooltip="Введите название" class="time">
               <input matInput class="mat-input-element"  name="name" [(ngModel)]="order.name" placeholder="Название">
             </span>
           </mat-form-field>
-          <mat-form-field *ngIf="auth.isSalesAdmin">
+          <mat-form-field>
            <span matTooltip="Выберите продукт">
              <input placeholder="Продукт" matInput class="mat-input-element" [(ngModel)]="order.product" name="type" placeholder="Выберите продукт">
            </span>
@@ -56,7 +56,7 @@
                  <input placeholder="Количество" matInput class="mat-input-element" name="count"  [(ngModel)]="order.count" placeholder="Количество">
               </span>
             </mat-form-field>
-          <mat-form-field *ngIf="auth.isSalesAdmin">
+          <mat-form-field>
             <span matTooltip="Срок" class="time">
               <input placeholder="Срок" matInput class="mat-input-element" type="date"  name="date" [(ngModel)]="order.date">
             </span>
@@ -71,7 +71,7 @@
   </div>
 </div>
 
-<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin">
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
   <span>Создать заказ</span>
 </button>
 <div class="modal fade" id="addNewItem" role="dialog">
@@ -92,7 +92,7 @@
                  </span>
               </mat-form-field>
               <mat-form-field>
-               <span matTooltip="Количество" *ngIf="auth.isSalesAdmin">
+               <span matTooltip="Количество" >
                   <input matInput class="mat-input-element"  name="count" formControlName="count" placeholder="Количество">
                 </span>
               </mat-form-field>
@@ -102,7 +102,7 @@
                 </span>
               </mat-form-field>
               <mat-form-field>
-               <span matTooltip="Продукт" *ngIf="auth.isSalesAdmin">
+               <span matTooltip="Продукт">
                   <input matInput class="mat-input-element"  name="product" formControlName="product" placeholder="Продукт">
                 </span>
               </mat-form-field>
