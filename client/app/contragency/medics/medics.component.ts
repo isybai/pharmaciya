@@ -23,7 +23,7 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 
 export class MedicsComponent implements OnInit {
-  lpus = [
+  typesL = [
     {value: 'Ц.С.М.', viewValue: 'Ц.С.М.'},
     {value: 'Больница', viewValue: 'Больница'},
     {value: 'Мед. центр', viewValue: 'Мед. центр'}
