@@ -98,8 +98,8 @@
             <mat-form-field>
                   <span matTooltip="Выберите тип">
                   <mat-select #selectedType [(ngModel)]="medic.type" name="type"  placeholder="Тип">
-                  <mat-option *ngFor="let spec of lpus | slice:0:3;" [value]="spec.type">
-                  {{ spec.type }}
+                  <mat-option *ngFor="let lpu of lpus" [value]="lpu.value">
+                  {{ lpu.viewValue }}
                   </mat-option>
                   </mat-select>
                   </span>

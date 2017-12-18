@@ -23,6 +23,11 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 
 export class MedicsComponent implements OnInit {
+  lpus = [
+    {value: 'Ц.С.М.', viewValue: 'Ц.С.М.'},
+    {value: 'Больница', viewValue: 'Больница'},
+    {value: 'Мед. центр', viewValue: 'Мед. центр'}
+  ];
 
   specs = [
     {value: 'Акушер', viewValue: 'Акушер'},
