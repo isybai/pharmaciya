@@ -75,7 +75,7 @@
         <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
           Ничего не найденно по вашему запросу.
         </div>
-        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="1000" [pageSizeOptions]="[5, 10, 25, 100]">
         </mat-paginator>
       </div>
 
@@ -146,7 +146,7 @@
         <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
           Ничего не найденно по вашему запросу.
         </div>
-        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="1000" [pageSizeOptions]="[5, 10, 25, 100]">
         </mat-paginator>
       </div>
 
@@ -166,7 +166,7 @@
           </ng-container>
           <ng-container cdkColumnDef="department">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Отделения / Филиалы </mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? <button md-fab color="primary">Показать</button> : ''}} </mat-cell>
+            <mat-cell *cdkCellDef="let row"><button *ngIf="row.type === 'Больница'? row.name : ''" md-fab color="primary">Показать</button>  </mat-cell>
           </ng-container>
           <!-- DateSubmitted -->
           <ng-container cdkColumnDef="localArea">
@@ -189,15 +189,15 @@
             <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.workTime : ''}} </mat-cell>
           </ng-container>
           <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="director">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.director : ''}} </mat-cell>
-          </ng-container>
-          <!-- ChangeDescription -->
-          <ng-container cdkColumnDef="directorPhone">
-            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>
-            <mat-cell *cdkCellDef="let row">{{row.type === 'Больница'? row.directorPhone : ''}}</mat-cell>
-          </ng-container>
+          <!--<ng-container cdkColumnDef="director">-->
+            <!--<mat-header-cell *cdkHeaderCellDef mat-sort-header> Директор</mat-header-cell>-->
+            <!--<mat-cell *cdkCellDef="let row"> {{row.type === 'Больница'? row.director : ''}} </mat-cell>-->
+          <!--</ng-container>-->
+          <!--&lt;!&ndash; ChangeDescription &ndash;&gt;-->
+          <!--<ng-container cdkColumnDef="directorPhone">-->
+            <!--<mat-header-cell *cdkHeaderCellDef mat-sort-header> Тел. директора </mat-header-cell>-->
+            <!--<mat-cell *cdkCellDef="let row">{{row.type === 'Больница'? row.directorPhone : ''}}</mat-cell>-->
+          <!--</ng-container>-->
           <ng-container cdkColumnDef="action">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
@@ -210,14 +210,14 @@
             </mat-cell>
           </ng-container>
           <!-- ChangeDescription -->
-          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+          <mat-header-row *cdkHeaderRowDef="hospitalColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: hospitalColumns;">
           </mat-row>
         </mat-table>
         <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
           Ничего не найденно по вашему запросу.
         </div>
-        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+        <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="1000" [pageSizeOptions]="[5, 10, 25, 100]">
         </mat-paginator>
       </div>
 

@@ -45,6 +45,7 @@ export class LpuComponent implements OnInit {
   checkb: boolean;
   isDataAvailable = false;
   displayedColumns = ['name', 'department', 'localArea', 'address', 'workTime', 'tel', 'director', 'directorPhone', 'action'];
+  hospitalColumns = ['name', 'department', 'localArea', 'address', 'workTime', 'tel', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -65,11 +66,7 @@ export class LpuComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
 
   show(e) {
-    if (e.checked) {
-      this.checkb = true;
-    } else {
-      this.checkb = false;
-    }
+    this.checkb = !!e.checked;
   }
 
   constructor(private lpuService: LpuService, private cdRef: ChangeDetectorRef,
