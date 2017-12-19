@@ -171,8 +171,8 @@
               <mat-form-field>
                      <span matTooltip="Выберите тип ЛПУ">
                         <mat-select #selectedType formControlName="type" placeholder="Тип ЛПУ">
-                           <mat-option *ngFor="let spec of lpus | slice:0:3;" [value]="spec.type">
-                           {{ spec.type }}
+                           <mat-option *ngFor="let item of typesL" [value]="item.value">
+                           {{ item.viewValue }}
                            </mat-option>
                         </mat-select>
                      </span>
