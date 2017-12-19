@@ -3,7 +3,7 @@
 <app-toast [message]="toast.message"></app-toast>
 <div class="info_table">
   <div class="" *ngIf="!isLoading">
-    <h4 class="">Арендаторы {{renters.length}}</h4>
+    <h6 class="">Количество арендаторов: {{renters.length}}</h6>
     <table class="table table-bordered table-striped" *ngIf="!isEditing">
       <thead class="thead-default">
         <tr>
@@ -16,52 +16,152 @@
         <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name">{{renter.name}}</td>
         <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name">{{renter.sur}}</td>
         <td>
-          <button class="btn btn-sm btn-warning" (click)="enableEditing(renter)">
+          <button class="btn btn-sm btn-info" (click)="enableEditing(renter)">
             <i class="fa fa-pencil"></i> Редактировать
           </button>
           <button class="btn btn-sm btn-danger" (click)="deleteRenter(renter)">
             <i class="fa fa-divash"></i> Удалить
           </button>
         </td>
-        <div class="modal inmodal in" [attr.id]="renter.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade renterInfo" [attr.id]="renter.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
-            <div class="modal-content animated flipInY">
+            <div class="modal-content">
               <mat-card class="example-card">
-                <mat-card-header>
-                 <mat-card-title><span class="float-left"><i class="material-icons">account_circle</i>Ф.И.О.: </span><span class="float-right">{{renter.name + ' ' + renter.sur}}</span></mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <div><i class="material-icons">notifications</i><span class="float-left">Статус: </span><span class="float-right">{{renter.status}}</span></div>
-                  <div><i class="material-icons">call</i><span class="float-left">Телефон: </span><span class="float-right">0 {{renter.tel}}</span></div>
-                  <div><i class="material-icons">cake</i><span class="float-left">Дата рождения: </span><span class="float-right">{{renter.dob}}</span></div>
-                  <div><i class="material-icons">domain</i><span class="float-left">Тип помещения: </span><span class="float-right">{{renter.type}}</span></div>
-                  <div><i class="material-icons">sort_by_alpha</i><span class="float-left">Литер: </span><span class="float-right">{{renter.liter}}</span></div>
-                  <div><i class="material-icons">stop</i><span class="float-left">Площадь помещения: </span><span class="float-right">{{renter.square}}</span></div>
-                  <div><i class="material-icons">sort_by_alpha</i><span class="float-left">Цена: </span><span class="float-right">{{renter.price}}</span></div>
-                  <div><i class="material-icons">access_time</i><span class="float-left">Дата от: </span><span class="float-right">{{renter.dateFrom}}</span></div>
-                  <div><i class="material-icons">access_time</i><span class="float-left">Дата до: </span><span class="float-right">{{renter.dateUntil}}</span></div>
-                  <div><i class="material-icons">query_builder</i><span class="float-left">Сумма оплаты: </span><span class="float-right">{{renter.priceSum}}</span></div>
-                  <div><i class="material-icons">query_builder</i><span class="float-left">Депозит: </span><span class="float-right">{{renter.deposite}}</span></div>
-                  <div><i class="material-icons">local_florist</i><span class="float-left">Т.Б.О.: </span><span class="float-right">{{renter.tbo}}</span></div>
-                  <div><i class="material-icons">power</i><span class="float-left">Электричество: </span><span class="float-right">{{renter.electric}}</span></div>
-                  <div><i class="material-icons">network_cell</i><span class="float-left">Тел. связь: </span><span class="float-right">{{renter.telNet}}</span></div>
-                  <div><i class="material-icons">attach_money</i><span class="float-left">Сумма всего: </span><span class="float-right">{{renter.sumAll}}</span></div>
-                  <div><i class="material-icons">attach_money</i><span class="float-left">Фактическая оплата: </span><span class="float-right">{{renter.factPay}}</span></div>
-                  <div><i class="material-icons">attach_money</i><span class="float-left">Дата оплаты: </span><span class="float-right">{{renter.datePay}}</span></div>
-                  <div><i class="material-icons">local_atm</i><span class="float-left">Тип оплаты: </span><span class="float-right">{{renter.typePay}}</span></div>
-                  <div><i class="material-icons">event_note</i><span class="float-left">Примечания: </span><span class="float-right">{{renter.note}}</span></div>
-                </mat-card-content>
-                <mat-card-actions>
-                  <button class="btn btn-sm btn-warning" (click)="enableEditing(renter)" data-dismiss="modal">
-                    <i class="fa fa-pencil"></i> Редактировать
-                  </button>
-                  <button class="btn btn-sm btn-danger" (click)="deleteRenter(renter)">
-                    <i class="fa fa-divash"></i> Удалить
-                  </button>
-                  <button class="btn btn-sm btn-default" data-dismiss="modal">
-                    <i class="fa fa-close"></i> Закрыть
-                  </button>
-                </mat-card-actions>
+              <mat-card-content>
+                <div class="col-4 col-md-4">
+                  <h5 class="renter">Арендатор</h5>
+                  <div class="form-group inline"><label><i class="material-icons">account_circle</i>
+                    Имя: </label>
+                    <div>{{renter.name}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">account_circle</i>
+                    Фамилия: </label>
+                    <div>{{renter.sur}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">call</i>
+                    Телефон: </label>
+                    <div>{{renter.tel}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">cake</i>
+                    Дата рождения: </label>
+                    <div>{{renter.dob}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                    Месяч. оплата: </label>
+                    <div>{{renter.price}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
+                    Литер: </label>
+                    <div>{{renter.liter}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">visibility</i>
+                    Продукт / Услуги: </label>
+                    <div>{{renter.rentersProduct}}</div>
+                  </div>
+                </div>
+                <div class="col-4 col-md-4">
+                  <h5 class="document">Договор</h5>
+                  <div class="form-group inline"><label>
+                    № договора: </label>
+                    <div>{{renter.docNumber}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">sentiment_satisfied</i>
+                    Сторона договора: </label>
+                    <div>{{renter.docSide}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">person_pin_circle</i>
+                    Должность: </label>
+                    <div>{{renter.docSidePos}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">local_phone</i>
+                    Телефон: </label>
+                    <div>{{renter.docNumber}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">access_time</i>
+                    Дата от: </label>
+                    <div>{{renter.dateFrom}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">access_time</i>
+                    Дата до: </label>
+                    <div>{{renter.dateUntil}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">notifications</i>
+                    Статус: </label>
+                    <div>{{renter.status}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">query_builder</i>
+                    Депозит: </label>
+                    <div>{{renter.deposite}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                    Факт. оплата: </label>
+                    <div>{{renter.factPay}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">query_builder</i>
+                    Сумма оплаты: </label>
+                    <div>{{renter.priceSum}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                    Дата оплаты: </label>
+                    <div>{{renter.datePay}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">local_atm</i>
+                    Тип оплаты: </label>
+                    <div>{{renter.typePay}}</div>
+                  </div>
+                </div>
+                <div class="col-4 col-md-4">
+                  <h5 class="office">Помещение</h5>
+                  <div class="form-group inline"><label><i class="material-icons">domain</i>
+                    Тип помещения: </label>
+                    <div>{{renter.type}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
+                    Литер: </label>
+                    <div>{{renter.liter}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">stop</i>
+                    Площадь: </label>
+                    <div>{{renter.square}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                    Цена: </label>
+                    <div>{{renter.price}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">local_florist</i>
+                    ТБО: </label>
+                    <div>{{renter.tbo}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">power</i>
+                    Электричество: </label>
+                    <div>{{renter.electric}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">network_cell</i>
+                    Тел. связь: </label>
+                    <div>{{renter.telNet}}</div>
+                  </div>
+                  <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                    Сумма всего: </label>
+                    <div>{{renter.sumAll}}</div>
+                  </div>
+                  <div class="form-group"><label><i class="material-icons">event_note</i>
+                    Примечание: </label>
+                    <div>{{renter.note}}</div>
+                  </div>
+                </div>
+
+              </mat-card-content>
+              <mat-card-actions>
+                <button class="btn btn-sm btn-info" (click)="enableEditing(renter)" data-dismiss="modal">
+                  <i class="fa fa-pencil"></i> Редактировать
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteRenter(renter)">
+                  <i class="fa fa-divash"></i> Удалить
+                </button>
+                <button class="btn btn-sm btn-default" data-dismiss="modal">
+                  <i class="fa fa-close"></i> Закрыть
+                </button>
+              </mat-card-actions>
               </mat-card>
             </div>
           </div>
@@ -77,100 +177,120 @@
   <form class="" #form="ngForm" (ngSubmit)="editRenter(renter)" style="display:inline">
     <mat-card-content>
       <div class="col-4 col-md-4">
-        <h5>Информация арендатора</h5>
+        <h5 class="renter">Арендатор</h5>
         <div class="form-group inline"><label><i class="material-icons">account_circle</i>
          Имя: </label>
-          <input class="form-control" type="text" name="name" [(ngModel)]="renter.name" placeholder="Имя" required>
+          <input class="form-control" type="text" name="name" [(ngModel)]="renter.name" placeholder="Имя">
         </div>
         <div class="form-group inline"><label><i class="material-icons">account_circle</i>
          Фамилия: </label>
-          <input class="form-control" type="text" name="sur" [(ngModel)]="renter.sur" placeholder="Фамилия" required>
+          <input class="form-control" type="text" name="sur" [(ngModel)]="renter.sur" placeholder="Фамилия">
         </div>
         <div class="form-group inline"><label><i class="material-icons">call</i>
          Телефон: </label>
-          <input class="form-control" type="number" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон" required>
+          <input class="form-control" type="number" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон">
         </div>
         <div class="form-group inline"><label><i class="material-icons">cake</i>
          Дата рождения: </label>
-          <input class="form-control" type="date" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения" required>
+          <input class="form-control" type="date" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения">
+        </div>
+        <div class="form-group inline"><label><i class="material-icons">visibility</i>
+          Продукт / Услуги: </label>
+          <input class="form-control" name="rentersProduct" [(ngModel)]="renter.rentersProduct" placeholder="Продукт / Услуги">
         </div>
       </div>
       <div class="col-4 col-md-4">
-        <h5>Информация о договоре</h5>
+        <h5 class="document">Договор</h5>
+        <div class="form-group inline"><label>
+          № договора: </label>
+          <input class="form-control" type="number" name="docNumber" [(ngModel)]="renter.docNumber" placeholder="№ договора">
+        </div>
+        <div class="form-group inline"><label><i class="material-icons">sentiment_satisfied</i>
+          Сторона договора: </label>
+          <input class="form-control" name="docSide" [(ngModel)]="renter.docSide" placeholder="Сторона договора">
+        </div>
+        <div class="form-group inline"><label><i class="material-icons">person_pin_circle</i>
+          Должность: </label>
+          <input class="form-control" type="docSidePos" name="docSidePos" [(ngModel)]="renter.docSidePos" placeholder="Должность">
+        </div>
+        <div class="form-group inline"><label><i class="material-icons">local_phone</i>
+          Телефон: </label>
+          <input class="form-control" name="docSideTel" [(ngModel)]="renter.docSideTel" placeholder="Телефон">
+        </div>
         <div class="form-group inline"><label><i class="material-icons">access_time</i>
          Дата от: </label>
-          <input class="form-control" type="date" name="dateFrom" [(ngModel)]="renter.dateFrom" placeholder="Дата от" required>
+          <input class="form-control" type="date" name="dateFrom" [(ngModel)]="renter.dateFrom" placeholder="Дата от">
         </div>
         <div class="form-group inline"><label><i class="material-icons">access_time</i>
          Дата до: </label>
-          <input class="form-control" type="date" name="dateUntil" [(ngModel)]="renter.dateUntil" placeholder="Дата до" required>
+          <input class="form-control" type="date" name="dateUntil" [(ngModel)]="renter.dateUntil" placeholder="Дата до">
         </div>
         <div class="form-group inline"><label><i class="material-icons">notifications</i>
          Статус: </label>
-          <input class="form-control" type="text" name="status" [(ngModel)]="renter.status" placeholder="Статус" required>
+          <input class="form-control" type="text" name="status" [(ngModel)]="renter.status" placeholder="Статус">
         </div>
         <div class="form-group inline"><label><i class="material-icons">query_builder</i>
          Депозит: </label>
-          <input class="form-control" type="number" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит" required>
+          <input class="form-control" type="number" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
-         Фактическая оплата: </label>
-          <input class="form-control" type="text" name="factPay" [(ngModel)]="renter.factPay" placeholder="Фактическая оплата" required>
+         Факт. оплата: </label>
+          <input class="form-control" type="text" name="factPay" [(ngModel)]="renter.factPay" placeholder="Факт. оплата">
         </div>
         <div class="form-group inline"><label><i class="material-icons">query_builder</i>
          Сумма оплаты: </label>
-          <input class="form-control" type="text" name="priceSum" [(ngModel)]="renter.priceSum" placeholder="Сумма оплаты" required>
+          <input class="form-control" type="text" name="priceSum" [(ngModel)]="renter.priceSum" placeholder="Сумма оплаты">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Дата оплаты: </label>
-          <input class="form-control" type="date" name="datePay" [(ngModel)]="renter.datePay" placeholder="Дата оплаты" required>
+          <input class="form-control" type="date" name="datePay" [(ngModel)]="renter.datePay" placeholder="Дата оплаты">
         </div>
         <div class="form-group inline"><label><i class="material-icons">local_atm</i>
          Тип оплаты: </label>
-          <input class="form-control" type="text" name="typePay" [(ngModel)]="renter.typePay" placeholder="Тип оплаты" required>
+          <input class="form-control" type="text" name="typePay" [(ngModel)]="renter.typePay" placeholder="Тип оплаты">
         </div>
       </div>
       <div class="col-4 col-md-4">
-        <h5>Информация помещения</h5>
+        <h5 class="office">Помещение</h5>
         <div class="form-group inline"><label><i class="material-icons">domain</i>
          Тип помещения: </label>
-          <input class="form-control" type="text" name="type" [(ngModel)]="renter.type" placeholder="Тип помещения" required>
+          <input class="form-control" type="text" name="type" [(ngModel)]="renter.type" placeholder="Тип помещения">
         </div>
         <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
          Литер: </label>
-          <input class="form-control" type="text" name="liter" [(ngModel)]="renter.liter" placeholder="Литер" required>
+          <input class="form-control" type="text" name="liter" [(ngModel)]="renter.liter" placeholder="Литер">
         </div>
         <div class="form-group inline"><label><i class="material-icons">stop</i>
-         Площадь помещения: </label>
-          <input class="form-control" type="text" name="square" [(ngModel)]="renter.square" placeholder="Площадь помещения" required>
+         Площадь: </label>
+          <input class="form-control" type="text" name="square" [(ngModel)]="renter.square" placeholder="Площадь">
         </div>
-        <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
+        <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Цена: </label>
-          <input class="form-control" type="number" name="price" [(ngModel)]="renter.price" placeholder="Цена" required>
+          <input class="form-control" type="number" name="price" [(ngModel)]="renter.price" placeholder="Цена">
         </div>
         <div class="form-group inline"><label><i class="material-icons">local_florist</i>
          ТБО: </label>
-          <input class="form-control" type="number" name="tbo" [(ngModel)]="renter.tbo" placeholder="ТБО" required>
+          <input class="form-control" type="number" name="tbo" [(ngModel)]="renter.tbo" placeholder="ТБО">
         </div>
         <div class="form-group inline"><label><i class="material-icons">power</i>
          Электричество: </label>
-          <input class="form-control" type="number" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество" required>
+          <input class="form-control" type="number" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество">
         </div>
         <div class="form-group inline"><label><i class="material-icons">network_cell</i>
          Тел. связь: </label>
-          <input class="form-control" type="number" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь" required>
+          <input class="form-control" type="number" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Сумма всего: </label>
-          <input class="form-control" type="text" name="sumAll" [(ngModel)]="renter.sumAll" placeholder="Сумма всего" required>
+          <input class="form-control" name="sumAll" [(ngModel)]="renter.sumAll" placeholder="Сумма всего">
         </div>
         <div class="form-group"><label><i class="material-icons">event_note</i>
          Примечание: </label>
-          <textarea class="form-control" type="text" name="note" [(ngModel)]="renter.note" placeholder="Примечания" required></textarea>
+          <textarea class="form-control" type="text" name="note" [(ngModel)]="renter.note" placeholder="Примечания"></textarea>
         </div>
       </div>
       <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-      <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
+      <button class="btn btn-sm btn-info" (click)="cancelEditing()"><i class="fa fa-times"></i> Отменить</button>
     </mat-card-content>
     <mat-card-actions>
 
@@ -178,126 +298,152 @@
   </form>
 </mat-card>
   </div>
-  <mat-sidenav-container class="example-container" *ngIf="!isEditing">
-    <div class="example-sidenav-content">
-      <button mat-raised-button (click)="sidenav.open()">
-        <mat-icon>add</mat-icon>Добавить арендатора
-      </button>
-    </div>
-    <mat-sidenav #sidenav class="example-sidenav">
-      <div class="addItem" *ngIf="!isEditing">
-        <div>
-          <form class="form-inline" [formGroup]="addRenterForm" (ngSubmit)="addRenter()" style="text-align:center">
-            <mat-form-field>
-              <span matTooltip="Введите имя">
-                <input matInput class="mat-input-element" type="text" name="name" formControlName="name" placeholder="Имя">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите фамилию">
-                <input matInput class="mat-input-element" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите день рождения">
-                <input matInput class="mat-input-element" type="date" name="dob" formControlName="dob" placeholder="Дата рождения">
-              </span>
-            </mat-form-field>
-            <span matTooltip="Введите телефон">
-              <mat-form-field>
-                <span style="color: #757575;" matPrefix>+996 &nbsp;</span>
-                <input matInput class="mat-input-element" type="number" name="tel" formControlName="tel" placeholder="Телефон">
-              </mat-form-field>
-            </span>
-            <mat-form-field>
-              <span matTooltip="Введите тип помещения">
-                <input matInput class="mat-input-element" type="text" name="type" formControlName="type" placeholder="Тип">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите литер">
-                <input matInput class="mat-input-element" type="text" name="liter" formControlName="liter" placeholder="Литер">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите площадь">
-                <input matInput class="mat-input-element" type="text" name="square" formControlName="square" placeholder="Площадь">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="">
-                <input matInput class="mat-input-element" type="number" name="price" formControlName="price" placeholder="Цена">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите дату начала аренды">
-                <input matInput class="mat-input-element" type="date" name="dateFrom" formControlName="dateFrom" placeholder="Дата от">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите дату окончания аренды">
-                <input matInput class="mat-input-element" type="date" name="dateUntil" formControlName="dateUntil" placeholder="Дата до">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите общую сумму">
-                <input matInput class="mat-input-element" type="text" name="priceSum" formControlName="priceSum" placeholder="Сумма">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Введите депозит">
-                <input matInput class="mat-input-element" type="number" name="deposite" formControlName="deposite" placeholder="Депозит">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="ТБО">
-                <input matInput class="mat-input-element" type="number" name="tbo" formControlName="tbo" placeholder="ТБО">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Электричество">
-                <input matInput class="mat-input-element" type="number" name="electric" formControlName="electric" placeholder="Электричество">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Сумма за тел.связь">
-                <input matInput class="mat-input-element" type="number" name="telNet" formControlName="telNet" placeholder="Тел. связь">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Общая сумма">
-                <input matInput class="mat-input-element" type="text" name="sumAll" formControlName="sumAll" placeholder="Сумма всего">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Фактическая оплата">
-                <input matInput class="mat-input-element" type="text" name="factPay" formControlName="factPay" placeholder="Фактическая оплата">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Дата оплаты">
-                <input matInput class="mat-input-element" type="date" name="datePay" formControlName="datePay" placeholder="Дата оплаты">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Тип оплаты">
-                <input matInput class="mat-input-element" type="text" name="typePay" formControlName="typePay" placeholder="Тип оплаты">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Статус">
-                <input matInput class="mat-input-element" type="text" name="status" formControlName="status" placeholder="Статус">
-              </span>
-            </mat-form-field>
-            <mat-form-field>
-              <span matTooltip="Заметки">
-                <textarea matInput class="mat-input-element" type="text" name="note" formControlName="note" placeholder="Заметки"></textarea>
-              </span>
-            </mat-form-field>
-            <button mat-raised-button color="warm" (click)="sidenav.close()" class="" type="submit" [disabled]="!addRenterForm.valid"><i class="material-icons">add</i> Добавить</button>
-          </form>
+
+</div>
+  <button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+    <span>Добавить арендатора</span>
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="addNewItem" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Добавление нового арендатора</h4>
+        </div>
+        <div class="modal-body">
+          <div class="addItem">
+            <div>
+              <form class="form-inline" [formGroup]="addRenterForm" (ngSubmit)="addRenter()" style="text-align:center">
+                <mat-card-content>
+                  <div class="col-4 col-md-4">
+                    <h5 class="renter">Арендатор</h5>
+                    <div class="form-group inline"><label><i class="material-icons">account_circle</i>
+                      Имя: </label>
+                      <input class="form-control" type="text" name="name" formControlName="name" placeholder="Имя">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">account_circle</i>
+                      Фамилия: </label>
+                      <input class="form-control" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">call</i>
+                      Телефон: </label>
+                      <input class="form-control" type="number" name="tel" formControlName="tel" placeholder="Телефон">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">cake</i>
+                      Дата рождения: </label>
+                      <input class="form-control" type="date" name="dob" formControlName="dob" step="any" min="0" placeholder="Дата рождения">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">visibility</i>
+                      Продукт / Услуги: </label>
+                      <input class="form-control" name="rentersProduct" formControlName="rentersProduct" placeholder="Продукт / Услуги">
+                    </div>
+                  </div>
+                  <div class="col-4 col-md-4">
+                    <h5 class="document">Договор</h5>
+                    <div class="form-group inline"><label>
+                      № договора: </label>
+                      <input class="form-control" type="number" name="docNumber" formControlName="docNumber" placeholder="№ договора">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">sentiment_satisfied</i>
+                      Сторона договора: </label>
+                      <input class="form-control" name="docSide" formControlName="docSide" placeholder="Сторона договора">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">person_pin_circle</i>
+                      Должность: </label>
+                      <input class="form-control" type="docSidePos" name="docSidePos" formControlName="docSidePos" placeholder="Должность">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">local_phone</i>
+                      Телефон: </label>
+                      <input class="form-control" name="docSideTel" formControlName="docSideTel" placeholder="Телефон">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">access_time</i>
+                      Дата от: </label>
+                      <input class="form-control" type="date" name="dateFrom" formControlName="dateFrom" placeholder="Дата от">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">access_time</i>
+                      Дата до: </label>
+                      <input class="form-control" type="date" name="dateUntil" formControlName="dateUntil" placeholder="Дата до">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">notifications</i>
+                      Статус: </label>
+                      <input class="form-control" type="text" name="status" formControlName="status" placeholder="Статус">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">monetization_on</i>
+                      Депозит: </label>
+                      <input class="form-control" type="number" name="deposite" formControlName="deposite" placeholder="Депозит">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                      Факт. оплата: </label>
+                      <input class="form-control" type="text" name="factPay" formControlName="factPay" placeholder="Факт. оплата">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">monetization_on</i>
+                      Сумма оплаты: </label>
+                      <input class="form-control" type="text" name="priceSum" formControlName="priceSum" placeholder="Сумма оплаты">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">insert_invitation</i>
+                      Дата оплаты: </label>
+                      <input class="form-control" type="date" name="datePay" formControlName="datePay" placeholder="Дата оплаты">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">local_atm</i>
+                      Тип оплаты: </label>
+                      <input class="form-control" type="text" name="typePay" formControlName="typePay" placeholder="Тип оплаты">
+                    </div>
+                  </div>
+                  <div class="col-4 col-md-4">
+                    <h5 class="office">Помещение</h5>
+                    <div class="form-group inline"><label><i class="material-icons">domain</i>
+                      Тип помещения: </label>
+                      <input class="form-control" type="text" name="type" formControlName="type" placeholder="Тип помещения">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
+                      Литер: </label>
+                      <input class="form-control" type="text" name="liter" formControlName="liter" placeholder="Литер">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">stop</i>
+                      Площадь: </label>
+                      <input class="form-control" type="text" name="square" formControlName="square" placeholder="Площадь">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                      Цена: </label>
+                      <input class="form-control" type="number" name="price" formControlName="price" placeholder="Цена">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">local_florist</i>
+                      ТБО: </label>
+                      <input class="form-control" type="number" name="tbo" formControlName="tbo" placeholder="ТБО">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">power</i>
+                      Электричество: </label>
+                      <input class="form-control" type="number" name="electric" formControlName="electric" placeholder="Электричество">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">network_cell</i>
+                      Тел. связь: </label>
+                      <input class="form-control" type="number" name="telNet" formControlName="telNet" placeholder="Тел. связь">
+                    </div>
+                    <div class="form-group inline"><label><i class="material-icons">attach_money</i>
+                      Сумма всего: </label>
+                      <input class="form-control" type="text" name="sumAll" formControlName="sumAll" placeholder="Сумма всего">
+                    </div>
+                    <div class="form-group"><label><i class="material-icons">event_note</i>
+                      Примечание: </label>
+                      <textarea class="form-control" type="text" name="note" formControlName="note" placeholder="Примечания"></textarea>
+                    </div>
+                  </div>
+
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addRenterForm.valid"><i class="material-icons">add</i> Добавить</button>
+                  <button type="button" #close class="btn btn-sm btn-info" data-dismiss="modal">Закрыть</button>
+                </mat-card-actions>
+
+              </form>
+            </div>
+          </div>
+        <div class="modal-footer">
+
         </div>
       </div>
-    </mat-sidenav>
-  </mat-sidenav-container>
+      </div>
+  </div>
 </div>

@@ -22,6 +22,11 @@ const renterSchema = new mongoose.Schema({
   typePay: String,
   status: String,
   note: String,
+  docNumber: String,
+  docSide: String,
+  docSidePos: String,
+  docSideTel: String,
+  rentersProduct: String,
 });
 
 const Renter = mongoose.model('Renter', renterSchema);

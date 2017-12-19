@@ -160,22 +160,22 @@
                      </span>
               </mat-form-field>
               <mat-form-field>
-                     <span matTooltip="Выберите специальность">
-                        <mat-select formControlName="spec" placeholder="Специальность">
-                           <mat-option *ngFor="let spec of specs" [value]="spec.value">
-                           {{ spec.viewValue }}
-                           </mat-option>
-                        </mat-select>
-                     </span>
+                 <span matTooltip="Выберите специальность">
+                    <mat-select formControlName="spec" placeholder="Специальность">
+                       <mat-option *ngFor="let spec of specs" [value]="spec.value">
+                       {{ spec.viewValue }}
+                       </mat-option>
+                    </mat-select>
+                 </span>
               </mat-form-field>
               <mat-form-field>
-                     <span matTooltip="Выберите тип ЛПУ">
-                        <mat-select #selectedType formControlName="type" placeholder="Тип ЛПУ">
-                           <mat-option *ngFor="let item of typesL" [value]="item.value">
-                           {{ item.viewValue }}
-                           </mat-option>
-                        </mat-select>
-                     </span>
+                 <span matTooltip="Выберите тип ЛПУ">
+                    <mat-select #selectedType formControlName="type" placeholder="Тип ЛПУ">
+                       <mat-option *ngFor="let item of typesL" [value]="item.value">
+                       {{ item.viewValue }}
+                       </mat-option>
+                    </mat-select>
+                 </span>
               </mat-form-field>
               <mat-form-field *ngIf="selectedType.value !== undefined">
                      <span matTooltip="Выберите больницу">

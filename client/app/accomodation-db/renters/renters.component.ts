@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
-import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { RenterService } from '../../services/renter.service';
@@ -41,7 +38,12 @@ export class RentersComponent implements OnInit {
   datePay = new FormControl('', Validators.required);
   typePay = new FormControl('', Validators.required);
   status = new FormControl('', Validators.required);
-  note = new FormControl(null, Validators.nullValidator);
+  note = new FormControl(null);
+  docNumber = new FormControl(null);
+  docSide = new FormControl(null);
+  docSidePos = new FormControl(null);
+  docSideTel = new FormControl(null);
+  rentersProduct = new FormControl(null);
 
   constructor(private renterService: RenterService,
               private formBuilder: FormBuilder,
@@ -51,27 +53,32 @@ export class RentersComponent implements OnInit {
   ngOnInit() {
     this.getRenters();
     this.addRenterForm = this.formBuilder.group({
-     name: this.name,	
-		 sur: this.sur,		
-		 dob: this.dob,		
-		 tel: this.tel,		
-		 type: this.type,		
-		 liter: this.liter,		
-		 square: this.square,	
-		 price: this.price,		
-		 dateFrom: this.dateFrom,	
+     name: this.name,
+		 sur: this.sur,
+		 dob: this.dob,
+		 tel: this.tel,
+		 type: this.type,
+		 liter: this.liter,
+		 square: this.square,
+		 price: this.price,
+		 dateFrom: this.dateFrom,
 		 dateUntil: this.dateUntil,
-		 priceSum: this.priceSum,	
-		 deposite: this.deposite,	
-		 tbo: this.tbo,		
-		 electric: this.electric,	
-		 telNet: this.telNet,	
-		 sumAll: this.sumAll,	
-		 factPay: this.factPay,	
-		 datePay: this.datePay,	
-		 typePay: this.typePay,	
-		 status: this.status,	
-		 note: this.note,		
+		 priceSum: this.priceSum,
+		 deposite: this.deposite,
+		 tbo: this.tbo,
+		 electric: this.electric,
+		 telNet: this.telNet,
+		 sumAll: this.sumAll,
+		 factPay: this.factPay,
+		 datePay: this.datePay,
+		 typePay: this.typePay,
+		 status: this.status,
+		 note: this.note,
+		 docNumber: this.docNumber,
+		 docSide: this.docSide,
+		 docSidePos: this.docSidePos,
+     docSideTel: this.docSideTel,
+		 rentersProduct: this.rentersProduct,
     });
   }
 
