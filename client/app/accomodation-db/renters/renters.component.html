@@ -30,22 +30,19 @@
               <mat-card-content>
                 <div class="col-4 col-md-4">
                   <h5 class="renter">Арендатор</h5>
-                  <div class="form-group inline"><label><i class="material-icons">account_circle</i>
-                    Имя: </label>
-                    <div>{{renter.name}}</div>
+                  <div class="form-group inline fullwidth"><label><i class="material-icons">account_balance</i>
+                    Организация: </label>
+                    <div>{{renter.dob}}</div>
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">account_circle</i>
-                    Фамилия: </label>
-                    <div>{{renter.sur}}</div>
+                    ФИО: </label>
+                    <div>{{renter.name}}</div>
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">call</i>
                     Телефон: </label>
                     <div>{{renter.tel}}</div>
                   </div>
-                  <div class="form-group inline"><label><i class="material-icons">cake</i>
-                    Организация: </label>
-                    <div>{{renter.dob}}</div>
-                  </div>
+
                   <div class="form-group inline"><label><i class="material-icons">attach_money</i>
                     Месяч. оплата: </label>
                     <div>{{renter.price}}</div>
@@ -178,22 +175,19 @@
     <mat-card-content>
       <div class="col-4 col-md-4">
         <h5 class="renter">Арендатор</h5>
-        <div class="form-group inline"><label><i class="material-icons">account_circle</i>
-         Имя: </label>
-          <input class="form-control" type="text" name="name" [(ngModel)]="renter.name" placeholder="Имя">
+        <div class="form-group inline fullwidth"><label><i class="material-icons">account_balance</i>
+          Организация: </label>
+          <input class="form-control" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения">
         </div>
         <div class="form-group inline"><label><i class="material-icons">account_circle</i>
-         Фамилия: </label>
-          <input class="form-control" type="text" name="sur" [(ngModel)]="renter.sur" placeholder="Фамилия">
+          ФИО: </label>
+          <input class="form-control" type="text" name="name" [(ngModel)]="renter.name" placeholder="Имя">
         </div>
         <div class="form-group inline"><label><i class="material-icons">call</i>
          Телефон: </label>
           <input class="form-control" type="number" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон">
         </div>
-        <div class="form-group inline"><label><i class="material-icons">cake</i>
-          Организация: </label>
-          <input class="form-control" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения">
-        </div>
+
         <div class="form-group inline"><label><i class="material-icons">visibility</i>
           Продукт / Услуги: </label>
           <input class="form-control" name="rentersProduct" [(ngModel)]="renter.rentersProduct" placeholder="Продукт / Услуги">
@@ -319,22 +313,19 @@
                 <mat-card-content>
                   <div class="col-4 col-md-4">
                     <h5 class="renter">Арендатор</h5>
-                    <div class="form-group inline"><label><i class="material-icons">account_circle</i>
-                      Имя: </label>
-                      <input class="form-control" type="text" name="name" formControlName="name" placeholder="Имя">
+                    <div class="form-group inline fullwidth"><label><i class="material-icons">account_balance</i>
+                      Организация: </label>
+                      <input class="form-control" name="dob" formControlName="dob" step="any" min="0" placeholder="Дата рождения">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">account_circle</i>
-                      Фамилия: </label>
-                      <input class="form-control" type="text" name="sur" formControlName="sur" placeholder="Фамилия">
+                      ФИО: </label>
+                      <input class="form-control" type="text" name="name" formControlName="name" placeholder="Имя">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">call</i>
                       Телефон: </label>
                       <input class="form-control" type="number" name="tel" formControlName="tel" placeholder="Телефон">
                     </div>
-                    <div class="form-group inline"><label><i class="material-icons">cake</i>
-                      Организация: </label>
-                      <input class="form-control" name="dob" formControlName="dob" step="any" min="0" placeholder="Дата рождения">
-                    </div>
+
                     <div class="form-group inline"><label><i class="material-icons">visibility</i>
                       Продукт / Услуги: </label>
                       <input class="form-control" name="rentersProduct" formControlName="rentersProduct" placeholder="Продукт / Услуги">

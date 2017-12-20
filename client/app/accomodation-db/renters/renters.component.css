@@ -79,6 +79,9 @@ mat-card-content.mat-card-content .col-4.col-md-4 {
   box-shadow: 0 0 7px 3px #17171738;
   padding: 0;
 }
+.form-group.inline.fullwidth {
+  width: 100% !important;
+}
 .form-inline .form-control {
   display: inline-block;
   width: 100%;

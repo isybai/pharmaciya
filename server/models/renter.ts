@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 
 const renterSchema = new mongoose.Schema({
   name: String,
-  sur: String,
   dob: String,
   tel: String,
   type: String,

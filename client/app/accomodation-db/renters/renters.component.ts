@@ -54,7 +54,6 @@ export class RentersComponent implements OnInit {
     this.getRenters();
     this.addRenterForm = this.formBuilder.group({
      name: this.name,
-		 sur: this.sur,
 		 dob: this.dob,
 		 tel: this.tel,
 		 type: this.type,
