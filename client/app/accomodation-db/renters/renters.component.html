@@ -43,7 +43,7 @@
                     <div>{{renter.tel}}</div>
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">cake</i>
-                    Дата рождения: </label>
+                    Организация: </label>
                     <div>{{renter.dob}}</div>
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">attach_money</i>
@@ -191,8 +191,8 @@
           <input class="form-control" type="number" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон">
         </div>
         <div class="form-group inline"><label><i class="material-icons">cake</i>
-         Дата рождения: </label>
-          <input class="form-control" type="date" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения">
+          Организация: </label>
+          <input class="form-control" name="dob" [(ngModel)]="renter.dob" step="any" min="0" placeholder="Дата рождения">
         </div>
         <div class="form-group inline"><label><i class="material-icons">visibility</i>
           Продукт / Услуги: </label>
@@ -332,8 +332,8 @@
                       <input class="form-control" type="number" name="tel" formControlName="tel" placeholder="Телефон">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">cake</i>
-                      Дата рождения: </label>
-                      <input class="form-control" type="date" name="dob" formControlName="dob" step="any" min="0" placeholder="Дата рождения">
+                      Организация: </label>
+                      <input class="form-control" name="dob" formControlName="dob" step="any" min="0" placeholder="Дата рождения">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">visibility</i>
                       Продукт / Услуги: </label>

@@ -55,7 +55,7 @@ export class AuthService {
     this.currentUser._id = decodedUser._id;
     this.currentUser.username = decodedUser.username;
     this.currentUser.role = decodedUser.role;
-    if (decodedUser.role === 'superAdmin') { 
+    if (decodedUser.role === 'superAdmin') {
       this.isSuperAdmin = true;
     } else if (decodedUser.role === 'salesAdmin') {
       this.isSalesAdmin = true;

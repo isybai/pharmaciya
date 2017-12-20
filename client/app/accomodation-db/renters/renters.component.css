@@ -90,6 +90,7 @@ div#addNewItem .modal-dialog {
 .form-inline .form-group.inline {
   display: inline-block;
   margin-bottom: 10px;
+  padding: 0px 10px;
   width: 49%;
 }
 .form-inline .form-group {
@@ -103,7 +104,7 @@ div#addNewItem .addItem {
   background: transparent;
 }
 div.renterInfo .modal-dialog {
-  max-width: 90%;
+  max-width: 95%;
 }
 .modal-content.animated.flipInY {
   white-space: initial;
@@ -153,12 +154,13 @@ div.renterInfo .modal-content {
 }
 label {
   display: block;
-  padding-left: 30px;
+  padding-left: 40px;
   position: relative;
+  text-align: left;
 }
 label i {
   position: absolute;
-  left: 0px;
+  left: 10px;
   top: -3px;
 }
 div.renterInfo .mat-card {

@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   username: String,
+  status: Boolean,
   email: { type: String, unique: true, lowercase: true, trim: true },
   password: String,
   role: String,

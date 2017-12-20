@@ -166,7 +166,7 @@
           </ng-container>
           <ng-container cdkColumnDef="department">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Отделения / Филиалы </mat-header-cell>
-            <mat-cell *cdkCellDef="let row"><button *ngIf="row.type === 'Больница'? row.name : ''" md-fab color="primary">Показать</button>  </mat-cell>
+            <mat-cell *cdkCellDef="let row">{{row.type === 'Больница'? row.department : ''}}</mat-cell>
           </ng-container>
           <!-- DateSubmitted -->
           <ng-container cdkColumnDef="localArea">

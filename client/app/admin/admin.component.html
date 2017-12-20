@@ -10,6 +10,7 @@
         <tr>
           <th>Логин</th>
           <th>Почта</th>
+          <th>Status</th>
           <th>Роль</th>
           <th>Действия</th>
         </tr>
@@ -17,19 +18,20 @@
       <tbody *ngIf="users.length === 0">
         <tr>
           <td colspan="4">Нету пользователей.</td>
-        </tr>  
+        </tr>
       </tbody>
       <tbody>
         <tr *ngFor="let user of users">
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
+          <td><span *ngIf="user.status">no</span><span *ngIf="!user.status">yes</span></td>
           <td>{{user.role}}</td>
           <td>
             <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
               <i class="fa fa-trash"></i>
             </button>
           </td>
-        </tr>  
+        </tr>
       </tbody>
     </table>
   </div>
