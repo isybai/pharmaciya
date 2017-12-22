@@ -7,14 +7,24 @@
     <table class="table table-bordered table-striped" *ngIf="!isEditing">
       <thead class="thead-default">
         <tr>
-          <th>Имя</th>
-          <th>Фамилия</th>
+          <th>Организация</th>
+          <th>Конт. лицо</th>
+          <th>Площадь</th>
+          <th>Месяч. оплата</th>
+          <th>Литер</th>
+          <th>Телефон</th>
+          <th>Дата окон.</th>
           <th>Действия</th>
         </tr>
       </thead>
       <tr *ngFor="let renter of renters">
-        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name">{{renter.name}}</td>
-        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name">{{renter.sur}}</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.dob}}</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.docSide}}</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.square}}кв.м</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.priceSum}}</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.liter}}</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.docSideTel}}</td>
+        <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.dateUntil}}</td>
         <td>
           <button class="btn btn-sm btn-info" (click)="enableEditing(renter)">
             <i class="fa fa-pencil"></i> Редактировать
@@ -23,7 +33,7 @@
             <i class="fa fa-divash"></i> Удалить
           </button>
         </td>
-        <div class="modal fade renterInfo" [attr.id]="renter.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade renterInfo" [attr.id]="renter.name.replace(' ', '')" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <mat-card class="example-card">
@@ -45,13 +55,13 @@
 
                   <div class="form-group inline"><label><i class="material-icons">attach_money</i>
                     Месяч. оплата: </label>
-                    <div>{{renter.price}}</div>
+                    <div>{{renter.priceSum}}</div>
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
                     Литер: </label>
                     <div>{{renter.liter}}</div>
                   </div>
-                  <div class="form-group inline"><label><i class="material-icons">visibility</i>
+                  <div class="form-group inline fullwidth"><label><i class="material-icons">visibility</i>
                     Продукт / Услуги: </label>
                     <div>{{renter.rentersProduct}}</div>
                   </div>
@@ -72,7 +82,7 @@
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">local_phone</i>
                     Телефон: </label>
-                    <div>{{renter.docNumber}}</div>
+                    <div>{{renter.docSideTel}}</div>
                   </div>
                   <div class="form-group inline"><label><i class="material-icons">access_time</i>
                     Дата от: </label>
@@ -181,14 +191,14 @@
         </div>
         <div class="form-group inline"><label><i class="material-icons">account_circle</i>
           ФИО: </label>
-          <input class="form-control" type="text" name="name" [(ngModel)]="renter.name" placeholder="Имя">
+          <input class="form-control" name="name" [(ngModel)]="renter.name" placeholder="Имя">
         </div>
         <div class="form-group inline"><label><i class="material-icons">call</i>
          Телефон: </label>
-          <input class="form-control" type="number" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон">
+          <input class="form-control" name="tel" [(ngModel)]="renter.tel" placeholder="Телефон">
         </div>
 
-        <div class="form-group inline"><label><i class="material-icons">visibility</i>
+        <div class="form-group inline fullwidth"><label><i class="material-icons">visibility</i>
           Продукт / Услуги: </label>
           <input class="form-control" name="rentersProduct" [(ngModel)]="renter.rentersProduct" placeholder="Продукт / Услуги">
         </div>
@@ -197,7 +207,7 @@
         <h5 class="document">Договор</h5>
         <div class="form-group inline"><label>
           № договора: </label>
-          <input class="form-control" type="number" name="docNumber" [(ngModel)]="renter.docNumber" placeholder="№ договора">
+          <input class="form-control" name="docNumber" [(ngModel)]="renter.docNumber" placeholder="№ договора">
         </div>
         <div class="form-group inline"><label><i class="material-icons">sentiment_satisfied</i>
           Сторона договора: </label>
@@ -221,19 +231,19 @@
         </div>
         <div class="form-group inline"><label><i class="material-icons">notifications</i>
          Статус: </label>
-          <input class="form-control" type="text" name="status" [(ngModel)]="renter.status" placeholder="Статус">
+          <input class="form-control" name="status" [(ngModel)]="renter.status" placeholder="Статус">
         </div>
         <div class="form-group inline"><label><i class="material-icons">query_builder</i>
          Депозит: </label>
-          <input class="form-control" type="number" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит">
+          <input class="form-control" name="deposite" [(ngModel)]="renter.deposite" placeholder="Депозит">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Факт. оплата: </label>
-          <input class="form-control" type="text" name="factPay" [(ngModel)]="renter.factPay" placeholder="Факт. оплата">
+          <input class="form-control" name="factPay" [(ngModel)]="renter.factPay" placeholder="Факт. оплата">
         </div>
         <div class="form-group inline"><label><i class="material-icons">query_builder</i>
          Сумма оплаты: </label>
-          <input class="form-control" type="text" name="priceSum" [(ngModel)]="renter.priceSum" placeholder="Сумма оплаты">
+          <input class="form-control" name="priceSum" [(ngModel)]="renter.priceSum" placeholder="Сумма оплаты">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Дата оплаты: </label>
@@ -241,38 +251,38 @@
         </div>
         <div class="form-group inline"><label><i class="material-icons">local_atm</i>
          Тип оплаты: </label>
-          <input class="form-control" type="text" name="typePay" [(ngModel)]="renter.typePay" placeholder="Тип оплаты">
+          <input class="form-control" name="typePay" [(ngModel)]="renter.typePay" placeholder="Тип оплаты">
         </div>
       </div>
       <div class="col-4 col-md-4">
         <h5 class="office">Помещение</h5>
         <div class="form-group inline"><label><i class="material-icons">domain</i>
          Тип помещения: </label>
-          <input class="form-control" type="text" name="type" [(ngModel)]="renter.type" placeholder="Тип помещения">
+          <input class="form-control" name="type" [(ngModel)]="renter.type" placeholder="Тип помещения">
         </div>
         <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
          Литер: </label>
-          <input class="form-control" type="text" name="liter" [(ngModel)]="renter.liter" placeholder="Литер">
+          <input class="form-control" name="liter" [(ngModel)]="renter.liter" placeholder="Литер">
         </div>
         <div class="form-group inline"><label><i class="material-icons">stop</i>
          Площадь: </label>
-          <input class="form-control" type="text" name="square" [(ngModel)]="renter.square" placeholder="Площадь">
+          <input class="form-control" name="square" [(ngModel)]="renter.square" placeholder="Площадь">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Цена: </label>
-          <input class="form-control" type="number" name="price" [(ngModel)]="renter.price" placeholder="Цена">
+          <input class="form-control" name="price" [(ngModel)]="renter.price" placeholder="Цена">
         </div>
         <div class="form-group inline"><label><i class="material-icons">local_florist</i>
          ТБО: </label>
-          <input class="form-control" type="number" name="tbo" [(ngModel)]="renter.tbo" placeholder="ТБО">
+          <input class="form-control" name="tbo" [(ngModel)]="renter.tbo" placeholder="ТБО">
         </div>
         <div class="form-group inline"><label><i class="material-icons">power</i>
          Электричество: </label>
-          <input class="form-control" type="number" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество">
+          <input class="form-control" name="electric" [(ngModel)]="renter.electric" placeholder="Электричество">
         </div>
         <div class="form-group inline"><label><i class="material-icons">network_cell</i>
          Тел. связь: </label>
-          <input class="form-control" type="number" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь">
+          <input class="form-control" name="telNet" [(ngModel)]="renter.telNet" placeholder="Тел. связь">
         </div>
         <div class="form-group inline"><label><i class="material-icons">attach_money</i>
          Сумма всего: </label>
@@ -280,7 +290,7 @@
         </div>
         <div class="form-group"><label><i class="material-icons">event_note</i>
          Примечание: </label>
-          <textarea class="form-control" type="text" name="note" [(ngModel)]="renter.note" placeholder="Примечания"></textarea>
+          <textarea class="form-control" name="note" [(ngModel)]="renter.note" placeholder="Примечания"></textarea>
         </div>
       </div>
       <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
@@ -315,15 +325,15 @@
                     <h5 class="renter">Арендатор</h5>
                     <div class="form-group inline fullwidth"><label><i class="material-icons">account_balance</i>
                       Организация: </label>
-                      <input class="form-control" name="dob" formControlName="dob" step="any" min="0" placeholder="Дата рождения">
+                      <input class="form-control" name="dob" formControlName="dob" placeholder="Организация">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">account_circle</i>
                       ФИО: </label>
-                      <input class="form-control" type="text" name="name" formControlName="name" placeholder="Имя">
+                      <input class="form-control" name="name" formControlName="name" placeholder="ФИО">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">call</i>
                       Телефон: </label>
-                      <input class="form-control" type="number" name="tel" formControlName="tel" placeholder="Телефон">
+                      <input class="form-control" name="tel" formControlName="tel" placeholder="Телефон">
                     </div>
 
                     <div class="form-group inline"><label><i class="material-icons">visibility</i>
@@ -335,7 +345,7 @@
                     <h5 class="document">Договор</h5>
                     <div class="form-group inline"><label>
                       № договора: </label>
-                      <input class="form-control" type="number" name="docNumber" formControlName="docNumber" placeholder="№ договора">
+                      <input class="form-control" name="docNumber" formControlName="docNumber" placeholder="№ договора">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">sentiment_satisfied</i>
                       Сторона договора: </label>
@@ -359,19 +369,19 @@
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">notifications</i>
                       Статус: </label>
-                      <input class="form-control" type="text" name="status" formControlName="status" placeholder="Статус">
+                      <input class="form-control" name="status" formControlName="status" placeholder="Статус">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">monetization_on</i>
                       Депозит: </label>
-                      <input class="form-control" type="number" name="deposite" formControlName="deposite" placeholder="Депозит">
+                      <input class="form-control" name="deposite" formControlName="deposite" placeholder="Депозит">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">attach_money</i>
                       Факт. оплата: </label>
-                      <input class="form-control" type="text" name="factPay" formControlName="factPay" placeholder="Факт. оплата">
+                      <input class="form-control" name="factPay" formControlName="factPay" placeholder="Факт. оплата">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">monetization_on</i>
                       Сумма оплаты: </label>
-                      <input class="form-control" type="text" name="priceSum" formControlName="priceSum" placeholder="Сумма оплаты">
+                      <input class="form-control" name="priceSum" formControlName="priceSum" placeholder="Сумма оплаты">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">insert_invitation</i>
                       Дата оплаты: </label>
@@ -379,46 +389,46 @@
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">local_atm</i>
                       Тип оплаты: </label>
-                      <input class="form-control" type="text" name="typePay" formControlName="typePay" placeholder="Тип оплаты">
+                      <input class="form-control" name="typePay" formControlName="typePay" placeholder="Тип оплаты">
                     </div>
                   </div>
                   <div class="col-4 col-md-4">
                     <h5 class="office">Помещение</h5>
                     <div class="form-group inline"><label><i class="material-icons">domain</i>
                       Тип помещения: </label>
-                      <input class="form-control" type="text" name="type" formControlName="type" placeholder="Тип помещения">
+                      <input class="form-control" name="type" formControlName="type" placeholder="Тип помещения">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">sort_by_alpha</i>
                       Литер: </label>
-                      <input class="form-control" type="text" name="liter" formControlName="liter" placeholder="Литер">
+                      <input class="form-control" name="liter" formControlName="liter" placeholder="Литер">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">stop</i>
                       Площадь: </label>
-                      <input class="form-control" type="text" name="square" formControlName="square" placeholder="Площадь">
+                      <input class="form-control" name="square" formControlName="square" placeholder="Площадь">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">attach_money</i>
                       Цена: </label>
-                      <input class="form-control" type="number" name="price" formControlName="price" placeholder="Цена">
+                      <input class="form-control" name="price" formControlName="price" placeholder="Цена">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">local_florist</i>
                       ТБО: </label>
-                      <input class="form-control" type="number" name="tbo" formControlName="tbo" placeholder="ТБО">
+                      <input class="form-control" name="tbo" formControlName="tbo" placeholder="ТБО">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">power</i>
                       Электричество: </label>
-                      <input class="form-control" type="number" name="electric" formControlName="electric" placeholder="Электричество">
+                      <input class="form-control" name="electric" formControlName="electric" placeholder="Электричество">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">network_cell</i>
                       Тел. связь: </label>
-                      <input class="form-control" type="number" name="telNet" formControlName="telNet" placeholder="Тел. связь">
+                      <input class="form-control" name="telNet" formControlName="telNet" placeholder="Тел. связь">
                     </div>
                     <div class="form-group inline"><label><i class="material-icons">attach_money</i>
                       Сумма всего: </label>
-                      <input class="form-control" type="text" name="sumAll" formControlName="sumAll" placeholder="Сумма всего">
+                      <input class="form-control" name="sumAll" formControlName="sumAll" placeholder="Сумма всего">
                     </div>
                     <div class="form-group"><label><i class="material-icons">event_note</i>
                       Примечание: </label>
-                      <textarea class="form-control" type="text" name="note" formControlName="note" placeholder="Примечания"></textarea>
+                      <textarea class="form-control" name="note" formControlName="note" placeholder="Примечания"></textarea>
                     </div>
                   </div>
 
