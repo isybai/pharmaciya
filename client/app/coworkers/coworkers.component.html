@@ -33,15 +33,19 @@
 				<mat-cell *cdkCellDef="let row">{{row.tel}}</mat-cell>
 			</ng-container>
 			<ng-container cdkColumnDef="workPlace">
-				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Место работы </mat-header-cell>
+				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Компания </mat-header-cell>
 				<mat-cell *cdkCellDef="let row">{{row.workPlace}}</mat-cell>
+			</ng-container>
+			<ng-container cdkColumnDef="subdivision">
+				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
+				<mat-cell *cdkCellDef="let row">{{row.subdivision}}</mat-cell>
 			</ng-container>
 			<ng-container cdkColumnDef="position">
 				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Должность </mat-header-cell>
 				<mat-cell *cdkCellDef="let row">{{row.position}}</mat-cell>
 			</ng-container>
 			<ng-container cdkColumnDef="adress">
-				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес </mat-header-cell>
+				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Дата приема на работу </mat-header-cell>
 				<mat-cell *cdkCellDef="let row">{{row.adress}}</mat-cell>
 			</ng-container>
 			<ng-container cdkColumnDef="action">
@@ -98,6 +102,11 @@
 						<mat-form-field>
 							<span matTooltip="Должность">
 								<input matInput class="mat-input-element" name="position" [(ngModel)]="coworker.position" placeholder="Должность">
+							</span>
+						</mat-form-field>
+						<mat-form-field>
+							<span matTooltip="Подразделение">
+								<input matInput class="mat-input-element" name="subdivision" [(ngModel)]="coworker.subdivision" placeholder="Подразделение">
 							</span>
 						</mat-form-field>
 
@@ -159,6 +168,11 @@
 							<mat-form-field>
 								<span matTooltip="Должность">
 									<input matInput class="mat-input-element" name="position" formControlName="position" placeholder="Должность">
+								</span>
+							</mat-form-field>
+							<mat-form-field>
+								<span matTooltip="Подразделение">
+									<input matInput class="mat-input-element" name="subdivision" formControlName="subdivision" placeholder="Подразделение">
 								</span>
 							</mat-form-field>
 							<span matTooltip="Введите телефон">

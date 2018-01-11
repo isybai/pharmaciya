@@ -6,6 +6,7 @@ const coworkerSchema = new mongoose.Schema({
   tel: String,
   position: String,
   dob: String,
+  subdivision: String,
   adress: String
 });
 

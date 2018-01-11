@@ -37,7 +37,7 @@ export class CoworkersComponent implements OnInit {
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'workPlace', 'position', 'dob', 'tel', 'adress', 'action'];
+  displayedColumns = ['name', 'workPlace', 'subdivision', 'position', 'dob', 'tel', 'adress', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -49,6 +49,7 @@ export class CoworkersComponent implements OnInit {
   position = new FormControl('', Validators.required);
   dob = new FormControl('', Validators.required);
   adress = new FormControl('', Validators.required);
+  subdivision = new FormControl(null);
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -78,6 +79,7 @@ export class CoworkersComponent implements OnInit {
       position: this.position,
       dob: this.dob,
       adress: this.adress,
+      subdivision: this.subdivision,
     });
   }
 
@@ -159,6 +161,7 @@ export interface ChangeData {
     position: string;
     dob: string;
     adress: string;
+    subdivision: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -224,6 +227,7 @@ export class ExampleDataSource extends DataSource<any> {
         case 'adress': [propertyA, propertyB] = [a.adress, b.adress]; break;
         case 'position': [propertyA, propertyB] = [a.position, b.position]; break;
         case 'workPlace': [propertyA, propertyB] = [a.workPlace, b.workPlace]; break;
+        case 'subdivision': [propertyA, propertyB] = [a.subdivision, b.subdivision]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
