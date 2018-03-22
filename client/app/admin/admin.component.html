@@ -9,6 +9,7 @@
       <thead class="thead-default">
         <tr>
           <th>Логин</th>
+          <th>ФИО</th>
           <th>Почта</th>
           <th>Status</th>
           <th>Роль</th>
@@ -23,12 +24,24 @@
       <tbody>
         <tr *ngFor="let user of users">
           <td>{{user.username}}</td>
+          <td>{{user.nick}}</td>
           <td>{{user.email}}</td>
-          <td><span *ngIf="user.status">no</span><span *ngIf="!user.status">yes</span></td>
-          <td>{{user.role}}</td>
           <td>
+            <span *ngIf="user.status">no</span>
+            <span *ngIf="!user.status">yes</span>
+          </td>
+          <td [ngSwitch]="true">
+            <div *ngSwitchCase="user.role === 'superAdmin'">Супер админ</div>
+            <div *ngSwitchCase="user.role === 'salesAdmin'">Админ сбыта</div>
+            <div *ngSwitchCase="user.role === 'rentersAdmin'">Админ аренды</div>
+            <div *ngSwitchCase="user.role === 'user'">Агент</div>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(user)" [disabled]="auth.currentUser._id === user._id">
+              <i class="material-icons">create</i>
+            </button>
             <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
-              <i class="fa fa-trash"></i>
+              <i class="material-icons">delete_forever</i>
             </button>
           </td>
         </tr>
@@ -36,3 +49,105 @@
     </table>
   </div>
 </div>
+<!-- editingItem  -->
+<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Редактирование пользователя</h4>
+      </div>
+      <form class="form-inline" #form="ngForm" (ngSubmit)="editUser(user)" style="display:inline">
+        <div class="modal-body">
+          <mat-form-field>
+            <span matTooltip="Введите логин" class="time">
+              <input matInput class="mat-input-element" name="username" [(ngModel)]="user.username" placeholder="Введите логин">
+            </span>
+          </mat-form-field>
+          <mat-form-field>
+            <span matTooltip="Введите ФИО" class="time">
+              <input matInput class="mat-input-element" name="nick" [(ngModel)]="user.nick" placeholder="Введите ФИО">
+            </span>
+          </mat-form-field>
+          <mat-form-field>
+            <span matTooltip="Введите email">
+              <input matInput class="mat-input-element" name="email" [(ngModel)]="user.email" placeholder="Введите email">
+            </span>
+          </mat-form-field>
+          <label for=""> Выберите роль</label>
+          <mat-form-field>
+            <mat-select class="mat-select" name="role" [(ngModel)]="user.role" style="margin-left: 10px;">
+              <mat-option value="superAdmin">Супер админ</mat-option>
+              <mat-option value="salesAdmin">Админ сбыта</mat-option>
+              <mat-option value="rentersAdmin">Админ аренды</mat-option>
+              <mat-option value="user">Агент</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid">
+            <i class="fa fa-floppy-o"></i> Сохранить</button>
+          <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()">
+            <i class="fa fa-times"></i> Отменить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- addNewItem button -->
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить пользователя</span>
+</button>
+<!-- addNewItem -->
+<div class="modal fade" id="addNewItem" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Добавление нового пользователя</h4>
+        </div>
+        <div class="modal-body">
+          <div class="addItem">
+            <div>
+              <form class="form-inline" [formGroup]="addUserForm" (ngSubmit)="addUser()" style="text-align:center">
+                  <mat-form-field>
+                      <span matTooltip="Введите логин" class="time">
+                        <input matInput class="mat-input-element" name="username" formControlName="username" placeholder="Введите логин" autofocus>
+                      </span>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите ФИО" class="time">
+                        <input matInput class="mat-input-element" name="nick" formControlName="nick" placeholder="Введите ФИО">
+                      </span>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите email">
+                        <input matInput class="mat-input-element" name="email" formControlName="email" placeholder="Введите email">
+                      </span>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <span matTooltip="Введите password">
+                        <input matInput class="mat-input-element" name="password" formControlName="password" placeholder="Введите password">
+                      </span>
+                    </mat-form-field>
+                    <label for=""> Выберите роль</label>
+                    <mat-form-field>
+                      <mat-select class="mat-select" name="role" formControlName="role" style="margin-left: 10px;">
+                        <mat-option value="superAdmin">Супер админ</mat-option>
+                        <mat-option value="salesAdmin">Админ сбыта</mat-option>
+                        <mat-option value="rentersAdmin">Админ аренды</mat-option>
+                        <mat-option value="user">Агент</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addUserForm.valid">
+                  <i class="material-icons">add</i> Добавить</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>

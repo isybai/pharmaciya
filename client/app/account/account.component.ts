@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class AccountComponent implements OnInit {
 
-  user = {};
+  user: any = {};
   isLoading = true;
 
   constructor(private auth: AuthService,

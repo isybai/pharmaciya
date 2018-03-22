@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { TaskService } from '../../services/task.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { UserService } from '../../services/user.service';
+import { SaleClientService } from '../../services/saleClient.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,10 +14,13 @@ import { UserService } from '../../services/user.service';
 export class TasksComponent implements OnInit {
 
 
+
   user = {};
   users = [];
+
   task = {};
   tasks = [];
+
   todays:string;
 
   isLoading = true;
@@ -32,13 +36,17 @@ export class TasksComponent implements OnInit {
     {value: 'выполнен', viewValue: 'выполнен'},
     {value: 'не выполнен', viewValue: 'не выполнен'},
   ];
-  addTaskForm: FormGroup;
-  name = new FormControl('', Validators.required);
-  type = new FormControl('', Validators.required);
-  belongTo = new FormControl('', Validators.required);
-  plan = new FormControl('', Validators.required);
-  until = new FormControl('', Validators.required);
-  status = new FormControl('на расмотрении');
+  
+
+  addTaskForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required),
+    belongTo: new FormControl('', Validators.required),
+    plan: new FormControl('', Validators.required),
+    until: new FormControl('', Validators.required),
+    status: new FormControl('на расмотрении'),
+  });
+  
 
   constructor(private userService: UserService,
               private taskService: TaskService,
@@ -51,14 +59,6 @@ this.todaySday();
   ngOnInit() {
     this.getUsers();
     this.getTasks();
-    this.addTaskForm = this.formBuilder.group({
-      name: this.name,
-      type: this.type,
-      belongTo: this.belongTo,
-      plan: this.plan,
-      until: this.until,
-      status: this.status
-    });
   }
   getUsers() {
     this.userService.getUsers().subscribe(

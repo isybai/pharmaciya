@@ -23,8 +23,8 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 export class IndividualsComponent implements OnInit {
 
 
-  individual = {};
-  individuals = [];
+  individual: any = {};
+  individuals: any = [];
   isLoading = true;
   isEditing = false;
 

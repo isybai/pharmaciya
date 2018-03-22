@@ -10,6 +10,7 @@ import TaskCtrl from './controllers/task';
 import CoworkerCtrl from './controllers/coworker';
 import HandbookCtrl from './controllers/handbook';
 import OrderCtrl from './controllers/order';
+import SaleClientCtrl from './controllers/saleClient';
 
 
 export default function setRoutes(app) {
@@ -27,6 +28,7 @@ export default function setRoutes(app) {
   const coworkerCtrl = new CoworkerCtrl();
   const handbookCtrl = new HandbookCtrl();
   const orderCtrl = new OrderCtrl();
+  const saleClientCtrl = new SaleClientCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -109,6 +111,14 @@ export default function setRoutes(app) {
   router.route('/order/:id').get(orderCtrl.get);
   router.route('/order/:id').put(orderCtrl.update);
   router.route('/order/:id').delete(orderCtrl.delete);
+
+  // SaleClient
+  router.route('/saleClients').get(saleClientCtrl.getAll);
+  router.route('/saleClients/count').get(saleClientCtrl.count);
+  router.route('/saleClient').post(saleClientCtrl.insert);
+  router.route('/saleClient/:id').get(saleClientCtrl.get);
+  router.route('/saleClient/:id').put(saleClientCtrl.update);
+  router.route('/saleClient/:id').delete(saleClientCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

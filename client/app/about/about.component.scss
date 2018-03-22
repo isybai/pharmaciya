@@ -3,3 +3,11 @@ span.greeting-text.float-right {
     text-align: right;
     color: white;
 }
+.card {
+    min-height: 300px;
+    background-color: #ffffff6e;
+    cursor: initial !important;
+}
+.dragged-item {
+    cursor: pointer;
+}

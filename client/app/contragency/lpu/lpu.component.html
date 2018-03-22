@@ -60,10 +60,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
               <button *ngIf="row.type === 'Ц.С.М.'" class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-                <i class="fa fa-pencil"></i> Редактировать
+                <i class="material-icons">create</i> 
               </button>
               <button *ngIf="row.type === 'Ц.С.М.'" class="btn btn-sm btn-danger" (click)="deleteLpu(row)">
-                <i class="fa fa-trash"></i> Удалить
+                <i class="material-icons">delete_forever</i> 
               </button>
             </mat-cell>
           </ng-container>
@@ -131,10 +131,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
               <button *ngIf="row.type === 'Мед. центр'" class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-                <i class="fa fa-pencil"></i> Редактировать
+                <i class="material-icons">create</i> 
               </button>
               <button *ngIf="row.type === 'Мед. центр'" class="btn btn-sm btn-danger" (click)="deleteLpu(row)">
-                <i class="fa fa-trash"></i> Удалить
+                <i class="material-icons">delete_forever</i> 
               </button>
             </mat-cell>
           </ng-container>
@@ -202,10 +202,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
               <button *ngIf="row.type === 'Больница'"  class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-                <i class="fa fa-pencil"></i> Редактировать
+                <i class="material-icons">create</i> 
               </button>
               <button *ngIf="row.type === 'Больница'"  class="btn btn-sm btn-danger" (click)="deleteLpu(row)">
-                <i class="fa fa-trash"></i> Удалить
+                <i class="material-icons">delete_forever</i> 
               </button>
             </mat-cell>
           </ng-container>
@@ -413,10 +413,10 @@
                 <td *ngIf="lpu.type === 'Ц.С.М.'">{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -429,10 +429,10 @@
                 <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Ц.С.М.' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -500,10 +500,10 @@
                 <td *ngIf="lpu.type === 'Мед. центр'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -516,10 +516,10 @@
                 <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Мед. центр' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -587,10 +587,10 @@
                 <td *ngIf="lpu.type === 'Больница'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Больница'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -603,10 +603,10 @@
                 <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{lpu.tel}}</td>
                 <td *ngIf="lpu.type === 'Больница' && lpu.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(lpu)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteLpu(lpu)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>

@@ -1,7 +1,13 @@
+
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CdkTableModule } from '@angular/cdk/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
+import { ApplicationRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DndModule } from 'ng2-dnd';
 
 import {
   MatAutocompleteModule,
@@ -50,6 +56,7 @@ import { DrugstoreService } from './services/drugstore.service';
 import { IndividualService } from './services/individual.service';
 import { RenterService } from './services/renter.service';
 import { LpuService } from './services/lpu.service';
+import { SaleClientService } from './services/saleClient.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 
@@ -151,6 +158,10 @@ import { OrdersComponent } from './orders/orders.component';
     MatToolbarModule,
     MatTooltipModule,
     CdkTableModule,
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    DndModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -166,7 +177,7 @@ import { OrdersComponent } from './orders/orders.component';
     CoworkerService,
     HandbookService,
     OrderService,
-
+    SaleClientService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

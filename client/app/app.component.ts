@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+
 declare var jquery:any;
 declare var $ :any;
 
@@ -12,6 +13,7 @@ declare var $ :any;
 export class AppComponent implements OnInit {
   user = {};
   users = [];
+
 	constructor(public auth: AuthService,
               private userService: UserService) { }
   ngOnInit() {

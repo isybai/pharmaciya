@@ -52,10 +52,10 @@
 				<mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
 				<mat-cell *cdkCellDef="let row">
 					<button class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-						<i class="fa fa-pencil"></i> Редактировать
+						<i class="material-icons">create</i> 
 					</button>
 					<button class="btn btn-sm btn-danger" (click)="deleteCoworker(row)">
-						<i class="fa fa-trash"></i> Удалить
+						<i class="material-icons">delete_forever</i> 
 					</button>
 				</mat-cell>
 			</ng-container>

@@ -47,10 +47,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
               <button *ngIf="row.type === 'Категория A'" class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-                <i class="fa fa-pencil"></i> Редактировать
+                <i class="material-icons">create</i> 
               </button>
               <button *ngIf="row.type === 'Категория A'" class="btn btn-sm btn-danger" (click)="deleteDrugstore(row)">
-                <i class="fa fa-trash"></i> Удалить
+                <i class="material-icons">delete_forever</i> 
               </button>
             </mat-cell>
           </ng-container>
@@ -105,10 +105,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
               <button *ngIf="row.type === 'Категория B'" class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-                <i class="fa fa-pencil"></i> Редактировать
+                <i class="material-icons">create</i> 
               </button>
               <button *ngIf="row.type === 'Категория B'" class="btn btn-sm btn-danger" (click)="deleteDrugstore(row)">
-                <i class="fa fa-trash"></i> Удалить
+                <i class="material-icons">delete_forever</i> 
               </button>
             </mat-cell>
           </ng-container>
@@ -163,10 +163,10 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
               <button *ngIf="row.type === 'Категория C'"  class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
-                <i class="fa fa-pencil"></i> Редактировать
+                <i class="material-icons">create</i> 
               </button>
               <button *ngIf="row.type === 'Категория C'"  class="btn btn-sm btn-danger" (click)="deleteDrugstore(row)">
-                <i class="fa fa-trash"></i> Удалить
+                <i class="material-icons">delete_forever</i> 
               </button>
             </mat-cell>
           </ng-container>
@@ -351,10 +351,10 @@
                 <td *ngIf="drugstore.type === 'Категория A'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория A'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -367,10 +367,10 @@
                 <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория A' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -443,10 +443,10 @@
                 <td *ngIf="drugstore.type === 'Категория B'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория B'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -459,10 +459,10 @@
                 <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория B' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -535,10 +535,10 @@
                 <td *ngIf="drugstore.type === 'Категория C'"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория C'">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>
@@ -551,10 +551,10 @@
                 <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)"><span style="color: #757575;" matPrefix>+312 &nbsp;</span>{{drugstore.tel}}</td>
                 <td *ngIf="drugstore.type === 'Категория C' && drugstore.name.toUpperCase().startsWith(searchItem)">
                   <button class="btn btn-sm btn-warning" (click)="enableEditing(drugstore)">
-                    <i class="fa fa-pencil"></i> Редактировать
+                    <i class="material-icons">create</i> 
                   </button>
                   <button class="btn btn-sm btn-danger" (click)="deleteDrugstore(drugstore)">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="material-icons">delete_forever</i> 
                   </button>
                 </td>
               </tr>

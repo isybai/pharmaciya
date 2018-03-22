@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
                                Validators.maxLength(100)]);
   password = new FormControl('', [Validators.required,
                                   Validators.minLength(6)]);
-  //avatar = new FormControl('', [Validators.required]);
+  // avatar = new FormControl('', [Validators.required]);
   role = new FormControl('', [Validators.required]);
-  
+  nick = new FormControl('', [Validators.required]);
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -36,7 +36,8 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       role: this.role,
-      //avatar: this.avatar
+      nick: this.nick,
+      // avatar: this.avatar
     });
   }
 

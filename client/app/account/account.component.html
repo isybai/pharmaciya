@@ -12,6 +12,11 @@
         <mat-error  class="mat-error" role="alert" >Нужно ввести  <strong >логин</strong></mat-error>
       </mat-form-field>
       <mat-form-field>
+        <i matPrefix class="material-icons">person</i>
+        <input matInput class="mat-input-element" type="text" name="nick" [(ngModel)]="user.nick" placeholder="ФИО" required>
+        <mat-error  class="mat-error" role="alert" >Нужно ввести  <strong >ФИО</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field>
         <i matPrefix class="material-icons">mail</i>
         <input matInput class="mat-input-element" type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required>
         <mat-error  class="mat-error" role="alert" >Нужно ввести свою <strong >почту</strong></mat-error>

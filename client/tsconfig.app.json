@@ -6,6 +6,7 @@
     "module": "es2015",
     "types": []
   },
+  "no-trailing-whitespace": false,
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

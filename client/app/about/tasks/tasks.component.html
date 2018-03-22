@@ -1,13 +1,11 @@
 <app-loading [condition]="isLoading"></app-loading>
 
 <app-toast [message]="toast.message"></app-toast>
-<h5 class="text-md-center">Задачи для агентов</h5>
-<div *ngIf="auth.isSalesAdmin || auth.isUser">
-  <div class="card" *ngIf="!isLoading">
+ <div *ngIf="auth.isSalesAdmin || auth.isUser">
+  <!--<div class="card" *ngIf="!isLoading">
     <div class="col-md-12" *ngIf="!isEditing">
       <mat-card *ngFor="let task of tasks" class="col-md-3">
         <mat-card-header class={{task.type}}>
-          <!--<div mat-card-avatar>{{task.type}}</div>-->
           <mat-card-title>{{task.name}}</mat-card-title>
           <mat-card-subtitle>{{task.belongTo}}<span class="float-right">До {{task.until}}</span></mat-card-subtitle>
           <mat-card-subtitle><div>Приоритет: {{task.type}}</div></mat-card-subtitle>
@@ -17,21 +15,21 @@
           {{task.plan}}
         </mat-card-content>
         <mat-card-actions>
-          <span matTooltip="Редактировать">
-            <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="fa fa-pencil"></i> </button>
+          <span matTooltip="">
+            <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(task)"><i class="material-icons">create</i> </button>
           </span>
           <span matTooltip="Удалить" *ngIf="auth.isSalesAdmin">
-            <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="fa fa-trash"></i> </button>
+            <button mat-mini-fab color="warn" (click)="deleteTask(task)"><i class="material-icons">delete_forever</i> </button>
           </span>
           <span class="task_status {{task.status}}">{{task.status}}</span>
         </mat-card-actions>
       </mat-card>
   </div>
-</div>
+</div> -->
 
-<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+<!-- <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
@@ -91,14 +89,14 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
-<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin">
+<!-- <button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem' *ngIf="auth.isSalesAdmin">
   <span>Создать план</span>
 </button>
 <div class="modal fade" id="addNewItem" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -160,6 +158,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 </div>

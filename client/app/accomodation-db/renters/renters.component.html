@@ -27,10 +27,10 @@
         <td class="clickable" data-toggle="modal" title="Нажмите, чтобы просмотреть подробнее" [attr.data-target]="'#'+renter.name.replace(' ', '')">{{renter.dateUntil}}</td>
         <td>
           <button class="btn btn-sm btn-info" (click)="enableEditing(renter)">
-            <i class="fa fa-pencil"></i> Редактировать
+            <i class="material-icons">create</i>
           </button>
           <button class="btn btn-sm btn-danger" (click)="deleteRenter(renter)">
-            <i class="fa fa-divash"></i> Удалить
+            <i class="material-icons">delete_forever</i>
           </button>
         </td>
         <div class="modal fade renterInfo" [attr.id]="renter.name.replace(' ', '')" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -160,10 +160,10 @@
               </mat-card-content>
               <mat-card-actions>
                 <button class="btn btn-sm btn-info" (click)="enableEditing(renter)" data-dismiss="modal">
-                  <i class="fa fa-pencil"></i> Редактировать
+                  <i class="material-icons">create</i> 
                 </button>
                 <button class="btn btn-sm btn-danger" (click)="deleteRenter(renter)">
-                  <i class="fa fa-divash"></i> Удалить
+                  <i class="fa fa-divash"></i> 
                 </button>
                 <button class="btn btn-sm btn-default" data-dismiss="modal">
                   <i class="fa fa-close"></i> Закрыть
