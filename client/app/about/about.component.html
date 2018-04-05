@@ -49,7 +49,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Редактирование врача</h4>
+              <h4 class="modal-title">Редактирование клиента</h4>
             </div>
             <form class="form-inline" #form="ngForm" (ngSubmit)="editSaleClient(saleClient)" style="display:inline">
               <div class="modal-body">
@@ -61,11 +61,6 @@
                 <mat-form-field>
                   <span matTooltip="Введите Адрес">
                     <input matInput class="mat-input-element" name="adress" [(ngModel)]="saleClient.adress" placeholder="Адрес">
-                  </span>
-                </mat-form-field>
-                <mat-form-field>
-                  <span matTooltip="Введите whos">
-                    <input matInput class="mat-input-element" name="whos" [(ngModel)]="saleClient.whos" placeholder="whos">
                   </span>
                 </mat-form-field>
               </div>
@@ -121,11 +116,11 @@
     </div>
 
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 animated bounceInRight">
     <div *ngFor="let item of users" [ngClass]="{'col-md-6' : item.role === 'user'}">
       <div *ngIf="item.role === 'user'">
         <div>
-          <h2>{{item.username}}</h2>
+          <h2>{{item.nick}}</h2>
           <div class="card" dnd-droppable [dropZones]="['user']" (onDropSuccess)="transferDataSuccess($event , item)">
             <div *ngFor="let client of saleClients">
                 <div (click)="removeItem(client)" class="dragged-item" *ngIf="client.whos === item.username">{{client.name +  ' ' + client.adress}}</div>

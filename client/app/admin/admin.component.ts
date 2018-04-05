@@ -60,6 +60,7 @@ export class AdminComponent implements OnInit {
   }
 
   editUser(user) {
+    user.status = true;
     this.userService.editUser(user).subscribe(
       data => this.toast.setMessage('user changed successfully.', 'success'),
       error => console.log(error),

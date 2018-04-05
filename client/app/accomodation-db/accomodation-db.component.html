@@ -1,23 +1,30 @@
 <header class="marketing-banner">
-	<h4 class="page-title">
-	  База данных помещений
-	</h4>
+  <h4 class="page-title">
+    База данных помещений
+  </h4>
 </header>
 <div class="col-12 col-md-12">
-<nav class="navbar navbar-light">
-  <div class="navbar" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-    	<a routerLink="./" routerLinkActive="" class="nav-link">Помещения</a>
-      </li>  
-      <li class="nav-item">
-       	<a routerLink="renters" routerLinkActive="active" class="nav-link">Арендаторы</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  <nav class="navbar navbar-light">
+    <div class="navbar" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a routerLink="./" routerLinkActive="" class="nav-link">Помещения</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="renters" routerLinkActive="active" class="nav-link">Арендаторы</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
 
 <div class="col-12 col-md-12 content">
+
+  <div>
+      <img class="first-floor" src="{{imglink}}" alt="" usemap="#map" />
+      <map name="map" id="map">
+          <area (mouseenter) ="mouseEnter(room.id)" (mouseleave)="mouseLeave()" *ngFor="let room of rooms" shape="poly" id="{{room.id}}" coords="{{room.coords}}" (click)="roomClicked()" title="{{room.title}}" />
+      </map>
+  </div>
   <router-outlet></router-outlet>
 </div>

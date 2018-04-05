@@ -18,3 +18,10 @@ a:hover {
 .navbar-nav .nav-item {
     list-style: none;
 }
+.first-floor {
+    width: 1401px;
+    height: 252px;
+}
+.content {
+    background: #f2f2f2;
+}

@@ -11,13 +11,14 @@ export class AuthService {
   isSalesAdmin = false;
   isRentersAdmin = false;
   isUser = false;
+  thisUser: any = {};
 
   jwtHelper: JwtHelper = new JwtHelper();
 
   currentUser = { _id: '', username: '', role: '' };
 
-  constructor(private userService: UserService,
-              private router: Router) {
+  constructor(private userService: UserService, private router: Router) {
+
     const token = localStorage.getItem('token');
     if (token) {
       const decodedUser = this.decodeUserFromToken(token);
@@ -44,6 +45,16 @@ export class AuthService {
     this.isRentersAdmin = false;
     this.isUser = false;
     this.router.navigate(['/']);
+
+    this.userService.getUser(this.thisUser).subscribe(
+      res => {
+      },
+      error => console.log(error)
+    );
+    this.thisUser.status = false;
+    this.userService.editUser(this.thisUser).subscribe(
+      error => console.log(error)
+    );
   }
 
   decodeUserFromToken(token) {
@@ -51,6 +62,19 @@ export class AuthService {
   }
 
   setCurrentUser(decodedUser) {
+
+    this.userService.getUser(decodedUser).subscribe(
+      res => {
+      },
+      error => console.log(error)
+    );
+
+    decodedUser.status = true;
+    this.userService.editUser(decodedUser).subscribe(
+      error => console.log(error)
+    );
+    this.thisUser = decodedUser;
+
     this.loggedIn = true;
     this.currentUser._id = decodedUser._id;
     this.currentUser.username = decodedUser.username;

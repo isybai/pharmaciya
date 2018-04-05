@@ -85,7 +85,6 @@ export class AboutComponent implements OnInit {
           a = a + 1;
           this.index.push(a);
         } else {}
-         console.log(this.index);
       }}
     );
   }
