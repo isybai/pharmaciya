@@ -1,0 +1,11 @@
+mat-toolbar.page-title.mat-toolbar {
+    background-color: #4caf50;
+    min-height: 50px;
+    max-height: 50px;
+}
+mat-toolbar-row.mat-toolbar-row {
+    height: 50px;
+}
+.col-12.col-md-12.content {
+    margin-top: 20px;
+}

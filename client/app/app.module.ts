@@ -1,4 +1,4 @@
-
+import { FileUploadModule } from 'ng2-file-upload';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -59,6 +59,8 @@ import { LpuService } from './services/lpu.service';
 import { SaleClientService } from './services/saleClient.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+import { JapanService } from './services/japan.service';
+import { RpoService } from './services/rpo.service';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -77,17 +79,15 @@ import { ContragencyComponent } from './contragency/contragency.component';
 import { NomenclatureComponent } from './nomenclature/nomenclature.component';
 import { AccomodationDbComponent } from './accomodation-db/accomodation-db.component';
 import { FinanceComponent } from './finance/finance.component';
-import { SalesComponent } from './sales/sales.component';
+import { SalesComponent } from './nomenclature/sales/sales.component';
 import { MedicsComponent } from './contragency/medics/medics.component';
 import { LpuComponent } from './contragency/lpu/lpu.component';
 import { DrugstoresComponent } from './contragency/drugstores/drugstores.component';
 import { IndividualsComponent } from './contragency/individuals/individuals.component';
 import { CoworkersComponent } from './coworkers/coworkers.component';
 import { RentersComponent } from './accomodation-db/renters/renters.component';
-import { DrugListComponent } from './nomenclature/drug-list/drug-list.component';
-import { PricesComponent } from './nomenclature/prices/prices.component';
-import { RemainsComponent } from './nomenclature/remains/remains.component';
-import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
+import { JapanComponent } from './nomenclature/japan/japan.component';
+import { RpoComponent } from './nomenclature/rpo/rpo.component';
 import { TasksComponent } from './about/tasks/tasks.component';
 import { HandbooksComponent } from './contragency/handbooks/handbooks.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -113,15 +113,14 @@ import { OrdersComponent } from './orders/orders.component';
     IndividualsComponent,
     CoworkersComponent,
     RentersComponent,
-    DrugListComponent,
-    PricesComponent,
-    RemainsComponent,
-    PjvlsComponent,
+    JapanComponent,
+    RpoComponent,
     TasksComponent,
     HandbooksComponent,
     OrdersComponent,
   ],
   imports: [
+    FileUploadModule,
     RoutingModule,
     SharedModule,
     BrowserModule,
@@ -178,6 +177,8 @@ import { OrdersComponent } from './orders/orders.component';
     HandbookService,
     OrderService,
     SaleClientService,
+    JapanService,
+    RpoService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

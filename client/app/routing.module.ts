@@ -13,17 +13,15 @@ import { ContragencyComponent } from './contragency/contragency.component';
 import { NomenclatureComponent } from './nomenclature/nomenclature.component';
 import { AccomodationDbComponent } from './accomodation-db/accomodation-db.component';
 import { FinanceComponent } from './finance/finance.component';
-import { SalesComponent } from './sales/sales.component';
+import { SalesComponent } from './nomenclature/sales/sales.component';
 import { MedicsComponent } from './contragency/medics/medics.component';
 import { LpuComponent } from './contragency/lpu/lpu.component';
 import { DrugstoresComponent } from './contragency/drugstores/drugstores.component';
 import { IndividualsComponent } from './contragency/individuals/individuals.component';
 import { CoworkersComponent } from './coworkers/coworkers.component';
 import { RentersComponent } from './accomodation-db/renters/renters.component';
-import { DrugListComponent } from './nomenclature/drug-list/drug-list.component';
-import { PricesComponent } from './nomenclature/prices/prices.component';
-import { RemainsComponent } from './nomenclature/remains/remains.component';
-import { PjvlsComponent } from './nomenclature/pjvls/pjvls.component';
+import { JapanComponent } from './nomenclature/japan/japan.component';
+import { RpoComponent } from './nomenclature/rpo/rpo.component';
 import { HandbooksComponent } from './contragency/handbooks/handbooks.component';
 import { OrdersComponent } from './orders/orders.component';
 
@@ -35,11 +33,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'sales', component: SalesComponent },
   {
     path: 'accomodation-db',
     component: AccomodationDbComponent,
-    children:[{path: 'renters',component: RentersComponent}]
+    children: [{path: 'renters', component: RentersComponent}]
   },
   { path: 'component', component: AppComponent },
   { path: 'finance', component: FinanceComponent },
@@ -48,30 +45,16 @@ const routes: Routes = [
   {
     path: 'nomenclature',
     component: NomenclatureComponent,
-    children:[
-    {
-      path: 'drug-list',
-      component: DrugListComponent
-    },
-    {
-      path: 'prices',
-      component: PricesComponent
-    },
-    {
-      path: 'remains',
-      component: RemainsComponent
-    },
-    {
-      path: 'pjvls',
-      component: PjvlsComponent
-    }
-    ]
+    children:
+    [{path: 'japan', component: JapanComponent },
+     {path: 'sales', component: SalesComponent },
+     {path: 'rpo', component: RpoComponent }]
   },
   {
     path: 'contragency',
     component: ContragencyComponent,
-    children:[
-    {
+    children:
+    [{
       path: 'medics',
       component: MedicsComponent
     },

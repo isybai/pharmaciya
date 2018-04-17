@@ -1,0 +1,136 @@
+<header class="marketing-banner">
+  <h4 class="page-title">
+    продукт
+  </h4>
+</header>
+<!-- CRUD-->
+<app-loading [condition]="isLoading"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+<div class="info_table col-md-12">
+  <div *ngIf="japans.length === 0 && !isLoading">
+    <h2>В базе данных еще нет продуктов Добавьте их</h2>
+  </div>
+  <h6>Количество продуктов в базе: {{japans.length}}</h6>
+  <div class="table-hover animated bounceInRight">
+    <div class="example-header">
+      <mat-input-container>
+        <input matInput #filter placeholder="поиск">
+      </mat-input-container>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- ChangeId Column -->
+      <ng-container cdkColumnDef="name">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+      <!-- DateSubmitted -->
+      <ng-container cdkColumnDef="purpose">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Назначение </mat-header-cell>
+        <mat-cell *cdkCellDef="let row"> {{row.purpose}} </mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="dose">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Дозировка </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.dose}}</mat-cell>
+      </ng-container>
+      <ng-container cdkColumnDef="action">
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header> Действия </mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+          <button class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(row)">
+            <i class="material-icons">create</i>
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteJapan(row)">
+            <i class="material-icons">delete_forever</i>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <!-- ChangeDescription -->
+      <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <div class="example-no-results" [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+      Ничего не найденно по вашему запросу.
+    </div>
+    <mat-paginator #paginator [length]="dataSource?.filteredData.length" [pageIndex]="0" [pageSize]="50" [pageSizeOptions]="[50, 100, 150, 200]">
+    </mat-paginator>
+  </div>
+  <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Редактирование продукта</h4>
+        </div>
+        <form class="form-inline" #form="ngForm" (ngSubmit)="editJapan(japan)" style="display:inline">
+          <div class="modal-body">
+            <mat-form-field>
+              <span matTooltip="Введите Название" class="time">
+                <input matInput class="mat-input-element" name="name" [(ngModel)]="japan.name" placeholder="Название">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите назначение">
+                <input matInput class="mat-input-element" name="purpose" [(ngModel)]="japan.purpose" placeholder="Назначение">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Введите дозировку">
+                <input matInput class="mat-input-element" name="dose" [(ngModel)]="japan.dose" placeholder="Дозировка">
+              </span>
+            </mat-form-field>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid">
+              <i class="fa fa-floppy-o"></i> Сохранить</button>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()">
+              <i class="fa fa-times"></i> Отменить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить продукт</span>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Добавление нового продукта</h4>
+      </div>
+      <div class="modal-body">
+        <div class="addItem">
+          <div>
+            <form class="form-inline" [formGroup]="addJapanForm" (ngSubmit)="addJapan()" style="text-align:center">
+              <mat-form-field>
+                <span matTooltip="Введите Название">
+                  <input matInput class="mat-input-element" name="name" formControlName="name" placeholder="Название">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Введите Назначение">
+                  <input matInput class="mat-input-element" name="purpose" formControlName="purpose" placeholder="Назначение">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Введите дозировку">
+                  <input matInput class="mat-input-element" name="dose" formControlName="dose" placeholder="Дозировка">
+                </span>
+              </mat-form-field>
+              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addJapanForm.valid">
+                <i class="material-icons">add</i> Добавить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

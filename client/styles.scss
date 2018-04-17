@@ -1,4 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+mat-toolbar-row.mat-toolbar-row {
+    height: 50px;
+}
 .panel.panel-default {
     position: relative;
     z-index: 99;

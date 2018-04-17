@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
   task = {};
   tasks = [];
 
-  todays:string;
+  todays: string;
 
   isLoading = true;
   isEditing = false;
@@ -36,7 +36,7 @@ export class TasksComponent implements OnInit {
     {value: 'выполнен', viewValue: 'выполнен'},
     {value: 'не выполнен', viewValue: 'не выполнен'},
   ];
-  
+
 
   addTaskForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -46,7 +46,7 @@ export class TasksComponent implements OnInit {
     until: new FormControl('', Validators.required),
     status: new FormControl('на расмотрении'),
   });
-  
+
 
   constructor(private userService: UserService,
               private taskService: TaskService,
@@ -138,6 +138,6 @@ this.todaySday();
     if (mm < 10) {
         mm = 0 + mm;
     }
-    this.todays = yyyy+ '-' + mm + '-' + dd;
+    this.todays = yyyy + '-' + mm + '-' + dd;
   }
 }

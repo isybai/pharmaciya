@@ -9,84 +9,77 @@
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isSalesAdmin || !auth.isSuperAdmin || !auth.isUser">
+          <a routerLink="/contragency/medics" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin || auth.isUser">
             <i class="material-icons">account_circle</i>
             <span>Контрагенты
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/order" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isSalesAdmin || !auth.isSuperAdmin">
+          <a routerLink="/order" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSalesAdmin || auth.isSuperAdmin">
             <i class="material-icons">shopping_cart</i>
             <span>Заказы
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isSuperAdmin">
+          <a routerLink="/nomenclature" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">local_hospital</i>
             <span>Номенклатура
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isRentersAdmin || !auth.isSuperAdmin">
+          <a routerLink="/accomodation-db" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isRentersAdmin || auth.isSuperAdmin">
             <i class="material-icons">location_city</i>
             <span>Помещения
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isSuperAdmin">
+          <a routerLink="/coworkers" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">supervisor_account</i>
             <span>Сотрудники
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isSuperAdmin">
+          <a routerLink="/finance" routerLinkActive="active" class="nav-item nav-link" *ngIf="auth.loggedIn && auth.isSuperAdmin">
             <i class="material-icons">monetization_on</i>
             <span>Финансы
             </span>
           </a>
         </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/sales" routerLinkActive="active" class="nav-item nav-link" [hidden]="!auth.loggedIn && !auth.isSalesAdmin || !auth.isSuperAdmin">
-            <i class="material-icons">insert_chart</i>
-            <span>Сбыт
-            </span>
-          </a>
-        </mat-list-item>
-        <mat-list-item [hidden]="auth.loggedIn">
+        <mat-list-item *ngIf="!auth.loggedIn">
           <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active">
             <i class="fa fa-sign-in"></i>
             <span> Логин
             </span>
           </a>
         </mat-list-item>
-        <mat-list-item [hidden]="auth.loggedIn">
+        <mat-list-item *ngIf="!auth.loggedIn">
           <a routerLink="/register" class="nav-item nav-link" routerLinkActive="active">
             <i class="fa fa-user-plus"></i>
             <span> Зарегестрироваться
             </span>
           </a>
         </mat-list-item>
-        <mat-list-item>
-          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active" [hidden]="!auth.loggedIn && !auth.isSuperAdmin">
+        <mat-list-item *ngIf="auth.isSuperAdmin &&  auth.loggedIn">
+          <a routerLink="/account" class="nav-item nav-link" routerLinkActive="active">
             <i class="material-icons">settings</i>
             <span> Аккаунт ({{auth.currentUser.username}})
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" [hidden]="!auth.loggedIn && !auth.isSuperAdmin">
+          <a routerLink="/admin" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.isSuperAdmin && auth.loggedIn">
             <i class="material-icons">verified_user</i>
             <span> Админ
             </span>
           </a>
         </mat-list-item>
         <mat-list-item>
-          <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" [hidden]="!auth.loggedIn">
+          <a routerLink="/logout" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
             <i class="material-icons">exit_to_app</i>
             <span> Выйти
             </span>

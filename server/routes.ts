@@ -11,6 +11,8 @@ import CoworkerCtrl from './controllers/coworker';
 import HandbookCtrl from './controllers/handbook';
 import OrderCtrl from './controllers/order';
 import SaleClientCtrl from './controllers/saleClient';
+import RpoCtrl from './controllers/rpo';
+import JapanCtrl from './controllers/japan';
 
 
 export default function setRoutes(app) {
@@ -29,6 +31,8 @@ export default function setRoutes(app) {
   const handbookCtrl = new HandbookCtrl();
   const orderCtrl = new OrderCtrl();
   const saleClientCtrl = new SaleClientCtrl();
+  const rpoCtrl = new RpoCtrl();
+  const japanCtrl = new JapanCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -119,6 +123,22 @@ export default function setRoutes(app) {
   router.route('/saleClient/:id').get(saleClientCtrl.get);
   router.route('/saleClient/:id').put(saleClientCtrl.update);
   router.route('/saleClient/:id').delete(saleClientCtrl.delete);
+
+  // rpo
+  router.route('/rpos').get(rpoCtrl.getAll);
+  router.route('/rpos/count').get(rpoCtrl.count);
+  router.route('/rpo').post(rpoCtrl.insert);
+  router.route('/rpo/:id').get(rpoCtrl.get);
+  router.route('/rpo/:id').put(rpoCtrl.update);
+  router.route('/rpo/:id').delete(rpoCtrl.delete);
+
+  // japan
+  router.route('/japans').get(japanCtrl.getAll);
+  router.route('/japans/count').get(japanCtrl.count);
+  router.route('/japan').post(japanCtrl.insert);
+  router.route('/japan/:id').get(japanCtrl.get);
+  router.route('/japan/:id').put(japanCtrl.update);
+  router.route('/japan/:id').delete(japanCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
