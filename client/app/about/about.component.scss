@@ -9,9 +9,48 @@ div.card {
     cursor: initial !important;
     border: 2px dashed rgba(0,0,0,.125);
 }
-
+.panel div {
+    display: inline-block;
+}
 .dragged-item {
     cursor: pointer;
     margin-top: 0;
-    margin-bottom: 10px;
+    line-height: 35px;
+    padding: 0 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    background: white;
+}
+.dragged-item:hover {
+    background: #ff070773;
+}
+mat-grid-list.panel mat-icon.mat-icon.material-icons {
+    margin-top: 13px;
+    margin-left: -10px;
+    color: #989898;
+}
+h2 {
+    font-size: 25px;
+}
+.table-hover > mat-grid-list.mat-grid-list figure {
+    font-weight: 500;
+    color: #414141;
+}
+.saleclients-list {
+    height: 400px;
+    overflow: auto;
+    background: white;
+}
+.agents .card {
+    height: 420px;
+    overflow: auto;
+}
+.agents .panel div {
+    display: inline-block;
+    width: 47%;
+    text-align: center;
+    font-weight: 500;
+    color: #414141;
+}
+span.c_adress {
+    float: right;
 }

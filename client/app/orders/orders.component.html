@@ -12,111 +12,129 @@
       <mat-card *ngFor="let order of orders" class="col-md-3">
         <mat-card-header>
           <!--<div mat-card-avatar>{{order.product}}</div>-->
-          <mat-card-title>Клиент: {{order.name}}<span class="float-right">Дата: {{order.date}}</span></mat-card-title>
-          <mat-card-subtitle>Заказ: <i class="material-icons">keyboard_arrow_down</i></mat-card-subtitle>
+          <mat-card-title>
+            <mat-icon matPrefix>account_circle</mat-icon>{{order.name}}
+            <span class="float-right">
+              <mat-icon matPrefix>date_range</mat-icon> {{order.date}}</span>
+          </mat-card-title>
         </mat-card-header>
+        <mat-card-subheader>
+            <mat-card-title>Название</mat-card-title>
+            <mat-card-title>Кол.во</mat-card-title>
+        </mat-card-subheader>
         <mat-card-content [innerHTML]="order.product">
-            <span *ngIf="order.count != ''" class="float-right">Статус: {{order.count}}</span>
+          <span *ngIf="order.count != ''" class="float-right">Статус: {{order.count}}</span>
         </mat-card-content>
         <mat-card-actions>
 
           <span matTooltip="">
-            <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(order)"><i class="material-icons">create</i> </button>
+            <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(order)">
+              <i class="material-icons">create</i>
+            </button>
           </span>
           <span matTooltip="Удалить">
-            <button mat-mini-fab color="warn" (click)="deleteOrder(order)"><i class="material-icons">delete_forever</i> </button>
+            <button mat-mini-fab color="warn" (click)="deleteOrder(order)">
+              <i class="material-icons">delete_forever</i>
+            </button>
           </span>
 
         </mat-card-actions>
       </mat-card>
+    </div>
   </div>
-</div>
 
-<div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Редактирование заказа</h4>
-      </div>
-      <form class="form-inline" #form="ngForm" (ngSubmit)="editOrder(order)" style="display:inline">
-        <div class="modal-body">
-          <mat-form-field>
-            <span matTooltip="Введите название" class="time">
-              <input matInput class="mat-input-element"  name="name" [(ngModel)]="order.name" placeholder="Название">
-            </span>
-          </mat-form-field>
-          <mat-form-field>
-           <span matTooltip="Выберите продукт">
-             <input placeholder="Продукт" matInput class="mat-input-element" [(ngModel)]="order.product" name="type" placeholder="Выберите продукт">
-           </span>
-          </mat-form-field>
+  <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Редактирование заказа</h4>
+        </div>
+        <form class="form-inline" #form="ngForm" (ngSubmit)="editOrder(order)" style="display:inline">
+          <div class="modal-body">
             <mat-form-field>
-              <span matTooltip="Количество">
-                 <input placeholder="Количество" matInput class="mat-input-element" name="count"  [(ngModel)]="order.count" placeholder="Количество">
+              <span matTooltip="Введите название" class="time">
+                <input matInput class="mat-input-element" name="name" [(ngModel)]="order.name" placeholder="Название">
               </span>
             </mat-form-field>
-          <mat-form-field>
-            <span matTooltip="Срок" class="time">
-              <input placeholder="Срок" matInput class="mat-input-element" type="date"  name="date" [(ngModel)]="order.date">
-            </span>
-          </mat-form-field>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Сохранить</button>
-          <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()"><i class="fa fa-times"></i> Отменить</button>
-        </div>
-      </form>
+            <mat-form-field>
+              <span matTooltip="Выберите продукт">
+                <input placeholder="Продукт" matInput class="mat-input-element" [(ngModel)]="order.product" name="type" placeholder="Выберите продукт">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Количество">
+                <input placeholder="Количество" matInput class="mat-input-element" name="count" [(ngModel)]="order.count" placeholder="Количество">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Срок" class="time">
+                <input placeholder="Срок" matInput class="mat-input-element" type="date" name="date" [(ngModel)]="order.date">
+              </span>
+            </mat-form-field>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid">
+              <i class="fa fa-floppy-o"></i> Сохранить</button>
+            <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()">
+              <i class="fa fa-times"></i> Отменить</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
-  <span>Создать заказ</span>
-</button>
-<div class="modal fade" id="addNewItem" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Созданть заказ</h4>
-      </div>
-      <div class="modal-body">
-        <div class="addItem">
-          <div>
-            <form class="form-inline" [formGroup]="addOrderForm" (ngSubmit)="addOrder()" style="text-align:center">
-              <mat-form-field>
-                 <span matTooltip="Введите название">
-                    <input matInput class="mat-input-element"  name="name" formControlName="name" placeholder="Название">
-                 </span>
-              </mat-form-field>
-              <mat-form-field>
-               <span matTooltip="Количество" >
-                  <input matInput class="mat-input-element"  name="count" formControlName="count" placeholder="Количество">
-                </span>
-              </mat-form-field>
-              <mat-form-field>
-                <span matTooltip="Срок">
-                  <input type="date" matInput class="mat-input-element"  name="date" formControlName="date">
-                </span>
-              </mat-form-field>
-              <mat-form-field>
-               <span matTooltip="Продукт">
-                  <input matInput class="mat-input-element"  name="product" formControlName="product" placeholder="Продукт">
-                </span>
-              </mat-form-field>
-              <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addOrderForm.valid"><i class="material-icons">add</i> Добавить</button>
-            </form>
+  <button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+    <span>Создать заказ</span>
+  </button>
+  <div class="modal fade" id="addNewItem" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Созданть заказ</h4>
+        </div>
+        <div class="modal-body">
+          <div class="addItem">
+            <div>
+              <form class="form-inline" [formGroup]="addOrderForm" (ngSubmit)="addOrder()" style="text-align:center">
+                <mat-form-field>
+                  <span matTooltip="Введите название">
+                    <input matInput class="mat-input-element" name="name" formControlName="name" placeholder="Название">
+                  </span>
+                </mat-form-field>
+                <mat-form-field>
+                  <span matTooltip="Количество">
+                    <input matInput class="mat-input-element" name="count" formControlName="count" placeholder="Количество">
+                  </span>
+                </mat-form-field>
+                <mat-form-field>
+                  <span matTooltip="Срок">
+                    <input type="date" matInput class="mat-input-element" name="date" formControlName="date">
+                  </span>
+                </mat-form-field>
+                <mat-form-field>
+                  <span matTooltip="Продукт">
+                    <input matInput class="mat-input-element" name="product" formControlName="product" placeholder="Продукт">
+                  </span>
+                </mat-form-field>
+                <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addOrderForm.valid">
+                  <i class="material-icons">add</i> Добавить</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+        <div class="modal-footer">
+          <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </div>
+
+
+
+

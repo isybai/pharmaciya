@@ -9,6 +9,31 @@ mat-grid-tile.result-plan{
 
     background: rgb(153, 255, 231);
 }
+mat-card-header.mat-card-header mat-icon.mat-icon.material-icons {
+    position: relative;
+    top: 6px;
+    margin-right: 6px;
+}
+mat-card-subheader mat-card-title.mat-card-title {
+    display: inline-block;
+    font-size: 14px;
+    width: 49%;
+    color: #909090;
+    padding: 0px 10px;
+    margin: 0;
+    border-bottom: 1px solid #e6e6e6;
+    background: #82c8ff;
+    color: #ffffff;
+    text-transform: lowercase;
+}
+
+mat-card-subheader mat-card-title.mat-card-title:last-child {
+    text-align: right;
+}
+mat-card-actions.mat-card-actions {
+    text-align: right;
+}
+
 .mat-grid-tile .mat-grid-tile-header span.label {
     display: inline;
     padding: .2em .6em .3em;
@@ -26,30 +51,7 @@ mat-card-header.mat-card-header {
 mat-card.col-md-4.mat-card {
     outline: 2px solid #c1c1c1;
 }
-span.в.процессе {
-    float: right;
-    background: #fcff7d;
-    padding: 2px 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.47);
-}
-span.на.расмотрении {
-    float: right;
-    background: #dadada;
-    padding: 2px 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.47);
-}
-span.выполнен {
-    background: #62ff68;
-    padding: 2px 10px;
-    border-radius: 5px;
-    float: right;
-    box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.47);
-}
-span.не.выполнен {
-    background: #f44336;
-}
+
 mat-card.col-md-3.mat-card {
   width: 24%;
   margin-right: 10px;

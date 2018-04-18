@@ -5,7 +5,7 @@
   </h4>
 </div>
 <div class="col-md-12" *ngIf="auth.loggedIn && auth.isSalesAdmin">
-  <div class="col-md-4">
+  <div class="col-md-7">
     <app-loading [condition]="isLoading"></app-loading>
     <app-toast [message]="toast.message"></app-toast>
 
@@ -19,28 +19,32 @@
 
         <mat-grid-list cols="3" rowHeight="50">
 
-            <mat-grid-tile>Ф.И.О.</mat-grid-tile>
-            <mat-grid-tile>Адрес</mat-grid-tile>
-            <mat-grid-tile>Действия</mat-grid-tile>
+          <mat-grid-tile>Ф.И.О.</mat-grid-tile>
+          <mat-grid-tile>Адрес</mat-grid-tile>
+          <mat-grid-tile>Действия</mat-grid-tile>
 
         </mat-grid-list>
-        <mat-divider inset></mat-divider>
+        <div class="saleclients-list">
+          <mat-grid-list cols="3" class="panel panel-default" rowHeight="50" *ngFor="let client of saleClients" [dropZones]="['user']"
+            dnd-draggable [dragEnabled]="true" [dragData]="client">
+            <mat-icon matPrefix>drag_handle</mat-icon>
+            <mat-grid-tile>
 
-        <mat-grid-list cols="3" class="panel panel-default" rowHeight="50" *ngFor="let client of saleClients" [dropZones]="['user']" dnd-draggable [dragEnabled]="true" [dragData]="client">
-          <mat-grid-tile>
-            <mat-icon mat-list-icon>more_vert</mat-icon>
-            {{client.name}}
-          </mat-grid-tile>
-          <mat-grid-tile>{{client.adress}}</mat-grid-tile>
-          <mat-grid-tile>
-            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(client)">
-              <i class="material-icons">create</i>
-            </button>
-            <button class="btn btn-sm btn-danger" (click)="deleteSaleClient(client)">
-              <i class="material-icons">delete_forever</i>
-            </button>
-          </mat-grid-tile>
-        </mat-grid-list>
+              {{client.name}}
+            </mat-grid-tile>
+            <mat-grid-tile>
+              {{client.adress}}
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <button class="btn btn-sm btn-warning" data-toggle="modal" data-target='#editingItem' (click)="enableEditing(client)">
+                <i class="material-icons">create</i>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteSaleClient(client)">
+                <i class="material-icons">delete_forever</i>
+              </button>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
       </div>
       <!-- editingItem  -->
       <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
@@ -76,9 +80,11 @@
       </div>
     </div>
     <!-- addNewItem button -->
-    <button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
-      <span>Добавить клиентово</span>
-    </button>
+    <div class="add-button">
+      <span matTooltipPosition="below" matTooltip="Добавить клиентов!">
+        <button class="add-new-button" data-toggle="modal" data-target='#addNewItem' mat-fab><i class="material-icons">add</i></button>
+      </span>
+    </div>
     <!-- addNewItem -->
     <div class="modal fade" id="addNewItem" role="dialog">
       <div class="modal-dialog">
@@ -116,56 +122,24 @@
     </div>
 
   </div>
-  <div class="col-md-8 animated bounceInRight">
-    <div *ngFor="let item of users" [ngClass]="{'col-md-6' : item.role === 'user'}">
+  <div class="col-md-5 animated bounceInRight agents">
+    <div *ngFor="let item of users" [ngClass]="{'col-md-12' : item.role === 'user'}">
       <div *ngIf="item.role === 'user'">
-        <div>
-          <h2>{{item.nick}}</h2>
+          <h2 class="">агент: {{item.nick}}</h2>
+          <div class="panel">
+            <div class="left">Имя</div>
+            <div class="right">Адрес</div>
+          </div>
           <div class="card" dnd-droppable [dropZones]="['user']" (onDropSuccess)="transferDataSuccess($event , item)">
             <div *ngFor="let client of saleClients">
-                <div (click)="removeItem(client)" class="dragged-item" *ngIf="client.whos === item.username">{{client.name +  ' ' + client.adress}}</div>
+              <div (click)="removeItem(client)" class="dragged-item" *ngIf="client.whos === item.username">
+                <span class="c_name">{{client.name}}</span>
+                <span class="c_adress">{{client.adress}}</span>
+              </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!--<div class="col-md-12">
-    <h4>Transfer custom data in Drag-and-Drop</h4>
-    <div class="col-md-6">
-      <div class="panel panel-warning" dnd-sortable-container [sortableData]="transferData" [dropZones]="['source-dropZone']">
-        <div class="panel-heading">Available to drag</div>
-        <div class="panel-body">
-          <div *ngFor="let data of transferData; let x = index" class="panel panel-default" dnd-draggable [dragEnabled]="true" [dragData]="data"
-            dnd-sortable [sortableIndex]="x">
-            <div class="panel-body">
-              <div>
-                <i class="material-icons">more_vert</i>{{data.msg}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div dnd-droppable class="panel panel-info" dnd-droppable [dropZones]="['source-dropZone']" (onDropSuccess)="transferDataSuccess($event)">
-        <div class="panel-heading">Place to drop (Items:{{receivedData.length}})</div>
-        <div class="panel-body">
-          <div class="dragged-item" (click)="removeItem(data)" *ngFor="let data of receivedData; let y = index">{{data.msg}}</div>
-        </div>
-      </div>
-    </div>
-  </div>-->
-  <app-tasks></app-tasks>
 </div>
-<!-- CRUD-->
 
-
-<!-- <div class="col-md-12" *ngIf="auth.loggedIn && auth.isSalesAdmin">
-    <button (click)="mapClick()">Показать Аптека №1</button>
-    <button (click)="mapClick2()">Показать Аптека №2</button>
-  <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
-    <agm-marker [visible]="showMarker"  [latitude]="lat" [longitude]="lng"></agm-marker>
-    <agm-marker [visible]="showMarker2" [latitude]="lat2" [longitude]="lng2"></agm-marker>
-  </agm-map>
-</div> -->

@@ -13,9 +13,9 @@ import { UserService } from '../services/user.service';
 export class OrdersComponent implements OnInit {
 
 
-  user = {};
+  user: any = {};
   users = [];
-  order = {};
+  order: any = {};
   orders = [];
 
   isLoading = true;
