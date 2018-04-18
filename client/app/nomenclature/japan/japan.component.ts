@@ -22,13 +22,13 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 export class JapanComponent implements OnInit {
 
-  japan = {};
+  japan: any = {};
   japans = [];
   isLoading = true;
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'purpose', 'dose'];
+  displayedColumns = ['name', 'purpose', 'dose', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -137,14 +137,9 @@ export class JapanComponent implements OnInit {
 }
 
 export interface ChangeData {
-
     name: string;
-    workPlace: string;
-    tel: string;
-    position: string;
-    dob: string;
-    adress: string;
-    subdivision: string;
+    purpose: string;
+    dose: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -205,8 +200,8 @@ export class ExampleDataSource extends DataSource<any> {
 
       switch (this._sort.active) {
         case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
-        case 'purpose': [propertyA, propertyB] = [a.dob, b.dob]; break;
-        case 'dose': [propertyA, propertyB] = [a.tel, b.tel]; break;
+        case 'purpose': [propertyA, propertyB] = [a.purpose, b.purpose]; break;
+        case 'dose': [propertyA, propertyB] = [a.dose, b.dose]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

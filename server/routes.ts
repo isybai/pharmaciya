@@ -13,6 +13,7 @@ import OrderCtrl from './controllers/order';
 import SaleClientCtrl from './controllers/saleClient';
 import RpoCtrl from './controllers/rpo';
 import JapanCtrl from './controllers/japan';
+import SaleCtrl from './controllers/sale';
 
 
 export default function setRoutes(app) {
@@ -33,6 +34,7 @@ export default function setRoutes(app) {
   const saleClientCtrl = new SaleClientCtrl();
   const rpoCtrl = new RpoCtrl();
   const japanCtrl = new JapanCtrl();
+  const saleCtrl = new SaleCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -139,6 +141,14 @@ export default function setRoutes(app) {
   router.route('/japan/:id').get(japanCtrl.get);
   router.route('/japan/:id').put(japanCtrl.update);
   router.route('/japan/:id').delete(japanCtrl.delete);
+
+  // japan
+  router.route('/sales').get(saleCtrl.getAll);
+  router.route('/sales/count').get(saleCtrl.count);
+  router.route('/sale').post(saleCtrl.insert);
+  router.route('/sale/:id').get(saleCtrl.get);
+  router.route('/sale/:id').put(saleCtrl.update);
+  router.route('/sale/:id').delete(saleCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

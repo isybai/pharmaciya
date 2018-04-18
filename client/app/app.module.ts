@@ -61,6 +61,7 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { JapanService } from './services/japan.service';
 import { RpoService } from './services/rpo.service';
+import { SaleService } from './services/sale.service';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -178,7 +179,8 @@ import { OrdersComponent } from './orders/orders.component';
     OrderService,
     SaleClientService,
     JapanService,
-    RpoService
+    RpoService,
+    SaleService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

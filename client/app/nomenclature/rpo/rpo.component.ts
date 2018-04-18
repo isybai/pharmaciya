@@ -22,13 +22,13 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 export class RpoComponent implements OnInit {
 
-  rpo = {};
+  rpo: any = {};
   rpos = [];
   isLoading = true;
   isEditing = false;
 
   isDataAvailable = false;
-  displayedColumns = ['name', 'unit', 'price', 'madeBy', 'expireDate'];
+  displayedColumns = ['name', 'unit', 'price', 'madeBy', 'expireDate', 'action'];
   dataChange: BehaviorSubject<ChangeData[]> = new BehaviorSubject<ChangeData[]>([]);
   get data(): ChangeData[] { return this.dataChange.value; }
   dataSource: ExampleDataSource | null;
@@ -141,14 +141,11 @@ export class RpoComponent implements OnInit {
 }
 
 export interface ChangeData {
-
     name: string;
-    workPlace: string;
-    tel: string;
-    position: string;
-    dob: string;
-    adress: string;
-    subdivision: string;
+    unit: string;
+    price: string;
+    madeBy: string;
+    expireDate: string;
 }
 
 export class ExampleDataSource extends DataSource<any> {
@@ -208,9 +205,11 @@ export class ExampleDataSource extends DataSource<any> {
       let propertyB: number | string = '';
 
       switch (this._sort.active) {
-        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
-        case 'purpose': [propertyA, propertyB] = [a.dob, b.dob]; break;
-        case 'dose': [propertyA, propertyB] = [a.tel, b.tel]; break;
+        case 'name' : [propertyA, propertyB] = [a.name, b.name]; break;
+        case 'unit' : [propertyA, propertyB] = [a.unit, b.unit]; break;
+        case 'price' : [propertyA, propertyB] = [a.price, b.price]; break;
+        case 'madeBy' : [propertyA, propertyB] = [a.madeBy, b.madeBy]; break;
+        case 'expireDate' : [propertyA, propertyB] = [a.expireDate, b.expireDate]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
