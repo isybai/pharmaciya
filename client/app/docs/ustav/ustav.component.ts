@@ -7,7 +7,7 @@ import { NgClass, NgStyle } from '@angular/common';
 
 
 // const URL = '/api/';
-const URL = 'http://localhost:3000/uploads';
+const URL = 'https://pharmaciya-isybai.c9users.i/api/';
 import { DocService } from '../../services/doc.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 
