@@ -22,7 +22,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 })
 export class CoworkersComponent implements OnInit {
 
-  companies = [
+  companies: any = [
     {value: 'ОАО “Фармация”', viewValue: 'ОАО “Фармация”'},
     {value: 'Фармация-плюс', viewValue: 'Фармация-плюс'},
     {value: 'АПТЕКА № 156', viewValue: 'АПТЕКА № 156'},
@@ -31,7 +31,7 @@ export class CoworkersComponent implements OnInit {
     {value: 'Форвард СТ', viewValue: 'Форвард СТ'},
     {value: 'Бимакс компани', viewValue: 'Бимакс компани'}
     ];
-  coworker = {};
+  coworker: any = {};
   coworkers = [];
   isLoading = true;
   isEditing = false;

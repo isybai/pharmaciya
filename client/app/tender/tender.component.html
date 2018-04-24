@@ -1,0 +1,180 @@
+<header class="marketing-banner">
+  <h4 class="page-title">
+    Tендеры
+  </h4>
+</header>
+<!-- CRUD -->
+<app-loading [condition]="isLoading"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+<div class="col-md-12 info_table">
+  <div class="" *ngIf="!isLoading">
+    <h6 class="">Количество тендеров: {{tenders.length}}</h6>
+    <div class="card" *ngIf="!isLoading">
+      <div class="col-md-12" *ngIf="!isEditing">
+        <mat-card *ngFor="let tender of tenders" class="col-md-3">
+          <mat-card-header>
+            <mat-card-title>
+              <span matPrefix>Наименование:
+                <span>{{tender.name}}</span>
+              </span>
+              <span class="float-right">№:
+                <span>{{tender.docN}}</span>
+              </span>
+            </mat-card-title>
+            <mat-card-title>
+              <span matPrefix>Лот:
+                <span>{{tender.lot}}</span>
+              </span>
+              <span class="float-right">Сумма:
+                <span>{{tender.sum}}</span>
+              </span>
+            </mat-card-title>
+            <mat-card-title>
+              <span matPrefix>Результат:
+                <span>{{tender.result}}</span>
+              </span>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-subheader>
+            <mat-card-title>Продукт</mat-card-title>
+            <mat-card-title>Срок.год</mat-card-title>
+            <mat-card-title>Кол.во</mat-card-title>
+          </mat-card-subheader>
+          <mat-card-content [innerHTML]="tender.med">
+
+          </mat-card-content>
+          <mat-card-actions>
+
+            <span matTooltip="">
+              <button mat-mini-fab data-toggle="modal" data-target='#editingItem' (click)="enableEditing(tender)">
+                <i class="material-icons">create</i>
+              </button>
+            </span>
+            <span matTooltip="Удалить">
+              <button mat-mini-fab color="warn" (click)="deleteTender(tender)">
+                <i class="material-icons">delete_forever</i>
+              </button>
+            </span>
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="tenders.length === 0">
+      В базе данных еще нет тендеров. Добавьте их.
+    </div>
+    <div class="modal fade" *ngIf="isEditing" id="editingItem" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" #closeEdit class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Редактирование тендера</h4>
+          </div>
+          <form class="form-inline" #form="ngForm" (ngSubmit)="editTender(tender)" style="display:inline">
+            <div class="modal-body">
+              <mat-form-field>
+                <span matTooltip="Введите Ф.И.О." class="time">
+                  <input matInput class="mat-input-element" name="name" [(ngModel)]="tender.name" placeholder="Ф.И.О.">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="№ Тендера">
+                  <input type="number" matInput class="mat-input-element" name="docN" [(ngModel)]="tender.docN" placeholder="№ Тендера">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Название">
+                  <input matInput class="mat-input-element" name="name" [(ngModel)]="tender.name" placeholder="Название">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Лот">
+                  <input matInput class="mat-input-element" name="lot" [(ngModel)]="tender.lot" placeholder="Лот">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Медикамент + срок.год + кол.во">
+                  <textarea matInput class="mat-input-element" name="med" [(ngModel)]="tender.med" placeholder="Медикамент + срок.год + кол.во"></textarea>
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Сумма">
+                  <input type="number" matInput class="mat-input-element" name="sum" [(ngModel)]="tender.sum" placeholder="Сумма">
+                </span>
+              </mat-form-field>
+              <mat-form-field>
+                <span matTooltip="Результат">
+                  <input matInput class="mat-input-element" name="result" [(ngModel)]="tender.result" placeholder="Результат">
+                </span>
+              </mat-form-field>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-sm btn-primary" (click)="closeEdit.click()" type="submit" [disabled]="!form.form.valid">
+                <i class="fa fa-floppy-o"></i> Сохранить</button>
+              <button class="btn btn-sm btn-warning" (click)="cancelEditing();closeEdit.click()">
+                <i class="fa fa-times"></i> Отменить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<button class="add-item-button btn btn-sm btn-success" data-toggle="modal" data-target='#addNewItem'>
+  <span>Добавить тендер</span>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="addNewItem" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Добавление нового тендера</h4>
+      </div>
+      <div class="modal-body">
+        <div class="addItem">
+          <form class="form-inline" [formGroup]="addTenderForm" (ngSubmit)="addTender()" style="text-align:center">
+            <mat-form-field>
+              <span matTooltip="№ Тендера">
+                <input type="number" matInput class="mat-input-element" name="docN" formControlName="docN" placeholder="№ Тендера">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Название">
+                <input matInput class="mat-input-element" name="name" formControlName="name" placeholder="Название">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Лот">
+                <input matInput class="mat-input-element" name="lot" formControlName="lot" placeholder="Лот">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Медикамент + срок.год + кол.во">
+                <textarea matInput class="mat-input-element" name="med" formControlName="med" placeholder="Медикамент + срок.год + кол.во"></textarea>
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Сумма">
+                <input type="number" matInput class="mat-input-element" name="sum" formControlName="sum" placeholder="Сумма">
+              </span>
+            </mat-form-field>
+            <mat-form-field>
+              <span matTooltip="Результат">
+                <input matInput class="mat-input-element" name="result" formControlName="result" placeholder="Результат">
+              </span>
+            </mat-form-field>
+            <button mat-raised-button color="warm" type="submit" (click)="close.click()" [disabled]="!addTenderForm.valid">
+              <i class="material-icons">add</i> Добавить</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #close class="btn btn-sm btn-warning" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

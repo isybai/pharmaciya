@@ -62,6 +62,8 @@ import { AuthService } from './services/auth.service';
 import { JapanService } from './services/japan.service';
 import { RpoService } from './services/rpo.service';
 import { SaleService } from './services/sale.service';
+import { TenderService } from './services/tender.service';
+import { DocService } from './services/doc.service';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -92,6 +94,15 @@ import { RpoComponent } from './nomenclature/rpo/rpo.component';
 import { TasksComponent } from './about/tasks/tasks.component';
 import { HandbooksComponent } from './contragency/handbooks/handbooks.component';
 import { OrdersComponent } from './orders/orders.component';
+import { TenderComponent } from './tender/tender.component';
+import { DocsComponent } from './docs/docs.component';
+import { UstavComponent } from './docs/ustav/ustav.component';
+import { LicenseComponent } from './docs/license/license.component';
+import { RekvisitComponent } from './docs/rekvisit/rekvisit.component';
+import { PriceComponent } from './docs/price/price.component';
+import { RentdocComponent } from './docs/rentdoc/rentdoc.component';
+import { IncomeComponent } from './docs/income/income.component';
+import { DismissalComponent } from './docs/dismissal/dismissal.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +130,15 @@ import { OrdersComponent } from './orders/orders.component';
     TasksComponent,
     HandbooksComponent,
     OrdersComponent,
+    TenderComponent,
+    DocsComponent,
+    UstavComponent,
+    LicenseComponent,
+    RekvisitComponent,
+    PriceComponent,
+    RentdocComponent,
+    IncomeComponent,
+    DismissalComponent,
   ],
   imports: [
     FileUploadModule,
@@ -180,6 +200,8 @@ import { OrdersComponent } from './orders/orders.component';
     SaleClientService,
     JapanService,
     RpoService,
+    TenderService,
+    DocService,
     SaleService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

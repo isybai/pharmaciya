@@ -14,6 +14,8 @@ import SaleClientCtrl from './controllers/saleClient';
 import RpoCtrl from './controllers/rpo';
 import JapanCtrl from './controllers/japan';
 import SaleCtrl from './controllers/sale';
+import TenderCtrl from './controllers/tender';
+import DocCtrl from './controllers/doc';
 
 
 export default function setRoutes(app) {
@@ -35,6 +37,8 @@ export default function setRoutes(app) {
   const rpoCtrl = new RpoCtrl();
   const japanCtrl = new JapanCtrl();
   const saleCtrl = new SaleCtrl();
+  const tenderCtrl = new TenderCtrl();
+  const docCtrl = new DocCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -44,6 +48,14 @@ export default function setRoutes(app) {
   router.route('/user/:id').get(userCtrl.get);
   router.route('/user/:id').put(userCtrl.update);
   router.route('/user/:id').delete(userCtrl.delete);
+
+  // Doc's
+  router.route('/docs').get(docCtrl.getAll);
+  router.route('/docs/count').get(docCtrl.count);
+  router.route('/doc').post(docCtrl.insert);
+  router.route('/doc/:id').get(docCtrl.get);
+  router.route('/doc/:id').put(docCtrl.update);
+  router.route('/doc/:id').delete(docCtrl.delete);
 
   // Medics
   router.route('/medics').get(medicCtrl.getAll);
@@ -149,6 +161,14 @@ export default function setRoutes(app) {
   router.route('/sale/:id').get(saleCtrl.get);
   router.route('/sale/:id').put(saleCtrl.update);
   router.route('/sale/:id').delete(saleCtrl.delete);
+
+  // Tender
+  router.route('/tenders').get(tenderCtrl.getAll);
+  router.route('/tenders/count').get(tenderCtrl.count);
+  router.route('/tender').post(tenderCtrl.insert);
+  router.route('/tender/:id').get(tenderCtrl.get);
+  router.route('/tender/:id').put(tenderCtrl.update);
+  router.route('/tender/:id').delete(tenderCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

@@ -12,8 +12,9 @@ import { ToastComponent } from '../../shared/toast/toast.component';
   styleUrls: ['./renters.component.css']
 })
 export class RentersComponent implements OnInit {
-  renter = {};
-  renters = [];
+
+  renter: any = {};
+  renters: any  = [];
   isLoading = true;
   isEditing = false;
 
