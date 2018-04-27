@@ -8,6 +8,7 @@ import { ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   MatAutocompleteModule,
@@ -181,6 +182,7 @@ import { DismissalComponent } from './docs/dismissal/dismissal.component';
     BrowserModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
     DndModule.forRoot()
   ],
   providers: [

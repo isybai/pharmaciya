@@ -12,7 +12,6 @@ import { UserService } from '../services/user.service';
 })
 export class OrdersComponent implements OnInit {
 
-
   user: any = {};
   users = [];
   order: any = {};

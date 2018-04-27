@@ -56,6 +56,9 @@ export default function setRoutes(app) {
   router.route('/doc/:id').get(docCtrl.get);
   router.route('/doc/:id').put(docCtrl.update);
   router.route('/doc/:id').delete(docCtrl.delete);
+  router.route('/docs/upload').post(orderCtrl.fileupload);
+  router.route('/docs/upload').get(orderCtrl.fileupload);
+
 
   // Medics
   router.route('/medics').get(medicCtrl.getAll);
@@ -169,6 +172,7 @@ export default function setRoutes(app) {
   router.route('/tender/:id').get(tenderCtrl.get);
   router.route('/tender/:id').put(tenderCtrl.update);
   router.route('/tender/:id').delete(tenderCtrl.delete);
+
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

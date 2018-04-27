@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import 'rxjs/add/observable/of';
-import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { NgClass, NgStyle } from '@angular/common';
+import { Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild, ElementRef,
+  Output, Input,
+  EventEmitter } from '@angular/core';
 
-
-// const URL = '/api/';
-const URL = 'https://pharmaciya-isybai.c9users.i/api/';
-import { DocService } from '../../services/doc.service';
-import { ToastComponent } from '../../shared/toast/toast.component';
+import { Binary } from '../../model/binary';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ustav',
@@ -18,100 +15,63 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 })
 
 export class UstavComponent implements OnInit {
-  public uploader: FileUploader = new FileUploader({url: URL});
-  public hasBaseDropZoneOver = false;
-  public hasAnotherDropZoneOver  = false;
+  @Output() onUploadStarted = new EventEmitter<void>();
+  @Output() onError = new EventEmitter<string>();
+  @Output() onUploaded = new EventEmitter<File[]>();
 
+  @Input() placeHolderText = 'Upload file...';
+  @ViewChild('fileInputParent') fileInputParent: ElementRef;
 
-  doc: any = {};
-  docs: any [];
-  isLoading = true;
-  isEditing = false;
-
-  addDocForm: FormGroup;
-  name = new FormControl('', Validators.required);
-  url = new FormControl('', Validators.required);
-  type = new FormControl('', Validators.required);
-
-
-  constructor(private ustavService: DocService,
-              private formBuilder: FormBuilder,
-              private http: Http,
-              public toast: ToastComponent) {}
+  constructor(private http: HttpClient) {
+   }
 
   ngOnInit() {
-    this.getDocs();
-    this.addDocForm = this.formBuilder.group({
-     name: this.name,
-     url: this.url,
-     type: this.type,
-    });
-  }
-  public fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
+    this.addFileInput();
   }
 
-  public fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
+
+
+  private addFileInput() {
+    const fileInputParentNative = this.fileInputParent.nativeElement;
+    const oldFileInput = fileInputParentNative.querySelector('input');
+    const newFileInput = document.createElement('input');
+    newFileInput.type = 'file';
+    newFileInput.multiple = true;
+    newFileInput.name = 'fileInput';
+    const uploadfiles = this.uploadFiles.bind(this);
+    newFileInput.onchange = uploadfiles;
+    oldFileInput.parentNode.replaceChild(newFileInput, oldFileInput);
   }
 
-  getDocs() {
-    this.ustavService.getDocs().subscribe(
-      data => this.docs = data,
-      error => console.log(error),
-      () => this.isLoading = false
-
-    );
-  }
-
-  addDoc() {
-    this.ustavService.addDoc(this.addDocForm.value).subscribe(
-      res => {
-        const newUstav = res.json();
-        this.docs.push(newUstav);
-        this.addDocForm.reset();
-        this.toast.setMessage('Документ успешно добавлен.', 'success');
-      },
-      error => console.log(error)
-    );
-  }
-
-  enableEditing(doc) {
-    this.isEditing = true;
-    this.doc = doc;
-  }
-
-  cancelEditing() {
-    this.isEditing = false;
-    this.doc = {};
-    this.toast.setMessage('Редактирование документ отменена.', 'warning');
-    // reload the ustavs to reset the editing
-    this.getDocs();
-  }
-
-  editDoc(doc) {
-    this.ustavService.editDoc(doc).subscribe(
-      res => {
-        this.isEditing = false;
-        this.doc = doc;
-        this.toast.setMessage('Документ успешно отредактирован.', 'success');
-      },
-      error => console.log(error)
-    );
-  }
-
-  deleteDoc(doc) {
-    if (window.confirm('Вы уверенны что хотите удалить этого документ?')) {
-      this.ustavService.deleteDoc(doc).subscribe(
-        res => {
-          const pos = this.docs.map(elem => elem._id).indexOf(doc._id);
-          this.docs.splice(pos, 1);
-          this.toast.setMessage('Документ успешно удален.', 'success');
-        },
-        error => console.log(error)
-      );
+  private uploadFiles() {
+    this.onUploadStarted.emit();
+    const fileInputParentNative = this.fileInputParent.nativeElement;
+    const fileInput = fileInputParentNative.querySelector('input');
+    if (fileInput.files && fileInput.files.length > 0) {
+      const formData = new FormData();
+      console.log({'file': fileInput.files[0]});
+      this.http.post('/api/docs/upload', {'file': fileInput.files[0]});
+      const onUploaded = this.onUploaded;
+      const onError = this.onError;
+      const addFileInput = this.addFileInput.bind(this);
+      fetch('/api/docs/upload', {
+        credentials: 'include',
+        method: 'POST',
+        body: formData,
+      }).then((response: any) => {
+        if (response.status !== 200) {
+          const error = `An error occured. Status: ${response.status}`;
+          throw new Error(error);
+        }
+        return response.json();
+      }).then(files => {
+        onUploaded.emit(files);
+        addFileInput();
+      }).catch((error) => {
+        onError.emit(error);
+      });
     }
-  }
+}
 }
 
 
